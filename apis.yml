@@ -1,0 +1,28 @@
+aid: portainer
+name: Portainer
+description: >-
+  Portainer is an open source container management platform that simplifies deploying, managing, and monitoring Docker and Kubernetes environments through a web UI.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Containers
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/portainer/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: portainer:portainer
+    name: Portainer
+    description: >-
+      Portainer is an open source container management platform that simplifies deploying, managing, and monitoring Docker and Kubernetes environments through a web UI.
+    humanURL: https://www.portainer.io/
+    tags:
+      - Containers
+    properties: []
+common:
+  - type: Website
+    url: https://www.portainer.io/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
