@@ -1,0 +1,13 @@
+{
+  "repo": "portainer",
+  "feeds": [
+    {
+      "source": "https://www.portainer.io/blog",
+      "feed_url": "https://www.portainer.io/blog/rss.xml",
+      "saved": 10,
+      "title": "Portainer Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:34:11Z"
+}
