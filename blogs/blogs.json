@@ -4,10 +4,10 @@
     {
       "source": "https://www.portainer.io/blog",
       "feed_url": "https://www.portainer.io/blog/rss.xml",
-      "saved": 10,
-      "title": "Portainer Blog"
+      "title": "Portainer Blog",
+      "saved": 1
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-05-03T23:34:11Z"
+  "post_count": 11,
+  "fetched": "2026-05-09T20:17:51Z"
 }
