@@ -1,0 +1,118 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — backup
+  description: 'PortainerCE API — backup. 2 operations. Lead operation: Creates an archive with a system data snapshot that
+    could be used to restore the system.. Self-contained Naftiko capability covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - backup
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-backup
+    baseUri: ''
+    description: PortainerCE API — backup business capability. Self-contained, no shared references.
+    resources:
+    - name: backup
+      path: /backup
+      operations:
+      - name: backup
+        method: POST
+        description: Creates an archive with a system data snapshot that could be used to restore the system.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: An object contains the password to encrypt the backup with
+    - name: restore
+      path: /restore
+      operations:
+      - name: restore
+        method: POST
+        description: Triggers a system restore using provided backup file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: restorePayload
+          in: body
+          type: string
+          description: Restore request payload
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-backup-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — backup. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/backup
+      name: backup
+      description: REST surface for backup.
+      operations:
+      - method: POST
+        name: backup
+        description: Creates an archive with a system data snapshot that could be used to restore the system.
+        call: portainer-backup.backup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restore
+      name: restore
+      description: REST surface for restore.
+      operations:
+      - method: POST
+        name: restore
+        description: Triggers a system restore using provided backup file
+        call: portainer-backup.restore
+        with:
+          restorePayload: rest.restorePayload
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-backup-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — backup. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: creates-archive-system-data-snapshot
+      description: Creates an archive with a system data snapshot that could be used to restore the system.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-backup.backup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: triggers-system-restore-using-provided
+      description: Triggers a system restore using provided backup file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-backup.restore
+      with:
+        restorePayload: tools.restorePayload
+      outputParameters:
+      - type: object
+        mapping: $.

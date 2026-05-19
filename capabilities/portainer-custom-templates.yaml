@@ -1,0 +1,459 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — custom_templates
+  description: 'PortainerCE API — custom_templates. 9 operations. Lead operation: List available custom templates. Self-contained
+    Naftiko capability covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - custom_templates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-custom-templates
+    baseUri: ''
+    description: PortainerCE API — custom_templates business capability. Self-contained, no shared references.
+    resources:
+    - name: custom_templates
+      path: /custom_templates
+      operations:
+      - name: customtemplatelist
+        method: GET
+        description: List available custom templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: array
+          description: Template types
+          required: true
+        - name: edge
+          in: query
+          type: boolean
+          description: Filter by edge templates
+    - name: custom_templates-create-file
+      path: /custom_templates/create/file
+      operations:
+      - name: customtemplatecreatefile
+        method: POST
+        description: Create a custom template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Title
+          in: formData
+          type: string
+          description: Title of the template
+          required: true
+        - name: Description
+          in: formData
+          type: string
+          description: Description of the template
+          required: true
+        - name: Note
+          in: formData
+          type: string
+          description: A note that will be displayed in the UI. Supports HTML content
+          required: true
+        - name: Platform
+          in: formData
+          type: integer
+          description: Platform associated to the template (1 - 'linux', 2 - 'windows')
+          required: true
+        - name: Type
+          in: formData
+          type: integer
+          description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
+          required: true
+        - name: File
+          in: formData
+          type: file
+          description: File
+          required: true
+        - name: Logo
+          in: formData
+          type: string
+          description: URL of the template's logo
+        - name: Variables
+          in: formData
+          type: string
+          description: A json array of variables definitions
+    - name: custom_templates-create-repository
+      path: /custom_templates/create/repository
+      operations:
+      - name: customtemplatecreaterepository
+        method: POST
+        description: Create a custom template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Required when using method=repository
+          required: true
+    - name: custom_templates-create-string
+      path: /custom_templates/create/string
+      operations:
+      - name: customtemplatecreatestring
+        method: POST
+        description: Create a custom template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: body
+          required: true
+    - name: custom_templates-id
+      path: /custom_templates/{id}
+      operations:
+      - name: customtemplatedelete
+        method: DELETE
+        description: Remove a template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Template identifier
+          required: true
+      - name: customtemplateinspect
+        method: GET
+        description: Inspect a custom template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Template identifier
+          required: true
+      - name: customtemplateupdate
+        method: PUT
+        description: Update a template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Template identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: Template details
+          required: true
+    - name: custom_templates-id-file
+      path: /custom_templates/{id}/file
+      operations:
+      - name: customtemplatefile
+        method: GET
+        description: Get Template stack file content.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Template identifier
+          required: true
+    - name: custom_templates-id-git_fetch
+      path: /custom_templates/{id}/git_fetch
+      operations:
+      - name: customtemplategitfetch
+        method: PUT
+        description: Fetch the latest config file content based on custom template's git repository configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Template identifier
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-custom-templates-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — custom_templates. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/custom-templates
+      name: custom-templates
+      description: REST surface for custom_templates.
+      operations:
+      - method: GET
+        name: customtemplatelist
+        description: List available custom templates
+        call: portainer-custom-templates.customtemplatelist
+        with:
+          type: rest.type
+          edge: rest.edge
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/custom-templates/create/file
+      name: custom-templates-create-file
+      description: REST surface for custom_templates-create-file.
+      operations:
+      - method: POST
+        name: customtemplatecreatefile
+        description: Create a custom template
+        call: portainer-custom-templates.customtemplatecreatefile
+        with:
+          Title: rest.Title
+          Description: rest.Description
+          Note: rest.Note
+          Platform: rest.Platform
+          Type: rest.Type
+          File: rest.File
+          Logo: rest.Logo
+          Variables: rest.Variables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/custom-templates/create/repository
+      name: custom-templates-create-repository
+      description: REST surface for custom_templates-create-repository.
+      operations:
+      - method: POST
+        name: customtemplatecreaterepository
+        description: Create a custom template
+        call: portainer-custom-templates.customtemplatecreaterepository
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/custom-templates/create/string
+      name: custom-templates-create-string
+      description: REST surface for custom_templates-create-string.
+      operations:
+      - method: POST
+        name: customtemplatecreatestring
+        description: Create a custom template
+        call: portainer-custom-templates.customtemplatecreatestring
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/custom-templates/{id}
+      name: custom-templates-id
+      description: REST surface for custom_templates-id.
+      operations:
+      - method: DELETE
+        name: customtemplatedelete
+        description: Remove a template
+        call: portainer-custom-templates.customtemplatedelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: customtemplateinspect
+        description: Inspect a custom template
+        call: portainer-custom-templates.customtemplateinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: customtemplateupdate
+        description: Update a template
+        call: portainer-custom-templates.customtemplateupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/custom-templates/{id}/file
+      name: custom-templates-id-file
+      description: REST surface for custom_templates-id-file.
+      operations:
+      - method: GET
+        name: customtemplatefile
+        description: Get Template stack file content.
+        call: portainer-custom-templates.customtemplatefile
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/custom-templates/{id}/git-fetch
+      name: custom-templates-id-git-fetch
+      description: REST surface for custom_templates-id-git_fetch.
+      operations:
+      - method: PUT
+        name: customtemplategitfetch
+        description: Fetch the latest config file content based on custom template's git repository configuration
+        call: portainer-custom-templates.customtemplategitfetch
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-custom-templates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — custom_templates. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-available-custom-templates
+      description: List available custom templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-custom-templates.customtemplatelist
+      with:
+        type: tools.type
+        edge: tools.edge
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-custom-template
+      description: Create a custom template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-custom-templates.customtemplatecreatefile
+      with:
+        Title: tools.Title
+        Description: tools.Description
+        Note: tools.Note
+        Platform: tools.Platform
+        Type: tools.Type
+        File: tools.File
+        Logo: tools.Logo
+        Variables: tools.Variables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-custom-template-2
+      description: Create a custom template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-custom-templates.customtemplatecreaterepository
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-custom-template-3
+      description: Create a custom template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-custom-templates.customtemplatecreatestring
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-template
+      description: Remove a template
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-custom-templates.customtemplatedelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-custom-template
+      description: Inspect a custom template
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-custom-templates.customtemplateinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-template
+      description: Update a template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-custom-templates.customtemplateupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-template-stack-file-content
+      description: Get Template stack file content.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-custom-templates.customtemplatefile
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-latest-config-file-content
+      description: Fetch the latest config file content based on custom template's git repository configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-custom-templates.customtemplategitfetch
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

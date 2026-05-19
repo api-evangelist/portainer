@@ -1,0 +1,1209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — endpoints
+  description: 'PortainerCE API — endpoints. 21 operations. Lead operation: Remove multiple environments. Self-contained Naftiko
+    capability covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - endpoints
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-endpoints
+    baseUri: ''
+    description: PortainerCE API — endpoints business capability. Self-contained, no shared references.
+    resources:
+    - name: endpoints
+      path: /endpoints
+      operations:
+      - name: endpointdeletebatchdeprecated
+        method: DELETE
+        description: Remove multiple environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: List of environments to delete, with optional deleteCluster flag to clean-up associated resources (cloud
+            environments only)
+          required: true
+      - name: endpointlist
+        method: GET
+        description: List environments(endpoints)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start
+          in: query
+          type: integer
+          description: Start searching from
+        - name: limit
+          in: query
+          type: integer
+          description: Limit results to this value
+        - name: sort
+          in: query
+          type: string
+          description: Sort results by this value
+        - name: order
+          in: query
+          type: integer
+          description: Order sorted results by desc/asc
+        - name: search
+          in: query
+          type: string
+          description: Search query
+        - name: groupIds
+          in: query
+          type: array
+          description: List environments(endpoints) of these groups
+        - name: status
+          in: query
+          type: array
+          description: List environments(endpoints) by this status
+        - name: types
+          in: query
+          type: array
+          description: List environments(endpoints) of this type
+        - name: tagIds
+          in: query
+          type: array
+          description: search environments(endpoints) with these tags (depends on tagsPartialMatch)
+        - name: tagsPartialMatch
+          in: query
+          type: boolean
+          description: If true, will return environment(endpoint) which has one of tagIds, if false (or missing) will return
+            only environments(endpoints) that has all the tags
+        - name: endpointIds
+          in: query
+          type: array
+          description: will return only these environments(endpoints)
+        - name: excludeIds
+          in: query
+          type: array
+          description: will exclude these environments(endpoints)
+        - name: excludeGroupIds
+          in: query
+          type: array
+          description: will exclude environments(endpoints) belonging to these endpoint groups
+        - name: provisioned
+          in: query
+          type: boolean
+          description: If true, will return environment(endpoint) that were provisioned
+        - name: agentVersions
+          in: query
+          type: array
+          description: will return only environments with on of these agent versions
+        - name: edgeAsync
+          in: query
+          type: boolean
+          description: if exists true show only edge async agents, false show only standard edge agents. if missing, will
+            show both types (relevant only for edge agents)
+        - name: edgeDeviceUntrusted
+          in: query
+          type: boolean
+          description: if true, show only untrusted edge agents, if false show only trusted edge agents (relevant only for
+            edge agents)
+        - name: edgeCheckInPassedSeconds
+          in: query
+          type: number
+          description: if bigger then zero, show only edge agents that checked-in in the last provided seconds (relevant only
+            for edge agents)
+        - name: excludeSnapshots
+          in: query
+          type: boolean
+          description: if true, the snapshot data won't be retrieved
+        - name: name
+          in: query
+          type: string
+          description: will return only environments(endpoints) with this name
+        - name: edgeStackStatus
+          in: query
+          type: string
+          description: only applied when edgeStackId exists. Filter the returned environments based on their deployment status
+            in the stack (not the environment status!)
+        - name: edgeGroupIds
+          in: query
+          type: array
+          description: List environments(endpoints) of these edge groups
+        - name: excludeEdgeGroupIds
+          in: query
+          type: array
+          description: Exclude environments(endpoints) of these edge groups
+      - name: endpointcreate
+        method: POST
+        description: Create a new environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Name
+          in: formData
+          type: string
+          description: 'Name that will be used to identify this environment(endpoint) (example: my-environment)'
+          required: true
+        - name: EndpointCreationType
+          in: formData
+          type: integer
+          description: 'Environment(Endpoint) type. Value must be one of: 1 (Local Docker environment), 2 (Agent environment),
+            3 (Azure environment), 4 (Edge agent environment) or 5 (L'
+          required: true
+        - name: ContainerEngine
+          in: formData
+          type: string
+          description: 'Container engine used by the environment(endpoint). Value must be one of: ''docker'' or ''podman'''
+        - name: URL
+          in: formData
+          type: string
+          description: 'URL or IP address of a Docker host (example: docker.mydomain.tld:2375). Defaults to local if not specified
+            (Linux: /var/run/docker.sock, Windows: //./pipe/docke'
+        - name: PublicURL
+          in: formData
+          type: string
+          description: 'URL or IP address where exposed containers will be reachable. Defaults to URL if not specified (example:
+            docker.mydomain.tld:2375)'
+        - name: GroupID
+          in: formData
+          type: integer
+          description: Environment(Endpoint) group identifier. If not specified will default to 1 (unassigned).
+        - name: TLS
+          in: formData
+          type: boolean
+          description: Require TLS to connect against this environment(endpoint). Must be true if EndpointCreationType is
+            set to 2 (Agent environment)
+        - name: TLSSkipVerify
+          in: formData
+          type: boolean
+          description: Skip server verification when using TLS. Must be true if EndpointCreationType is set to 2 (Agent environment)
+        - name: TLSSkipClientVerify
+          in: formData
+          type: boolean
+          description: Skip client verification when using TLS. Must be true if EndpointCreationType is set to 2 (Agent environment)
+        - name: TLSCACertFile
+          in: formData
+          type: file
+          description: TLS CA certificate file
+        - name: TLSCertFile
+          in: formData
+          type: file
+          description: TLS client certificate file
+        - name: TLSKeyFile
+          in: formData
+          type: file
+          description: TLS client key file
+        - name: AzureApplicationID
+          in: formData
+          type: string
+          description: Azure application ID. Required if environment(endpoint) type is set to 3
+        - name: AzureTenantID
+          in: formData
+          type: string
+          description: Azure tenant ID. Required if environment(endpoint) type is set to 3
+        - name: AzureAuthenticationKey
+          in: formData
+          type: string
+          description: Azure authentication key. Required if environment(endpoint) type is set to 3
+        - name: TagIds
+          in: formData
+          type: array
+          description: List of tag identifiers to which this environment(endpoint) is associated
+        - name: EdgeCheckinInterval
+          in: formData
+          type: integer
+          description: The check in interval for edge agent (in seconds)
+        - name: EdgeTunnelServerAddress
+          in: formData
+          type: string
+          description: URL or IP address that will be used to establish a reverse tunnel
+          required: true
+        - name: Gpus
+          in: formData
+          type: string
+          description: List of GPUs - json stringified array of {name, value} structs
+    - name: endpoints-delete
+      path: /endpoints/delete
+      operations:
+      - name: endpointdeletebatch
+        method: POST
+        description: Remove multiple environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: List of environments to delete, with optional deleteCluster flag to clean-up associated resources (cloud
+            environments only)
+          required: true
+    - name: endpoints-global-key
+      path: /endpoints/global-key
+      operations:
+      - name: endpointcreateglobalkey
+        method: POST
+        description: Create or retrieve the endpoint for an EdgeID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: endpoints-relations
+      path: /endpoints/relations
+      operations:
+      - name: endpointupdaterelations
+        method: PUT
+        description: Update relations for a list of environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Environment relations data
+          required: true
+    - name: endpoints-snapshot
+      path: /endpoints/snapshot
+      operations:
+      - name: endpointsnapshots
+        method: POST
+        description: Snapshot all environments(endpoints)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: endpoints-id
+      path: /endpoints/{id}
+      operations:
+      - name: endpointdelete
+        method: DELETE
+        description: Remove an environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+      - name: endpointinspect
+        method: GET
+        description: Inspect an environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: excludeSnapshot
+          in: query
+          type: boolean
+          description: if true, the snapshot data won't be retrieved
+      - name: endpointupdate
+        method: PUT
+        description: Update an environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: Environment(Endpoint) details
+          required: true
+    - name: endpoints-id-association
+      path: /endpoints/{id}/association
+      operations:
+      - name: endpointassociationdelete
+        method: PUT
+        description: De-association an edge environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+    - name: endpoints-id-docker-v2-browse-put
+      path: /endpoints/{id}/docker/v2/browse/put
+      operations:
+      - name: post
+        method: POST
+        description: Upload a file under a specific path on the file system of an environment (endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: volumeID
+          in: query
+          type: string
+          description: Optional volume identifier to upload the file
+        - name: Path
+          in: formData
+          type: string
+          description: The destination path to upload the file to
+          required: true
+        - name: file
+          in: formData
+          type: file
+          description: The file to upload
+          required: true
+    - name: endpoints-id-dockerhub-registryId
+      path: /endpoints/{id}/dockerhub/{registryId}
+      operations:
+      - name: endpointdockerhubstatus
+        method: GET
+        description: fetch docker pull limits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: endpoint ID
+          required: true
+        - name: registryId
+          in: path
+          type: integer
+          description: registry ID
+          required: true
+    - name: endpoints-id-edge-jobs-jobID-logs
+      path: /endpoints/{id}/edge/jobs/{jobID}/logs
+      operations:
+      - name: post
+        method: POST
+        description: Update the logs collected from an Edge Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: environment(endpoint) Id
+          required: true
+        - name: jobID
+          in: path
+          type: integer
+          description: Job Id
+          required: true
+    - name: endpoints-id-edge-stacks-stackId
+      path: /endpoints/{id}/edge/stacks/{stackId}
+      operations:
+      - name: get
+        method: GET
+        description: Inspect an Edge Stack for an Environment(Endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: environment(endpoint) Id
+          required: true
+        - name: stackId
+          in: path
+          type: integer
+          description: EdgeStack Id
+          required: true
+    - name: endpoints-id-edge-status
+      path: /endpoints/{id}/edge/status
+      operations:
+      - name: endpointedgestatusinspect
+        method: GET
+        description: Get environment(endpoint) status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+    - name: endpoints-id-forceupdateservice
+      path: /endpoints/{id}/forceupdateservice
+      operations:
+      - name: endpointforceupdateservice
+        method: PUT
+        description: force update a docker service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: endpoint identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: details
+          required: true
+    - name: endpoints-id-registries
+      path: /endpoints/{id}/registries
+      operations:
+      - name: endpointregistrieslist
+        method: GET
+        description: List Registries on environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: namespace
+          in: query
+          type: string
+          description: required if kubernetes environment, will show registries by namespace
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+    - name: endpoints-id-registries-registryId
+      path: /endpoints/{id}/registries/{registryId}
+      operations:
+      - name: endpointregistryaccess
+        method: PUT
+        description: update registry access for environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: registryId
+          in: path
+          type: integer
+          description: Registry identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: details
+          required: true
+    - name: endpoints-id-settings
+      path: /endpoints/{id}/settings
+      operations:
+      - name: endpointsettingsupdate
+        method: PUT
+        description: Update settings for an environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: Environment(Endpoint) details
+          required: true
+    - name: endpoints-id-snapshot
+      path: /endpoints/{id}/snapshot
+      operations:
+      - name: endpointsnapshot
+        method: POST
+        description: Snapshots an environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-endpoints-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — endpoints. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/endpoints
+      name: endpoints
+      description: REST surface for endpoints.
+      operations:
+      - method: DELETE
+        name: endpointdeletebatchdeprecated
+        description: Remove multiple environments
+        call: portainer-endpoints.endpointdeletebatchdeprecated
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: endpointlist
+        description: List environments(endpoints)
+        call: portainer-endpoints.endpointlist
+        with:
+          start: rest.start
+          limit: rest.limit
+          sort: rest.sort
+          order: rest.order
+          search: rest.search
+          groupIds: rest.groupIds
+          status: rest.status
+          types: rest.types
+          tagIds: rest.tagIds
+          tagsPartialMatch: rest.tagsPartialMatch
+          endpointIds: rest.endpointIds
+          excludeIds: rest.excludeIds
+          excludeGroupIds: rest.excludeGroupIds
+          provisioned: rest.provisioned
+          agentVersions: rest.agentVersions
+          edgeAsync: rest.edgeAsync
+          edgeDeviceUntrusted: rest.edgeDeviceUntrusted
+          edgeCheckInPassedSeconds: rest.edgeCheckInPassedSeconds
+          excludeSnapshots: rest.excludeSnapshots
+          name: rest.name
+          edgeStackStatus: rest.edgeStackStatus
+          edgeGroupIds: rest.edgeGroupIds
+          excludeEdgeGroupIds: rest.excludeEdgeGroupIds
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: endpointcreate
+        description: Create a new environment(endpoint)
+        call: portainer-endpoints.endpointcreate
+        with:
+          Name: rest.Name
+          EndpointCreationType: rest.EndpointCreationType
+          ContainerEngine: rest.ContainerEngine
+          URL: rest.URL
+          PublicURL: rest.PublicURL
+          GroupID: rest.GroupID
+          TLS: rest.TLS
+          TLSSkipVerify: rest.TLSSkipVerify
+          TLSSkipClientVerify: rest.TLSSkipClientVerify
+          TLSCACertFile: rest.TLSCACertFile
+          TLSCertFile: rest.TLSCertFile
+          TLSKeyFile: rest.TLSKeyFile
+          AzureApplicationID: rest.AzureApplicationID
+          AzureTenantID: rest.AzureTenantID
+          AzureAuthenticationKey: rest.AzureAuthenticationKey
+          TagIds: rest.TagIds
+          EdgeCheckinInterval: rest.EdgeCheckinInterval
+          EdgeTunnelServerAddress: rest.EdgeTunnelServerAddress
+          Gpus: rest.Gpus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/delete
+      name: endpoints-delete
+      description: REST surface for endpoints-delete.
+      operations:
+      - method: POST
+        name: endpointdeletebatch
+        description: Remove multiple environments
+        call: portainer-endpoints.endpointdeletebatch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/global-key
+      name: endpoints-global-key
+      description: REST surface for endpoints-global-key.
+      operations:
+      - method: POST
+        name: endpointcreateglobalkey
+        description: Create or retrieve the endpoint for an EdgeID
+        call: portainer-endpoints.endpointcreateglobalkey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/relations
+      name: endpoints-relations
+      description: REST surface for endpoints-relations.
+      operations:
+      - method: PUT
+        name: endpointupdaterelations
+        description: Update relations for a list of environments
+        call: portainer-endpoints.endpointupdaterelations
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/snapshot
+      name: endpoints-snapshot
+      description: REST surface for endpoints-snapshot.
+      operations:
+      - method: POST
+        name: endpointsnapshots
+        description: Snapshot all environments(endpoints)
+        call: portainer-endpoints.endpointsnapshots
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}
+      name: endpoints-id
+      description: REST surface for endpoints-id.
+      operations:
+      - method: DELETE
+        name: endpointdelete
+        description: Remove an environment
+        call: portainer-endpoints.endpointdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: endpointinspect
+        description: Inspect an environment(endpoint)
+        call: portainer-endpoints.endpointinspect
+        with:
+          id: rest.id
+          excludeSnapshot: rest.excludeSnapshot
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: endpointupdate
+        description: Update an environment(endpoint)
+        call: portainer-endpoints.endpointupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/association
+      name: endpoints-id-association
+      description: REST surface for endpoints-id-association.
+      operations:
+      - method: PUT
+        name: endpointassociationdelete
+        description: De-association an edge environment(endpoint)
+        call: portainer-endpoints.endpointassociationdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/docker/v2/browse/put
+      name: endpoints-id-docker-v2-browse-put
+      description: REST surface for endpoints-id-docker-v2-browse-put.
+      operations:
+      - method: POST
+        name: post
+        description: Upload a file under a specific path on the file system of an environment (endpoint)
+        call: portainer-endpoints.post
+        with:
+          id: rest.id
+          volumeID: rest.volumeID
+          Path: rest.Path
+          file: rest.file
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/dockerhub/{registryid}
+      name: endpoints-id-dockerhub-registryid
+      description: REST surface for endpoints-id-dockerhub-registryId.
+      operations:
+      - method: GET
+        name: endpointdockerhubstatus
+        description: fetch docker pull limits
+        call: portainer-endpoints.endpointdockerhubstatus
+        with:
+          id: rest.id
+          registryId: rest.registryId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/edge/jobs/{jobid}/logs
+      name: endpoints-id-edge-jobs-jobid-logs
+      description: REST surface for endpoints-id-edge-jobs-jobID-logs.
+      operations:
+      - method: POST
+        name: post
+        description: Update the logs collected from an Edge Job
+        call: portainer-endpoints.post
+        with:
+          id: rest.id
+          jobID: rest.jobID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/edge/stacks/{stackid}
+      name: endpoints-id-edge-stacks-stackid
+      description: REST surface for endpoints-id-edge-stacks-stackId.
+      operations:
+      - method: GET
+        name: get
+        description: Inspect an Edge Stack for an Environment(Endpoint)
+        call: portainer-endpoints.get
+        with:
+          id: rest.id
+          stackId: rest.stackId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/edge/status
+      name: endpoints-id-edge-status
+      description: REST surface for endpoints-id-edge-status.
+      operations:
+      - method: GET
+        name: endpointedgestatusinspect
+        description: Get environment(endpoint) status
+        call: portainer-endpoints.endpointedgestatusinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/forceupdateservice
+      name: endpoints-id-forceupdateservice
+      description: REST surface for endpoints-id-forceupdateservice.
+      operations:
+      - method: PUT
+        name: endpointforceupdateservice
+        description: force update a docker service
+        call: portainer-endpoints.endpointforceupdateservice
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/registries
+      name: endpoints-id-registries
+      description: REST surface for endpoints-id-registries.
+      operations:
+      - method: GET
+        name: endpointregistrieslist
+        description: List Registries on environment
+        call: portainer-endpoints.endpointregistrieslist
+        with:
+          namespace: rest.namespace
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/registries/{registryid}
+      name: endpoints-id-registries-registryid
+      description: REST surface for endpoints-id-registries-registryId.
+      operations:
+      - method: PUT
+        name: endpointregistryaccess
+        description: update registry access for environment
+        call: portainer-endpoints.endpointregistryaccess
+        with:
+          id: rest.id
+          registryId: rest.registryId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/settings
+      name: endpoints-id-settings
+      description: REST surface for endpoints-id-settings.
+      operations:
+      - method: PUT
+        name: endpointsettingsupdate
+        description: Update settings for an environment(endpoint)
+        call: portainer-endpoints.endpointsettingsupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/snapshot
+      name: endpoints-id-snapshot
+      description: REST surface for endpoints-id-snapshot.
+      operations:
+      - method: POST
+        name: endpointsnapshot
+        description: Snapshots an environment(endpoint)
+        call: portainer-endpoints.endpointsnapshot
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-endpoints-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — endpoints. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: remove-multiple-environments
+      description: Remove multiple environments
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-endpoints.endpointdeletebatchdeprecated
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-environments-endpoints
+      description: List environments(endpoints)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointlist
+      with:
+        start: tools.start
+        limit: tools.limit
+        sort: tools.sort
+        order: tools.order
+        search: tools.search
+        groupIds: tools.groupIds
+        status: tools.status
+        types: tools.types
+        tagIds: tools.tagIds
+        tagsPartialMatch: tools.tagsPartialMatch
+        endpointIds: tools.endpointIds
+        excludeIds: tools.excludeIds
+        excludeGroupIds: tools.excludeGroupIds
+        provisioned: tools.provisioned
+        agentVersions: tools.agentVersions
+        edgeAsync: tools.edgeAsync
+        edgeDeviceUntrusted: tools.edgeDeviceUntrusted
+        edgeCheckInPassedSeconds: tools.edgeCheckInPassedSeconds
+        excludeSnapshots: tools.excludeSnapshots
+        name: tools.name
+        edgeStackStatus: tools.edgeStackStatus
+        edgeGroupIds: tools.edgeGroupIds
+        excludeEdgeGroupIds: tools.excludeEdgeGroupIds
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-environment-endpoint
+      description: Create a new environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.endpointcreate
+      with:
+        Name: tools.Name
+        EndpointCreationType: tools.EndpointCreationType
+        ContainerEngine: tools.ContainerEngine
+        URL: tools.URL
+        PublicURL: tools.PublicURL
+        GroupID: tools.GroupID
+        TLS: tools.TLS
+        TLSSkipVerify: tools.TLSSkipVerify
+        TLSSkipClientVerify: tools.TLSSkipClientVerify
+        TLSCACertFile: tools.TLSCACertFile
+        TLSCertFile: tools.TLSCertFile
+        TLSKeyFile: tools.TLSKeyFile
+        AzureApplicationID: tools.AzureApplicationID
+        AzureTenantID: tools.AzureTenantID
+        AzureAuthenticationKey: tools.AzureAuthenticationKey
+        TagIds: tools.TagIds
+        EdgeCheckinInterval: tools.EdgeCheckinInterval
+        EdgeTunnelServerAddress: tools.EdgeTunnelServerAddress
+        Gpus: tools.Gpus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-multiple-environments-2
+      description: Remove multiple environments
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.endpointdeletebatch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-retrieve-endpoint-edgeid
+      description: Create or retrieve the endpoint for an EdgeID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.endpointcreateglobalkey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-relations-list-environments
+      description: Update relations for a list of environments
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointupdaterelations
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: snapshot-all-environments-endpoints
+      description: Snapshot all environments(endpoints)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.endpointsnapshots
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-environment
+      description: Remove an environment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-endpoints.endpointdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-environment-endpoint
+      description: Inspect an environment(endpoint)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointinspect
+      with:
+        id: tools.id
+        excludeSnapshot: tools.excludeSnapshot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-environment-endpoint
+      description: Update an environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: de-association-edge-environment-endpoint
+      description: De-association an edge environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointassociationdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-file-under-specific-path
+      description: Upload a file under a specific path on the file system of an environment (endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.post
+      with:
+        id: tools.id
+        volumeID: tools.volumeID
+        Path: tools.Path
+        file: tools.file
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-docker-pull-limits
+      description: fetch docker pull limits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointdockerhubstatus
+      with:
+        id: tools.id
+        registryId: tools.registryId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-logs-collected-edge-job
+      description: Update the logs collected from an Edge Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.post
+      with:
+        id: tools.id
+        jobID: tools.jobID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-edge-stack-environment-endpoint
+      description: Inspect an Edge Stack for an Environment(Endpoint)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.get
+      with:
+        id: tools.id
+        stackId: tools.stackId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-endpoint-status
+      description: Get environment(endpoint) status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointedgestatusinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: force-update-docker-service
+      description: force update a docker service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointforceupdateservice
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-registries-environment
+      description: List Registries on environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointregistrieslist
+      with:
+        namespace: tools.namespace
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-registry-access-environment
+      description: update registry access for environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointregistryaccess
+      with:
+        id: tools.id
+        registryId: tools.registryId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-settings-environment-endpoint
+      description: Update settings for an environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoints.endpointsettingsupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: snapshots-environment-endpoint
+      description: Snapshots an environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoints.endpointsnapshot
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

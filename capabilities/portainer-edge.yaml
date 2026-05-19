@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — edge
+  description: 'PortainerCE API — edge. 2 operations. Lead operation: Update the logs collected from an Edge Job. Self-contained
+    Naftiko capability covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - edge
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-edge
+    baseUri: ''
+    description: PortainerCE API — edge business capability. Self-contained, no shared references.
+    resources:
+    - name: endpoints-id-edge-jobs-jobID-logs
+      path: /endpoints/{id}/edge/jobs/{jobID}/logs
+      operations:
+      - name: post
+        method: POST
+        description: Update the logs collected from an Edge Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: environment(endpoint) Id
+          required: true
+        - name: jobID
+          in: path
+          type: integer
+          description: Job Id
+          required: true
+    - name: endpoints-id-edge-stacks-stackId
+      path: /endpoints/{id}/edge/stacks/{stackId}
+      operations:
+      - name: get
+        method: GET
+        description: Inspect an Edge Stack for an Environment(Endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: environment(endpoint) Id
+          required: true
+        - name: stackId
+          in: path
+          type: integer
+          description: EdgeStack Id
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-edge-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — edge. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/endpoints/{id}/edge/jobs/{jobid}/logs
+      name: endpoints-id-edge-jobs-jobid-logs
+      description: REST surface for endpoints-id-edge-jobs-jobID-logs.
+      operations:
+      - method: POST
+        name: post
+        description: Update the logs collected from an Edge Job
+        call: portainer-edge.post
+        with:
+          id: rest.id
+          jobID: rest.jobID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/edge/stacks/{stackid}
+      name: endpoints-id-edge-stacks-stackid
+      description: REST surface for endpoints-id-edge-stacks-stackId.
+      operations:
+      - method: GET
+        name: get
+        description: Inspect an Edge Stack for an Environment(Endpoint)
+        call: portainer-edge.get
+        with:
+          id: rest.id
+          stackId: rest.stackId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-edge-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — edge. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: update-logs-collected-edge-job
+      description: Update the logs collected from an Edge Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-edge.post
+      with:
+        id: tools.id
+        jobID: tools.jobID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-edge-stack-environment-endpoint
+      description: Inspect an Edge Stack for an Environment(Endpoint)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge.get
+      with:
+        id: tools.id
+        stackId: tools.stackId
+      outputParameters:
+      - type: object
+        mapping: $.

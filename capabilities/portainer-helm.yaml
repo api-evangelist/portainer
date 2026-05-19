@@ -1,0 +1,661 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — helm
+  description: 'PortainerCE API — helm. 11 operations. Lead operation: List Helm Releases. Self-contained Naftiko capability
+    covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - helm
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-helm
+    baseUri: ''
+    description: PortainerCE API — helm business capability. Self-contained, no shared references.
+    resources:
+    - name: endpoints-id-kubernetes-helm
+      path: /endpoints/{id}/kubernetes/helm
+      operations:
+      - name: helmlist
+        method: GET
+        description: List Helm Releases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: namespace
+          in: query
+          type: string
+          description: specify an optional namespace
+        - name: filter
+          in: query
+          type: string
+          description: specify an optional filter
+        - name: selector
+          in: query
+          type: string
+          description: specify an optional selector
+      - name: helminstall
+        method: POST
+        description: Install Helm Chart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: payload
+          in: body
+          type: string
+          description: Chart details
+          required: true
+        - name: dryRun
+          in: query
+          type: boolean
+          description: Dry run
+    - name: endpoints-id-kubernetes-helm-name
+      path: /endpoints/{id}/kubernetes/helm/{name}
+      operations:
+      - name: helmget
+        method: GET
+        description: Get a helm release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: Helm release name
+          required: true
+        - name: namespace
+          in: query
+          type: string
+          description: specify an optional namespace
+        - name: showResources
+          in: query
+          type: boolean
+          description: show resources of the release
+        - name: revision
+          in: query
+          type: integer
+          description: specify an optional revision
+    - name: endpoints-id-kubernetes-helm-release
+      path: /endpoints/{id}/kubernetes/helm/{release}
+      operations:
+      - name: helmdelete
+        method: DELETE
+        description: Delete Helm Release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: release
+          in: path
+          type: string
+          description: The name of the release/application to uninstall
+          required: true
+        - name: namespace
+          in: query
+          type: string
+          description: An optional namespace
+    - name: endpoints-id-kubernetes-helm-release-history
+      path: /endpoints/{id}/kubernetes/helm/{release}/history
+      operations:
+      - name: helmgethistory
+        method: GET
+        description: Get a historical list of releases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: Helm release name
+          required: true
+        - name: namespace
+          in: query
+          type: string
+          description: specify an optional namespace
+    - name: endpoints-id-kubernetes-helm-release-rollback
+      path: /endpoints/{id}/kubernetes/helm/{release}/rollback
+      operations:
+      - name: helmrollback
+        method: POST
+        description: Rollback a helm release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+        - name: release
+          in: path
+          type: string
+          description: Helm release name
+          required: true
+        - name: namespace
+          in: query
+          type: string
+          description: specify an optional namespace
+        - name: revision
+          in: query
+          type: integer
+          description: specify the revision to rollback to (defaults to previous revision if not specified)
+        - name: wait
+          in: query
+          type: boolean
+          description: 'wait for resources to be ready (default: false)'
+        - name: waitForJobs
+          in: query
+          type: boolean
+          description: 'wait for jobs to complete before marking the release as successful (default: false)'
+        - name: recreate
+          in: query
+          type: boolean
+          description: 'performs pods restart for the resource if applicable (default: true)'
+        - name: force
+          in: query
+          type: boolean
+          description: 'force resource update through delete/recreate if needed (default: false)'
+        - name: timeout
+          in: query
+          type: integer
+          description: 'time to wait for any individual Kubernetes operation in seconds (default: 300)'
+    - name: templates-helm
+      path: /templates/helm
+      operations:
+      - name: helmreposearch
+        method: GET
+        description: Search Helm Charts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: query
+          type: string
+          description: Helm repository URL
+          required: true
+        - name: chart
+          in: query
+          type: string
+          description: Helm chart name
+        - name: useCache
+          in: query
+          type: string
+          description: If true will use cache to search
+    - name: templates-helm-command
+      path: /templates/helm/{command}
+      operations:
+      - name: helmshow
+        method: GET
+        description: Show Helm Chart Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: query
+          type: string
+          description: Helm repository URL
+          required: true
+        - name: chart
+          in: query
+          type: string
+          description: Chart name
+          required: true
+        - name: version
+          in: query
+          type: string
+          description: Chart version
+          required: true
+        - name: command
+          in: path
+          type: string
+          description: chart/values/readme
+          required: true
+    - name: users-id-helm-repositories
+      path: /users/{id}/helm/repositories
+      operations:
+      - name: helmuserrepositorieslist
+        method: GET
+        description: List a users helm repositories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+      - name: helmuserrepositorycreate
+        method: POST
+        description: Create a user helm repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+        - name: payload
+          in: body
+          type: string
+          description: Helm Repository
+          required: true
+    - name: users-id-helm-repositories-repositoryID
+      path: /users/{id}/helm/repositories/{repositoryID}
+      operations:
+      - name: helmuserrepositorydelete
+        method: DELETE
+        description: Delete a users helm repositoryies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+        - name: repositoryID
+          in: path
+          type: integer
+          description: Repository identifier
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-helm-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — helm. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/endpoints/{id}/kubernetes/helm
+      name: endpoints-id-kubernetes-helm
+      description: REST surface for endpoints-id-kubernetes-helm.
+      operations:
+      - method: GET
+        name: helmlist
+        description: List Helm Releases
+        call: portainer-helm.helmlist
+        with:
+          id: rest.id
+          namespace: rest.namespace
+          filter: rest.filter
+          selector: rest.selector
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: helminstall
+        description: Install Helm Chart
+        call: portainer-helm.helminstall
+        with:
+          id: rest.id
+          payload: rest.payload
+          dryRun: rest.dryRun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/kubernetes/helm/{name}
+      name: endpoints-id-kubernetes-helm-name
+      description: REST surface for endpoints-id-kubernetes-helm-name.
+      operations:
+      - method: GET
+        name: helmget
+        description: Get a helm release
+        call: portainer-helm.helmget
+        with:
+          id: rest.id
+          name: rest.name
+          namespace: rest.namespace
+          showResources: rest.showResources
+          revision: rest.revision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/kubernetes/helm/{release}
+      name: endpoints-id-kubernetes-helm-release
+      description: REST surface for endpoints-id-kubernetes-helm-release.
+      operations:
+      - method: DELETE
+        name: helmdelete
+        description: Delete Helm Release
+        call: portainer-helm.helmdelete
+        with:
+          id: rest.id
+          release: rest.release
+          namespace: rest.namespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/kubernetes/helm/{release}/history
+      name: endpoints-id-kubernetes-helm-release-history
+      description: REST surface for endpoints-id-kubernetes-helm-release-history.
+      operations:
+      - method: GET
+        name: helmgethistory
+        description: Get a historical list of releases
+        call: portainer-helm.helmgethistory
+        with:
+          id: rest.id
+          name: rest.name
+          namespace: rest.namespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoints/{id}/kubernetes/helm/{release}/rollback
+      name: endpoints-id-kubernetes-helm-release-rollback
+      description: REST surface for endpoints-id-kubernetes-helm-release-rollback.
+      operations:
+      - method: POST
+        name: helmrollback
+        description: Rollback a helm release
+        call: portainer-helm.helmrollback
+        with:
+          id: rest.id
+          release: rest.release
+          namespace: rest.namespace
+          revision: rest.revision
+          wait: rest.wait
+          waitForJobs: rest.waitForJobs
+          recreate: rest.recreate
+          force: rest.force
+          timeout: rest.timeout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/templates/helm
+      name: templates-helm
+      description: REST surface for templates-helm.
+      operations:
+      - method: GET
+        name: helmreposearch
+        description: Search Helm Charts
+        call: portainer-helm.helmreposearch
+        with:
+          repo: rest.repo
+          chart: rest.chart
+          useCache: rest.useCache
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/templates/helm/{command}
+      name: templates-helm-command
+      description: REST surface for templates-helm-command.
+      operations:
+      - method: GET
+        name: helmshow
+        description: Show Helm Chart Information
+        call: portainer-helm.helmshow
+        with:
+          repo: rest.repo
+          chart: rest.chart
+          version: rest.version
+          command: rest.command
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/helm/repositories
+      name: users-id-helm-repositories
+      description: REST surface for users-id-helm-repositories.
+      operations:
+      - method: GET
+        name: helmuserrepositorieslist
+        description: List a users helm repositories
+        call: portainer-helm.helmuserrepositorieslist
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: helmuserrepositorycreate
+        description: Create a user helm repository
+        call: portainer-helm.helmuserrepositorycreate
+        with:
+          id: rest.id
+          payload: rest.payload
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/helm/repositories/{repositoryid}
+      name: users-id-helm-repositories-repositoryid
+      description: REST surface for users-id-helm-repositories-repositoryID.
+      operations:
+      - method: DELETE
+        name: helmuserrepositorydelete
+        description: Delete a users helm repositoryies
+        call: portainer-helm.helmuserrepositorydelete
+        with:
+          id: rest.id
+          repositoryID: rest.repositoryID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-helm-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — helm. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-helm-releases
+      description: List Helm Releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-helm.helmlist
+      with:
+        id: tools.id
+        namespace: tools.namespace
+        filter: tools.filter
+        selector: tools.selector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-helm-chart
+      description: Install Helm Chart
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-helm.helminstall
+      with:
+        id: tools.id
+        payload: tools.payload
+        dryRun: tools.dryRun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-helm-release
+      description: Get a helm release
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-helm.helmget
+      with:
+        id: tools.id
+        name: tools.name
+        namespace: tools.namespace
+        showResources: tools.showResources
+        revision: tools.revision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-helm-release
+      description: Delete Helm Release
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-helm.helmdelete
+      with:
+        id: tools.id
+        release: tools.release
+        namespace: tools.namespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-historical-list-releases
+      description: Get a historical list of releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-helm.helmgethistory
+      with:
+        id: tools.id
+        name: tools.name
+        namespace: tools.namespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rollback-helm-release
+      description: Rollback a helm release
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-helm.helmrollback
+      with:
+        id: tools.id
+        release: tools.release
+        namespace: tools.namespace
+        revision: tools.revision
+        wait: tools.wait
+        waitForJobs: tools.waitForJobs
+        recreate: tools.recreate
+        force: tools.force
+        timeout: tools.timeout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-helm-charts
+      description: Search Helm Charts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-helm.helmreposearch
+      with:
+        repo: tools.repo
+        chart: tools.chart
+        useCache: tools.useCache
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: show-helm-chart-information
+      description: Show Helm Chart Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-helm.helmshow
+      with:
+        repo: tools.repo
+        chart: tools.chart
+        version: tools.version
+        command: tools.command
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users-helm-repositories
+      description: List a users helm repositories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-helm.helmuserrepositorieslist
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-user-helm-repository
+      description: Create a user helm repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-helm.helmuserrepositorycreate
+      with:
+        id: tools.id
+        payload: tools.payload
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-users-helm-repositoryies
+      description: Delete a users helm repositoryies
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-helm.helmuserrepositorydelete
+      with:
+        id: tools.id
+        repositoryID: tools.repositoryID
+      outputParameters:
+      - type: object
+        mapping: $.

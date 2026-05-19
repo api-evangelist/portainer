@@ -1,0 +1,195 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — system
+  description: 'PortainerCE API — system. 5 operations. Lead operation: Retrieve system info. Self-contained Naftiko capability
+    covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - system
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-system
+    baseUri: ''
+    description: PortainerCE API — system business capability. Self-contained, no shared references.
+    resources:
+    - name: system-info
+      path: /system/info
+      operations:
+      - name: systeminfo
+        method: GET
+        description: Retrieve system info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-nodes
+      path: /system/nodes
+      operations:
+      - name: systemnodescount
+        method: GET
+        description: Retrieve the count of nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-status
+      path: /system/status
+      operations:
+      - name: systemstatus
+        method: GET
+        description: Check Portainer status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-upgrade
+      path: /system/upgrade
+      operations:
+      - name: systemupgrade
+        method: POST
+        description: Upgrade Portainer to BE
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-version
+      path: /system/version
+      operations:
+      - name: systemversion
+        method: GET
+        description: Check for portainer updates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: portainer-system-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — system. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/system/info
+      name: system-info
+      description: REST surface for system-info.
+      operations:
+      - method: GET
+        name: systeminfo
+        description: Retrieve system info
+        call: portainer-system.systeminfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/nodes
+      name: system-nodes
+      description: REST surface for system-nodes.
+      operations:
+      - method: GET
+        name: systemnodescount
+        description: Retrieve the count of nodes
+        call: portainer-system.systemnodescount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/status
+      name: system-status
+      description: REST surface for system-status.
+      operations:
+      - method: GET
+        name: systemstatus
+        description: Check Portainer status
+        call: portainer-system.systemstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/upgrade
+      name: system-upgrade
+      description: REST surface for system-upgrade.
+      operations:
+      - method: POST
+        name: systemupgrade
+        description: Upgrade Portainer to BE
+        call: portainer-system.systemupgrade
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/version
+      name: system-version
+      description: REST surface for system-version.
+      operations:
+      - method: GET
+        name: systemversion
+        description: Check for portainer updates
+        call: portainer-system.systemversion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-system-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — system. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-system-info
+      description: Retrieve system info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-system.systeminfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-count-nodes
+      description: Retrieve the count of nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-system.systemnodescount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-portainer-status
+      description: Check Portainer status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-system.systemstatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upgrade-portainer-be
+      description: Upgrade Portainer to BE
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-system.systemupgrade
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-portainer-updates
+      description: Check for portainer updates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-system.systemversion
+      outputParameters:
+      - type: object
+        mapping: $.

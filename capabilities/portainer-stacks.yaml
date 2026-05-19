@@ -1,0 +1,1157 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — stacks
+  description: 'PortainerCE API — stacks. 22 operations. Lead operation: List stacks. Self-contained Naftiko capability covering
+    one Portainer business surface.'
+  tags:
+  - Portainer
+  - stacks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-stacks
+    baseUri: ''
+    description: PortainerCE API — stacks business capability. Self-contained, no shared references.
+    resources:
+    - name: stacks
+      path: /stacks
+      operations:
+      - name: stacklist
+        method: GET
+        description: List stacks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filters
+          in: query
+          type: string
+          description: 'Filters to process on the stack list. Encoded as JSON (a map[string]string). For example, {''SwarmID'':
+            ''jpofkc0i9uo9wtx1zesuk649w''} will only return stacks that '
+    - name: stacks-create-kubernetes-repository
+      path: /stacks/create/kubernetes/repository
+      operations:
+      - name: stackcreatekubernetesgit
+        method: POST
+        description: Deploy a new kubernetes stack from a git repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-create-kubernetes-string
+      path: /stacks/create/kubernetes/string
+      operations:
+      - name: stackcreatekubernetesfile
+        method: POST
+        description: Deploy a new kubernetes stack from a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-create-kubernetes-url
+      path: /stacks/create/kubernetes/url
+      operations:
+      - name: stackcreatekubernetesurl
+        method: POST
+        description: Deploy a new kubernetes stack from a url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-create-standalone-file
+      path: /stacks/create/standalone/file
+      operations:
+      - name: stackcreatedockerstandalonefile
+        method: POST
+        description: Deploy a new compose stack from a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Name
+          in: formData
+          type: string
+          description: Name of the stack
+          required: true
+        - name: Env
+          in: formData
+          type: string
+          description: 'Environment variables passed during deployment, represented as a JSON array [{''name'': ''name'',
+            ''value'': ''value''}].'
+        - name: file
+          in: formData
+          type: file
+          description: Stack file
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-create-standalone-repository
+      path: /stacks/create/standalone/repository
+      operations:
+      - name: stackcreatedockerstandalonerepository
+        method: POST
+        description: Deploy a new compose stack from repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+    - name: stacks-create-standalone-string
+      path: /stacks/create/standalone/string
+      operations:
+      - name: stackcreatedockerstandalonestring
+        method: POST
+        description: Deploy a new compose stack from a text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-create-swarm-file
+      path: /stacks/create/swarm/file
+      operations:
+      - name: stackcreatedockerswarmfile
+        method: POST
+        description: Deploy a new swarm stack from a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Name
+          in: formData
+          type: string
+          description: Name of the stack
+        - name: SwarmID
+          in: formData
+          type: string
+          description: Swarm cluster identifier.
+        - name: Env
+          in: formData
+          type: string
+          description: 'Environment variables passed during deployment, represented as a JSON array [{''name'': ''name'',
+            ''value'': ''value''}]. Optional'
+        - name: file
+          in: formData
+          type: file
+          description: Stack file
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-create-swarm-repository
+      path: /stacks/create/swarm/repository
+      operations:
+      - name: stackcreatedockerswarmrepository
+        method: POST
+        description: Deploy a new swarm stack from a git repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+    - name: stacks-create-swarm-string
+      path: /stacks/create/swarm/string
+      operations:
+      - name: stackcreatedockerswarmstring
+        method: POST
+        description: Deploy a new swarm stack from a text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: stack config
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Identifier of the environment that will be used to deploy the stack
+          required: true
+    - name: stacks-name-name
+      path: /stacks/name/{name}
+      operations:
+      - name: stackdeletekubernetesbyname
+        method: DELETE
+        description: Remove Kubernetes stacks by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Stack name
+          required: true
+        - name: external
+          in: query
+          type: boolean
+          description: Set to true to delete an external stack. Only external Swarm stacks are supported
+        - name: endpointId
+          in: query
+          type: integer
+          description: Environment identifier
+          required: true
+    - name: stacks-webhooks-webhookID
+      path: /stacks/webhooks/{webhookID}
+      operations:
+      - name: webhookinvoke
+        method: POST
+        description: Webhook for triggering stack updates from git
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webhookID
+          in: path
+          type: string
+          description: Stack identifier
+          required: true
+    - name: stacks-id
+      path: /stacks/{id}
+      operations:
+      - name: stackdelete
+        method: DELETE
+        description: Remove a stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: external
+          in: query
+          type: boolean
+          description: Set to true to delete an external stack. Only external Swarm stacks are supported
+        - name: endpointId
+          in: query
+          type: integer
+          description: Environment identifier
+          required: true
+      - name: stackinspect
+        method: GET
+        description: Inspect a stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+      - name: stackupdate
+        method: PUT
+        description: Update a stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Environment identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: Stack details
+          required: true
+    - name: stacks-id-associate
+      path: /stacks/{id}/associate
+      operations:
+      - name: stackassociate
+        method: PUT
+        description: Associate an orphaned stack to a new environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Environment identifier
+          required: true
+        - name: swarmId
+          in: query
+          type: integer
+          description: Swarm identifier
+          required: true
+        - name: orphanedRunning
+          in: query
+          type: boolean
+          description: Indicates whether the stack is orphaned
+          required: true
+    - name: stacks-id-file
+      path: /stacks/{id}/file
+      operations:
+      - name: stackfileinspect
+        method: GET
+        description: Retrieve the content of the Stack file for the specified stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+    - name: stacks-id-git
+      path: /stacks/{id}/git
+      operations:
+      - name: stackupdategit
+        method: POST
+        description: Update a stack's Git configs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier.
+            Use this optional parameter to set the environment(endpoint)
+        - name: body
+          in: body
+          type: string
+          description: Git configs for pull and redeploy a stack
+          required: true
+    - name: stacks-id-git-redeploy
+      path: /stacks/{id}/git/redeploy
+      operations:
+      - name: stackgitredeploy
+        method: PUT
+        description: Redeploy a stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier.
+            Use this optional parameter to set the environment(endpoint)
+        - name: body
+          in: body
+          type: string
+          description: Git configs for pull and redeploy of a stack. **StackName** may only be populated for Kuberenetes stacks,
+            and if specified with a blank string, it will be set t
+          required: true
+    - name: stacks-id-migrate
+      path: /stacks/{id}/migrate
+      operations:
+      - name: stackmigrate
+        method: POST
+        description: Migrate a stack to another environment(endpoint)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier.
+            Use this optional parameter to set the environment(endpoint)
+        - name: body
+          in: body
+          type: string
+          description: Stack migration details
+          required: true
+    - name: stacks-id-start
+      path: /stacks/{id}/start
+      operations:
+      - name: stackstart
+        method: POST
+        description: Starts a stopped Stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Environment identifier
+          required: true
+    - name: stacks-id-stop
+      path: /stacks/{id}/stop
+      operations:
+      - name: stackstop
+        method: POST
+        description: Stops a stopped Stack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Stack identifier
+          required: true
+        - name: endpointId
+          in: query
+          type: integer
+          description: Environment identifier
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-stacks-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — stacks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/stacks
+      name: stacks
+      description: REST surface for stacks.
+      operations:
+      - method: GET
+        name: stacklist
+        description: List stacks
+        call: portainer-stacks.stacklist
+        with:
+          filters: rest.filters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/kubernetes/repository
+      name: stacks-create-kubernetes-repository
+      description: REST surface for stacks-create-kubernetes-repository.
+      operations:
+      - method: POST
+        name: stackcreatekubernetesgit
+        description: Deploy a new kubernetes stack from a git repository
+        call: portainer-stacks.stackcreatekubernetesgit
+        with:
+          body: rest.body
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/kubernetes/string
+      name: stacks-create-kubernetes-string
+      description: REST surface for stacks-create-kubernetes-string.
+      operations:
+      - method: POST
+        name: stackcreatekubernetesfile
+        description: Deploy a new kubernetes stack from a file
+        call: portainer-stacks.stackcreatekubernetesfile
+        with:
+          body: rest.body
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/kubernetes/url
+      name: stacks-create-kubernetes-url
+      description: REST surface for stacks-create-kubernetes-url.
+      operations:
+      - method: POST
+        name: stackcreatekubernetesurl
+        description: Deploy a new kubernetes stack from a url
+        call: portainer-stacks.stackcreatekubernetesurl
+        with:
+          body: rest.body
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/standalone/file
+      name: stacks-create-standalone-file
+      description: REST surface for stacks-create-standalone-file.
+      operations:
+      - method: POST
+        name: stackcreatedockerstandalonefile
+        description: Deploy a new compose stack from a file
+        call: portainer-stacks.stackcreatedockerstandalonefile
+        with:
+          Name: rest.Name
+          Env: rest.Env
+          file: rest.file
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/standalone/repository
+      name: stacks-create-standalone-repository
+      description: REST surface for stacks-create-standalone-repository.
+      operations:
+      - method: POST
+        name: stackcreatedockerstandalonerepository
+        description: Deploy a new compose stack from repository
+        call: portainer-stacks.stackcreatedockerstandalonerepository
+        with:
+          endpointId: rest.endpointId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/standalone/string
+      name: stacks-create-standalone-string
+      description: REST surface for stacks-create-standalone-string.
+      operations:
+      - method: POST
+        name: stackcreatedockerstandalonestring
+        description: Deploy a new compose stack from a text
+        call: portainer-stacks.stackcreatedockerstandalonestring
+        with:
+          body: rest.body
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/swarm/file
+      name: stacks-create-swarm-file
+      description: REST surface for stacks-create-swarm-file.
+      operations:
+      - method: POST
+        name: stackcreatedockerswarmfile
+        description: Deploy a new swarm stack from a file
+        call: portainer-stacks.stackcreatedockerswarmfile
+        with:
+          Name: rest.Name
+          SwarmID: rest.SwarmID
+          Env: rest.Env
+          file: rest.file
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/swarm/repository
+      name: stacks-create-swarm-repository
+      description: REST surface for stacks-create-swarm-repository.
+      operations:
+      - method: POST
+        name: stackcreatedockerswarmrepository
+        description: Deploy a new swarm stack from a git repository
+        call: portainer-stacks.stackcreatedockerswarmrepository
+        with:
+          endpointId: rest.endpointId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/create/swarm/string
+      name: stacks-create-swarm-string
+      description: REST surface for stacks-create-swarm-string.
+      operations:
+      - method: POST
+        name: stackcreatedockerswarmstring
+        description: Deploy a new swarm stack from a text
+        call: portainer-stacks.stackcreatedockerswarmstring
+        with:
+          body: rest.body
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/name/{name}
+      name: stacks-name-name
+      description: REST surface for stacks-name-name.
+      operations:
+      - method: DELETE
+        name: stackdeletekubernetesbyname
+        description: Remove Kubernetes stacks by name
+        call: portainer-stacks.stackdeletekubernetesbyname
+        with:
+          name: rest.name
+          external: rest.external
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/webhooks/{webhookid}
+      name: stacks-webhooks-webhookid
+      description: REST surface for stacks-webhooks-webhookID.
+      operations:
+      - method: POST
+        name: webhookinvoke
+        description: Webhook for triggering stack updates from git
+        call: portainer-stacks.webhookinvoke
+        with:
+          webhookID: rest.webhookID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}
+      name: stacks-id
+      description: REST surface for stacks-id.
+      operations:
+      - method: DELETE
+        name: stackdelete
+        description: Remove a stack
+        call: portainer-stacks.stackdelete
+        with:
+          id: rest.id
+          external: rest.external
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: stackinspect
+        description: Inspect a stack
+        call: portainer-stacks.stackinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: stackupdate
+        description: Update a stack
+        call: portainer-stacks.stackupdate
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/associate
+      name: stacks-id-associate
+      description: REST surface for stacks-id-associate.
+      operations:
+      - method: PUT
+        name: stackassociate
+        description: Associate an orphaned stack to a new environment(endpoint)
+        call: portainer-stacks.stackassociate
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+          swarmId: rest.swarmId
+          orphanedRunning: rest.orphanedRunning
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/file
+      name: stacks-id-file
+      description: REST surface for stacks-id-file.
+      operations:
+      - method: GET
+        name: stackfileinspect
+        description: Retrieve the content of the Stack file for the specified stack
+        call: portainer-stacks.stackfileinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/git
+      name: stacks-id-git
+      description: REST surface for stacks-id-git.
+      operations:
+      - method: POST
+        name: stackupdategit
+        description: Update a stack's Git configs
+        call: portainer-stacks.stackupdategit
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/git/redeploy
+      name: stacks-id-git-redeploy
+      description: REST surface for stacks-id-git-redeploy.
+      operations:
+      - method: PUT
+        name: stackgitredeploy
+        description: Redeploy a stack
+        call: portainer-stacks.stackgitredeploy
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/migrate
+      name: stacks-id-migrate
+      description: REST surface for stacks-id-migrate.
+      operations:
+      - method: POST
+        name: stackmigrate
+        description: Migrate a stack to another environment(endpoint)
+        call: portainer-stacks.stackmigrate
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/start
+      name: stacks-id-start
+      description: REST surface for stacks-id-start.
+      operations:
+      - method: POST
+        name: stackstart
+        description: Starts a stopped Stack
+        call: portainer-stacks.stackstart
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stacks/{id}/stop
+      name: stacks-id-stop
+      description: REST surface for stacks-id-stop.
+      operations:
+      - method: POST
+        name: stackstop
+        description: Stops a stopped Stack
+        call: portainer-stacks.stackstop
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-stacks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — stacks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-stacks
+      description: List stacks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-stacks.stacklist
+      with:
+        filters: tools.filters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-kubernetes-stack-git
+      description: Deploy a new kubernetes stack from a git repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatekubernetesgit
+      with:
+        body: tools.body
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-kubernetes-stack-file
+      description: Deploy a new kubernetes stack from a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatekubernetesfile
+      with:
+        body: tools.body
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-kubernetes-stack-url
+      description: Deploy a new kubernetes stack from a url
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatekubernetesurl
+      with:
+        body: tools.body
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-compose-stack-file
+      description: Deploy a new compose stack from a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatedockerstandalonefile
+      with:
+        Name: tools.Name
+        Env: tools.Env
+        file: tools.file
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-compose-stack-repository
+      description: Deploy a new compose stack from repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatedockerstandalonerepository
+      with:
+        endpointId: tools.endpointId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-compose-stack-text
+      description: Deploy a new compose stack from a text
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatedockerstandalonestring
+      with:
+        body: tools.body
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-swarm-stack-file
+      description: Deploy a new swarm stack from a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatedockerswarmfile
+      with:
+        Name: tools.Name
+        SwarmID: tools.SwarmID
+        Env: tools.Env
+        file: tools.file
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-swarm-stack-git
+      description: Deploy a new swarm stack from a git repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatedockerswarmrepository
+      with:
+        endpointId: tools.endpointId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-new-swarm-stack-text
+      description: Deploy a new swarm stack from a text
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackcreatedockerswarmstring
+      with:
+        body: tools.body
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-kubernetes-stacks-name
+      description: Remove Kubernetes stacks by name
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-stacks.stackdeletekubernetesbyname
+      with:
+        name: tools.name
+        external: tools.external
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: webhook-triggering-stack-updates-git
+      description: Webhook for triggering stack updates from git
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.webhookinvoke
+      with:
+        webhookID: tools.webhookID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-stack
+      description: Remove a stack
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-stacks.stackdelete
+      with:
+        id: tools.id
+        external: tools.external
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-stack
+      description: Inspect a stack
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-stacks.stackinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-stack
+      description: Update a stack
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-stacks.stackupdate
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: associate-orphaned-stack-new-environment-endpoint
+      description: Associate an orphaned stack to a new environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-stacks.stackassociate
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+        swarmId: tools.swarmId
+        orphanedRunning: tools.orphanedRunning
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-content-stack-file-specified
+      description: Retrieve the content of the Stack file for the specified stack
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-stacks.stackfileinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-stack-s-git-configs
+      description: Update a stack's Git configs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackupdategit
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: redeploy-stack
+      description: Redeploy a stack
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-stacks.stackgitredeploy
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-stack-another-environment-endpoint
+      description: Migrate a stack to another environment(endpoint)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackmigrate
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: starts-stopped-stack
+      description: Starts a stopped Stack
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackstart
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stops-stopped-stack
+      description: Stops a stopped Stack
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-stacks.stackstop
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.

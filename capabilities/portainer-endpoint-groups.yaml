@@ -1,0 +1,312 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — endpoint_groups
+  description: 'PortainerCE API — endpoint_groups. 7 operations. Lead operation: List Environment(Endpoint) groups. Self-contained
+    Naftiko capability covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - endpoint_groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-endpoint-groups
+    baseUri: ''
+    description: PortainerCE API — endpoint_groups business capability. Self-contained, no shared references.
+    resources:
+    - name: endpoint_groups
+      path: /endpoint_groups
+      operations:
+      - name: endpointgrouplist
+        method: GET
+        description: List Environment(Endpoint) groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Create an Environment(Endpoint) Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Environment(Endpoint) Group details
+          required: true
+    - name: endpoint_groups-id
+      path: /endpoint_groups/{id}
+      operations:
+      - name: endpointgroupdelete
+        method: DELETE
+        description: Remove an environment(endpoint) group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EndpointGroup identifier
+          required: true
+      - name: get
+        method: GET
+        description: Inspect an Environment(Endpoint) group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Environment(Endpoint) group identifier
+          required: true
+      - name: endpointgroupupdate
+        method: PUT
+        description: Update an environment(endpoint) group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EndpointGroup identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: EndpointGroup details
+          required: true
+    - name: endpoint_groups-id-endpoints-endpointId
+      path: /endpoint_groups/{id}/endpoints/{endpointId}
+      operations:
+      - name: endpointgroupdeleteendpoint
+        method: DELETE
+        description: Removes environment(endpoint) from an environment(endpoint) group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EndpointGroup identifier
+          required: true
+        - name: endpointId
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+      - name: endpointgroupaddendpoint
+        method: PUT
+        description: Add an environment(endpoint) to an environment(endpoint) group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EndpointGroup identifier
+          required: true
+        - name: endpointId
+          in: path
+          type: integer
+          description: Environment(Endpoint) identifier
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-endpoint-groups-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — endpoint_groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/endpoint-groups
+      name: endpoint-groups
+      description: REST surface for endpoint_groups.
+      operations:
+      - method: GET
+        name: endpointgrouplist
+        description: List Environment(Endpoint) groups
+        call: portainer-endpoint-groups.endpointgrouplist
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create an Environment(Endpoint) Group
+        call: portainer-endpoint-groups.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoint-groups/{id}
+      name: endpoint-groups-id
+      description: REST surface for endpoint_groups-id.
+      operations:
+      - method: DELETE
+        name: endpointgroupdelete
+        description: Remove an environment(endpoint) group
+        call: portainer-endpoint-groups.endpointgroupdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: Inspect an Environment(Endpoint) group
+        call: portainer-endpoint-groups.get
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: endpointgroupupdate
+        description: Update an environment(endpoint) group
+        call: portainer-endpoint-groups.endpointgroupupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/endpoint-groups/{id}/endpoints/{endpointid}
+      name: endpoint-groups-id-endpoints-endpointid
+      description: REST surface for endpoint_groups-id-endpoints-endpointId.
+      operations:
+      - method: DELETE
+        name: endpointgroupdeleteendpoint
+        description: Removes environment(endpoint) from an environment(endpoint) group
+        call: portainer-endpoint-groups.endpointgroupdeleteendpoint
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: endpointgroupaddendpoint
+        description: Add an environment(endpoint) to an environment(endpoint) group
+        call: portainer-endpoint-groups.endpointgroupaddendpoint
+        with:
+          id: rest.id
+          endpointId: rest.endpointId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-endpoint-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — endpoint_groups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-environment-endpoint-groups
+      description: List Environment(Endpoint) groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoint-groups.endpointgrouplist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-environment-endpoint-group
+      description: Create an Environment(Endpoint) Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-endpoint-groups.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-environment-endpoint-group
+      description: Remove an environment(endpoint) group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-endpoint-groups.endpointgroupdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-environment-endpoint-group
+      description: Inspect an Environment(Endpoint) group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-endpoint-groups.get
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-environment-endpoint-group
+      description: Update an environment(endpoint) group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoint-groups.endpointgroupupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removes-environment-endpoint-environment-endpoint-group
+      description: Removes environment(endpoint) from an environment(endpoint) group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-endpoint-groups.endpointgroupdeleteendpoint
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-environment-endpoint-environment-endpoint-group
+      description: Add an environment(endpoint) to an environment(endpoint) group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-endpoint-groups.endpointgroupaddendpoint
+      with:
+        id: tools.id
+        endpointId: tools.endpointId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,521 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — edge_jobs
+  description: 'PortainerCE API — edge_jobs. 11 operations. Lead operation: Fetch EdgeJobs list. Self-contained Naftiko capability
+    covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - edge_jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-edge-jobs
+    baseUri: ''
+    description: PortainerCE API — edge_jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: edge_jobs
+      path: /edge_jobs
+      operations:
+      - name: edgejoblist
+        method: GET
+        description: Fetch EdgeJobs list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: edge_jobs-create-file
+      path: /edge_jobs/create/file
+      operations:
+      - name: edgejobcreatefile
+        method: POST
+        description: Create an EdgeJob from a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: file
+          in: formData
+          type: file
+          description: Content of the Stack file
+          required: true
+        - name: Name
+          in: formData
+          type: string
+          description: Name of the stack
+          required: true
+        - name: CronExpression
+          in: formData
+          type: string
+          description: A cron expression to schedule this job
+          required: true
+        - name: EdgeGroups
+          in: formData
+          type: string
+          description: JSON stringified array of Edge Groups ids
+          required: true
+        - name: Endpoints
+          in: formData
+          type: string
+          description: JSON stringified array of Environment ids
+          required: true
+        - name: Recurring
+          in: formData
+          type: boolean
+          description: If recurring
+    - name: edge_jobs-create-string
+      path: /edge_jobs/create/string
+      operations:
+      - name: edgejobcreatestring
+        method: POST
+        description: Create an EdgeJob from a text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: EdgeGroup data when method is string
+          required: true
+    - name: edge_jobs-id
+      path: /edge_jobs/{id}
+      operations:
+      - name: edgejobdelete
+        method: DELETE
+        description: Delete an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+      - name: edgejobinspect
+        method: GET
+        description: Inspect an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+      - name: edgejobupdate
+        method: PUT
+        description: Update an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: EdgeGroup data
+          required: true
+    - name: edge_jobs-id-file
+      path: /edge_jobs/{id}/file
+      operations:
+      - name: edgejobfile
+        method: GET
+        description: Fetch a file of an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+    - name: edge_jobs-id-tasks
+      path: /edge_jobs/{id}/tasks
+      operations:
+      - name: edgejobtaskslist
+        method: GET
+        description: Fetch the list of tasks on an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+    - name: edge_jobs-id-tasks-taskID-logs
+      path: /edge_jobs/{id}/tasks/{taskID}/logs
+      operations:
+      - name: edgejobtasksclear
+        method: DELETE
+        description: Clear the log for a specifc task on an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+        - name: taskID
+          in: path
+          type: integer
+          description: Task Id
+          required: true
+      - name: edgejobtasklogsinspect
+        method: GET
+        description: Fetch the log for a specifc task on an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+        - name: taskID
+          in: path
+          type: integer
+          description: Task Id
+          required: true
+      - name: edgejobtaskscollect
+        method: POST
+        description: Collect the log for a specifc task on an EdgeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeJob Id
+          required: true
+        - name: taskID
+          in: path
+          type: integer
+          description: Task Id
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-edge-jobs-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — edge_jobs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/edge-jobs
+      name: edge-jobs
+      description: REST surface for edge_jobs.
+      operations:
+      - method: GET
+        name: edgejoblist
+        description: Fetch EdgeJobs list
+        call: portainer-edge-jobs.edgejoblist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-jobs/create/file
+      name: edge-jobs-create-file
+      description: REST surface for edge_jobs-create-file.
+      operations:
+      - method: POST
+        name: edgejobcreatefile
+        description: Create an EdgeJob from a file
+        call: portainer-edge-jobs.edgejobcreatefile
+        with:
+          file: rest.file
+          Name: rest.Name
+          CronExpression: rest.CronExpression
+          EdgeGroups: rest.EdgeGroups
+          Endpoints: rest.Endpoints
+          Recurring: rest.Recurring
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-jobs/create/string
+      name: edge-jobs-create-string
+      description: REST surface for edge_jobs-create-string.
+      operations:
+      - method: POST
+        name: edgejobcreatestring
+        description: Create an EdgeJob from a text
+        call: portainer-edge-jobs.edgejobcreatestring
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-jobs/{id}
+      name: edge-jobs-id
+      description: REST surface for edge_jobs-id.
+      operations:
+      - method: DELETE
+        name: edgejobdelete
+        description: Delete an EdgeJob
+        call: portainer-edge-jobs.edgejobdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: edgejobinspect
+        description: Inspect an EdgeJob
+        call: portainer-edge-jobs.edgejobinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: edgejobupdate
+        description: Update an EdgeJob
+        call: portainer-edge-jobs.edgejobupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-jobs/{id}/file
+      name: edge-jobs-id-file
+      description: REST surface for edge_jobs-id-file.
+      operations:
+      - method: GET
+        name: edgejobfile
+        description: Fetch a file of an EdgeJob
+        call: portainer-edge-jobs.edgejobfile
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-jobs/{id}/tasks
+      name: edge-jobs-id-tasks
+      description: REST surface for edge_jobs-id-tasks.
+      operations:
+      - method: GET
+        name: edgejobtaskslist
+        description: Fetch the list of tasks on an EdgeJob
+        call: portainer-edge-jobs.edgejobtaskslist
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-jobs/{id}/tasks/{taskid}/logs
+      name: edge-jobs-id-tasks-taskid-logs
+      description: REST surface for edge_jobs-id-tasks-taskID-logs.
+      operations:
+      - method: DELETE
+        name: edgejobtasksclear
+        description: Clear the log for a specifc task on an EdgeJob
+        call: portainer-edge-jobs.edgejobtasksclear
+        with:
+          id: rest.id
+          taskID: rest.taskID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: edgejobtasklogsinspect
+        description: Fetch the log for a specifc task on an EdgeJob
+        call: portainer-edge-jobs.edgejobtasklogsinspect
+        with:
+          id: rest.id
+          taskID: rest.taskID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: edgejobtaskscollect
+        description: Collect the log for a specifc task on an EdgeJob
+        call: portainer-edge-jobs.edgejobtaskscollect
+        with:
+          id: rest.id
+          taskID: rest.taskID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-edge-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — edge_jobs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: fetch-edgejobs-list
+      description: Fetch EdgeJobs list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-jobs.edgejoblist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-edgejob-file
+      description: Create an EdgeJob from a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-edge-jobs.edgejobcreatefile
+      with:
+        file: tools.file
+        Name: tools.Name
+        CronExpression: tools.CronExpression
+        EdgeGroups: tools.EdgeGroups
+        Endpoints: tools.Endpoints
+        Recurring: tools.Recurring
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-edgejob-text
+      description: Create an EdgeJob from a text
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-edge-jobs.edgejobcreatestring
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-edgejob
+      description: Delete an EdgeJob
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-edge-jobs.edgejobdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-edgejob
+      description: Inspect an EdgeJob
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-jobs.edgejobinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-edgejob
+      description: Update an EdgeJob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-edge-jobs.edgejobupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-file-edgejob
+      description: Fetch a file of an EdgeJob
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-jobs.edgejobfile
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-list-tasks-edgejob
+      description: Fetch the list of tasks on an EdgeJob
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-jobs.edgejobtaskslist
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clear-log-specifc-task-edgejob
+      description: Clear the log for a specifc task on an EdgeJob
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-edge-jobs.edgejobtasksclear
+      with:
+        id: tools.id
+        taskID: tools.taskID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-log-specifc-task-edgejob
+      description: Fetch the log for a specifc task on an EdgeJob
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-jobs.edgejobtasklogsinspect
+      with:
+        id: tools.id
+        taskID: tools.taskID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: collect-log-specifc-task-edgejob
+      description: Collect the log for a specifc task on an EdgeJob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-edge-jobs.edgejobtaskscollect
+      with:
+        id: tools.id
+        taskID: tools.taskID
+      outputParameters:
+      - type: object
+        mapping: $.

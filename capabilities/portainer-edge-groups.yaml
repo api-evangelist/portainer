@@ -1,0 +1,221 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — edge_groups
+  description: 'PortainerCE API — edge_groups. 5 operations. Lead operation: list EdgeGroups. Self-contained Naftiko capability
+    covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - edge_groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-edge-groups
+    baseUri: ''
+    description: PortainerCE API — edge_groups business capability. Self-contained, no shared references.
+    resources:
+    - name: edge_groups
+      path: /edge_groups
+      operations:
+      - name: edgegrouplist
+        method: GET
+        description: list EdgeGroups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: edgegroupcreate
+        method: POST
+        description: Create an EdgeGroup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: EdgeGroup data
+          required: true
+    - name: edge_groups-id
+      path: /edge_groups/{id}
+      operations:
+      - name: edgegroupdelete
+        method: DELETE
+        description: Deletes an EdgeGroup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeGroup Id
+          required: true
+      - name: edgegroupinspect
+        method: GET
+        description: Inspects an EdgeGroup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeGroup Id
+          required: true
+      - name: edgegroupupdate
+        method: PUT
+        description: Updates an EdgeGroup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: EdgeGroup Id
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: EdgeGroup data
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-edge-groups-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — edge_groups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/edge-groups
+      name: edge-groups
+      description: REST surface for edge_groups.
+      operations:
+      - method: GET
+        name: edgegrouplist
+        description: list EdgeGroups
+        call: portainer-edge-groups.edgegrouplist
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: edgegroupcreate
+        description: Create an EdgeGroup
+        call: portainer-edge-groups.edgegroupcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edge-groups/{id}
+      name: edge-groups-id
+      description: REST surface for edge_groups-id.
+      operations:
+      - method: DELETE
+        name: edgegroupdelete
+        description: Deletes an EdgeGroup
+        call: portainer-edge-groups.edgegroupdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: edgegroupinspect
+        description: Inspects an EdgeGroup
+        call: portainer-edge-groups.edgegroupinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: edgegroupupdate
+        description: Updates an EdgeGroup
+        call: portainer-edge-groups.edgegroupupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-edge-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — edge_groups. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-edgegroups
+      description: list EdgeGroups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-groups.edgegrouplist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-edgegroup
+      description: Create an EdgeGroup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-edge-groups.edgegroupcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletes-edgegroup
+      description: Deletes an EdgeGroup
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-edge-groups.edgegroupdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspects-edgegroup
+      description: Inspects an EdgeGroup
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-edge-groups.edgegroupinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updates-edgegroup
+      description: Updates an EdgeGroup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-edge-groups.edgegroupupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

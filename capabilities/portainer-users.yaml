@@ -1,0 +1,560 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — users
+  description: 'PortainerCE API — users. 13 operations. Lead operation: List users. Self-contained Naftiko capability covering
+    one Portainer business surface.'
+  tags:
+  - Portainer
+  - users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-users
+    baseUri: ''
+    description: PortainerCE API — users business capability. Self-contained, no shared references.
+    resources:
+    - name: users
+      path: /users
+      operations:
+      - name: userlist
+        method: GET
+        description: List users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: integer
+          description: Identifier of the environment(endpoint) that will be used to filter the authorized users
+      - name: usercreate
+        method: POST
+        description: Create a new user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: User details
+          required: true
+    - name: users-admin-check
+      path: /users/admin/check
+      operations:
+      - name: useradmincheck
+        method: GET
+        description: Check administrator account existence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-admin-init
+      path: /users/admin/init
+      operations:
+      - name: useradmininit
+        method: POST
+        description: Initialize administrator account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: User details
+          required: true
+    - name: users-me
+      path: /users/me
+      operations:
+      - name: currentuserinspect
+        method: GET
+        description: Inspect the current user user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-id
+      path: /users/{id}
+      operations:
+      - name: userdelete
+        method: DELETE
+        description: Remove a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+      - name: userinspect
+        method: GET
+        description: Inspect a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+      - name: userupdate
+        method: PUT
+        description: Update a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: User details
+          required: true
+    - name: users-id-memberships
+      path: /users/{id}/memberships
+      operations:
+      - name: usermembershipsinspect
+        method: GET
+        description: Inspect a user memberships
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+    - name: users-id-passwd
+      path: /users/{id}/passwd
+      operations:
+      - name: userupdatepassword
+        method: PUT
+        description: Update password for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: details
+          required: true
+    - name: users-id-tokens
+      path: /users/{id}/tokens
+      operations:
+      - name: usergetapikeys
+        method: GET
+        description: Get all API keys for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+      - name: usergenerateapikey
+        method: POST
+        description: Generate an API key for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: details
+          required: true
+    - name: users-id-tokens-keyID
+      path: /users/{id}/tokens/{keyID}
+      operations:
+      - name: userremoveapikey
+        method: DELETE
+        description: Remove an api-key associated to a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: User identifier
+          required: true
+        - name: keyID
+          in: path
+          type: integer
+          description: Api Key identifier
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-users-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — users. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/users
+      name: users
+      description: REST surface for users.
+      operations:
+      - method: GET
+        name: userlist
+        description: List users
+        call: portainer-users.userlist
+        with:
+          environmentId: rest.environmentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: usercreate
+        description: Create a new user
+        call: portainer-users.usercreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/admin/check
+      name: users-admin-check
+      description: REST surface for users-admin-check.
+      operations:
+      - method: GET
+        name: useradmincheck
+        description: Check administrator account existence
+        call: portainer-users.useradmincheck
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/admin/init
+      name: users-admin-init
+      description: REST surface for users-admin-init.
+      operations:
+      - method: POST
+        name: useradmininit
+        description: Initialize administrator account
+        call: portainer-users.useradmininit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/me
+      name: users-me
+      description: REST surface for users-me.
+      operations:
+      - method: GET
+        name: currentuserinspect
+        description: Inspect the current user user
+        call: portainer-users.currentuserinspect
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}
+      name: users-id
+      description: REST surface for users-id.
+      operations:
+      - method: DELETE
+        name: userdelete
+        description: Remove a user
+        call: portainer-users.userdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: userinspect
+        description: Inspect a user
+        call: portainer-users.userinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: userupdate
+        description: Update a user
+        call: portainer-users.userupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/memberships
+      name: users-id-memberships
+      description: REST surface for users-id-memberships.
+      operations:
+      - method: GET
+        name: usermembershipsinspect
+        description: Inspect a user memberships
+        call: portainer-users.usermembershipsinspect
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/passwd
+      name: users-id-passwd
+      description: REST surface for users-id-passwd.
+      operations:
+      - method: PUT
+        name: userupdatepassword
+        description: Update password for a user
+        call: portainer-users.userupdatepassword
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/tokens
+      name: users-id-tokens
+      description: REST surface for users-id-tokens.
+      operations:
+      - method: GET
+        name: usergetapikeys
+        description: Get all API keys for a user
+        call: portainer-users.usergetapikeys
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: usergenerateapikey
+        description: Generate an API key for a user
+        call: portainer-users.usergenerateapikey
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/tokens/{keyid}
+      name: users-id-tokens-keyid
+      description: REST surface for users-id-tokens-keyID.
+      operations:
+      - method: DELETE
+        name: userremoveapikey
+        description: Remove an api-key associated to a user
+        call: portainer-users.userremoveapikey
+        with:
+          id: rest.id
+          keyID: rest.keyID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — users. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-users
+      description: List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-users.userlist
+      with:
+        environmentId: tools.environmentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-user
+      description: Create a new user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-users.usercreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-administrator-account-existence
+      description: Check administrator account existence
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-users.useradmincheck
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: initialize-administrator-account
+      description: Initialize administrator account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-users.useradmininit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-current-user-user
+      description: Inspect the current user user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-users.currentuserinspect
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-user
+      description: Remove a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-users.userdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-user
+      description: Inspect a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-users.userinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-users.userupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: inspect-user-memberships
+      description: Inspect a user memberships
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-users.usermembershipsinspect
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-password-user
+      description: Update password for a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-users.userupdatepassword
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-api-keys-user
+      description: Get all API keys for a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-users.usergetapikeys
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-api-key-user
+      description: Generate an API key for a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-users.usergenerateapikey
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-api-key-associated-user
+      description: Remove an api-key associated to a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-users.userremoveapikey
+      with:
+        id: tools.id
+        keyID: tools.keyID
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,228 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — team_memberships
+  description: 'PortainerCE API — team_memberships. 5 operations. Lead operation: List team memberships. Self-contained Naftiko
+    capability covering one Portainer business surface.'
+  tags:
+  - Portainer
+  - team_memberships
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-team-memberships
+    baseUri: ''
+    description: PortainerCE API — team_memberships business capability. Self-contained, no shared references.
+    resources:
+    - name: team_memberships
+      path: /team_memberships
+      operations:
+      - name: teammembershiplist
+        method: GET
+        description: List team memberships
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: teammembershipcreate
+        method: POST
+        description: Create a new team membership
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Team membership details
+          required: true
+    - name: team_memberships-id
+      path: /team_memberships/{id}
+      operations:
+      - name: teammembershipdelete
+        method: DELETE
+        description: Remove a team membership
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: TeamMembership identifier
+          required: true
+      - name: teammembershipupdate
+        method: PUT
+        description: Update a team membership
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Team membership identifier
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: Team membership details
+          required: true
+    - name: teams-id-memberships
+      path: /teams/{id}/memberships
+      operations:
+      - name: teammemberships
+        method: GET
+        description: List team memberships
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Team Id
+          required: true
+  exposes:
+  - type: rest
+    namespace: portainer-team-memberships-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — team_memberships. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/team-memberships
+      name: team-memberships
+      description: REST surface for team_memberships.
+      operations:
+      - method: GET
+        name: teammembershiplist
+        description: List team memberships
+        call: portainer-team-memberships.teammembershiplist
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: teammembershipcreate
+        description: Create a new team membership
+        call: portainer-team-memberships.teammembershipcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/team-memberships/{id}
+      name: team-memberships-id
+      description: REST surface for team_memberships-id.
+      operations:
+      - method: DELETE
+        name: teammembershipdelete
+        description: Remove a team membership
+        call: portainer-team-memberships.teammembershipdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: teammembershipupdate
+        description: Update a team membership
+        call: portainer-team-memberships.teammembershipupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/memberships
+      name: teams-id-memberships
+      description: REST surface for teams-id-memberships.
+      operations:
+      - method: GET
+        name: teammemberships
+        description: List team memberships
+        call: portainer-team-memberships.teammemberships
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-team-memberships-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — team_memberships. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-team-memberships
+      description: List team memberships
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-team-memberships.teammembershiplist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-team-membership
+      description: Create a new team membership
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: portainer-team-memberships.teammembershipcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-team-membership
+      description: Remove a team membership
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: portainer-team-memberships.teammembershipdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-team-membership
+      description: Update a team membership
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: portainer-team-memberships.teammembershipupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-team-memberships-2
+      description: List team memberships
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-team-memberships.teammemberships
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

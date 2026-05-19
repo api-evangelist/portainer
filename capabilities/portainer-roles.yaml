@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PortainerCE API — roles
+  description: 'PortainerCE API — roles. 1 operations. Lead operation: List roles. Self-contained Naftiko capability covering
+    one Portainer business surface.'
+  tags:
+  - Portainer
+  - roles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PORTAINER_API_KEY: PORTAINER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: portainer-roles
+    baseUri: ''
+    description: PortainerCE API — roles business capability. Self-contained, no shared references.
+    resources:
+    - name: roles
+      path: /roles
+      operations:
+      - name: rolelist
+        method: GET
+        description: List roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: portainer-roles-rest
+    port: 8080
+    description: REST adapter for PortainerCE API — roles. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/roles
+      name: roles
+      description: REST surface for roles.
+      operations:
+      - method: GET
+        name: rolelist
+        description: List roles
+        call: portainer-roles.rolelist
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: portainer-roles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PortainerCE API — roles. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-roles
+      description: List roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: portainer-roles.rolelist
+      outputParameters:
+      - type: object
+        mapping: $.
