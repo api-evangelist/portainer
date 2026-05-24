@@ -121,6 +121,8 @@ common:
   url: https://www.portainer.io/community
 - type: Slack
   url: https://www.portainer.io/slack
+- type: LLMsTxt
+  url: https://docs.portainer.io/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
