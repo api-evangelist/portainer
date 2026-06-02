@@ -2,12 +2,20 @@
   "repo": "portainer",
   "feeds": [
     {
-      "source": "https://www.portainer.io/blog",
+      "source": "https://www.portainer.io/blog/rss.xml",
       "feed_url": "https://www.portainer.io/blog/rss.xml",
-      "title": "Portainer Blog",
-      "saved": 45
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://api-docs.portainer.io/",
+      "feed_url": "https://api-docs.portainer.io/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 56,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 64,
+  "fetched": "2026-06-01T23:35:02Z"
 }
