@@ -1,128 +1,66 @@
 aid: portainer
 name: Portainer
-description: Portainer is an open source container management platform that simplifies deploying, managing, and monitoring
-  Docker, Swarm, Podman, and Kubernetes environments through a unified web UI and REST API.
+description: >-
+  Portainer is an open source container management platform that simplifies deploying, managing, and monitoring Docker,
+  Swarm, Podman, and Kubernetes environments through a unified web UI and REST API.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Container Management
-- Containers
-- Docker
-- Kubernetes
+  - Container Management
+  - Containers
+  - Docker
+  - Kubernetes
 url: https://raw.githubusercontent.com/api-evangelist/portainer/refs/heads/main/apis.yml
 created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: portainer:portainer
-  name: Portainer
-  description: Portainer's HTTP API exposes everything the Portainer UI can do, including authentication, environment and
-    endpoint management, stacks, containers, images, volumes, networks, registries, edge computing, Kubernetes namespaces
-    and resources, RBAC, and backup and restore for managing containerized infrastructure programmatically.
-  humanURL: https://www.portainer.io/
-  baseURL: https://api-docs.portainer.io
-  tags:
-  - Container Management
-  - Containers
-  - Docker
-  - Kubernetes
-  - Edge Computing
-  properties:
+  - aid: portainer:portainer
+    name: Portainer
+    description: >-
+      Portainer's HTTP API exposes everything the Portainer UI can do, including authentication, environment and
+      endpoint management, stacks, containers, images, volumes, networks, registries, edge computing, Kubernetes
+      namespaces and resources, RBAC, and backup and restore for managing containerized infrastructure programmatically.
+    humanURL: https://www.portainer.io/
+    baseURL: https://api-docs.portainer.io
+    tags:
+      - Container Management
+      - Containers
+      - Docker
+      - Kubernetes
+      - Edge Computing
+    properties:
+      - type: Documentation
+        url: https://docs.portainer.io/
+      - type: APIReference
+        url: https://api-docs.portainer.io/
+      - type: GettingStarted
+        url: https://docs.portainer.io/start
+      - type: OpenAPI
+        url: openapi/portainer-openapi.yml
+common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/portainer
+  - type: Website
+    url: https://www.portainer.io/
   - type: Documentation
     url: https://docs.portainer.io/
   - type: APIReference
     url: https://api-docs.portainer.io/
-  - type: GettingStarted
-    url: https://docs.portainer.io/start
-  - type: OpenAPI
-    url: openapi/portainer-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/portainer-auth.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-backup.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-custom-templates.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-docker.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-edge.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-edge-groups.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-edge-jobs.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-edge-stacks.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-endpoint-groups.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-endpoints.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-gitops.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-helm.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-intel.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-kubernetes.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-ldap.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-motd.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-registries.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-resource-controls.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-roles.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-settings.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-ssl.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-stacks.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-status.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-system.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-tags.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-team-memberships.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-teams.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-templates.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-upload.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-users.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-webhooks.yaml
-  - type: NaftikoCapability
-    url: capabilities/portainer-websocket.yaml
-common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/portainer
-- type: Website
-  url: https://www.portainer.io/
-- type: Documentation
-  url: https://docs.portainer.io/
-- type: APIReference
-  url: https://api-docs.portainer.io/
-- type: Blog
-  url: https://www.portainer.io/blog
-- type: Pricing
-  url: https://www.portainer.io/pricing
-- type: GitHubOrg
-  url: https://github.com/portainer
-- type: GitHubRepository
-  url: https://github.com/portainer/portainer
-- type: Community
-  url: https://www.portainer.io/community
-- type: Slack
-  url: https://www.portainer.io/slack
-- type: LLMsTxt
-  url: https://docs.portainer.io/llms.txt
+  - type: Blog
+    url: https://www.portainer.io/blog
+  - type: Pricing
+    url: https://www.portainer.io/pricing
+  - type: GitHubOrg
+    url: https://github.com/portainer
+  - type: GitHubRepository
+    url: https://github.com/portainer/portainer
+  - type: Community
+    url: https://www.portainer.io/community
+  - type: Slack
+    url: https://www.portainer.io/slack
+  - type: LLMsTxt
+    url: https://docs.portainer.io/llms.txt
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com

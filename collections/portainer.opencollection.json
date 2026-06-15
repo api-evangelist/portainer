@@ -1,0 +1,5175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth"
+          },
+          "docs": "**Access policy**: public\nUse this environment(endpoint) to authenticate against Portainer using a username and password."
+        },
+        {
+          "info": {
+            "name": "Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout"
+          },
+          "docs": "**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Authenticate with OAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/oauth/validate"
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "backup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates an archive with a system data snapshot that could be used to restore the system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backup"
+          },
+          "docs": "Creates an archive with a system data snapshot that could be used to restore the system.\n**Access policy**: admin"
+        },
+        {
+          "info": {
+            "name": "Triggers a system restore using provided backup file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restore"
+          },
+          "docs": "Triggers a system restore using provided backup file\n**Access policy**: public"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "custom_templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available custom templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom_templates",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Template types"
+              },
+              {
+                "name": "edge",
+                "value": "",
+                "type": "query",
+                "description": "Filter by edge templates"
+              }
+            ]
+          },
+          "docs": "List available custom templates.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Inspect a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Update a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/custom_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Update a template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/custom_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Remove a template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get Template stack file content.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom_templates/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the content of the Stack file for the specified custom template\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Fetch the latest config file content based on custom template's git repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/custom_templates/:id/git_fetch",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a template created from git repository method.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom_templates/create/file"
+          },
+          "docs": "Create a custom template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom_templates/create/repository"
+          },
+          "docs": "Create a custom template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom_templates/create/string"
+          },
+          "docs": "Create a custom template.\n**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "docker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch container gpus data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docker/:environmentId/containers/:containerId/gpus",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "containerId",
+                "value": "",
+                "type": "path",
+                "description": "Container identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**:"
+        },
+        {
+          "info": {
+            "name": "Get counters for the dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docker/:environmentId/dashboard",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Fetch images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docker/:environmentId/images",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withUsage",
+                "value": "",
+                "type": "query",
+                "description": "Include image usage information"
+              }
+            ]
+          },
+          "docs": "**Access policy**:"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "edge_groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list EdgeGroups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_groups"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_groups"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspects an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeGroup Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Updates an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeGroup Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Deletes an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeGroup Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "edge_jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch EdgeJobs list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Delete an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch a file of an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch the list of tasks on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch the log for a specifc task on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks/:taskID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              },
+              {
+                "name": "taskID",
+                "value": "",
+                "type": "path",
+                "description": "Task Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Collect the log for a specifc task on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks/:taskID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              },
+              {
+                "name": "taskID",
+                "value": "",
+                "type": "path",
+                "description": "Task Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Clear the log for a specifc task on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks/:taskID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              },
+              {
+                "name": "taskID",
+                "value": "",
+                "type": "path",
+                "description": "Task Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeJob from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_jobs/create/file"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeJob from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_jobs/create/string"
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "edge_stacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetches the list of EdgeStacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_stacks",
+            "params": [
+              {
+                "name": "summarizeStatuses",
+                "value": "",
+                "type": "query",
+                "description": "will summarize the statuses"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Delete an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetches the stack file for an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_stacks/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an EdgeStack status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_stacks/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "Authorized only if the request is done by an Edge Environment(Endpoint)"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeStack from file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_stacks/create/file",
+            "params": [
+              {
+                "name": "dryrun",
+                "value": "",
+                "type": "query",
+                "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeStack from a git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_stacks/create/repository",
+            "params": [
+              {
+                "name": "dryrun",
+                "value": "",
+                "type": "query",
+                "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeStack from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_stacks/create/string",
+            "params": [
+              {
+                "name": "dryrun",
+                "value": "",
+                "type": "query",
+                "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "endpoint_groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environment(Endpoint) groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoint_groups"
+          },
+          "docs": "List all environment(endpoint) groups based on the current user authorizations. Will\nreturn all environment(endpoint) groups if using an administrator account otherwise it will\nonly return authorized environment(endpoint) groups.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create an Environment(Endpoint) Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoint_groups"
+          },
+          "docs": "Create a new environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an Environment(Endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoint_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) group identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details abont an environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoint_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              }
+            ]
+          },
+          "docs": "Update an environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoint_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              }
+            ]
+          },
+          "docs": "Remove an environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Add an environment(endpoint) to an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoint_groups/:id/endpoints/:endpointId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Add an environment(endpoint) to an environment(endpoint) group\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Removes environment(endpoint) from an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoint_groups/:id/endpoints/:endpointId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List environments(endpoints)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start searching from"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to this value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort results by this value"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order sorted results by desc/asc"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query"
+              },
+              {
+                "name": "groupIds",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) of these groups"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) by this status"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) of this type"
+              },
+              {
+                "name": "tagIds",
+                "value": "",
+                "type": "query",
+                "description": "search environments(endpoints) with these tags (depends on tagsPartialMatch)"
+              },
+              {
+                "name": "tagsPartialMatch",
+                "value": "",
+                "type": "query",
+                "description": "If true, will return environment(endpoint) which has one of tagIds, if false (or missing) will return only environments(endpoints) that has all the tags"
+              },
+              {
+                "name": "endpointIds",
+                "value": "",
+                "type": "query",
+                "description": "will return only these environments(endpoints)"
+              },
+              {
+                "name": "excludeIds",
+                "value": "",
+                "type": "query",
+                "description": "will exclude these environments(endpoints)"
+              },
+              {
+                "name": "excludeGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "will exclude environments(endpoints) belonging to these endpoint groups"
+              },
+              {
+                "name": "provisioned",
+                "value": "",
+                "type": "query",
+                "description": "If true, will return environment(endpoint) that were provisioned"
+              },
+              {
+                "name": "agentVersions",
+                "value": "",
+                "type": "query",
+                "description": "will return only environments with on of these agent versions"
+              },
+              {
+                "name": "edgeAsync",
+                "value": "",
+                "type": "query",
+                "description": "if exists true show only edge async agents, false show only standard edge agents. if missing, will show both types (relevant only for edge agents)"
+              },
+              {
+                "name": "edgeDeviceUntrusted",
+                "value": "",
+                "type": "query",
+                "description": "if true, show only untrusted edge agents, if false show only trusted edge agents (relevant only for edge agents)"
+              },
+              {
+                "name": "edgeCheckInPassedSeconds",
+                "value": "",
+                "type": "query",
+                "description": "if bigger then zero, show only edge agents that checked-in in the last provided seconds (relevant only for edge agents)"
+              },
+              {
+                "name": "excludeSnapshots",
+                "value": "",
+                "type": "query",
+                "description": "if true, the snapshot data won't be retrieved"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "will return only environments(endpoints) with this name"
+              },
+              {
+                "name": "edgeStackStatus",
+                "value": "",
+                "type": "query",
+                "description": "only applied when edgeStackId exists. Filter the returned environments based on their deployment status in the stack (not the environment status!)"
+              },
+              {
+                "name": "edgeGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) of these edge groups"
+              },
+              {
+                "name": "excludeEdgeGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Exclude environments(endpoints) of these edge groups"
+              }
+            ]
+          },
+          "docs": "List all environments(endpoints) based on the current user authorizations. Will\nreturn all environments(endpoints) if using an administrator or team leader account otherwise it will\nonly return authorized environments(endpoints).\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints"
+          },
+          "docs": "Create a new environment(endpoint) that will be used to manage an environment(endpoint).\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove multiple environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoints"
+          },
+          "docs": "Deprecated: use the `POST` endpoint instead.\nRemove multiple environments and optionally clean-up associated resources.\n**Access policy**: Administrator only."
+        },
+        {
+          "info": {
+            "name": "Inspect an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "excludeSnapshot",
+                "value": "",
+                "type": "query",
+                "description": "if true, the snapshot data won't be retrieved"
+              }
+            ]
+          },
+          "docs": "Retrieve details about an environment(endpoint).\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Update an environment(endpoint).\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoints/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Remove the environment associated to the specified identifier and optionally clean-up associated resources.\n**Access policy**: Administrator only."
+        },
+        {
+          "info": {
+            "name": "De-association an edge environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/association",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "De-association an edge environment(endpoint).\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Upload a file under a specific path on the file system of an environment (endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/docker/v2/browse/put",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "volumeID",
+                "value": "",
+                "type": "query",
+                "description": "Optional volume identifier to upload the file"
+              }
+            ]
+          },
+          "docs": "Use this environment(endpoint) to upload TLS files.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "fetch docker pull limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/dockerhub/:registryId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "endpoint ID"
+              },
+              {
+                "name": "registryId",
+                "value": "",
+                "type": "path",
+                "description": "registry ID"
+              }
+            ]
+          },
+          "docs": "get docker pull limits for a docker hub registry in the environment\n**Access policy**:"
+        },
+        {
+          "info": {
+            "name": "Get environment(endpoint) status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/edge/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "environment(endpoint) for edge agent to check status of environment(endpoint)\n**Access policy**: restricted only to Edge environments(endpoints)"
+        },
+        {
+          "info": {
+            "name": "force update a docker service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/forceupdateservice",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "endpoint identifier"
+              }
+            ]
+          },
+          "docs": "force update a docker service\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "List Registries on environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/registries",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "required if kubernetes environment, will show registries by namespace"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "List all registries based on the current user authorizations in current environment.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "update registry access for environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/registries/:registryId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "registryId",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Update settings for an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Update settings for an environment(endpoint).\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Snapshots an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/snapshot",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Snapshots an environment(endpoint)\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove multiple environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/delete"
+          },
+          "docs": "Remove multiple environments and optionally clean-up associated resources.\n**Access policy**: Administrator only."
+        },
+        {
+          "info": {
+            "name": "Create or retrieve the endpoint for an EdgeID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/global-key"
+          },
+          "docs": "Create or retrieve the endpoint for an EdgeID"
+        },
+        {
+          "info": {
+            "name": "Update relations for a list of environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/relations"
+          },
+          "docs": "Update relations for a list of environments\nEdge groups, tags and environment group can be updated.\n\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Snapshot all environments(endpoints)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/snapshot"
+          },
+          "docs": "Snapshot all environments(endpoints)\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "edge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update the logs collected from an Edge Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/edge/jobs/:jobID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "jobID",
+                "value": "",
+                "type": "path",
+                "description": "Job Id"
+              }
+            ]
+          },
+          "docs": "Authorized only if the request is done by an Edge Environment(Endpoint)"
+        },
+        {
+          "info": {
+            "name": "Inspect an Edge Stack for an Environment(Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/edge/stacks/:stackId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "stackId",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "helm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Helm Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional filter"
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional selector"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Install Helm Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query",
+                "description": "Dry run"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get a helm release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Helm release name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              },
+              {
+                "name": "showResources",
+                "value": "",
+                "type": "query",
+                "description": "show resources of the release"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional revision"
+              }
+            ]
+          },
+          "docs": "Get details of a helm release by release name\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Delete Helm Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:release",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "path",
+                "description": "The name of the release/application to uninstall"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "An optional namespace"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get a historical list of releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:release/history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Helm release name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              }
+            ]
+          },
+          "docs": "Get a historical list of releases by release name\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Rollback a helm release",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:release/rollback",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "path",
+                "description": "Helm release name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "specify the revision to rollback to (defaults to previous revision if not specified)"
+              },
+              {
+                "name": "wait",
+                "value": "",
+                "type": "query",
+                "description": "wait for resources to be ready (default: false)"
+              },
+              {
+                "name": "waitForJobs",
+                "value": "",
+                "type": "query",
+                "description": "wait for jobs to complete before marking the release as successful (default: false)"
+              },
+              {
+                "name": "recreate",
+                "value": "",
+                "type": "query",
+                "description": "performs pods restart for the resource if applicable (default: true)"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "force resource update through delete/recreate if needed (default: false)"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "time to wait for any individual Kubernetes operation in seconds (default: 300)"
+              }
+            ]
+          },
+          "docs": "Rollback a helm release to a previous revision\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Search Helm Charts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/templates/helm",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Helm repository URL"
+              },
+              {
+                "name": "chart",
+                "value": "",
+                "type": "query",
+                "description": "Helm chart name"
+              },
+              {
+                "name": "useCache",
+                "value": "",
+                "type": "query",
+                "description": "If true will use cache to search"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Show Helm Chart Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/templates/helm/:command",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Helm repository URL"
+              },
+              {
+                "name": "chart",
+                "value": "",
+                "type": "query",
+                "description": "Chart name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Chart version"
+              },
+              {
+                "name": "command",
+                "value": "",
+                "type": "path",
+                "description": "chart/values/readme"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "List a users helm repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/helm/repositories",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Inspect a user helm repositories.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a user helm repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:id/helm/repositories",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Create a user helm repository.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Delete a users helm repositoryies",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:id/helm/repositories/:repositoryID",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "repositoryID",
+                "value": "",
+                "type": "path",
+                "description": "Repository identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "gitops",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "preview the content of target file in the git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/gitops/repo/file/preview"
+          },
+          "docs": "Retrieve the compose file content based on git repository configuration\n**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "kubernetes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of applications across all namespaces in the cluster. If the nodeName is provided, it will return the applications running on that node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "query",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Get a list of applications across all namespaces in the cluster. If the nodeName is provided, it will return the applications running on that node.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get Applications count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/applications/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of Applications across all namespaces in the cluster. If the nodeName is provided, it will return the count of applications running on that node.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete cluster role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/cluster_role_bindings/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of cluster role bindings.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete cluster roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/cluster_roles/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of cluster roles.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes cluster role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/clusterrolebindings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes cluster role bindings within the given environment at the cluster level.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes cluster roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/clusterroles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes cluster roles within the given environment at the cluster level.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of ConfigMaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/configmaps",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "isUsed",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to include information about applications that use the ConfigMaps in the response"
+              }
+            ]
+          },
+          "docs": "Get a list of ConfigMaps across all namespaces in the cluster. For non-admin users, it will only return ConfigMaps based on the namespaces that they have access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get ConfigMaps count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/configmaps/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of ConfigMaps across all namespaces in the cluster. For non-admin users, it will only return the count of ConfigMaps based on the namespaces that they have access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes Cron Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/cron_jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes Cron Jobs that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete Cron Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/cron_jobs/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of Cron Jobs.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the dashboard summary data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/dashboard",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment (Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Get the dashboard summary data which is simply a count of a range of different commonly used kubernetes resources.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a description of a kubernetes resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/describe",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Resource name"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Resource kind"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Get a description of a kubernetes resource.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Gets kubernetes events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "The resource id of the involved kubernetes object"
+              }
+            ]
+          },
+          "docs": "Get events by query param resourceId\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of ingress controllers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "allowedOnly",
+                "value": "",
+                "type": "query",
+                "description": "Only return allowed ingress controllers"
+              }
+            ]
+          },
+          "docs": "Get a list of ingress controllers for the given environment. If the allowedOnly query parameter is set, only ingress controllers that are allowed by the environment's ingress configuration will be returned.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update (block/unblock) ingress controllers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Update (block/unblock) ingress controllers for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get kubernetes ingresses at the cluster level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withServices",
+                "value": "",
+                "type": "query",
+                "description": "Lookup services associated with each ingress"
+              }
+            ]
+          },
+          "docs": "Get kubernetes ingresses at the cluster level for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Ingresses count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresses/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the number of kubernetes ingresses within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete one or more Ingresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresses/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete one or more Ingresses in the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "includeCronJobChildren",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include Jobs that have a cronjob owner"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes Jobs that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/jobs/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of Jobs.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get max CPU and memory limits of all nodes within k8s cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/max_resource_limits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Get max CPU and memory limits (unused resources) of all nodes within k8s cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the total resource requests and limits of all applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/applications_resources",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Get the total CPU (cores) and memory (bytes) requests and limits of all applications across all namespaces.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of nodes with their live metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/nodes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of metrics associated with all nodes of a cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get live metrics for a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/nodes/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Node identifier"
+              }
+            ]
+          },
+          "docs": "Get live metrics for the specified node.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of pods with their live metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/pods/:namespace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Get a list of pods with their live metrics for the specified namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get live metrics for a pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/pods/:namespace/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Pod identifier"
+              }
+            ]
+          },
+          "docs": "Get live metrics for the specified pod.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withResourceQuota",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, include the resource quota information as part of the Namespace information. Default is false"
+              },
+              {
+                "name": "withUnhealthyEvents",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, include the unhealthy events information as part of the Namespace information. Default is false"
+              }
+            ]
+          },
+          "docs": "Get a list of all namespaces within the given environment based on the user role and permissions. If the user is an admin, they can access all namespaces. If the user is not an admin, they can only access namespaces that they have access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Create a namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Update a namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete a kubernetes namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete a kubernetes namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get namespace details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to get details for"
+              },
+              {
+                "name": "withResourceQuota",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, include the resource quota information as part of the Namespace information. Default is false"
+              }
+            ]
+          },
+          "docs": "Get namespace details for the provided namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Update a namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a ConfigMap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/configmaps/:configmap",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name where the configmap is located"
+              },
+              {
+                "name": "configmap",
+                "value": "",
+                "type": "path",
+                "description": "The configmap name to get details for"
+              }
+            ]
+          },
+          "docs": "Get a ConfigMap by name for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Gets kubernetes events for namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name the events are associated to"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "The resource id of the involved kubernetes object"
+              }
+            ]
+          },
+          "docs": "Get events by optional query param resourceId for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list ingress controllers by namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Get a list of ingress controllers for the given environment in the provided namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update (block/unblock) ingress controllers by namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Update (block/unblock) ingress controllers by namespace for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of Ingresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Get a list of Ingresses. If namespace is provided, it will return the list of Ingresses in that namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create an Ingress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Create an Ingress for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update an Ingress",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Update an Ingress for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get an Ingress by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses/:ingress",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              },
+              {
+                "name": "ingress",
+                "value": "",
+                "type": "path",
+                "description": "Ingress name"
+              }
+            ]
+          },
+          "docs": "Get an Ingress by name for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/secrets/:secret",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name where the secret is located"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "path",
+                "description": "The secret name to get details for"
+              }
+            ]
+          },
+          "docs": "Get a Secret by name for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of services for a given namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Get a list of services for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Create a service within a given namespace\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Update a service within a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Toggle the system state for a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/system",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Toggle the system state for a namespace\n**Access policy**: Administrator or environment administrator."
+        },
+        {
+          "info": {
+            "name": "Get Kubernetes volumes within a namespace in the given Portainer environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/volumes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace identifier"
+              },
+              {
+                "name": "withApplications",
+                "value": "",
+                "type": "query",
+                "description": "When set to True, include the applications that are using the volumes. It is set to false by default"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes volumes within the specified namespace in the given environment (Endpoint). The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the total number of kubernetes namespaces within the given Portainer environment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the total number of kubernetes namespaces within the given environment, including the system namespaces. The total count depends on the user's role and permissions.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Drain a Kubernetes node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/nodes/:name/drain",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node to drain"
+              }
+            ]
+          },
+          "docs": "Drain a Kubernetes node by safely evicting all pods from the node, preparing it for maintenance or removal\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get CPU and memory limits of all nodes within k8s cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/nodes_limits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Get CPU and memory limits of all nodes within k8s cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Check if RBAC is enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/rbac_enabled",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Check if RBAC is enabled in the specified Kubernetes cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/role_bindings/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of role bindings.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/rolebindings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes role bindings that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes roles that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/roles/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of roles.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/secrets",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "isUsed",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, associate the Secrets with the applications that use them"
+              }
+            ]
+          },
+          "docs": "Get a list of Secrets for a given namespace. If isUsed is set to true, information about the applications that use the secrets is also returned.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Secrets count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/secrets/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of Secrets across all namespaces that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/service_accounts/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of service accounts.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/serviceaccounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes service accounts that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withApplications",
+                "value": "",
+                "type": "query",
+                "description": "Lookup applications associated with each service"
+              }
+            ]
+          },
+          "docs": "Get a list of services that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get services count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/services/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of services that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete services",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/services/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of services.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Kubernetes volumes within the given Portainer environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/volumes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withApplications",
+                "value": "",
+                "type": "query",
+                "description": "When set to True, include the applications that are using the volumes. It is set to false by default"
+              }
+            ]
+          },
+          "docs": "Get a list of all kubernetes volumes within the given environment (Endpoint). The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a Kubernetes volume within the given Portainer environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/volumes/:namespace/:volume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace identifier"
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "path",
+                "description": "Volume name"
+              }
+            ]
+          },
+          "docs": "Get a Kubernetes volume within the given environment (Endpoint). The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the total number of kubernetes volumes within the given Portainer environment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/volumes/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the total number of kubernetes volumes within the given environment (Endpoint). The total count depends on the user's role and permissions. The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Generate a kubeconfig file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/config",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "will include only these environments(endpoints)"
+              },
+              {
+                "name": "excludeIds",
+                "value": "",
+                "type": "query",
+                "description": "will exclude these environments(endpoints)"
+              }
+            ]
+          },
+          "docs": "Generate a kubeconfig file that allows a client to communicate with the Kubernetes API server\n**Access policy**: Authenticated user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ldap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Test LDAP connectivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ldap/check"
+          },
+          "docs": "Test LDAP connectivity using LDAP details\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "motd",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "fetches the message of the day",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/motd"
+          },
+          "docs": "**Access policy**: restricted"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "intel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enable Portainer's OpenAMT capabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt"
+          },
+          "docs": "Enable Portainer's OpenAMT capabilities\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Activate OpenAMT device and associate to agent endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt/:id/activate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Activate OpenAMT device and associate to agent endpoint\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch OpenAMT managed devices information for endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/open_amt/:id/devices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Fetch OpenAMT managed devices information for endpoint\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Execute out of band action on an AMT managed device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt/:id/devices/:deviceId/action",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Device identifier"
+              }
+            ]
+          },
+          "docs": "Execute out of band action on an AMT managed device\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Enable features on an AMT managed device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt/:id/devices_features/:deviceId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Device identifier"
+              }
+            ]
+          },
+          "docs": "Enable features on an AMT managed device\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Request OpenAMT info from a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/open_amt/:id/info",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Request OpenAMT info from a node\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "registries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Registries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/registries"
+          },
+          "docs": "List all registries based on the current user authorizations.\nWill return all registries if using an administrator account otherwise it\nwill only return authorized registries.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/registries"
+          },
+          "docs": "Create a new registry.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Inspect a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/registries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a registry.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/registries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Update a registry\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Remove a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/registries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Remove a registry\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Configures a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/registries/:id/configure",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Configures a registry.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Test registry connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/registries/ping"
+          },
+          "docs": "Test connection to a registry with provided credentials\n**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "resource_controls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new resource control",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/resource_controls"
+          },
+          "docs": "Create a new resource control to restrict access to a Docker resource.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update a resource control",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/resource_controls/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource control identifier"
+              }
+            ]
+          },
+          "docs": "Update a resource control\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a resource control",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/resource_controls/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource control identifier"
+              }
+            ]
+          },
+          "docs": "Remove a resource control.\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles"
+          },
+          "docs": "List all roles available for use\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Portainer settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings"
+          },
+          "docs": "Retrieve Portainer settings.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update Portainer settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings"
+          },
+          "docs": "Update Portainer settings.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Retrieve Portainer public settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/public"
+          },
+          "docs": "Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.\n**Access policy**: public"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ssl",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Inspect the ssl settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ssl"
+          },
+          "docs": "Retrieve the ssl settings.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update the ssl settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ssl"
+          },
+          "docs": "Update the ssl settings.\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "stacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List stacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/stacks",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters to process on the stack list. Encoded as JSON (a map[string]string). For example, {'SwarmID': 'jpofkc0i9uo9wtx1zesuk649w'} will only return stacks that are part of the specified Swarm cluster. Available filters: EndpointID, SwarmID."
+              }
+            ]
+          },
+          "docs": "List all stacks based on the current user authorizations.\nWill return all stacks if using an administrator account otherwise it\nwill only return the list of stacks the user have access to.\nLimited stacks will not be returned by this endpoint.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Inspect a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a stack.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Update a stack, only for file based stacks.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "external",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to delete an external stack. Only external Swarm stacks are supported"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Remove a stack.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Associate an orphaned stack to a new environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/stacks/:id/associate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "swarmId",
+                "value": "",
+                "type": "query",
+                "description": "Swarm identifier"
+              },
+              {
+                "name": "orphanedRunning",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the stack is orphaned"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Retrieve the content of the Stack file for the specified stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/stacks/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              }
+            ]
+          },
+          "docs": "Get Stack file content.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update a stack's Git configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/git",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack."
+              }
+            ]
+          },
+          "docs": "Update the Git settings in a stack, e.g., RepositoryReferenceName and AutoUpdate\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Redeploy a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/stacks/:id/git/redeploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack."
+              }
+            ]
+          },
+          "docs": "Pull and redeploy a stack via Git\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Migrate a stack to another environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/migrate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack."
+              }
+            ]
+          },
+          "docs": "Migrate a stack from an environment(endpoint) to another environment(endpoint). It will re-create the stack inside the target environment(endpoint) before removing the original stack.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Starts a stopped Stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Starts a stopped Stack.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Stops a stopped Stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Stops a stopped Stack.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new kubernetes stack from a git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/kubernetes/repository",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new kubernetes stack from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/kubernetes/string",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new kubernetes stack from a url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/kubernetes/url",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new compose stack from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/standalone/file",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new compose stack from repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/standalone/repository",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new compose stack from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/standalone/string",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new swarm stack from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/swarm/file",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new swarm stack from a git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/swarm/repository",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new swarm stack from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/swarm/string",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove Kubernetes stacks by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/stacks/name/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Stack name"
+              },
+              {
+                "name": "external",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to delete an external stack. Only external Swarm stacks are supported"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Remove a stack.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Webhook for triggering stack updates from git",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/webhooks/:webhookID",
+            "params": [
+              {
+                "name": "webhookID",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Portainer status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/status"
+          },
+          "docs": "Deprecated: use the `/system/status` endpoint instead.\nRetrieve Portainer status\n**Access policy**: public"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve system info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/info"
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Retrieve the count of nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/nodes"
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Check Portainer status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/status"
+          },
+          "docs": "Retrieve Portainer status\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Upgrade Portainer to BE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/system/upgrade"
+          },
+          "docs": "Upgrade Portainer to BE\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Check for portainer updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/version"
+          },
+          "docs": "Check if portainer has an update available\n**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tags"
+          },
+          "docs": "List tags.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a new tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tags"
+          },
+          "docs": "Create a new tag.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove a tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Tag identifier"
+              }
+            ]
+          },
+          "docs": "Remove a tag.\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "team_memberships",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List team memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/team_memberships"
+          },
+          "docs": "List team memberships. Access is only available to administrators and team leaders.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create a new team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/team_memberships"
+          },
+          "docs": "Create a new team memberships. Access is only available to administrators leaders of the associated team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update a team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/team_memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team membership identifier"
+              }
+            ]
+          },
+          "docs": "Update a team membership. Access is only available to administrators or leaders of the associated team.\n**Access policy**: administrator or leaders of the associated team"
+        },
+        {
+          "info": {
+            "name": "Remove a team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/team_memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "TeamMembership identifier"
+              }
+            ]
+          },
+          "docs": "Remove a team membership. Access is only available to administrators leaders of the associated team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "List team memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/teams/:id/memberships",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team Id"
+              }
+            ]
+          },
+          "docs": "List team memberships. Access is only available to administrators and team leaders.\n**Access policy**: restricted"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/teams",
+            "params": [
+              {
+                "name": "onlyLedTeams",
+                "value": "",
+                "type": "query",
+                "description": "Only list teams that the user is leader of"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment(endpoint) that will be used to filter the authorized teams"
+              }
+            ]
+          },
+          "docs": "List teams. For non-administrator users, will only list the teams they are member of.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/teams"
+          },
+          "docs": "Create a new team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a team. Access is only available for administrator and leaders of that team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team identifier"
+              }
+            ]
+          },
+          "docs": "Update a team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team Id"
+              }
+            ]
+          },
+          "docs": "Remove a team.\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/templates"
+          },
+          "docs": "List available templates.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get a template's file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/templates/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Get a template's file\n**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload TLS files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/upload/tls/:certificate",
+            "params": [
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path",
+                "description": "TLS file type. Valid values are 'ca', 'cert' or 'key'."
+              }
+            ]
+          },
+          "docs": "Use this environment(endpoint) to upload TLS files.\n**Access policy**: administrator"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment(endpoint) that will be used to filter the authorized users"
+              }
+            ]
+          },
+          "docs": "List Portainer users.\nNon-administrator users will only be able to list other non-administrator user accounts.\nUser passwords are filtered out, and should never be accessible.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users"
+          },
+          "docs": "Create a new Portainer user.\nOnly administrators can create users.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Inspect a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a user.\nUser passwords are filtered out, and should never be accessible.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Update user details. A regular user account can only update his details.\nA regular user account cannot change their username or role.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Remove a user.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect a user memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/memberships",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Inspect a user memberships.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update password for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/users/:id/passwd",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "identifier"
+              }
+            ]
+          },
+          "docs": "Update password for the specified user.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get all API keys for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Gets all API keys for a user.\nOnly the calling user or admin can retrieve api-keys.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Generate an API key for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:id/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Generates an API key for a user.\nOnly the calling user can generate a token for themselves.\nPassword is required only for internal authentication.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Remove an api-key associated to a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:id/tokens/:keyID",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "path",
+                "description": "Api Key identifier"
+              }
+            ]
+          },
+          "docs": "Remove an api-key associated to a user..\nOnly the calling user or admin can remove api-key.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Check administrator account existence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/admin/check"
+          },
+          "docs": "Check if an administrator account exists in the database.\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Initialize administrator account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/admin/init"
+          },
+          "docs": "Initialize the 'admin' user account.\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Inspect the current user user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/me"
+          },
+          "docs": "Retrieve details about the current  user.\nUser passwords are filtered out, and should never be accessible.\n**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/webhooks",
+            "params": [
+              {
+                "name": "filters",
+                "value": "{\"EndpointID\":1,\"ResourceID\":\"abc12345-abcd-2345-ab12-58005b4a0260\"}",
+                "type": "query",
+                "description": "Filters (json-string)"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webhooks"
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Execute a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook token"
+              }
+            ]
+          },
+          "docs": "Acts on a passed in token UUID to restart the docker service\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Update a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "websocket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Attach a websocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/attach",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "query",
+                "description": "node name"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).\nIf the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and\nan AttachStart operation HTTP request will be created and hijacked.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Execute a websocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/exec",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "query",
+                "description": "node name"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).\nIf the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and\nan ExecStart operation HTTP request will be created and hijacked."
+        },
+        {
+          "info": {
+            "name": "Execute a websocket on kubectl shell pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/kubernetes-shell",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "The request will be upgraded to the websocket protocol. The request will proxy input from the client to the pod via long-lived websocket connection.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Execute a websocket on pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/pod",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "namespace where the container is located"
+              },
+              {
+                "name": "podName",
+                "value": "",
+                "type": "query",
+                "description": "name of the pod containing the container"
+              },
+              {
+                "name": "containerName",
+                "value": "",
+                "type": "query",
+                "description": "name of the container"
+              },
+              {
+                "name": "command",
+                "value": "",
+                "type": "query",
+                "description": "command to execute in the container"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "The request will be upgraded to the websocket protocol.\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
