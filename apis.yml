@@ -39,6 +39,10 @@ apis:
       - type: OpenAPI
         url: openapi/portainer-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/portainer-domain-security.yml
+  - type: Authentication
+    url: authentication/portainer-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/portainer
   - type: Website
