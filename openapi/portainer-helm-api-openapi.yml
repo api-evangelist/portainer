@@ -1,0 +1,993 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth helm API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage Helm charts
+  name: helm
+paths:
+  /endpoints/{id}/kubernetes/helm:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: HelmList
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      - description: specify an optional filter
+        in: query
+        name: filter
+        type: string
+      - description: specify an optional selector
+        in: query
+        name: selector
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/release.ReleaseElement'
+            type: array
+        '400':
+          description: Invalid environment(endpoint) identifier
+        '401':
+          description: Unauthorized
+        '404':
+          description: Environment(Endpoint) or ServiceAccount not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List Helm Releases
+      tags:
+      - helm
+    post:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: HelmInstall
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Chart details
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/helm.installChartPayload'
+      - description: Dry run
+        in: query
+        name: dryRun
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.Release'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Environment(Endpoint) or ServiceAccount not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Install Helm Chart
+      tags:
+      - helm
+  /endpoints/{id}/kubernetes/helm/{name}:
+    get:
+      description: 'Get details of a helm release by release name
+
+        **Access policy**: authenticated'
+      operationId: HelmGet
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm release name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      - description: show resources of the release
+        in: query
+        name: showResources
+        type: boolean
+      - description: specify an optional revision
+        in: query
+        name: revision
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.Release'
+        '400':
+          description: Invalid request payload, such as missing required fields or fields not meeting validation criteria.
+        '401':
+          description: Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+        '403':
+          description: Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+        '404':
+          description: Unable to find an environment with the specified identifier.
+        '500':
+          description: Server error occurred while attempting to retrieve the release.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a helm release
+      tags:
+      - helm
+  /endpoints/{id}/kubernetes/helm/{release}:
+    delete:
+      description: '**Access policy**: authenticated'
+      operationId: HelmDelete
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The name of the release/application to uninstall
+        in: path
+        name: release
+        required: true
+        type: string
+      - description: An optional namespace
+        in: query
+        name: namespace
+        type: string
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid environment(endpoint) id or bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Environment(Endpoint) or ServiceAccount not found
+        '500':
+          description: Server error or helm error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Delete Helm Release
+      tags:
+      - helm
+  /endpoints/{id}/kubernetes/helm/{release}/history:
+    get:
+      description: 'Get a historical list of releases by release name
+
+        **Access policy**: authenticated'
+      operationId: HelmGetHistory
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm release name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.Release'
+            type: array
+        '400':
+          description: Invalid request payload, such as missing required fields or fields not meeting validation criteria.
+        '401':
+          description: Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+        '403':
+          description: Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+        '404':
+          description: Unable to find an environment with the specified identifier.
+        '500':
+          description: Server error occurred while attempting to retrieve the historical list of releases.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a historical list of releases
+      tags:
+      - helm
+  /endpoints/{id}/kubernetes/helm/{release}/rollback:
+    post:
+      description: 'Rollback a helm release to a previous revision
+
+        **Access policy**: authenticated'
+      operationId: HelmRollback
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm release name
+        in: path
+        name: release
+        required: true
+        type: string
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      - description: specify the revision to rollback to (defaults to previous revision if not specified)
+        in: query
+        name: revision
+        type: integer
+      - description: 'wait for resources to be ready (default: false)'
+        in: query
+        name: wait
+        type: boolean
+      - description: 'wait for jobs to complete before marking the release as successful (default: false)'
+        in: query
+        name: waitForJobs
+        type: boolean
+      - description: 'performs pods restart for the resource if applicable (default: true)'
+        in: query
+        name: recreate
+        type: boolean
+      - description: 'force resource update through delete/recreate if needed (default: false)'
+        in: query
+        name: force
+        type: boolean
+      - description: 'time to wait for any individual Kubernetes operation in seconds (default: 300)'
+        in: query
+        name: timeout
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.Release'
+        '400':
+          description: Invalid request payload, such as missing required fields or fields not meeting validation criteria.
+        '401':
+          description: Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+        '403':
+          description: Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+        '404':
+          description: Unable to find an environment with the specified identifier or release name.
+        '500':
+          description: Server error occurred while attempting to rollback the release.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Rollback a helm release
+      tags:
+      - helm
+  /templates/helm:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: HelmRepoSearch
+      parameters:
+      - description: Helm repository URL
+        in: query
+        name: repo
+        required: true
+        type: string
+      - description: Helm chart name
+        in: query
+        name: chart
+        type: string
+      - description: If true will use cache to search
+        in: query
+        name: useCache
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: string
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Search Helm Charts
+      tags:
+      - helm
+  /templates/helm/{command}:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: HelmShow
+      parameters:
+      - description: Helm repository URL
+        in: query
+        name: repo
+        required: true
+        type: string
+      - description: Chart name
+        in: query
+        name: chart
+        required: true
+        type: string
+      - description: Chart version
+        in: query
+        name: version
+        required: true
+        type: string
+      - description: chart/values/readme
+        in: path
+        name: command
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Environment(Endpoint) or ServiceAccount not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Show Helm Chart Information
+      tags:
+      - helm
+  /users/{id}/helm/repositories:
+    get:
+      description: 'Inspect a user helm repositories.
+
+        **Access policy**: authenticated'
+      operationId: HelmUserRepositoriesList
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/users.helmUserRepositoryResponse'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List a users helm repositories
+      tags:
+      - helm
+    post:
+      consumes:
+      - application/json
+      description: 'Create a user helm repository.
+
+        **Access policy**: authenticated'
+      operationId: HelmUserRepositoryCreate
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm Repository
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/users.addHelmRepoUrlPayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.HelmUserRepository'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a user helm repository
+      tags:
+      - helm
+  /users/{id}/helm/repositories/{repositoryID}:
+    delete:
+      description: '**Access policy**: authenticated'
+      operationId: HelmUserRepositoryDelete
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Repository identifier
+        in: path
+        name: repositoryID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Delete a users helm repositoryies
+      tags:
+      - helm
+definitions:
+  release.Maintainer:
+    properties:
+      email:
+        description: Email is an optional email address to contact the named maintainer
+        type: string
+      name:
+        description: Name is a user name or organization name
+        type: string
+      url:
+        description: URL is an optional URL to an address for the named maintainer
+        type: string
+    type: object
+  release.Dependency:
+    properties:
+      alias:
+        description: Alias usable alias to be used for the chart
+        type: string
+      condition:
+        description: A yaml path that resolves to a boolean, used for enabling/disabling charts (e.g. subchart1.enabled )
+        type: string
+      enabled:
+        description: Enabled bool determines if chart should be loaded
+        type: boolean
+      import-values:
+        description: 'ImportValues holds the mapping of source values to parent key to be imported. Each item can be a
+
+          string or pair of child/parent sublist items.'
+        items: {}
+        type: array
+      name:
+        description: 'Name is the name of the dependency.
+
+
+          This must mach the name in the dependency''s Chart.yaml.'
+        type: string
+      repository:
+        description: 'The URL to the repository.
+
+
+          Appending `index.yaml` to this string should result in a URL that can be
+
+          used to fetch the repository index.'
+        type: string
+      tags:
+        description: Tags can be used to group charts for enabling/disabling together
+        items:
+          type: string
+        type: array
+      version:
+        description: 'Version is the version (range) of this chart.
+
+
+          A lock file will always produce a single version, while a dependency
+
+          may contain a semantic version range.'
+        type: string
+    type: object
+  unstructured.Unstructured:
+    properties:
+      Object:
+        additionalProperties: true
+        description: 'Object is a JSON compatible map with string, float, int, bool, []interface{}, or
+
+          map[string]interface{}
+
+          children.'
+        type: object
+    type: object
+  portainer.HelmUserRepository:
+    properties:
+      Id:
+        description: Membership Identifier
+        example: 1
+        type: integer
+      URL:
+        description: Helm repository URL
+        example: https://charts.bitnami.com/bitnami
+        type: string
+      UserId:
+        description: User identifier
+        example: 1
+        type: integer
+    type: object
+  release.Chart:
+    properties:
+      files:
+        description: 'Files are miscellaneous files in a chart archive,
+
+          e.g. README, LICENSE, etc.'
+        items:
+          $ref: '#/definitions/release.File'
+        type: array
+      lock:
+        allOf:
+        - $ref: '#/definitions/release.Lock'
+        description: Lock is the contents of Chart.lock.
+      metadata:
+        allOf:
+        - $ref: '#/definitions/release.Metadata'
+        description: Metadata is the contents of the Chartfile.
+      schema:
+        description: Schema is an optional JSON schema for imposing structure on Values
+        items:
+          type: integer
+        type: array
+      templates:
+        description: Templates for this chart.
+        items:
+          $ref: '#/definitions/release.File'
+        type: array
+      values:
+        additionalProperties: {}
+        description: Values are default config for this chart.
+        type: object
+    type: object
+  release.ChartReference:
+    properties:
+      chartPath:
+        type: string
+      registryID:
+        type: integer
+      repoURL:
+        type: string
+    type: object
+  users.helmUserRepositoryResponse:
+    properties:
+      GlobalRepository:
+        type: string
+      UserRepositories:
+        items:
+          $ref: '#/definitions/portainer.HelmUserRepository'
+        type: array
+    type: object
+  release.Values:
+    properties:
+      computedValues:
+        type: string
+      userSuppliedValues:
+        type: string
+    type: object
+  github_com_portainer_portainer_pkg_libhelm_release.HookExecution:
+    properties:
+      completed_at:
+        description: CompletedAt indicates the date/time this hook was completed.
+        type: string
+      phase:
+        description: Phase indicates whether the hook completed successfully
+        type: string
+      started_at:
+        description: StartedAt indicates the date/time this hook was started
+        type: string
+    type: object
+  github_com_portainer_portainer_pkg_libhelm_release.Info:
+    properties:
+      deleted:
+        description: Deleted tracks when this object was deleted.
+        type: string
+      description:
+        description: Description is human-friendly "log entry" about this release.
+        type: string
+      first_deployed:
+        description: FirstDeployed is when the release was first deployed.
+        type: string
+      last_deployed:
+        description: LastDeployed is when the release was last deployed.
+        type: string
+      notes:
+        description: Contains the rendered templates/NOTES.txt if available
+        type: string
+      resources:
+        description: Resources is the list of resources that are part of the release
+        items:
+          $ref: '#/definitions/unstructured.Unstructured'
+        type: array
+      status:
+        description: Status is the current state of the release
+        type: string
+    type: object
+  release.Lock:
+    properties:
+      dependencies:
+        description: Dependencies is the list of dependencies that this lock file has locked.
+        items:
+          $ref: '#/definitions/release.Dependency'
+        type: array
+      digest:
+        description: Digest is a hash of the dependencies in Chart.yaml.
+        type: string
+      generated:
+        description: Generated is the date the lock file was last generated.
+        type: string
+    type: object
+  release.Metadata:
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations are additional mappings uninterpreted by Helm,
+
+          made available for inspection by other applications.'
+        type: object
+      apiVersion:
+        description: The API Version of this chart. Required.
+        type: string
+      appVersion:
+        description: The version of the application enclosed inside of this chart.
+        type: string
+      condition:
+        description: The condition to check to enable chart
+        type: string
+      dependencies:
+        description: Dependencies are a list of dependencies for a chart.
+        items:
+          $ref: '#/definitions/release.Dependency'
+        type: array
+      deprecated:
+        description: Whether or not this chart is deprecated
+        type: boolean
+      description:
+        description: A one-sentence description of the chart
+        type: string
+      home:
+        description: The URL to a relevant project page, git repo, or contact person
+        type: string
+      icon:
+        description: The URL to an icon file.
+        type: string
+      keywords:
+        description: A list of string keywords
+        items:
+          type: string
+        type: array
+      kubeVersion:
+        description: KubeVersion is a SemVer constraint specifying the version of Kubernetes required.
+        type: string
+      maintainers:
+        description: A list of name and URL/email address combinations for the maintainer(s)
+        items:
+          $ref: '#/definitions/release.Maintainer'
+        type: array
+      name:
+        description: The name of the chart. Required.
+        type: string
+      sources:
+        description: Source is the URL to the source code of this chart
+        items:
+          type: string
+        type: array
+      tags:
+        description: The tags to check to enable chart
+        type: string
+      type:
+        description: 'Specifies the chart type: application or library'
+        type: string
+      version:
+        description: A SemVer 2 conformant version string of the chart. Required.
+        type: string
+    type: object
+  github_com_portainer_portainer_pkg_libhelm_release.Hook:
+    properties:
+      delete_policies:
+        description: DeletePolicies are the policies that indicate when to delete the hook
+        items:
+          type: string
+        type: array
+      events:
+        description: Events are the events that this hook fires on.
+        items:
+          type: string
+        type: array
+      kind:
+        description: Kind is the Kubernetes kind.
+        type: string
+      last_run:
+        allOf:
+        - $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.HookExecution'
+        description: LastRun indicates the date/time this was last run.
+      manifest:
+        description: Manifest is the manifest contents.
+        type: string
+      name:
+        type: string
+      path:
+        description: Path is the chart-relative path to the template.
+        type: string
+      weight:
+        description: Weight indicates the sort order for execution among similar Hook type
+        type: integer
+    type: object
+  release.File:
+    properties:
+      data:
+        description: Data is the template as byte data.
+        items:
+          type: integer
+        type: array
+      name:
+        description: Name is the path-like name of the template.
+        type: string
+    type: object
+  github_com_portainer_portainer_pkg_libhelm_release.Release:
+    properties:
+      appVersion:
+        description: AppVersion is the app version of the release.
+        type: string
+      chart:
+        allOf:
+        - $ref: '#/definitions/release.Chart'
+        description: Chart is the chart that was released.
+      chartReference:
+        allOf:
+        - $ref: '#/definitions/release.ChartReference'
+        description: ChartReference are the labels that are used to identify the chart source.
+      config:
+        additionalProperties: {}
+        description: 'Config is the set of extra Values added to the chart.
+
+          These values override the default values inside of the chart.'
+        type: object
+      hooks:
+        description: Hooks are all of the hooks declared for this release.
+        items:
+          $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.Hook'
+        type: array
+      info:
+        allOf:
+        - $ref: '#/definitions/github_com_portainer_portainer_pkg_libhelm_release.Info'
+        description: Info provides information about a release
+      manifest:
+        description: Manifest is the string representation of the rendered template.
+        type: string
+      name:
+        description: Name is the name of the release
+        type: string
+      namespace:
+        description: Namespace is the kubernetes namespace of the release.
+        type: string
+      stackID:
+        description: StackID is the ID of the Portainer stack associated with this release (if using GitOps)
+        type: integer
+      values:
+        allOf:
+        - $ref: '#/definitions/release.Values'
+        description: Values are the values used to deploy the chart.
+      version:
+        description: Version is an int which represents the revision of the release.
+        type: integer
+    type: object
+  helm.installChartPayload:
+    properties:
+      atomic:
+        type: boolean
+      chart:
+        type: string
+      name:
+        type: string
+      namespace:
+        type: string
+      repo:
+        type: string
+      values:
+        type: string
+      version:
+        type: string
+    type: object
+  users.addHelmRepoUrlPayload:
+    properties:
+      url:
+        type: string
+    type: object
+  release.ReleaseElement:
+    properties:
+      appVersion:
+        type: string
+      chart:
+        type: string
+      name:
+        type: string
+      namespace:
+        type: string
+      revision:
+        type: string
+      status:
+        type: string
+      updated:
+        type: string
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

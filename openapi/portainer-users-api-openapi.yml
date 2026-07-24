@@ -1,0 +1,801 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth users API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage users
+  name: users
+paths:
+  /users:
+    get:
+      description: 'List Portainer users.
+
+        Non-administrator users will only be able to list other non-administrator user accounts.
+
+        User passwords are filtered out, and should never be accessible.
+
+        **Access policy**: restricted'
+      operationId: UserList
+      parameters:
+      - description: Identifier of the environment(endpoint) that will be used to filter the authorized users
+        in: query
+        name: environmentId
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.User'
+            type: array
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List users
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: 'Create a new Portainer user.
+
+        Only administrators can create users.
+
+        **Access policy**: restricted'
+      operationId: UserCreate
+      parameters:
+      - description: User details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.userCreatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.User'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '409':
+          description: User already exists
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a new user
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      description: 'Remove a user.
+
+        **Access policy**: administrator'
+      operationId: UserDelete
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove a user
+      tags:
+      - users
+    get:
+      description: 'Retrieve details about a user.
+
+        User passwords are filtered out, and should never be accessible.
+
+        **Access policy**: authenticated'
+      operationId: UserInspect
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.User'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect a user
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: 'Update user details. A regular user account can only update his details.
+
+        A regular user account cannot change their username or role.
+
+        **Access policy**: authenticated'
+      operationId: UserUpdate
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.userUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.User'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '409':
+          description: Username already exist
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a user
+      tags:
+      - users
+  /users/{id}/memberships:
+    get:
+      description: 'Inspect a user memberships.
+
+        **Access policy**: restricted'
+      operationId: UserMembershipsInspect
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.TeamMembership'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect a user memberships
+      tags:
+      - users
+  /users/{id}/passwd:
+    put:
+      consumes:
+      - application/json
+      description: 'Update password for the specified user.
+
+        **Access policy**: authenticated'
+      operationId: UserUpdatePassword
+      parameters:
+      - description: identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.userUpdatePasswordPayload'
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update password for a user
+      tags:
+      - users
+  /users/{id}/tokens:
+    get:
+      description: 'Gets all API keys for a user.
+
+        Only the calling user or admin can retrieve api-keys.
+
+        **Access policy**: authenticated'
+      operationId: UserGetAPIKeys
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.APIKey'
+            type: array
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get all API keys for a user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: 'Generates an API key for a user.
+
+        Only the calling user can generate a token for themselves.
+
+        Password is required only for internal authentication.
+
+        **Access policy**: restricted'
+      operationId: UserGenerateAPIKey
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.userAccessTokenCreatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/users.accessTokenResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      security:
+      - jwt: []
+      summary: Generate an API key for a user
+      tags:
+      - users
+  /users/{id}/tokens/{keyID}:
+    delete:
+      description: 'Remove an api-key associated to a user..
+
+        Only the calling user or admin can remove api-key.
+
+        **Access policy**: authenticated'
+      operationId: UserRemoveAPIKey
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Api Key identifier
+        in: path
+        name: keyID
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove an api-key associated to a user
+      tags:
+      - users
+  /users/admin/check:
+    get:
+      description: 'Check if an administrator account exists in the database.
+
+        **Access policy**: public'
+      operationId: UserAdminCheck
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: User not found
+      summary: Check administrator account existence
+      tags:
+      - users
+  /users/admin/init:
+    post:
+      consumes:
+      - application/json
+      description: 'Initialize the ''admin'' user account.
+
+        **Access policy**: public'
+      operationId: UserAdminInit
+      parameters:
+      - description: User details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.adminInitPayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.User'
+        '400':
+          description: Invalid request
+        '409':
+          description: Admin user already initialized
+        '500':
+          description: Server error
+      summary: Initialize administrator account
+      tags:
+      - users
+  /users/me:
+    get:
+      description: 'Retrieve details about the current  user.
+
+        User passwords are filtered out, and should never be accessible.
+
+        **Access policy**: authenticated'
+      operationId: CurrentUserInspect
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.User'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect the current user user
+      tags:
+      - users
+definitions:
+  portainer.TeamMembership:
+    properties:
+      Id:
+        description: Membership Identifier
+        example: 1
+        type: integer
+      Role:
+        allOf:
+        - $ref: '#/definitions/portainer.MembershipRole'
+        description: Team role (1 for team leader and 2 for team member)
+        example: 1
+      TeamID:
+        description: Team identifier
+        example: 1
+        type: integer
+      UserID:
+        description: User identifier
+        example: 1
+        type: integer
+    type: object
+  users.userUpdatePasswordPayload:
+    properties:
+      NewPassword:
+        description: New Password
+        example: new_passwd
+        type: string
+      Password:
+        description: Current Password
+        example: passwd
+        type: string
+    required:
+    - NewPassword
+    - Password
+    type: object
+  users.userAccessTokenCreatePayload:
+    properties:
+      description:
+        example: github-api-key
+        type: string
+      password:
+        example: password
+        type: string
+    required:
+    - description
+    - password
+    type: object
+  portainer.UserRole:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - _
+    - AdministratorRole
+    - StandardUserRole
+  users.adminInitPayload:
+    properties:
+      Password:
+        description: Password for the admin user
+        example: admin-password
+        type: string
+      Username:
+        description: Username for the admin user
+        example: admin
+        type: string
+    required:
+    - Password
+    - Username
+    type: object
+  portainer.User:
+    properties:
+      EndpointAuthorizations:
+        allOf:
+        - $ref: '#/definitions/portainer.EndpointAuthorizations'
+        description: Deprecated in DBVersion == 25
+      Id:
+        description: User Identifier
+        example: 1
+        type: integer
+      PortainerAuthorizations:
+        allOf:
+        - $ref: '#/definitions/portainer.Authorizations'
+        description: Deprecated in DBVersion == 25
+      Role:
+        allOf:
+        - $ref: '#/definitions/portainer.UserRole'
+        description: User role (1 for administrator account and 2 for regular account)
+        example: 1
+      ThemeSettings:
+        $ref: '#/definitions/portainer.UserThemeSettings'
+      TokenIssueAt:
+        example: 1
+        type: integer
+      UseCache:
+        example: true
+        type: boolean
+      UserTheme:
+        description: Deprecated
+        example: dark
+        type: string
+      Username:
+        example: bob
+        type: string
+    type: object
+  portainer.Authorizations:
+    additionalProperties:
+      type: boolean
+    type: object
+  portainer.UserThemeSettings:
+    properties:
+      color:
+        description: Color represents the color theme of the UI
+        enum:
+        - dark
+        - light
+        - highcontrast
+        - auto
+        example: dark
+        type: string
+    type: object
+  portainer.MembershipRole:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - _
+    - TeamLeader
+    - TeamMember
+  users.accessTokenResponse:
+    properties:
+      apiKey:
+        $ref: '#/definitions/portainer.APIKey'
+      rawAPIKey:
+        type: string
+    type: object
+  portainer.APIKey:
+    properties:
+      dateCreated:
+        description: Unix timestamp (UTC) when the API key was created
+        type: integer
+      description:
+        example: portainer-api-key
+        type: string
+      digest:
+        description: Digest represents SHA256 hash of the raw API key
+        type: string
+      id:
+        example: 1
+        type: integer
+      lastUsed:
+        description: Unix timestamp (UTC) when the API key was last used
+        type: integer
+      prefix:
+        description: API key identifier (7 char prefix)
+        type: string
+      userId:
+        example: 1
+        type: integer
+    type: object
+  users.userUpdatePayload:
+    properties:
+      NewPassword:
+        example: asfj2emv
+        type: string
+      Password:
+        example: cg9Wgky3
+        type: string
+      Role:
+        description: User role (1 for administrator account and 2 for regular account)
+        enum:
+        - 1
+        - 2
+        example: 2
+        type: integer
+      Theme:
+        $ref: '#/definitions/users.themePayload'
+      UseCache:
+        example: true
+        type: boolean
+      Username:
+        example: bob
+        type: string
+    required:
+    - NewPassword
+    - Password
+    - Role
+    - UseCache
+    - Username
+    type: object
+  users.userCreatePayload:
+    properties:
+      Password:
+        example: cg9Wgky3
+        type: string
+      Role:
+        description: User role (1 for administrator account and 2 for regular account)
+        enum:
+        - 1
+        - 2
+        example: 2
+        type: integer
+      Username:
+        example: bob
+        type: string
+    required:
+    - Password
+    - Role
+    - Username
+    type: object
+  portainer.EndpointAuthorizations:
+    additionalProperties:
+      $ref: '#/definitions/portainer.Authorizations'
+    type: object
+  users.themePayload:
+    properties:
+      color:
+        description: Color represents the color theme of the UI
+        enum:
+        - dark
+        - light
+        - highcontrast
+        - auto
+        example: dark
+        type: string
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

@@ -1,0 +1,321 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth system API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage Portainer system
+  name: system
+paths:
+  /system/info:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: systemInfo
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/system.systemInfoResponse'
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve system info
+      tags:
+      - system
+  /system/nodes:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: systemNodesCount
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/system.nodesCountResponse'
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve the count of nodes
+      tags:
+      - system
+  /system/status:
+    get:
+      description: 'Retrieve Portainer status
+
+        **Access policy**: public'
+      operationId: systemStatus
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/system.status'
+      summary: Check Portainer status
+      tags:
+      - system
+  /system/upgrade:
+    post:
+      description: 'Upgrade Portainer to BE
+
+        **Access policy**: administrator'
+      operationId: systemUpgrade
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/system.status'
+      summary: Upgrade Portainer to BE
+      tags:
+      - system
+  /system/version:
+    get:
+      description: 'Check if portainer has an update available
+
+        **Access policy**: authenticated'
+      operationId: systemVersion
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/system.versionResponse'
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Check for portainer updates
+      tags:
+      - system
+definitions:
+  system.status:
+    properties:
+      InstanceID:
+        description: Server Instance ID
+        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+        type: string
+      Version:
+        description: Portainer API version
+        example: 2.0.0
+        type: string
+    type: object
+  system.systemInfoResponse:
+    properties:
+      agents:
+        type: integer
+      edgeAgents:
+        type: integer
+      platform:
+        $ref: '#/definitions/platform.ContainerPlatform'
+    type: object
+  build.BuildInfo:
+    properties:
+      BuildNumber:
+        type: string
+      GitCommit:
+        type: string
+      GoVersion:
+        type: string
+      ImageTag:
+        type: string
+      NodejsVersion:
+        type: string
+      PnpmVersion:
+        type: string
+      WebpackVersion:
+        type: string
+    type: object
+  system.nodesCountResponse:
+    properties:
+      nodes:
+        type: integer
+    type: object
+  platform.ContainerPlatform:
+    enum:
+    - Docker
+    - Docker Standalone
+    - Docker Swarm
+    - Kubernetes
+    - Podman
+    type: string
+    x-enum-varnames:
+    - PlatformDocker
+    - PlatformDockerStandalone
+    - PlatformDockerSwarm
+    - PlatformKubernetes
+    - PlatformPodman
+  build.RuntimeInfo:
+    properties:
+      Env:
+        items:
+          type: string
+        type: array
+    type: object
+  system.versionResponse:
+    properties:
+      Build:
+        $ref: '#/definitions/build.BuildInfo'
+      DatabaseVersion:
+        type: string
+      Dependencies:
+        $ref: '#/definitions/build.DependenciesInfo'
+      LatestVersion:
+        description: The latest version available
+        example: 2.0.0
+        type: string
+      Runtime:
+        $ref: '#/definitions/build.RuntimeInfo'
+      ServerEdition:
+        example: CE/EE
+        type: string
+      ServerVersion:
+        type: string
+      UpdateAvailable:
+        description: Whether portainer has an update available
+        example: false
+        type: boolean
+      VersionSupport:
+        example: STS/LTS
+        type: string
+    type: object
+  build.DependenciesInfo:
+    properties:
+      ComposeVersion:
+        type: string
+      DockerVersion:
+        type: string
+      HelmVersion:
+        type: string
+      KubectlVersion:
+        type: string
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

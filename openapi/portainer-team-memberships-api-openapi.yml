@@ -1,0 +1,369 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth team_memberships API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage team memberships
+  name: team_memberships
+paths:
+  /team_memberships:
+    get:
+      description: 'List team memberships. Access is only available to administrators and team leaders.
+
+        **Access policy**: administrator'
+      operationId: TeamMembershipList
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.TeamMembership'
+            type: array
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List team memberships
+      tags:
+      - team_memberships
+    post:
+      consumes:
+      - application/json
+      description: 'Create a new team memberships. Access is only available to administrators leaders of the associated team.
+
+        **Access policy**: administrator'
+      operationId: TeamMembershipCreate
+      parameters:
+      - description: Team membership details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/teammemberships.teamMembershipCreatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.TeamMembership'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied to manage memberships
+        '409':
+          description: Team membership already registered
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a new team membership
+      tags:
+      - team_memberships
+  /team_memberships/{id}:
+    delete:
+      description: 'Remove a team membership. Access is only available to administrators leaders of the associated team.
+
+        **Access policy**: administrator'
+      operationId: TeamMembershipDelete
+      parameters:
+      - description: TeamMembership identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: TeamMembership not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove a team membership
+      tags:
+      - team_memberships
+    put:
+      consumes:
+      - application/json
+      description: 'Update a team membership. Access is only available to administrators or leaders of the associated team.
+
+        **Access policy**: administrator or leaders of the associated team'
+      operationId: TeamMembershipUpdate
+      parameters:
+      - description: Team membership identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Team membership details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/teammemberships.teamMembershipUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.TeamMembership'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: TeamMembership not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a team membership
+      tags:
+      - team_memberships
+  /teams/{id}/memberships:
+    get:
+      description: 'List team memberships. Access is only available to administrators and team leaders.
+
+        **Access policy**: restricted'
+      operationId: TeamMemberships
+      parameters:
+      - description: Team Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.TeamMembership'
+            type: array
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List team memberships
+      tags:
+      - team_memberships
+definitions:
+  portainer.TeamMembership:
+    properties:
+      Id:
+        description: Membership Identifier
+        example: 1
+        type: integer
+      Role:
+        allOf:
+        - $ref: '#/definitions/portainer.MembershipRole'
+        description: Team role (1 for team leader and 2 for team member)
+        example: 1
+      TeamID:
+        description: Team identifier
+        example: 1
+        type: integer
+      UserID:
+        description: User identifier
+        example: 1
+        type: integer
+    type: object
+  teammemberships.teamMembershipCreatePayload:
+    properties:
+      Role:
+        description: Role for the user inside the team (1 for leader and 2 for regular member)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+      TeamID:
+        description: Team identifier
+        example: 1
+        type: integer
+      UserID:
+        description: User identifier
+        example: 1
+        type: integer
+    required:
+    - Role
+    - TeamID
+    - UserID
+    type: object
+  teammemberships.teamMembershipUpdatePayload:
+    properties:
+      Role:
+        description: Role for the user inside the team (1 for leader and 2 for regular member)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+      TeamID:
+        description: Team identifier
+        example: 1
+        type: integer
+      UserID:
+        description: User identifier
+        example: 1
+        type: integer
+    required:
+    - Role
+    - TeamID
+    - UserID
+    type: object
+  portainer.MembershipRole:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - _
+    - TeamLeader
+    - TeamMember
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

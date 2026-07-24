@@ -1,0 +1,651 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth settings API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage Portainer settings
+  name: settings
+paths:
+  /settings:
+    get:
+      description: 'Retrieve Portainer settings.
+
+        **Access policy**: administrator'
+      operationId: SettingsInspect
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Settings'
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve Portainer settings
+      tags:
+      - settings
+    put:
+      consumes:
+      - application/json
+      description: 'Update Portainer settings.
+
+        **Access policy**: administrator'
+      operationId: SettingsUpdate
+      parameters:
+      - description: New settings
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/settings.settingsUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Settings'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update Portainer settings
+      tags:
+      - settings
+  /settings/public:
+    get:
+      description: 'Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.
+
+        **Access policy**: public'
+      operationId: SettingsPublic
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/settings.publicSettingsResponse'
+        '500':
+          description: Server error
+      summary: Retrieve Portainer public settings
+      tags:
+      - settings
+definitions:
+  portainer.AuthenticationMethod:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-varnames:
+    - _
+    - AuthenticationInternal
+    - AuthenticationLDAP
+    - AuthenticationOAuth
+  portainer.TLSConfiguration:
+    properties:
+      TLS:
+        description: Use TLS
+        example: true
+        type: boolean
+      TLSCACert:
+        description: Path to the TLS CA certificate file
+        example: /data/tls/ca.pem
+        type: string
+      TLSCert:
+        description: Path to the TLS client certificate file
+        example: /data/tls/cert.pem
+        type: string
+      TLSKey:
+        description: Path to the TLS client key file
+        example: /data/tls/key.pem
+        type: string
+      TLSSkipVerify:
+        description: Skip the verification of the server TLS certificate
+        example: false
+        type: boolean
+    type: object
+  portainer.LDAPSettings:
+    properties:
+      AnonymousMode:
+        description: Enable this option if the server is configured for Anonymous access. When enabled, ReaderDN and Password will not be used
+        example: true
+        type: boolean
+      AutoCreateUsers:
+        description: Automatically provision users and assign them to matching LDAP group names
+        example: true
+        type: boolean
+      GroupSearchSettings:
+        items:
+          $ref: '#/definitions/portainer.LDAPGroupSearchSettings'
+        type: array
+      Password:
+        description: Password of the account that will be used to search users
+        example: readonly-password
+        type: string
+      ReaderDN:
+        description: Account that will be used to search for users
+        example: cn=readonly-account,dc=ldap,dc=domain,dc=tld
+        type: string
+      SearchSettings:
+        items:
+          $ref: '#/definitions/portainer.LDAPSearchSettings'
+        type: array
+      StartTLS:
+        description: Whether LDAP connection should use StartTLS
+        example: true
+        type: boolean
+      TLSConfig:
+        $ref: '#/definitions/portainer.TLSConfiguration'
+      URL:
+        description: URL or IP address of the LDAP server
+        example: myldap.domain.tld:389
+        type: string
+    type: object
+  settings.publicSettingsResponse:
+    properties:
+      AuthenticationMethod:
+        allOf:
+        - $ref: '#/definitions/portainer.AuthenticationMethod'
+        description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
+        example: 1
+      Edge:
+        properties:
+          CheckinInterval:
+            description: The check in interval for edge agent (in seconds) - used in non async mode [seconds]
+            example: 60
+            type: integer
+          CommandInterval:
+            description: The command list interval for edge agent - used in edge async mode [seconds]
+            example: 60
+            type: integer
+          PingInterval:
+            description: The ping interval for edge agent - used in edge async mode [seconds]
+            example: 60
+            type: integer
+          SnapshotInterval:
+            description: The snapshot interval for edge agent - used in edge async mode [seconds]
+            example: 60
+            type: integer
+        type: object
+      EnableEdgeComputeFeatures:
+        description: Whether edge compute features are enabled
+        example: true
+        type: boolean
+      Features:
+        additionalProperties:
+          type: boolean
+        description: Supported feature flags
+        type: object
+      GlobalDeploymentOptions:
+        allOf:
+        - $ref: '#/definitions/portainer.GlobalDeploymentOptions'
+        description: Deployment options for encouraging deployment as code
+      IsAMTEnabled:
+        description: Whether AMT is enabled
+        type: boolean
+      IsDockerDesktopExtension:
+        example: false
+        type: boolean
+      KubeconfigExpiry:
+        default: '0'
+        description: The expiry of a Kubeconfig
+        example: 24h
+        type: string
+      LogoURL:
+        description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
+        example: https://mycompany.mydomain.tld/logo.png
+        type: string
+      OAuthLoginURI:
+        description: The URL used for oauth login
+        example: https://gitlab.com/oauth
+        type: string
+      OAuthLogoutURI:
+        description: The URL used for oauth logout
+        example: https://gitlab.com/oauth/logout
+        type: string
+      RequiredPasswordLength:
+        description: The minimum required length for a password of any user when using internal auth mode
+        example: 1
+        type: integer
+      TeamSync:
+        description: Whether team sync is enabled
+        example: true
+        type: boolean
+    type: object
+  portainer.OpenAMTConfiguration:
+    properties:
+      certFileContent:
+        type: string
+      certFileName:
+        type: string
+      certFilePassword:
+        type: string
+      domainName:
+        type: string
+      enabled:
+        type: boolean
+      mpsPassword:
+        type: string
+      mpsServer:
+        type: string
+      mpsToken:
+        description: retrieved from API
+        type: string
+      mpsUser:
+        type: string
+    type: object
+  settings.settingsUpdatePayload:
+    properties:
+      AuthenticationMethod:
+        description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
+        example: 1
+        type: integer
+      BlackListedLabels:
+        description: A list of label name & value that will be used to hide containers when querying containers
+        items:
+          $ref: '#/definitions/portainer.Pair'
+        type: array
+      EdgeAgentCheckinInterval:
+        example: 5
+        type: integer
+      EdgePortainerURL:
+        description: EdgePortainerURL is the URL that is exposed to edge agents
+        type: string
+      EnableEdgeComputeFeatures:
+        description: Whether edge compute features are enabled
+        example: true
+        type: boolean
+      EnforceEdgeID:
+        description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
+        example: false
+        type: boolean
+      GlobalDeploymentOptions:
+        allOf:
+        - $ref: '#/definitions/portainer.GlobalDeploymentOptions'
+        description: Deployment options for encouraging deployment as code
+      HelmRepositoryURL:
+        description: Helm repository URL
+        example: https://charts.bitnami.com/bitnami
+        type: string
+      InternalAuthSettings:
+        $ref: '#/definitions/portainer.InternalAuthSettings'
+      KubeconfigExpiry:
+        default: '0'
+        description: The expiry of a Kubeconfig
+        example: 24h
+        type: string
+      KubectlShellImage:
+        description: Kubectl Shell Image
+        example: portainer/kubectl-shell:latest
+        type: string
+      LDAPSettings:
+        $ref: '#/definitions/portainer.LDAPSettings'
+      LogoURL:
+        description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
+        example: https://mycompany.mydomain.tld/logo.png
+        type: string
+      OAuthSettings:
+        $ref: '#/definitions/portainer.OAuthSettings'
+      SnapshotInterval:
+        description: The interval in which environment(endpoint) snapshots are created
+        example: 5m
+        type: string
+      TemplatesURL:
+        description: URL to the templates that will be displayed in the UI when navigating to App Templates
+        example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
+        type: string
+      TrustOnFirstConnect:
+        description: TrustOnFirstConnect makes Portainer accepting edge agent connection by default
+        example: false
+        type: boolean
+      UserSessionTimeout:
+        description: The duration of a user session
+        example: 5m
+        type: string
+    type: object
+  portainer.OAuthSettings:
+    properties:
+      AccessTokenURI:
+        type: string
+      AuthStyle:
+        $ref: '#/definitions/oauth2.AuthStyle'
+      AuthorizationURI:
+        type: string
+      ClientID:
+        type: string
+      ClientSecret:
+        type: string
+      DefaultTeamID:
+        type: integer
+      KubeSecretKey:
+        items:
+          type: integer
+        type: array
+      LogoutURI:
+        type: string
+      OAuthAutoCreateUsers:
+        type: boolean
+      RedirectURI:
+        type: string
+      ResourceURI:
+        type: string
+      SSO:
+        type: boolean
+      Scopes:
+        type: string
+      UserIdentifier:
+        type: string
+    type: object
+  portainer.InternalAuthSettings:
+    properties:
+      RequiredPasswordLength:
+        type: integer
+    type: object
+  oauth2.AuthStyle:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - AuthStyleAutoDetect
+    - AuthStyleInParams
+    - AuthStyleInHeader
+  portainer.Edge:
+    properties:
+      AsyncMode:
+        description: Deprecated 2.18
+        example: false
+        type: boolean
+      CommandInterval:
+        description: The command list interval for edge agent - used in edge async mode (in seconds)
+        example: 5
+        type: integer
+      PingInterval:
+        description: The ping interval for edge agent - used in edge async mode (in seconds)
+        example: 5
+        type: integer
+      SnapshotInterval:
+        description: The snapshot interval for edge agent - used in edge async mode (in seconds)
+        example: 5
+        type: integer
+    type: object
+  portainer.LDAPGroupSearchSettings:
+    properties:
+      GroupAttribute:
+        description: LDAP attribute which denotes the group membership
+        example: member
+        type: string
+      GroupBaseDN:
+        description: The distinguished name of the element from which the LDAP server will search for groups
+        example: dc=ldap,dc=domain,dc=tld
+        type: string
+      GroupFilter:
+        description: The LDAP search filter used to select group elements, optional
+        example: (objectClass=account
+        type: string
+    type: object
+  portainer.GlobalDeploymentOptions:
+    properties:
+      hideStacksFunctionality:
+        example: false
+        type: boolean
+    type: object
+  portainer.LDAPSearchSettings:
+    properties:
+      BaseDN:
+        description: The distinguished name of the element from which the LDAP server will search for users
+        example: dc=ldap,dc=domain,dc=tld
+        type: string
+      Filter:
+        description: Optional LDAP search filter used to select user elements
+        example: (objectClass=account)
+        type: string
+      UserNameAttribute:
+        description: LDAP attribute which denotes the username
+        example: uid
+        type: string
+    type: object
+  portainer.Settings:
+    properties:
+      AgentSecret:
+        description: Container environment parameter AGENT_SECRET
+        type: string
+      AllowBindMountsForRegularUsers:
+        type: boolean
+      AllowContainerCapabilitiesForRegularUsers:
+        type: boolean
+      AllowDeviceMappingForRegularUsers:
+        type: boolean
+      AllowHostNamespaceForRegularUsers:
+        type: boolean
+      AllowPrivilegedModeForRegularUsers:
+        type: boolean
+      AllowStackManagementForRegularUsers:
+        type: boolean
+      AllowVolumeBrowserForRegularUsers:
+        type: boolean
+      AuthenticationMethod:
+        allOf:
+        - $ref: '#/definitions/portainer.AuthenticationMethod'
+        description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
+        example: 1
+      BlackListedLabels:
+        description: A list of label name & value that will be used to hide containers when querying containers
+        items:
+          $ref: '#/definitions/portainer.Pair'
+        type: array
+      DisplayDonationHeader:
+        description: Deprecated fields
+        type: boolean
+      DisplayExternalContributors:
+        type: boolean
+      Edge:
+        $ref: '#/definitions/portainer.Edge'
+      EdgeAgentCheckinInterval:
+        description: The default check in interval for edge agent (in seconds)
+        example: 5
+        type: integer
+      EdgePortainerUrl:
+        description: EdgePortainerURL is the URL that is exposed to edge agents
+        type: string
+      EnableEdgeComputeFeatures:
+        description: Whether edge compute features are enabled
+        type: boolean
+      EnableHostManagementFeatures:
+        description: Deprecated fields v26
+        type: boolean
+      EnforceEdgeID:
+        description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
+        example: false
+        type: boolean
+      FeatureFlagSettings:
+        additionalProperties:
+          type: boolean
+        type: object
+      GlobalDeploymentOptions:
+        allOf:
+        - $ref: '#/definitions/portainer.GlobalDeploymentOptions'
+        description: Deployment options for encouraging git ops workflows
+      HelmRepositoryURL:
+        description: Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
+        example: https://charts.bitnami.com/bitnami
+        type: string
+      InternalAuthSettings:
+        $ref: '#/definitions/portainer.InternalAuthSettings'
+      IsDockerDesktopExtension:
+        type: boolean
+      KubeconfigExpiry:
+        description: The expiry of a Kubeconfig
+        example: 24h
+        type: string
+      KubectlShellImage:
+        description: KubectlImage, defaults to portainer/kubectl-shell
+        example: portainer/kubectl-shell
+        type: string
+      LDAPSettings:
+        $ref: '#/definitions/portainer.LDAPSettings'
+      LogoURL:
+        description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
+        example: https://mycompany.mydomain.tld/logo.png
+        type: string
+      OAuthSettings:
+        $ref: '#/definitions/portainer.OAuthSettings'
+      SnapshotInterval:
+        description: The interval in which environment(endpoint) snapshots are created
+        example: 5m
+        type: string
+      TemplatesURL:
+        description: URL to the templates that will be displayed in the UI when navigating to App Templates
+        example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
+        type: string
+      TrustOnFirstConnect:
+        description: TrustOnFirstConnect makes Portainer accepting edge agent connection by default
+        example: false
+        type: boolean
+      UserSessionTimeout:
+        description: The duration of a user session
+        example: 5m
+        type: string
+      openAMTConfiguration:
+        $ref: '#/definitions/portainer.OpenAMTConfiguration'
+    type: object
+  portainer.Pair:
+    properties:
+      name:
+        example: name
+        type: string
+      value:
+        example: value
+        type: string
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

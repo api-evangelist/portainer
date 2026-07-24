@@ -1,0 +1,996 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth custom_templates API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage Custom Templates
+  name: custom_templates
+paths:
+  /custom_templates:
+    get:
+      description: 'List available custom templates.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateList
+      parameters:
+      - collectionFormat: csv
+        description: Template types
+        in: query
+        items:
+          enum:
+          - 1
+          - 2
+          - 3
+          type: integer
+        name: type
+        required: true
+        type: array
+      - description: Filter by edge templates
+        in: query
+        name: edge
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.CustomTemplate'
+            type: array
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List available custom templates
+      tags:
+      - custom_templates
+  /custom_templates/{id}:
+    delete:
+      description: 'Remove a template.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateDelete
+      parameters:
+      - description: Template identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Access denied to resource
+        '404':
+          description: Template not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove a template
+      tags:
+      - custom_templates
+    get:
+      description: 'Retrieve details about a template.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateInspect
+      parameters:
+      - description: Template identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.CustomTemplate'
+        '400':
+          description: Invalid request
+        '404':
+          description: Template not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect a custom template
+      tags:
+      - custom_templates
+    put:
+      consumes:
+      - application/json
+      description: 'Update a template.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateUpdate
+      parameters:
+      - description: Template identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Template details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/customtemplates.customTemplateUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.CustomTemplate'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied to access template
+        '404':
+          description: Template not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a template
+      tags:
+      - custom_templates
+  /custom_templates/{id}/file:
+    get:
+      description: 'Retrieve the content of the Stack file for the specified custom template
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateFile
+      parameters:
+      - description: Template identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/customtemplates.fileResponse'
+        '400':
+          description: Invalid request
+        '404':
+          description: Custom template not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get Template stack file content.
+      tags:
+      - custom_templates
+  /custom_templates/{id}/git_fetch:
+    put:
+      description: 'Retrieve details about a template created from git repository method.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateGitFetch
+      parameters:
+      - description: Template identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/customtemplates.fileResponse'
+        '400':
+          description: Invalid request
+        '404':
+          description: Custom template not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Fetch the latest config file content based on custom template's git repository configuration
+      tags:
+      - custom_templates
+  /custom_templates/create/file:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 'Create a custom template.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateCreateFile
+      parameters:
+      - description: Title of the template
+        in: formData
+        name: Title
+        required: true
+        type: string
+      - description: Description of the template
+        in: formData
+        name: Description
+        required: true
+        type: string
+      - description: A note that will be displayed in the UI. Supports HTML content
+        in: formData
+        name: Note
+        required: true
+        type: string
+      - description: Platform associated to the template (1 - 'linux', 2 - 'windows')
+        enum:
+        - 1
+        - 2
+        in: formData
+        name: Platform
+        required: true
+        type: integer
+      - description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
+        enum:
+        - 1
+        - 2
+        - 3
+        in: formData
+        name: Type
+        required: true
+        type: integer
+      - description: File
+        in: formData
+        name: File
+        required: true
+        type: file
+      - description: URL of the template's logo
+        in: formData
+        name: Logo
+        type: string
+      - description: A json array of variables definitions
+        in: formData
+        name: Variables
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/portainer.CustomTemplate'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a custom template
+      tags:
+      - custom_templates
+  /custom_templates/create/repository:
+    post:
+      consumes:
+      - application/json
+      description: 'Create a custom template.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateCreateRepository
+      parameters:
+      - description: Required when using method=repository
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/customtemplates.customTemplateFromGitRepositoryPayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/portainer.CustomTemplate'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a custom template
+      tags:
+      - custom_templates
+  /custom_templates/create/string:
+    post:
+      consumes:
+      - application/json
+      description: 'Create a custom template.
+
+        **Access policy**: authenticated'
+      operationId: CustomTemplateCreateString
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/customtemplates.customTemplateFromFileContentPayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/portainer.CustomTemplate'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a custom template
+      tags:
+      - custom_templates
+definitions:
+  customtemplates.customTemplateUpdatePayload:
+    properties:
+      ComposeFilePathInRepository:
+        default: docker-compose.yml
+        description: Path to the Stack file inside the Git repository
+        example: docker-compose.yml
+        type: string
+      Description:
+        description: Description of the template
+        example: High performance web server
+        type: string
+      EdgeTemplate:
+        description: EdgeTemplate indicates if this template purpose for Edge Stack
+        example: false
+        type: boolean
+      FileContent:
+        description: Content of stack file
+        type: string
+      IsComposeFormat:
+        description: IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+        example: false
+        type: boolean
+      Logo:
+        description: URL of the template's logo
+        example: https://portainer.io/img/logo.svg
+        type: string
+      Note:
+        description: A note that will be displayed in the UI. Supports HTML content
+        example: This is my <b>custom</b> template
+        type: string
+      Platform:
+        allOf:
+        - $ref: '#/definitions/portainer.CustomTemplatePlatform'
+        description: 'Platform associated to the template.
+
+          Valid values are: 1 - ''linux'', 2 - ''windows''
+
+          Required for Docker stacks'
+        enum:
+        - 1
+        - 2
+        example: 1
+      RepositoryAuthentication:
+        description: Use authentication to clone the Git repository
+        example: true
+        type: boolean
+      RepositoryAuthorizationType:
+        allOf:
+        - $ref: '#/definitions/gittypes.GitCredentialAuthType'
+        description: RepositoryAuthorizationType is the authorization type to use
+        example: 0
+      RepositoryGitCredentialID:
+        description: 'GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
+
+          is true and RepositoryUsername/RepositoryPassword are not provided'
+        example: 0
+        type: integer
+      RepositoryPassword:
+        description: 'Password used in basic authentication or token used in token authentication.
+
+          Required when RepositoryAuthentication is true and RepositoryGitCredentialID is 0'
+        example: myGitPassword
+        type: string
+      RepositoryReferenceName:
+        description: Reference name of a Git repository hosting the Stack file
+        example: refs/heads/master
+        type: string
+      RepositoryURL:
+        description: URL of a Git repository hosting the Stack file
+        example: https://github.com/openfaas/faas
+        type: string
+      RepositoryUsername:
+        description: 'Username used in basic authentication. Required when RepositoryAuthentication is true
+
+          and RepositoryGitCredentialID is 0. Ignored if RepositoryAuthType is token'
+        example: myGitUsername
+        type: string
+      TLSSkipVerify:
+        description: TLSSkipVerify skips SSL verification when cloning the Git repository
+        example: false
+        type: boolean
+      Title:
+        description: Title of the template
+        example: Nginx
+        type: string
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.StackType'
+        description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
+        enum:
+        - 1
+        - 2
+        - 3
+        example: 1
+      Variables:
+        description: Definitions of variables in the stack file
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
+    required:
+    - Description
+    - FileContent
+    - RepositoryURL
+    - Title
+    - Type
+    type: object
+  portainer.CustomTemplatePlatform:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - _
+    - CustomTemplatePlatformLinux
+    - CustomTemplatePlatformWindows
+  portainer.UserResourceAccess:
+    properties:
+      AccessLevel:
+        $ref: '#/definitions/portainer.ResourceAccessLevel'
+      UserId:
+        type: integer
+    type: object
+  portainer.TeamResourceAccess:
+    properties:
+      AccessLevel:
+        $ref: '#/definitions/portainer.ResourceAccessLevel'
+      TeamId:
+        type: integer
+    type: object
+  portainer.ResourceControlType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    type: integer
+    x-enum-varnames:
+    - _
+    - ContainerResourceControl
+    - ServiceResourceControl
+    - VolumeResourceControl
+    - NetworkResourceControl
+    - SecretResourceControl
+    - StackResourceControl
+    - ConfigResourceControl
+    - CustomTemplateResourceControl
+    - ContainerGroupResourceControl
+  portainer.CustomTemplateVariableDefinition:
+    properties:
+      defaultValue:
+        example: default value
+        type: string
+      description:
+        example: Description
+        type: string
+      label:
+        example: My Variable
+        type: string
+      name:
+        example: MY_VAR
+        type: string
+    type: object
+  gittypes.GitCredentialAuthType:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - GitCredentialAuthType_Basic
+    - GitCredentialAuthType_Token
+  gittypes.RepoConfig:
+    properties:
+      Authentication:
+        allOf:
+        - $ref: '#/definitions/gittypes.GitAuthentication'
+        description: Git credentials
+      ConfigFilePath:
+        description: Path to where the config file is in this url/refName
+        example: docker-compose.yml
+        type: string
+      ConfigHash:
+        description: Repository hash
+        example: bc4c183d756879ea4d173315338110b31004b8e0
+        type: string
+      ReferenceName:
+        description: The reference name
+        example: refs/heads/branch_name
+        type: string
+      TLSSkipVerify:
+        description: TLSSkipVerify skips SSL verification when cloning the Git repository
+        example: false
+        type: boolean
+      URL:
+        description: The repo url
+        example: https://github.com/portainer/portainer.git
+        type: string
+    type: object
+  portainer.StackType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-varnames:
+    - _
+    - DockerSwarmStack
+    - DockerComposeStack
+    - KubernetesStack
+  customtemplates.fileResponse:
+    properties:
+      FileContent:
+        type: string
+    type: object
+  customtemplates.customTemplateFromGitRepositoryPayload:
+    properties:
+      ComposeFilePathInRepository:
+        default: docker-compose.yml
+        description: Path to the Stack file inside the Git repository
+        example: docker-compose.yml
+        type: string
+      Description:
+        description: Description of the template
+        example: High performance web server
+        type: string
+      EdgeTemplate:
+        description: EdgeTemplate indicates if this template purpose for Edge Stack
+        example: false
+        type: boolean
+      IsComposeFormat:
+        description: IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+        example: false
+        type: boolean
+      Logo:
+        description: URL of the template's logo
+        example: https://portainer.io/img/logo.svg
+        type: string
+      Note:
+        description: A note that will be displayed in the UI. Supports HTML content
+        example: This is my <b>custom</b> template
+        type: string
+      Platform:
+        allOf:
+        - $ref: '#/definitions/portainer.CustomTemplatePlatform'
+        description: 'Platform associated to the template.
+
+          Valid values are: 1 - ''linux'', 2 - ''windows''
+
+          Required for Docker stacks'
+        enum:
+        - 1
+        - 2
+        example: 1
+      RepositoryAuthentication:
+        description: Use basic authentication to clone the Git repository
+        example: true
+        type: boolean
+      RepositoryPassword:
+        description: Password used in basic authentication. Required when RepositoryAuthentication is true.
+        example: myGitPassword
+        type: string
+      RepositoryReferenceName:
+        description: Reference name of a Git repository hosting the Stack file
+        example: refs/heads/master
+        type: string
+      RepositoryURL:
+        description: URL of a Git repository hosting the Stack file
+        example: https://github.com/openfaas/faas
+        type: string
+      RepositoryUsername:
+        description: Username used in basic authentication. Required when RepositoryAuthentication is true.
+        example: myGitUsername
+        type: string
+      TLSSkipVerify:
+        description: TLSSkipVerify skips SSL verification when cloning the Git repository
+        example: false
+        type: boolean
+      Title:
+        description: Title of the template
+        example: Nginx
+        type: string
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.StackType'
+        description: 'Type of created stack:
+
+          * 1 - swarm
+
+          * 2 - compose
+
+          * 3 - kubernetes'
+        enum:
+        - 1
+        - 2
+        example: 1
+      Variables:
+        description: Definitions of variables in the stack file
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
+    required:
+    - Description
+    - RepositoryURL
+    - Title
+    - Type
+    type: object
+  portainer.CustomTemplate:
+    properties:
+      CreatedByUserId:
+        description: User identifier who created this template
+        example: 3
+        type: integer
+      Description:
+        description: Description of the template
+        example: High performance web server
+        type: string
+      EdgeTemplate:
+        description: EdgeTemplate indicates if this template purpose for Edge Stack
+        example: false
+        type: boolean
+      EntryPoint:
+        description: Path to the Stack file
+        example: docker-compose.yml
+        type: string
+      GitConfig:
+        $ref: '#/definitions/gittypes.RepoConfig'
+      Id:
+        description: CustomTemplate Identifier
+        example: 1
+        type: integer
+      IsComposeFormat:
+        description: IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+        example: false
+        type: boolean
+      Logo:
+        description: URL of the template's logo
+        example: https://portainer.io/img/logo.svg
+        type: string
+      Note:
+        description: A note that will be displayed in the UI. Supports HTML content
+        example: This is my <b>custom</b> template
+        type: string
+      Platform:
+        allOf:
+        - $ref: '#/definitions/portainer.CustomTemplatePlatform'
+        description: 'Platform associated to the template.
+
+          Valid values are: 1 - ''linux'', 2 - ''windows'''
+        enum:
+        - 1
+        - 2
+        example: 1
+      ProjectPath:
+        description: Path on disk to the repository hosting the Stack file
+        example: /data/custom_template/3
+        type: string
+      ResourceControl:
+        $ref: '#/definitions/portainer.ResourceControl'
+      Title:
+        description: Title of the template
+        example: Nginx
+        type: string
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.StackType'
+        description: 'Type of created stack:
+
+          * 1 - swarm
+
+          * 2 - compose
+
+          * 3 - kubernetes'
+        enum:
+        - 1
+        - 2
+        - 3
+        example: 1
+      Variables:
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
+    type: object
+  portainer.ResourceControl:
+    properties:
+      AccessLevel:
+        $ref: '#/definitions/portainer.ResourceAccessLevel'
+      AdministratorsOnly:
+        description: Permit access to resource only to admins
+        example: true
+        type: boolean
+      Id:
+        description: ResourceControl Identifier
+        example: 1
+        type: integer
+      OwnerId:
+        description: 'Deprecated fields
+
+          Deprecated in DBVersion == 2'
+        type: integer
+      Public:
+        description: Permit access to the associated resource to any user
+        example: true
+        type: boolean
+      ResourceId:
+        description: 'Docker resource identifier on which access control will be applied.\
+
+          In the case of a resource control applied to a stack, use the stack name as identifier'
+        example: 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
+        type: string
+      SubResourceIds:
+        description: List of Docker resources that will inherit this access control
+        example:
+        - 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
+        items:
+          type: string
+        type: array
+      System:
+        type: boolean
+      TeamAccesses:
+        items:
+          $ref: '#/definitions/portainer.TeamResourceAccess'
+        type: array
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.ResourceControlType'
+        description: 'Type of Docker resource. Valid values are: 1- container, 2 -service
+
+          3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template'
+        example: 1
+      UserAccesses:
+        items:
+          $ref: '#/definitions/portainer.UserResourceAccess'
+        type: array
+    type: object
+  gittypes.GitAuthentication:
+    properties:
+      AuthorizationType:
+        $ref: '#/definitions/gittypes.GitCredentialAuthType'
+      GitCredentialID:
+        description: 'Git credentials identifier when the value is not 0
+
+          When the value is 0, Username, Password, and Authtype are set without using saved credential
+
+          This is introduced since 2.15.0'
+        example: 0
+        type: integer
+      Password:
+        type: string
+      Username:
+        type: string
+    type: object
+  customtemplates.customTemplateFromFileContentPayload:
+    properties:
+      Description:
+        description: Description of the template
+        example: High performance web server
+        type: string
+      EdgeTemplate:
+        description: EdgeTemplate indicates if this template purpose for Edge Stack
+        example: false
+        type: boolean
+      FileContent:
+        description: Content of stack file
+        type: string
+      Logo:
+        description: URL of the template's logo
+        example: https://portainer.io/img/logo.svg
+        type: string
+      Note:
+        description: A note that will be displayed in the UI. Supports HTML content
+        example: This is my <b>custom</b> template
+        type: string
+      Platform:
+        allOf:
+        - $ref: '#/definitions/portainer.CustomTemplatePlatform'
+        description: 'Platform associated to the template.
+
+          Valid values are: 1 - ''linux'', 2 - ''windows''
+
+          Required for Docker stacks'
+        enum:
+        - 1
+        - 2
+        example: 1
+      Title:
+        description: Title of the template
+        example: Nginx
+        type: string
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.StackType'
+        description: 'Type of created stack:
+
+          * 1 - swarm
+
+          * 2 - compose
+
+          * 3 - kubernetes'
+        enum:
+        - 1
+        - 2
+        - 3
+        example: 1
+      Variables:
+        description: Definitions of variables in the stack file
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
+    required:
+    - Description
+    - FileContent
+    - Title
+    - Type
+    type: object
+  portainer.ResourceAccessLevel:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - _
+    - ReadWriteAccessLevel
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

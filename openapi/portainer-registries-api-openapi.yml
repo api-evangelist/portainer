@@ -1,0 +1,766 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth registries API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage Docker registries
+  name: registries
+paths:
+  /registries:
+    get:
+      description: 'List all registries based on the current user authorizations.
+
+        Will return all registries if using an administrator account otherwise it
+
+        will only return authorized registries.
+
+        **Access policy**: restricted'
+      operationId: RegistryList
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.Registry'
+            type: array
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List Registries
+      tags:
+      - registries
+    post:
+      consumes:
+      - application/json
+      description: 'Create a new registry.
+
+        **Access policy**: restricted'
+      operationId: RegistryCreate
+      parameters:
+      - description: Registry details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/registries.registryCreatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Registry'
+        '400':
+          description: Invalid request
+        '409':
+          description: Another registry with the same name or same URL & credentials already exists
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a new registry
+      tags:
+      - registries
+  /registries/{id}:
+    delete:
+      description: 'Remove a registry
+
+        **Access policy**: restricted'
+      operationId: RegistryDelete
+      parameters:
+      - description: Registry identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '404':
+          description: Registry not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove a registry
+      tags:
+      - registries
+    get:
+      description: 'Retrieve details about a registry.
+
+        **Access policy**: restricted'
+      operationId: RegistryInspect
+      parameters:
+      - description: Registry identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Registry'
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied to access registry
+        '404':
+          description: Registry not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect a registry
+      tags:
+      - registries
+    put:
+      consumes:
+      - application/json
+      description: 'Update a registry
+
+        **Access policy**: restricted'
+      operationId: RegistryUpdate
+      parameters:
+      - description: Registry identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Registry details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/registries.registryUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Registry'
+        '400':
+          description: Invalid request
+        '404':
+          description: Registry not found
+        '409':
+          description: Another registry with the same name or same URL & credentials already exists
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a registry
+      tags:
+      - registries
+  /registries/{id}/configure:
+    post:
+      consumes:
+      - application/json
+      description: 'Configures a registry.
+
+        **Access policy**: restricted'
+      operationId: RegistryConfigure
+      parameters:
+      - description: Registry identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Registry configuration
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/registries.registryConfigurePayload'
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '403':
+          description: Permission denied
+        '404':
+          description: Registry not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Configures a registry
+      tags:
+      - registries
+  /registries/ping:
+    post:
+      consumes:
+      - application/json
+      description: 'Test connection to a registry with provided credentials
+
+        **Access policy**: authenticated'
+      operationId: RegistryPing
+      parameters:
+      - description: Registry credentials to test
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/registries.registryPingPayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/registries.registryPingResponse'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Test registry connection
+      tags:
+      - registries
+definitions:
+  portainer.TLSConfiguration:
+    properties:
+      TLS:
+        description: Use TLS
+        example: true
+        type: boolean
+      TLSCACert:
+        description: Path to the TLS CA certificate file
+        example: /data/tls/ca.pem
+        type: string
+      TLSCert:
+        description: Path to the TLS client certificate file
+        example: /data/tls/cert.pem
+        type: string
+      TLSKey:
+        description: Path to the TLS client key file
+        example: /data/tls/key.pem
+        type: string
+      TLSSkipVerify:
+        description: Skip the verification of the server TLS certificate
+        example: false
+        type: boolean
+    type: object
+  portainer.QuayRegistryData:
+    properties:
+      OrganisationName:
+        type: string
+      UseOrganisation:
+        type: boolean
+    type: object
+  registries.registryPingPayload:
+    properties:
+      Password:
+        description: Password used to authenticate against this registry
+        example: registry_password
+        type: string
+      TLS:
+        description: Use TLS
+        example: true
+        type: boolean
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.RegistryType'
+        description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5 (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)\n\t8 (Github registry)"
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        example: 6
+      URL:
+        description: URL or IP address of the Docker registry
+        example: registry-1.docker.io
+        type: string
+      Username:
+        description: Username used to authenticate against this registry
+        example: registry_user
+        type: string
+    required:
+    - Type
+    - URL
+    type: object
+  portainer.GithubRegistryData:
+    properties:
+      OrganisationName:
+        type: string
+      UseOrganisation:
+        type: boolean
+    type: object
+  portainer.Registry:
+    properties:
+      AccessToken:
+        description: Stores temporary access token
+        type: string
+      AccessTokenExpiry:
+        type: integer
+      Authentication:
+        description: Is authentication against this registry enabled
+        example: true
+        type: boolean
+      AuthorizedTeams:
+        description: Deprecated in DBVersion == 18
+        items:
+          type: integer
+        type: array
+      AuthorizedUsers:
+        description: Deprecated in DBVersion == 18
+        items:
+          type: integer
+        type: array
+      BaseURL:
+        description: Base URL, introduced for ProGet registry
+        example: registry.mydomain.tld:2375
+        type: string
+      Ecr:
+        $ref: '#/definitions/portainer.EcrData'
+      Github:
+        $ref: '#/definitions/portainer.GithubRegistryData'
+      Gitlab:
+        $ref: '#/definitions/portainer.GitlabRegistryData'
+      Id:
+        description: Registry Identifier
+        example: 1
+        type: integer
+      ManagementConfiguration:
+        $ref: '#/definitions/portainer.RegistryManagementConfiguration'
+      Name:
+        description: Registry Name
+        example: my-registry
+        type: string
+      Password:
+        description: Password or SecretAccessKey used to authenticate against this registry
+        example: registry_password
+        type: string
+      Quay:
+        $ref: '#/definitions/portainer.QuayRegistryData'
+      RegistryAccesses:
+        $ref: '#/definitions/portainer.RegistryAccesses'
+      TeamAccessPolicies:
+        allOf:
+        - $ref: '#/definitions/portainer.TeamAccessPolicies'
+        description: Deprecated in DBVersion == 31
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.RegistryType'
+        description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+      URL:
+        description: URL or IP address of the Docker registry
+        example: registry.mydomain.tld:2375
+        type: string
+      UserAccessPolicies:
+        allOf:
+        - $ref: '#/definitions/portainer.UserAccessPolicies'
+        description: 'Deprecated fields
+
+          Deprecated in DBVersion == 31'
+      Username:
+        description: Username or AccessKeyID used to authenticate against this registry
+        example: registry user
+        type: string
+    type: object
+  portainer.RegistryType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    type: integer
+    x-enum-varnames:
+    - _
+    - QuayRegistry
+    - AzureRegistry
+    - CustomRegistry
+    - GitlabRegistry
+    - ProGetRegistry
+    - DockerHubRegistry
+    - EcrRegistry
+    - GithubRegistry
+  portainer.EcrData:
+    properties:
+      Region:
+        example: ap-southeast-2
+        type: string
+    type: object
+  registries.registryUpdatePayload:
+    properties:
+      Authentication:
+        description: Is authentication against this registry enabled
+        example: false
+        type: boolean
+      BaseURL:
+        description: BaseURL is used for quay registry
+        example: registry.mydomain.tld:2375
+        type: string
+      Ecr:
+        allOf:
+        - $ref: '#/definitions/portainer.EcrData'
+        description: ECR data
+      Name:
+        description: Name that will be used to identify this registry
+        example: my-registry
+        type: string
+      Password:
+        description: Password used to authenticate against this registry. required when Authentication is true
+        example: registry_password
+        type: string
+      Quay:
+        allOf:
+        - $ref: '#/definitions/portainer.QuayRegistryData'
+        description: Quay data
+      RegistryAccesses:
+        allOf:
+        - $ref: '#/definitions/portainer.RegistryAccesses'
+        description: Registry access control
+      URL:
+        description: URL or IP address of the Docker registry
+        example: registry.mydomain.tld:2375
+        type: string
+      Username:
+        description: Username used to authenticate against this registry. Required when Authentication is true
+        example: registry_user
+        type: string
+    required:
+    - Authentication
+    - Name
+    - URL
+    type: object
+  registries.registryCreatePayload:
+    properties:
+      Authentication:
+        description: Is authentication against this registry enabled
+        example: false
+        type: boolean
+      BaseURL:
+        description: BaseURL required for ProGet registry
+        example: registry.mydomain.tld:2375
+        type: string
+      Ecr:
+        allOf:
+        - $ref: '#/definitions/portainer.EcrData'
+        description: ECR specific details, required when type = 7
+      Gitlab:
+        allOf:
+        - $ref: '#/definitions/portainer.GitlabRegistryData'
+        description: Gitlab specific details, required when type = 4
+      Name:
+        description: Name that will be used to identify this registry
+        example: my-registry
+        type: string
+      Password:
+        description: Password used to authenticate against this registry. required when Authentication is true
+        example: registry_password
+        type: string
+      Quay:
+        allOf:
+        - $ref: '#/definitions/portainer.QuayRegistryData'
+        description: Quay specific details, required when type = 1
+      TLS:
+        description: Use TLS
+        example: true
+        type: boolean
+      Type:
+        allOf:
+        - $ref: '#/definitions/portainer.RegistryType'
+        description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5 (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)"
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        example: 1
+      URL:
+        description: URL or IP address of the Docker registry
+        example: registry.mydomain.tld:2375/feed
+        type: string
+      Username:
+        description: Username used to authenticate against this registry. Required when Authentication is true
+        example: registry_user
+        type: string
+    required:
+    - Authentication
+    - Name
+    - Type
+    - URL
+    type: object
+  registries.registryConfigurePayload:
+    properties:
+      Authentication:
+        description: Is authentication against this registry enabled
+        example: false
+        type: boolean
+      Password:
+        description: Password used to authenticate against this registry. required when Authentication is true
+        example: registry_password
+        type: string
+      Region:
+        description: ECR region
+        type: string
+      TLS:
+        description: Use TLS
+        example: true
+        type: boolean
+      TLSCACertFile:
+        description: The TLS CA certificate file
+        items:
+          type: integer
+        type: array
+      TLSCertFile:
+        description: The TLS client certificate file
+        items:
+          type: integer
+        type: array
+      TLSKeyFile:
+        description: The TLS client key file
+        items:
+          type: integer
+        type: array
+      TLSSkipVerify:
+        description: Skip the verification of the server TLS certificate
+        example: false
+        type: boolean
+      Username:
+        description: Username used to authenticate against this registry. Required when Authentication is true
+        example: registry_user
+        type: string
+    required:
+    - Authentication
+    type: object
+  portainer.RegistryAccesses:
+    additionalProperties:
+      $ref: '#/definitions/portainer.RegistryAccessPolicies'
+    type: object
+  portainer.RegistryAccessPolicies:
+    properties:
+      Namespaces:
+        description: Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
+        items:
+          type: string
+        type: array
+      TeamAccessPolicies:
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
+      UserAccessPolicies:
+        allOf:
+        - $ref: '#/definitions/portainer.UserAccessPolicies'
+        description: Docker specific fields (with docker, users/teams have access to a registry)
+    type: object
+  portainer.RegistryManagementConfiguration:
+    properties:
+      AccessToken:
+        type: string
+      AccessTokenExpiry:
+        type: integer
+      Authentication:
+        type: boolean
+      Ecr:
+        $ref: '#/definitions/portainer.EcrData'
+      Password:
+        type: string
+      TLSConfig:
+        $ref: '#/definitions/portainer.TLSConfiguration'
+      Type:
+        $ref: '#/definitions/portainer.RegistryType'
+      Username:
+        type: string
+    type: object
+  portainer.UserAccessPolicies:
+    additionalProperties:
+      $ref: '#/definitions/portainer.AccessPolicy'
+    type: object
+  portainer.GitlabRegistryData:
+    properties:
+      InstanceURL:
+        type: string
+      ProjectId:
+        type: integer
+      ProjectPath:
+        type: string
+    type: object
+  portainer.AccessPolicy:
+    properties:
+      Namespaces:
+        description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+        items:
+          type: string
+        type: array
+      RoleId:
+        description: Role identifier. Reference the role that will be associated to this access policy
+        example: 1
+        type: integer
+    type: object
+  registries.registryPingResponse:
+    properties:
+      message:
+        description: Message provides details about the connection test result
+        example: Registry connection successful
+        type: string
+      success:
+        description: Success indicates if the registry connection was successful
+        example: true
+        type: boolean
+    type: object
+  portainer.TeamAccessPolicies:
+    additionalProperties:
+      $ref: '#/definitions/portainer.AccessPolicy'
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

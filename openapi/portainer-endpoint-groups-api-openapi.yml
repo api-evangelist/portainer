@@ -1,0 +1,477 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth endpoint_groups API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage environment(endpoint) groups
+  name: endpoint_groups
+paths:
+  /endpoint_groups:
+    get:
+      description: 'List all environment(endpoint) groups based on the current user authorizations. Will
+
+        return all environment(endpoint) groups if using an administrator account otherwise it will
+
+        only return authorized environment(endpoint) groups.
+
+        **Access policy**: restricted'
+      operationId: EndpointGroupList
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Environment(Endpoint) group
+          schema:
+            items:
+              $ref: '#/definitions/portainer.EndpointGroup'
+            type: array
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List Environment(Endpoint) groups
+      tags:
+      - endpoint_groups
+    post:
+      consumes:
+      - application/json
+      description: 'Create a new environment(endpoint) group.
+
+        **Access policy**: administrator'
+      parameters:
+      - description: Environment(Endpoint) Group details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/endpointgroups.endpointGroupCreatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.EndpointGroup'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create an Environment(Endpoint) Group
+      tags:
+      - endpoint_groups
+  /endpoint_groups/{id}:
+    delete:
+      description: 'Remove an environment(endpoint) group.
+
+        **Access policy**: administrator'
+      operationId: EndpointGroupDelete
+      parameters:
+      - description: EndpointGroup identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '404':
+          description: EndpointGroup not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove an environment(endpoint) group
+      tags:
+      - endpoint_groups
+    get:
+      consumes:
+      - application/json
+      description: 'Retrieve details abont an environment(endpoint) group.
+
+        **Access policy**: administrator'
+      parameters:
+      - description: Environment(Endpoint) group identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.EndpointGroup'
+        '400':
+          description: Invalid request
+        '404':
+          description: EndpointGroup not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect an Environment(Endpoint) group
+      tags:
+      - endpoint_groups
+    put:
+      consumes:
+      - application/json
+      description: 'Update an environment(endpoint) group.
+
+        **Access policy**: administrator'
+      operationId: EndpointGroupUpdate
+      parameters:
+      - description: EndpointGroup identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: EndpointGroup details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/endpointgroups.endpointGroupUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.EndpointGroup'
+        '400':
+          description: Invalid request
+        '404':
+          description: EndpointGroup not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update an environment(endpoint) group
+      tags:
+      - endpoint_groups
+  /endpoint_groups/{id}/endpoints/{endpointId}:
+    delete:
+      description: '**Access policy**: administrator'
+      operationId: EndpointGroupDeleteEndpoint
+      parameters:
+      - description: EndpointGroup identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: endpointId
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '404':
+          description: EndpointGroup not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Removes environment(endpoint) from an environment(endpoint) group
+      tags:
+      - endpoint_groups
+    put:
+      description: 'Add an environment(endpoint) to an environment(endpoint) group
+
+        **Access policy**: administrator'
+      operationId: EndpointGroupAddEndpoint
+      parameters:
+      - description: EndpointGroup identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: endpointId
+        required: true
+        type: integer
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '404':
+          description: EndpointGroup not found
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Add an environment(endpoint) to an environment(endpoint) group
+      tags:
+      - endpoint_groups
+definitions:
+  portainer.EndpointGroup:
+    properties:
+      AuthorizedTeams:
+        items:
+          type: integer
+        type: array
+      AuthorizedUsers:
+        description: Deprecated in DBVersion == 18
+        items:
+          type: integer
+        type: array
+      Description:
+        description: Description associated to the environment(endpoint) group
+        example: Environment(Endpoint) group description
+        type: string
+      Id:
+        description: Environment(Endpoint) group Identifier
+        example: 1
+        type: integer
+      Labels:
+        description: Deprecated fields
+        items:
+          $ref: '#/definitions/portainer.Pair'
+        type: array
+      Name:
+        description: Environment(Endpoint) group name
+        example: my-environment-group
+        type: string
+      TagIds:
+        description: List of tags associated to this environment(endpoint) group
+        items:
+          type: integer
+        type: array
+      Tags:
+        description: Deprecated in DBVersion == 22
+        items:
+          type: string
+        type: array
+      TeamAccessPolicies:
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
+      UserAccessPolicies:
+        $ref: '#/definitions/portainer.UserAccessPolicies'
+    type: object
+  endpointgroups.endpointGroupCreatePayload:
+    properties:
+      AssociatedEndpoints:
+        description: List of environment(endpoint) identifiers that will be part of this group
+        example:
+        - 1
+        - 3
+        items:
+          type: integer
+        type: array
+      Description:
+        description: Environment(Endpoint) group description
+        example: description
+        type: string
+      Name:
+        description: Environment(Endpoint) group name
+        example: my-environment-group
+        type: string
+      TagIDs:
+        description: List of tag identifiers to which this environment(endpoint) group is associated
+        example:
+        - 1
+        - 2
+        items:
+          type: integer
+        type: array
+    required:
+    - Name
+    type: object
+  portainer.TeamAccessPolicies:
+    additionalProperties:
+      $ref: '#/definitions/portainer.AccessPolicy'
+    type: object
+  portainer.UserAccessPolicies:
+    additionalProperties:
+      $ref: '#/definitions/portainer.AccessPolicy'
+    type: object
+  portainer.AccessPolicy:
+    properties:
+      Namespaces:
+        description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+        items:
+          type: string
+        type: array
+      RoleId:
+        description: Role identifier. Reference the role that will be associated to this access policy
+        example: 1
+        type: integer
+    type: object
+  portainer.Pair:
+    properties:
+      name:
+        example: name
+        type: string
+      value:
+        example: value
+        type: string
+    type: object
+  endpointgroups.endpointGroupUpdatePayload:
+    properties:
+      AssociatedEndpoints:
+        description: List of environment(endpoint) identifiers that will be part of this group
+        example:
+        - 1
+        - 3
+        items:
+          type: integer
+        type: array
+      Description:
+        description: Environment(Endpoint) group description
+        example: description
+        type: string
+      Name:
+        description: Environment(Endpoint) group name
+        example: my-environment-group
+        type: string
+      TagIDs:
+        description: List of tag identifiers associated to the environment(endpoint) group
+        example:
+        - 3
+        - 4
+        items:
+          type: integer
+        type: array
+      TeamAccessPolicies:
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
+      UserAccessPolicies:
+        $ref: '#/definitions/portainer.UserAccessPolicies'
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey

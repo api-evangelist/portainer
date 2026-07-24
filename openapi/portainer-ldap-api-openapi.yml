@@ -1,0 +1,254 @@
+swagger: '2.0'
+info:
+  contact:
+    email: info@portainer.io
+  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
+
+    Examples are available at https://documentation.portainer.io/api/api-examples/
+
+    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
+
+    # Authentication
+
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
+
+    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
+
+    with the **Bearer** authentication mechanism.
+
+
+    Example:
+
+
+    ```
+
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
+
+    ```
+
+
+    # Security
+
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
+
+    Different access policies are available:
+
+
+    - Public access
+
+    - Authenticated access
+
+    - Restricted access
+
+    - Administrator access
+
+
+    ### Public access
+
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Authenticated access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+
+    ### Restricted access
+
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
+    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
+
+    ### Administrator access
+
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
+
+    # Execute Docker requests
+
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
+
+    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
+
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
+
+    # Private Registry
+
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+
+    \<registryID value\> - The registry ID where the repository was created.
+
+
+    Example:
+
+
+    ```
+
+    eyJyZWdpc3RyeUlkIjoxfQ==
+
+    ```
+
+
+    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
+
+    '
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE auth ldap API
+  version: 2.39.1
+basePath: /api
+schemes:
+- http
+- https
+tags:
+- description: Manage LDAP settings
+  name: ldap
+paths:
+  /ldap/check:
+    post:
+      consumes:
+      - application/json
+      description: 'Test LDAP connectivity using LDAP details
+
+        **Access policy**: administrator'
+      operationId: LDAPCheck
+      parameters:
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ldap.checkPayload'
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Test LDAP connectivity
+      tags:
+      - ldap
+definitions:
+  portainer.TLSConfiguration:
+    properties:
+      TLS:
+        description: Use TLS
+        example: true
+        type: boolean
+      TLSCACert:
+        description: Path to the TLS CA certificate file
+        example: /data/tls/ca.pem
+        type: string
+      TLSCert:
+        description: Path to the TLS client certificate file
+        example: /data/tls/cert.pem
+        type: string
+      TLSKey:
+        description: Path to the TLS client key file
+        example: /data/tls/key.pem
+        type: string
+      TLSSkipVerify:
+        description: Skip the verification of the server TLS certificate
+        example: false
+        type: boolean
+    type: object
+  portainer.LDAPSettings:
+    properties:
+      AnonymousMode:
+        description: Enable this option if the server is configured for Anonymous access. When enabled, ReaderDN and Password will not be used
+        example: true
+        type: boolean
+      AutoCreateUsers:
+        description: Automatically provision users and assign them to matching LDAP group names
+        example: true
+        type: boolean
+      GroupSearchSettings:
+        items:
+          $ref: '#/definitions/portainer.LDAPGroupSearchSettings'
+        type: array
+      Password:
+        description: Password of the account that will be used to search users
+        example: readonly-password
+        type: string
+      ReaderDN:
+        description: Account that will be used to search for users
+        example: cn=readonly-account,dc=ldap,dc=domain,dc=tld
+        type: string
+      SearchSettings:
+        items:
+          $ref: '#/definitions/portainer.LDAPSearchSettings'
+        type: array
+      StartTLS:
+        description: Whether LDAP connection should use StartTLS
+        example: true
+        type: boolean
+      TLSConfig:
+        $ref: '#/definitions/portainer.TLSConfiguration'
+      URL:
+        description: URL or IP address of the LDAP server
+        example: myldap.domain.tld:389
+        type: string
+    type: object
+  portainer.LDAPGroupSearchSettings:
+    properties:
+      GroupAttribute:
+        description: LDAP attribute which denotes the group membership
+        example: member
+        type: string
+      GroupBaseDN:
+        description: The distinguished name of the element from which the LDAP server will search for groups
+        example: dc=ldap,dc=domain,dc=tld
+        type: string
+      GroupFilter:
+        description: The LDAP search filter used to select group elements, optional
+        example: (objectClass=account
+        type: string
+    type: object
+  portainer.LDAPSearchSettings:
+    properties:
+      BaseDN:
+        description: The distinguished name of the element from which the LDAP server will search for users
+        example: dc=ldap,dc=domain,dc=tld
+        type: string
+      Filter:
+        description: Optional LDAP search filter used to select user elements
+        example: (objectClass=account)
+        type: string
+      UserNameAttribute:
+        description: LDAP attribute which denotes the username
+        example: uid
+        type: string
+    type: object
+  ldap.checkPayload:
+    properties:
+      LDAPSettings:
+        $ref: '#/definitions/portainer.LDAPSettings'
+    type: object
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  jwt:
+    in: header
+    name: Authorization
+    type: apiKey
