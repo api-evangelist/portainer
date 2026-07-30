@@ -4,7 +4,20 @@ description: >-
   Portainer is an open source container management platform that simplifies deploying, managing, and monitoring Docker,
   Swarm, Podman, and Kubernetes environments through a unified web UI and REST API.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/portainer.png
 tags:
   - Container Management
   - Containers
@@ -15,29 +28,518 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: portainer:portainer
-    name: Portainer
-    description: >-
-      Portainer's HTTP API exposes everything the Portainer UI can do, including authentication, environment and
-      endpoint management, stacks, containers, images, volumes, networks, registries, edge computing, Kubernetes
-      namespaces and resources, RBAC, and backup and restore for managing containerized infrastructure programmatically.
-    humanURL: https://www.portainer.io/
-    baseURL: https://api-docs.portainer.io
-    tags:
-      - Container Management
-      - Containers
-      - Docker
-      - Kubernetes
-      - Edge Computing
-    properties:
-      - type: Documentation
-        url: https://docs.portainer.io/
-      - type: APIReference
-        url: https://api-docs.portainer.io/
-      - type: GettingStarted
-        url: https://docs.portainer.io/start
-      - type: OpenAPI
-        url: openapi/portainer-openapi.yml
+- aid: portainer:portainer-auth-api
+  name: Portainer auth API
+  description: Authenticate against Portainer HTTP API
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - auth
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-backup-api
+  name: Portainer backup API
+  description: Manage backups
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - backup
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-backup-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-custom-templates-api
+  name: Portainer custom_templates API
+  description: Manage Custom Templates
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - custom_templates
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-custom-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-docker-api
+  name: Portainer docker API
+  description: Manage Docker resources
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - docker
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-docker-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-edge-api
+  name: Portainer edge API
+  description: Manage Edge related environment(endpoint) settings
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - edge
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-edge-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-edge-groups-api
+  name: Portainer edge_groups API
+  description: Manage Edge Groups
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - edge_groups
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-edge-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-edge-jobs-api
+  name: Portainer edge_jobs API
+  description: Manage Edge Jobs
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - edge_jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-edge-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-edge-stacks-api
+  name: Portainer edge_stacks API
+  description: Manage Edge Stacks
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - edge_stacks
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-edge-stacks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-endpoint-groups-api
+  name: Portainer endpoint_groups API
+  description: Manage environment(endpoint) groups
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - endpoint_groups
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-endpoint-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-endpoints-api
+  name: Portainer endpoints API
+  description: Manage Docker environments(endpoints)
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-gitops-api
+  name: Portainer gitops API
+  description: Operate git repository
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - gitops
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-gitops-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-helm-api
+  name: Portainer helm API
+  description: Manage Helm charts
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - helm
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-helm-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-intel-api
+  name: Portainer intel API
+  description: Manage Intel AMT settings
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - intel
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-intel-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-kubernetes-api
+  name: Portainer kubernetes API
+  description: Manage Kubernetes cluster
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - kubernetes
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-kubernetes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-ldap-api
+  name: Portainer ldap API
+  description: Manage LDAP settings
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - ldap
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-ldap-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-motd-api
+  name: Portainer motd API
+  description: Fetch the message of the day
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - motd
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-motd-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-registries-api
+  name: Portainer registries API
+  description: Manage Docker registries
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - registries
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-registries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-resource-controls-api
+  name: Portainer resource_controls API
+  description: Manage access control on Docker resources
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - resource_controls
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-resource-controls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-roles-api
+  name: Portainer roles API
+  description: Manage roles
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - roles
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-settings-api
+  name: Portainer settings API
+  description: Manage Portainer settings
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - settings
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-ssl-api
+  name: Portainer ssl API
+  description: Manage ssl settings
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - ssl
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-ssl-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-stacks-api
+  name: Portainer stacks API
+  description: Manage stacks
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - stacks
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-stacks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-status-api
+  name: Portainer status API
+  description: Information about the Portainer instance
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - status
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-status-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-system-api
+  name: Portainer system API
+  description: Manage Portainer system
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-system-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-tags-api
+  name: Portainer tags API
+  description: Manage tags
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - tags
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-team-memberships-api
+  name: Portainer team_memberships API
+  description: Manage team memberships
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - team_memberships
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-team-memberships-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-teams-api
+  name: Portainer teams API
+  description: Manage teams
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-templates-api
+  name: Portainer templates API
+  description: Manage App Templates
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - templates
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-upload-api
+  name: Portainer upload API
+  description: Upload files
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - upload
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-users-api
+  name: Portainer users API
+  description: Manage users
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-webhooks-api
+  name: Portainer webhooks API
+  description: Manage webhooks
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-websocket-api
+  name: Portainer websocket API
+  description: Create exec sessions using websockets
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - websocket
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-websocket-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
 common:
   - type: AgenticAccess
     url: agentic-access/portainer-agentic-access.yml
