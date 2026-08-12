@@ -541,6 +541,9 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 common:
+  - type: License
+    name: Zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
   - type: AgenticAccess
     url: agentic-access/portainer-agentic-access.yml
   - type: DomainSecurity
