@@ -1,0 +1,476 @@
+{
+  "item": [
+    {
+      "id": "76f58ba5-efd3-4a37-b5f2-55ec39936ad2",
+      "name": "settings",
+      "description": {
+        "content": "Manage Portainer settings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e13ecfee-bd92-4d00-be5e-6eb5fb43f876",
+          "name": "Retrieve Portainer settings",
+          "request": {
+            "name": "Retrieve Portainer settings",
+            "description": {
+              "content": "Retrieve Portainer settings.\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "874a3ec2-3406-4b5c-bd65-5a10e152b009",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AgentSecret\": \"string\",\n  \"AllowBindMountsForRegularUsers\": true,\n  \"AllowContainerCapabilitiesForRegularUsers\": false,\n  \"AllowDeviceMappingForRegularUsers\": false,\n  \"AllowHostNamespaceForRegularUsers\": true,\n  \"AllowPrivilegedModeForRegularUsers\": false,\n  \"AllowStackManagementForRegularUsers\": false,\n  \"AllowVolumeBrowserForRegularUsers\": true,\n  \"AuthenticationMethod\": 1,\n  \"BlackListedLabels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"DisplayDonationHeader\": true,\n  \"DisplayExternalContributors\": false,\n  \"Edge\": {\n    \"AsyncMode\": false,\n    \"CommandInterval\": 5,\n    \"PingInterval\": 5,\n    \"SnapshotInterval\": 5\n  },\n  \"EdgeAgentCheckinInterval\": 5,\n  \"EdgePortainerUrl\": \"string\",\n  \"EnableEdgeComputeFeatures\": true,\n  \"EnableHostManagementFeatures\": false,\n  \"EnforceEdgeID\": false,\n  \"FeatureFlagSettings\": {\n    \"key_0\": false,\n    \"key_1\": true\n  },\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": false\n  },\n  \"HelmRepositoryURL\": \"https://charts.bitnami.com/bitnami\",\n  \"InternalAuthSettings\": {\n    \"RequiredPasswordLength\": 742\n  },\n  \"IsDockerDesktopExtension\": true,\n  \"KubeconfigExpiry\": \"24h\",\n  \"KubectlShellImage\": \"portainer/kubectl-shell\",\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  },\n  \"LogoURL\": \"https://mycompany.mydomain.tld/logo.png\",\n  \"OAuthSettings\": {\n    \"AccessTokenURI\": \"string\",\n    \"AuthStyle\": 2,\n    \"AuthorizationURI\": \"string\",\n    \"ClientID\": \"string\",\n    \"ClientSecret\": \"string\",\n    \"DefaultTeamID\": 8032,\n    \"KubeSecretKey\": [\n      9993,\n      3230\n    ],\n    \"LogoutURI\": \"string\",\n    \"OAuthAutoCreateUsers\": false,\n    \"RedirectURI\": \"string\",\n    \"ResourceURI\": \"string\",\n    \"SSO\": false,\n    \"Scopes\": \"string\",\n    \"UserIdentifier\": \"string\"\n  },\n  \"SnapshotInterval\": \"5m\",\n  \"TemplatesURL\": \"https://raw.githubusercontent.com/portainer/templates/master/templates.json\",\n  \"TrustOnFirstConnect\": false,\n  \"UserSessionTimeout\": \"5m\",\n  \"openAMTConfiguration\": {\n    \"certFileContent\": \"string\",\n    \"certFileName\": \"string\",\n    \"certFilePassword\": \"string\",\n    \"domainName\": \"string\",\n    \"enabled\": false,\n    \"mpsPassword\": \"string\",\n    \"mpsServer\": \"string\",\n    \"mpsToken\": \"string\",\n    \"mpsUser\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dc224a2-81ac-4e02-be0d-40b863ee6e70",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a627e7c-a056-4a44-957e-705b46517866",
+          "name": "Update Portainer settings",
+          "request": {
+            "name": "Update Portainer settings",
+            "description": {
+              "content": "Update Portainer settings.\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AuthenticationMethod\": \"<integer>\",\n  \"BlackListedLabels\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"EdgeAgentCheckinInterval\": \"<integer>\",\n  \"EdgePortainerURL\": \"<string>\",\n  \"EnableEdgeComputeFeatures\": \"<boolean>\",\n  \"EnforceEdgeID\": \"<boolean>\",\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": \"<boolean>\"\n  },\n  \"HelmRepositoryURL\": \"<string>\",\n  \"InternalAuthSettings\": {\n    \"RequiredPasswordLength\": \"<integer>\"\n  },\n  \"KubeconfigExpiry\": \"0\",\n  \"KubectlShellImage\": \"<string>\",\n  \"LDAPSettings\": {\n    \"AnonymousMode\": \"<boolean>\",\n    \"AutoCreateUsers\": \"<boolean>\",\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"<string>\",\n        \"GroupBaseDN\": \"<string>\",\n        \"GroupFilter\": \"<string>\"\n      },\n      {\n        \"GroupAttribute\": \"<string>\",\n        \"GroupBaseDN\": \"<string>\",\n        \"GroupFilter\": \"<string>\"\n      }\n    ],\n    \"Password\": \"<string>\",\n    \"ReaderDN\": \"<string>\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"<string>\",\n        \"Filter\": \"<string>\",\n        \"UserNameAttribute\": \"<string>\"\n      },\n      {\n        \"BaseDN\": \"<string>\",\n        \"Filter\": \"<string>\",\n        \"UserNameAttribute\": \"<string>\"\n      }\n    ],\n    \"StartTLS\": \"<boolean>\",\n    \"TLSConfig\": {\n      \"TLS\": \"<boolean>\",\n      \"TLSCACert\": \"<string>\",\n      \"TLSCert\": \"<string>\",\n      \"TLSKey\": \"<string>\",\n      \"TLSSkipVerify\": \"<boolean>\"\n    },\n    \"URL\": \"<string>\"\n  },\n  \"LogoURL\": \"<string>\",\n  \"OAuthSettings\": {\n    \"AccessTokenURI\": \"<string>\",\n    \"AuthStyle\": \"<integer>\",\n    \"AuthorizationURI\": \"<string>\",\n    \"ClientID\": \"<string>\",\n    \"ClientSecret\": \"<string>\",\n    \"DefaultTeamID\": \"<integer>\",\n    \"KubeSecretKey\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"LogoutURI\": \"<string>\",\n    \"OAuthAutoCreateUsers\": \"<boolean>\",\n    \"RedirectURI\": \"<string>\",\n    \"ResourceURI\": \"<string>\",\n    \"SSO\": \"<boolean>\",\n    \"Scopes\": \"<string>\",\n    \"UserIdentifier\": \"<string>\"\n  },\n  \"SnapshotInterval\": \"<string>\",\n  \"TemplatesURL\": \"<string>\",\n  \"TrustOnFirstConnect\": \"<boolean>\",\n  \"UserSessionTimeout\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e48fff5-0ea0-4dc5-b6fb-bd352cb86138",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AuthenticationMethod\": 1,\n  \"BlackListedLabels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"EdgeAgentCheckinInterval\": 5,\n  \"EdgePortainerURL\": \"<string>\",\n  \"EnableEdgeComputeFeatures\": true,\n  \"EnforceEdgeID\": false,\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": false\n  },\n  \"HelmRepositoryURL\": \"https://charts.bitnami.com/bitnami\",\n  \"InternalAuthSettings\": {\n    \"RequiredPasswordLength\": \"<integer>\"\n  },\n  \"KubeconfigExpiry\": \"24h\",\n  \"KubectlShellImage\": \"portainer/kubectl-shell:latest\",\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  },\n  \"LogoURL\": \"https://mycompany.mydomain.tld/logo.png\",\n  \"OAuthSettings\": {\n    \"AccessTokenURI\": \"<string>\",\n    \"AuthStyle\": \"<integer>\",\n    \"AuthorizationURI\": \"<string>\",\n    \"ClientID\": \"<string>\",\n    \"ClientSecret\": \"<string>\",\n    \"DefaultTeamID\": \"<integer>\",\n    \"KubeSecretKey\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"LogoutURI\": \"<string>\",\n    \"OAuthAutoCreateUsers\": \"<boolean>\",\n    \"RedirectURI\": \"<string>\",\n    \"ResourceURI\": \"<string>\",\n    \"SSO\": \"<boolean>\",\n    \"Scopes\": \"<string>\",\n    \"UserIdentifier\": \"<string>\"\n  },\n  \"SnapshotInterval\": \"5m\",\n  \"TemplatesURL\": \"https://raw.githubusercontent.com/portainer/templates/master/templates.json\",\n  \"TrustOnFirstConnect\": false,\n  \"UserSessionTimeout\": \"5m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AgentSecret\": \"string\",\n  \"AllowBindMountsForRegularUsers\": true,\n  \"AllowContainerCapabilitiesForRegularUsers\": true,\n  \"AllowDeviceMappingForRegularUsers\": true,\n  \"AllowHostNamespaceForRegularUsers\": false,\n  \"AllowPrivilegedModeForRegularUsers\": false,\n  \"AllowStackManagementForRegularUsers\": true,\n  \"AllowVolumeBrowserForRegularUsers\": false,\n  \"AuthenticationMethod\": 1,\n  \"BlackListedLabels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"DisplayDonationHeader\": false,\n  \"DisplayExternalContributors\": false,\n  \"Edge\": {\n    \"AsyncMode\": false,\n    \"CommandInterval\": 5,\n    \"PingInterval\": 5,\n    \"SnapshotInterval\": 5\n  },\n  \"EdgeAgentCheckinInterval\": 5,\n  \"EdgePortainerUrl\": \"string\",\n  \"EnableEdgeComputeFeatures\": false,\n  \"EnableHostManagementFeatures\": false,\n  \"EnforceEdgeID\": false,\n  \"FeatureFlagSettings\": {\n    \"key_0\": false\n  },\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": false\n  },\n  \"HelmRepositoryURL\": \"https://charts.bitnami.com/bitnami\",\n  \"InternalAuthSettings\": {\n    \"RequiredPasswordLength\": \"<integer>\"\n  },\n  \"IsDockerDesktopExtension\": false,\n  \"KubeconfigExpiry\": \"24h\",\n  \"KubectlShellImage\": \"portainer/kubectl-shell\",\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  },\n  \"LogoURL\": \"https://mycompany.mydomain.tld/logo.png\",\n  \"OAuthSettings\": {\n    \"AccessTokenURI\": \"<string>\",\n    \"AuthStyle\": \"<integer>\",\n    \"AuthorizationURI\": \"<string>\",\n    \"ClientID\": \"<string>\",\n    \"ClientSecret\": \"<string>\",\n    \"DefaultTeamID\": \"<integer>\",\n    \"KubeSecretKey\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"LogoutURI\": \"<string>\",\n    \"OAuthAutoCreateUsers\": \"<boolean>\",\n    \"RedirectURI\": \"<string>\",\n    \"ResourceURI\": \"<string>\",\n    \"SSO\": \"<boolean>\",\n    \"Scopes\": \"<string>\",\n    \"UserIdentifier\": \"<string>\"\n  },\n  \"SnapshotInterval\": \"5m\",\n  \"TemplatesURL\": \"https://raw.githubusercontent.com/portainer/templates/master/templates.json\",\n  \"TrustOnFirstConnect\": false,\n  \"UserSessionTimeout\": \"5m\",\n  \"openAMTConfiguration\": {\n    \"certFileContent\": \"string\",\n    \"certFileName\": \"string\",\n    \"certFilePassword\": \"string\",\n    \"domainName\": \"string\",\n    \"enabled\": true,\n    \"mpsPassword\": \"string\",\n    \"mpsServer\": \"string\",\n    \"mpsToken\": \"string\",\n    \"mpsUser\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8e208a3-e993-4863-af3a-a20a02a4c2d6",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AuthenticationMethod\": 1,\n  \"BlackListedLabels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"EdgeAgentCheckinInterval\": 5,\n  \"EdgePortainerURL\": \"<string>\",\n  \"EnableEdgeComputeFeatures\": true,\n  \"EnforceEdgeID\": false,\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": false\n  },\n  \"HelmRepositoryURL\": \"https://charts.bitnami.com/bitnami\",\n  \"InternalAuthSettings\": {\n    \"RequiredPasswordLength\": \"<integer>\"\n  },\n  \"KubeconfigExpiry\": \"24h\",\n  \"KubectlShellImage\": \"portainer/kubectl-shell:latest\",\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  },\n  \"LogoURL\": \"https://mycompany.mydomain.tld/logo.png\",\n  \"OAuthSettings\": {\n    \"AccessTokenURI\": \"<string>\",\n    \"AuthStyle\": \"<integer>\",\n    \"AuthorizationURI\": \"<string>\",\n    \"ClientID\": \"<string>\",\n    \"ClientSecret\": \"<string>\",\n    \"DefaultTeamID\": \"<integer>\",\n    \"KubeSecretKey\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"LogoutURI\": \"<string>\",\n    \"OAuthAutoCreateUsers\": \"<boolean>\",\n    \"RedirectURI\": \"<string>\",\n    \"ResourceURI\": \"<string>\",\n    \"SSO\": \"<boolean>\",\n    \"Scopes\": \"<string>\",\n    \"UserIdentifier\": \"<string>\"\n  },\n  \"SnapshotInterval\": \"5m\",\n  \"TemplatesURL\": \"https://raw.githubusercontent.com/portainer/templates/master/templates.json\",\n  \"TrustOnFirstConnect\": false,\n  \"UserSessionTimeout\": \"5m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "69113be1-d7dd-418b-b6e7-b8851270cb32",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AuthenticationMethod\": 1,\n  \"BlackListedLabels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"EdgeAgentCheckinInterval\": 5,\n  \"EdgePortainerURL\": \"<string>\",\n  \"EnableEdgeComputeFeatures\": true,\n  \"EnforceEdgeID\": false,\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": false\n  },\n  \"HelmRepositoryURL\": \"https://charts.bitnami.com/bitnami\",\n  \"InternalAuthSettings\": {\n    \"RequiredPasswordLength\": \"<integer>\"\n  },\n  \"KubeconfigExpiry\": \"24h\",\n  \"KubectlShellImage\": \"portainer/kubectl-shell:latest\",\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  },\n  \"LogoURL\": \"https://mycompany.mydomain.tld/logo.png\",\n  \"OAuthSettings\": {\n    \"AccessTokenURI\": \"<string>\",\n    \"AuthStyle\": \"<integer>\",\n    \"AuthorizationURI\": \"<string>\",\n    \"ClientID\": \"<string>\",\n    \"ClientSecret\": \"<string>\",\n    \"DefaultTeamID\": \"<integer>\",\n    \"KubeSecretKey\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"LogoutURI\": \"<string>\",\n    \"OAuthAutoCreateUsers\": \"<boolean>\",\n    \"RedirectURI\": \"<string>\",\n    \"ResourceURI\": \"<string>\",\n    \"SSO\": \"<boolean>\",\n    \"Scopes\": \"<string>\",\n    \"UserIdentifier\": \"<string>\"\n  },\n  \"SnapshotInterval\": \"5m\",\n  \"TemplatesURL\": \"https://raw.githubusercontent.com/portainer/templates/master/templates.json\",\n  \"TrustOnFirstConnect\": false,\n  \"UserSessionTimeout\": \"5m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e319f7c5-7881-454d-a559-bc1e55f173c4",
+          "name": "Retrieve Portainer public settings",
+          "request": {
+            "name": "Retrieve Portainer public settings",
+            "description": {
+              "content": "Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.\n**Access policy**: public",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settings",
+                "public"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d514365-6c54-405b-a914-bcf5e97879c5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AuthenticationMethod\": 1,\n  \"Edge\": {\n    \"CheckinInterval\": 60,\n    \"CommandInterval\": 60,\n    \"PingInterval\": 60,\n    \"SnapshotInterval\": 60\n  },\n  \"EnableEdgeComputeFeatures\": true,\n  \"Features\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"GlobalDeploymentOptions\": {\n    \"hideStacksFunctionality\": false\n  },\n  \"IsAMTEnabled\": false,\n  \"IsDockerDesktopExtension\": false,\n  \"KubeconfigExpiry\": \"24h\",\n  \"LogoURL\": \"https://mycompany.mydomain.tld/logo.png\",\n  \"OAuthLoginURI\": \"https://gitlab.com/oauth\",\n  \"OAuthLogoutURI\": \"https://gitlab.com/oauth/logout\",\n  \"RequiredPasswordLength\": 1,\n  \"TeamSync\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd694c6c-20c2-4048-b0e2-49a753b2e9c9",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settings",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "db5fb38e-5509-4fb3-919d-df2f923337c7",
+    "name": "PortainerCE auth settings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

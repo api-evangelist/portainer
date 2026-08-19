@@ -1,0 +1,3079 @@
+{
+  "item": [
+    {
+      "id": "e4d9be99-5cd0-4bd8-a065-6566d65e0f3d",
+      "name": "edge_stacks",
+      "description": {
+        "content": "Manage Edge Stacks",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eaced821-bac0-4774-a86e-4039c5f96706",
+          "name": "Fetches the list of EdgeStacks",
+          "request": {
+            "name": "Fetches the list of EdgeStacks",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "summarizeStatuses",
+                  "value": "<boolean>",
+                  "description": "will summarize the statuses"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cbc5153e-7a18-4f70-b2f4-763d11289703",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summarizeStatuses",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"CreatedBy\": \"admin\",\n    \"CreatedByUserId\": \"1\",\n    \"CreationDate\": 2671,\n    \"DeploymentType\": 0,\n    \"EdgeGroups\": [\n      3798,\n      8028\n    ],\n    \"EntryPoint\": \"string\",\n    \"Id\": 1,\n    \"ManifestPath\": \"string\",\n    \"Name\": \"string\",\n    \"NumDeployments\": 3990,\n    \"ProjectPath\": \"string\",\n    \"Status\": {\n      \"key_0\": {\n        \"DeploymentInfo\": {\n          \"ConfigHash\": \"string\",\n          \"FileVersion\": 9261,\n          \"Version\": 1258\n        },\n        \"Details\": {\n          \"Acknowledged\": false,\n          \"Error\": false,\n          \"ImagesPulled\": false,\n          \"Ok\": false,\n          \"Pending\": false,\n          \"RemoteUpdateSuccess\": false,\n          \"Remove\": true\n        },\n        \"EndpointID\": 9030,\n        \"Error\": \"string\",\n        \"ReadyRePullImage\": false,\n        \"Status\": [\n          {\n            \"Error\": \"string\",\n            \"RollbackTo\": 4993,\n            \"Time\": 2635,\n            \"Type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Version\": 4003\n          },\n          {\n            \"Error\": \"string\",\n            \"RollbackTo\": 9659,\n            \"Time\": 5759,\n            \"Type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Version\": 7209\n          }\n        ],\n        \"Type\": 0\n      }\n    },\n    \"UseManifestNamespaces\": false,\n    \"Version\": 8364\n  },\n  {\n    \"CreatedBy\": \"admin\",\n    \"CreatedByUserId\": \"1\",\n    \"CreationDate\": 831,\n    \"DeploymentType\": 0,\n    \"EdgeGroups\": [\n      3553,\n      8148\n    ],\n    \"EntryPoint\": \"string\",\n    \"Id\": 1,\n    \"ManifestPath\": \"string\",\n    \"Name\": \"string\",\n    \"NumDeployments\": 5157,\n    \"ProjectPath\": \"string\",\n    \"Status\": {\n      \"key_0\": {\n        \"DeploymentInfo\": {\n          \"ConfigHash\": \"string\",\n          \"FileVersion\": 8447,\n          \"Version\": 1317\n        },\n        \"Details\": {\n          \"Acknowledged\": false,\n          \"Error\": true,\n          \"ImagesPulled\": false,\n          \"Ok\": false,\n          \"Pending\": true,\n          \"RemoteUpdateSuccess\": true,\n          \"Remove\": false\n        },\n        \"EndpointID\": 5604,\n        \"Error\": \"string\",\n        \"ReadyRePullImage\": false,\n        \"Status\": [\n          {\n            \"Error\": \"string\",\n            \"RollbackTo\": 1959,\n            \"Time\": 8087,\n            \"Type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Version\": 8287\n          },\n          {\n            \"Error\": \"string\",\n            \"RollbackTo\": 9641,\n            \"Time\": 4038,\n            \"Type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Version\": 3197\n          }\n        ],\n        \"Type\": 7\n      }\n    },\n    \"UseManifestNamespaces\": false,\n    \"Version\": 8713\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e25a4724-b384-40ef-aeda-4e29c0306682",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summarizeStatuses",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44cdcf69-9039-4208-9657-e6caaa4ca43d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summarizeStatuses",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6bf7786f-5041-46ef-aab9-e6a05b677c3d",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summarizeStatuses",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d973a87e-aa26-4673-9c4d-a14e391c97fe",
+          "name": "Delete an EdgeStack",
+          "request": {
+            "name": "Delete an EdgeStack",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EdgeStack Id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e2447599-60c4-4e95-be17-b65cd686c378",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffee6ef5-89d5-459f-a2e4-df9a1c6c637f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c758a3b-fc5c-4a4d-a300-c329a5d142f7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ba78c40-15ef-44ba-a816-dc89061691d4",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c559abe-c26a-4a95-8c55-1ae609fcc72d",
+          "name": "Inspect an EdgeStack",
+          "request": {
+            "name": "Inspect an EdgeStack",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EdgeStack Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a6ce441-764c-4c25-9210-63b004260ae4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedBy\": \"admin\",\n  \"CreatedByUserId\": \"1\",\n  \"CreationDate\": 7637,\n  \"DeploymentType\": 0,\n  \"EdgeGroups\": [\n    4377,\n    9182\n  ],\n  \"EntryPoint\": \"string\",\n  \"Id\": 1,\n  \"ManifestPath\": \"string\",\n  \"Name\": \"string\",\n  \"NumDeployments\": 4816,\n  \"ProjectPath\": \"string\",\n  \"Status\": {\n    \"key_0\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 5335,\n        \"Version\": 5700\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": true,\n        \"ImagesPulled\": false,\n        \"Ok\": false,\n        \"Pending\": true,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 7665,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": false,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 7876,\n          \"Time\": 5265,\n          \"Type\": 2,\n          \"Version\": 9879\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 3735,\n          \"Time\": 8647,\n          \"Type\": 3,\n          \"Version\": 7923\n        }\n      ],\n      \"Type\": 10\n    },\n    \"key_1\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 3302,\n        \"Version\": 8817\n      },\n      \"Details\": {\n        \"Acknowledged\": false,\n        \"Error\": true,\n        \"ImagesPulled\": true,\n        \"Ok\": true,\n        \"Pending\": false,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 9591,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": true,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 8610,\n          \"Time\": 7138,\n          \"Type\": 7,\n          \"Version\": 4121\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 5863,\n          \"Time\": 8001,\n          \"Type\": 4,\n          \"Version\": 7922\n        }\n      ],\n      \"Type\": 13\n    },\n    \"key_2\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 2519,\n        \"Version\": 338\n      },\n      \"Details\": {\n        \"Acknowledged\": false,\n        \"Error\": false,\n        \"ImagesPulled\": true,\n        \"Ok\": true,\n        \"Pending\": false,\n        \"RemoteUpdateSuccess\": true,\n        \"Remove\": true\n      },\n      \"EndpointID\": 5852,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": false,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 7253,\n          \"Time\": 2213,\n          \"Type\": 6,\n          \"Version\": 1005\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 5870,\n          \"Time\": 2935,\n          \"Type\": 5,\n          \"Version\": 5761\n        }\n      ],\n      \"Type\": 3\n    },\n    \"key_3\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 4403,\n        \"Version\": 3532\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": true,\n        \"ImagesPulled\": true,\n        \"Ok\": true,\n        \"Pending\": true,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 5519,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": true,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 2494,\n          \"Time\": 316,\n          \"Type\": 13,\n          \"Version\": 4406\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 3259,\n          \"Time\": 6172,\n          \"Type\": 1,\n          \"Version\": 952\n        }\n      ],\n      \"Type\": 8\n    }\n  },\n  \"UseManifestNamespaces\": false,\n  \"Version\": 3958\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12be6cf8-06b7-406c-bb19-48749d147126",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0cd3f73-5243-4759-a054-6bffee4a15da",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2c519a1-7b5a-4e52-8bf7-5d9b808d02b6",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f6eb332-93ae-4a3d-8e7b-1b90cd962025",
+          "name": "Update an EdgeStack",
+          "request": {
+            "name": "Update an EdgeStack",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EdgeStack Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"StackFileContent\": \"<string>\",\n  \"UpdateVersion\": \"<boolean>\",\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "100cb14d-2947-4d03-b0b1-f9a1736ad2b1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"StackFileContent\": \"<string>\",\n  \"UpdateVersion\": \"<boolean>\",\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedBy\": \"admin\",\n  \"CreatedByUserId\": \"1\",\n  \"CreationDate\": 5950,\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    1236,\n    6834\n  ],\n  \"EntryPoint\": \"string\",\n  \"Id\": 1,\n  \"ManifestPath\": \"string\",\n  \"Name\": \"string\",\n  \"NumDeployments\": 1851,\n  \"ProjectPath\": \"string\",\n  \"Status\": {\n    \"key_0\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 4041,\n        \"Version\": 9365\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": true,\n        \"ImagesPulled\": true,\n        \"Ok\": false,\n        \"Pending\": true,\n        \"RemoteUpdateSuccess\": true,\n        \"Remove\": true\n      },\n      \"EndpointID\": 349,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": false,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 9788,\n          \"Time\": 4956,\n          \"Type\": 9,\n          \"Version\": 322\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 8108,\n          \"Time\": 7667,\n          \"Type\": 5,\n          \"Version\": 601\n        }\n      ],\n      \"Type\": 12\n    }\n  },\n  \"UseManifestNamespaces\": false,\n  \"Version\": 8863\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "383b57ea-c404-4c28-8fc3-82ca3bfd7465",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"StackFileContent\": \"<string>\",\n  \"UpdateVersion\": \"<boolean>\",\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f7a1a8b-e3b8-486c-baa2-caca8d3aedb8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"StackFileContent\": \"<string>\",\n  \"UpdateVersion\": \"<boolean>\",\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc3167d2-9b4e-470e-b3fe-9f324382912d",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"StackFileContent\": \"<string>\",\n  \"UpdateVersion\": \"<boolean>\",\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa0dc8a0-750f-4fbd-b2b9-77b02a3ba18b",
+          "name": "Fetches the stack file for an EdgeStack",
+          "request": {
+            "name": "Fetches the stack file for an EdgeStack",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                ":id",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EdgeStack Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fbe5227b-f5b9-4a7d-9b19-7e53f1c8b7a7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StackFileContent\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0c18764-077f-4de1-b79c-07132cac5a0c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07fd46e8-3b2a-430e-8525-22b6cc78bb9b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aed9a604-c9ee-4595-8ebc-c24fdebdeea5",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b6695c2-b08c-468d-943b-29caeacfabba",
+          "name": "Update an EdgeStack status",
+          "request": {
+            "name": "Update an EdgeStack status",
+            "description": {
+              "content": "Authorized only if the request is done by an Edge Environment(Endpoint)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EdgeStack Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EndpointID\": \"<integer>\",\n  \"Error\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Time\": \"<integer>\",\n  \"Version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3742363f-0cfb-4660-86f5-09c4d16f9a9a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EndpointID\": \"<integer>\",\n  \"Error\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Time\": \"<integer>\",\n  \"Version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedBy\": \"admin\",\n  \"CreatedByUserId\": \"1\",\n  \"CreationDate\": 8667,\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    3566,\n    870\n  ],\n  \"EntryPoint\": \"string\",\n  \"Id\": 1,\n  \"ManifestPath\": \"string\",\n  \"Name\": \"string\",\n  \"NumDeployments\": 6589,\n  \"ProjectPath\": \"string\",\n  \"Status\": {\n    \"key_0\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 4125,\n        \"Version\": 5799\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": false,\n        \"ImagesPulled\": false,\n        \"Ok\": true,\n        \"Pending\": false,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 3057,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": true,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 6930,\n          \"Time\": 578,\n          \"Type\": \"<integer>\",\n          \"Version\": 2522\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 3682,\n          \"Time\": 7271,\n          \"Type\": \"<integer>\",\n          \"Version\": 3397\n        }\n      ],\n      \"Type\": \"<integer>\"\n    }\n  },\n  \"UseManifestNamespaces\": true,\n  \"Version\": 4984\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91095777-257d-46f8-9f9e-86e24af86e07",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EndpointID\": \"<integer>\",\n  \"Error\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Time\": \"<integer>\",\n  \"Version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6deac41-5868-4f32-9531-e845c30b0cf7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EndpointID\": \"<integer>\",\n  \"Error\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Time\": \"<integer>\",\n  \"Version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d052159-32e6-4175-81ab-a87dcd6cc907",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EndpointID\": \"<integer>\",\n  \"Error\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Time\": \"<integer>\",\n  \"Version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef5ed511-a681-4def-9860-9ff2325b0bc0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EndpointID\": \"<integer>\",\n  \"Error\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Time\": \"<integer>\",\n  \"Version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cd00f47-4415-451a-b2ac-53ffc477951e",
+          "name": "Create an EdgeStack from file",
+          "request": {
+            "name": "Create an EdgeStack from file",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                "create",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dryrun",
+                  "value": "<string>",
+                  "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "Name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Name of the stack. it must only consist of lowercase alphanumeric characters, hyphens, or underscores as well as start with a letter or number"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Content of the Stack file"
+                },
+                {
+                  "key": "EdgeGroups",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) JSON stringified array of Edge Groups ids"
+                },
+                {
+                  "key": "DeploymentType",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) deploy type 0 - 'compose', 1 - 'kubernetes'"
+                },
+                {
+                  "key": "Registries",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "JSON stringified array of Registry ids to use for this stack"
+                },
+                {
+                  "key": "UseManifestNamespaces",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Uses the manifest's namespaces instead of the default one, relevant only for kube environments"
+                },
+                {
+                  "key": "PrePullImage",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Pre Pull image"
+                },
+                {
+                  "key": "RetryDeploy",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Retry deploy"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7ad2d2ec-aa02-47cc-9e63-56c9ca1ee210",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the stack. it must only consist of lowercase alphanumeric characters, hyphens, or underscores as well as start with a letter or number",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Content of the Stack file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) JSON stringified array of Edge Groups ids",
+                        "type": "text/plain"
+                      },
+                      "key": "EdgeGroups",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) deploy type 0 - 'compose', 1 - 'kubernetes'",
+                        "type": "text/plain"
+                      },
+                      "key": "DeploymentType",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON stringified array of Registry ids to use for this stack",
+                        "type": "text/plain"
+                      },
+                      "key": "Registries",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Uses the manifest's namespaces instead of the default one, relevant only for kube environments",
+                        "type": "text/plain"
+                      },
+                      "key": "UseManifestNamespaces",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Pre Pull image",
+                        "type": "text/plain"
+                      },
+                      "key": "PrePullImage",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Retry deploy",
+                        "type": "text/plain"
+                      },
+                      "key": "RetryDeploy",
+                      "value": "<boolean>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedBy\": \"admin\",\n  \"CreatedByUserId\": \"1\",\n  \"CreationDate\": 8667,\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    3566,\n    870\n  ],\n  \"EntryPoint\": \"string\",\n  \"Id\": 1,\n  \"ManifestPath\": \"string\",\n  \"Name\": \"string\",\n  \"NumDeployments\": 6589,\n  \"ProjectPath\": \"string\",\n  \"Status\": {\n    \"key_0\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 4125,\n        \"Version\": 5799\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": false,\n        \"ImagesPulled\": false,\n        \"Ok\": true,\n        \"Pending\": false,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 3057,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": true,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 6930,\n          \"Time\": 578,\n          \"Type\": \"<integer>\",\n          \"Version\": 2522\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 3682,\n          \"Time\": 7271,\n          \"Type\": \"<integer>\",\n          \"Version\": 3397\n        }\n      ],\n      \"Type\": \"<integer>\"\n    }\n  },\n  \"UseManifestNamespaces\": true,\n  \"Version\": 4984\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df18f6cd-3c40-4a3e-8a08-1a4829165fa4",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the stack. it must only consist of lowercase alphanumeric characters, hyphens, or underscores as well as start with a letter or number",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Content of the Stack file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) JSON stringified array of Edge Groups ids",
+                        "type": "text/plain"
+                      },
+                      "key": "EdgeGroups",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) deploy type 0 - 'compose', 1 - 'kubernetes'",
+                        "type": "text/plain"
+                      },
+                      "key": "DeploymentType",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON stringified array of Registry ids to use for this stack",
+                        "type": "text/plain"
+                      },
+                      "key": "Registries",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Uses the manifest's namespaces instead of the default one, relevant only for kube environments",
+                        "type": "text/plain"
+                      },
+                      "key": "UseManifestNamespaces",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Pre Pull image",
+                        "type": "text/plain"
+                      },
+                      "key": "PrePullImage",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Retry deploy",
+                        "type": "text/plain"
+                      },
+                      "key": "RetryDeploy",
+                      "value": "<boolean>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "79ada862-dcc4-40fb-9f56-1116b6759448",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the stack. it must only consist of lowercase alphanumeric characters, hyphens, or underscores as well as start with a letter or number",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Content of the Stack file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) JSON stringified array of Edge Groups ids",
+                        "type": "text/plain"
+                      },
+                      "key": "EdgeGroups",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) deploy type 0 - 'compose', 1 - 'kubernetes'",
+                        "type": "text/plain"
+                      },
+                      "key": "DeploymentType",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON stringified array of Registry ids to use for this stack",
+                        "type": "text/plain"
+                      },
+                      "key": "Registries",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Uses the manifest's namespaces instead of the default one, relevant only for kube environments",
+                        "type": "text/plain"
+                      },
+                      "key": "UseManifestNamespaces",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Pre Pull image",
+                        "type": "text/plain"
+                      },
+                      "key": "PrePullImage",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Retry deploy",
+                        "type": "text/plain"
+                      },
+                      "key": "RetryDeploy",
+                      "value": "<boolean>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "780345b7-6839-4893-9cb6-e3431653e313",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the stack. it must only consist of lowercase alphanumeric characters, hyphens, or underscores as well as start with a letter or number",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Content of the Stack file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) JSON stringified array of Edge Groups ids",
+                        "type": "text/plain"
+                      },
+                      "key": "EdgeGroups",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) deploy type 0 - 'compose', 1 - 'kubernetes'",
+                        "type": "text/plain"
+                      },
+                      "key": "DeploymentType",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON stringified array of Registry ids to use for this stack",
+                        "type": "text/plain"
+                      },
+                      "key": "Registries",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Uses the manifest's namespaces instead of the default one, relevant only for kube environments",
+                        "type": "text/plain"
+                      },
+                      "key": "UseManifestNamespaces",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Pre Pull image",
+                        "type": "text/plain"
+                      },
+                      "key": "PrePullImage",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Retry deploy",
+                        "type": "text/plain"
+                      },
+                      "key": "RetryDeploy",
+                      "value": "<boolean>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9912d363-34ec-443e-8a45-64c5611ff068",
+          "name": "Create an EdgeStack from a git repository",
+          "request": {
+            "name": "Create an EdgeStack from a git repository",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                "create",
+                "repository"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dryrun",
+                  "value": "<string>",
+                  "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"Name\": \"<string>\",\n  \"RepositoryURL\": \"<string>\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"FilePathInRepository\": \"docker-compose.yml\",\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"RepositoryAuthentication\": \"<boolean>\",\n  \"RepositoryAuthorizationType\": \"<integer>\",\n  \"RepositoryPassword\": \"<string>\",\n  \"RepositoryReferenceName\": \"<string>\",\n  \"RepositoryUsername\": \"<string>\",\n  \"TLSSkipVerify\": \"<boolean>\",\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bb78c8f-1792-44ec-a67a-8755b1f040a0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Name\": \"stack-name\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"FilePathInRepository\": \"docker-compose.yml\",\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedBy\": \"admin\",\n  \"CreatedByUserId\": \"1\",\n  \"CreationDate\": 8667,\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    3566,\n    870\n  ],\n  \"EntryPoint\": \"string\",\n  \"Id\": 1,\n  \"ManifestPath\": \"string\",\n  \"Name\": \"string\",\n  \"NumDeployments\": 6589,\n  \"ProjectPath\": \"string\",\n  \"Status\": {\n    \"key_0\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 4125,\n        \"Version\": 5799\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": false,\n        \"ImagesPulled\": false,\n        \"Ok\": true,\n        \"Pending\": false,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 3057,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": true,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 6930,\n          \"Time\": 578,\n          \"Type\": \"<integer>\",\n          \"Version\": 2522\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 3682,\n          \"Time\": 7271,\n          \"Type\": \"<integer>\",\n          \"Version\": 3397\n        }\n      ],\n      \"Type\": \"<integer>\"\n    }\n  },\n  \"UseManifestNamespaces\": true,\n  \"Version\": 4984\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05bc3e61-86ac-471f-94b5-04264cd3c6dc",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Name\": \"stack-name\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"FilePathInRepository\": \"docker-compose.yml\",\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3f2eb9e-6c60-4466-82a0-4891c4a87250",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Name\": \"stack-name\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"FilePathInRepository\": \"docker-compose.yml\",\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5037917-e05b-4d3f-8c4c-ca186243d433",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Name\": \"stack-name\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"FilePathInRepository\": \"docker-compose.yml\",\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7b9ef48-954d-4383-8f30-feff84d56983",
+          "name": "Create an EdgeStack from a text",
+          "request": {
+            "name": "Create an EdgeStack from a text",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edge_stacks",
+                "create",
+                "string"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dryrun",
+                  "value": "<string>",
+                  "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"StackFileContent\": \"<string>\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeGroups\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "801a5e0e-37d1-4530-bbc3-14f529cee006",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"stack-name\",\n  \"StackFileContent\": \"version: 3\\n services:\\n web:\\n image:nginx\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedBy\": \"admin\",\n  \"CreatedByUserId\": \"1\",\n  \"CreationDate\": 8667,\n  \"DeploymentType\": \"<integer>\",\n  \"EdgeGroups\": [\n    3566,\n    870\n  ],\n  \"EntryPoint\": \"string\",\n  \"Id\": 1,\n  \"ManifestPath\": \"string\",\n  \"Name\": \"string\",\n  \"NumDeployments\": 6589,\n  \"ProjectPath\": \"string\",\n  \"Status\": {\n    \"key_0\": {\n      \"DeploymentInfo\": {\n        \"ConfigHash\": \"string\",\n        \"FileVersion\": 4125,\n        \"Version\": 5799\n      },\n      \"Details\": {\n        \"Acknowledged\": true,\n        \"Error\": false,\n        \"ImagesPulled\": false,\n        \"Ok\": true,\n        \"Pending\": false,\n        \"RemoteUpdateSuccess\": false,\n        \"Remove\": true\n      },\n      \"EndpointID\": 3057,\n      \"Error\": \"string\",\n      \"ReadyRePullImage\": true,\n      \"Status\": [\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 6930,\n          \"Time\": 578,\n          \"Type\": \"<integer>\",\n          \"Version\": 2522\n        },\n        {\n          \"Error\": \"string\",\n          \"RollbackTo\": 3682,\n          \"Time\": 7271,\n          \"Type\": \"<integer>\",\n          \"Version\": 3397\n        }\n      ],\n      \"Type\": \"<integer>\"\n    }\n  },\n  \"UseManifestNamespaces\": true,\n  \"Version\": 4984\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b58a3d0-0f9e-45d6-9e2e-49694185c57d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"stack-name\",\n  \"StackFileContent\": \"version: 3\\n services:\\n web:\\n image:nginx\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4bd1561-4779-4625-9666-55afa94d8566",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"stack-name\",\n  \"StackFileContent\": \"version: 3\\n services:\\n web:\\n image:nginx\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63fabd7a-2fd8-4b7f-9447-1e46b3099b5c",
+              "name": "Edge compute features are disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edge_stacks",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryrun",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"stack-name\",\n  \"StackFileContent\": \"version: 3\\n services:\\n web:\\n image:nginx\",\n  \"DeploymentType\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeGroups\": [\n    1\n  ],\n  \"Registries\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"UseManifestNamespaces\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abbeeacc-3d3e-430a-9b05-feb5ddf39813",
+          "name": "Inspect an Edge Stack for an Environment(Endpoint)",
+          "request": {
+            "name": "Inspect an Edge Stack for an Environment(Endpoint)",
+            "description": {
+              "content": "**Access policy**: public",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoints",
+                ":id",
+                "edge",
+                "stacks",
+                ":stackId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) environment(endpoint) Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "stackId",
+                  "description": "(Required) EdgeStack Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3d81f64-831a-4d11-9fdb-4b3b87d28db0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoints",
+                    ":id",
+                    "edge",
+                    "stacks",
+                    ":stackId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) environment(endpoint) Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "stackId",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AlwaysCloneGitRepoForRelativePath\": true,\n  \"CreatedBy\": \"string\",\n  \"CreatedByUserId\": \"string\",\n  \"DeployerOptionsPayload\": {\n    \"ForceRecreate\": false,\n    \"Prune\": false,\n    \"RemoveVolumes\": false\n  },\n  \"DirEntries\": [\n    {\n      \"Content\": \"string\",\n      \"IsFile\": true,\n      \"Name\": \"string\",\n      \"Permissions\": 4194304\n    },\n    {\n      \"Content\": \"string\",\n      \"IsFile\": false,\n      \"Name\": \"string\",\n      \"Permissions\": 16777216\n    }\n  ],\n  \"EdgeUpdateID\": 2241,\n  \"EntryFileName\": \"string\",\n  \"EnvVars\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"FilesystemPath\": \"string\",\n  \"ForceUpdate\": false,\n  \"HelmConfig\": {\n    \"Atomic\": true,\n    \"ChartPath\": \"charts/my-app\",\n    \"Timeout\": \"5m0s\",\n    \"ValuesFiles\": [\n      \"['values/prod.yaml'\",\n      \" 'values/secrets.yaml']\"\n    ],\n    \"Version\": \"1.2.3\"\n  },\n  \"ID\": 3700,\n  \"Name\": \"string\",\n  \"Namespace\": \"string\",\n  \"PrePullImage\": true,\n  \"RePullImage\": true,\n  \"ReadyRePullImage\": false,\n  \"RegistryCredentials\": [\n    {\n      \"Secret\": \"string\",\n      \"ServerURL\": \"string\",\n      \"Username\": \"string\"\n    },\n    {\n      \"Secret\": \"string\",\n      \"ServerURL\": \"string\",\n      \"Username\": \"string\"\n    }\n  ],\n  \"RetryDeploy\": true,\n  \"RetryPeriod\": 9801,\n  \"RollbackTo\": 2304,\n  \"StackFileContent\": \"string\",\n  \"SupportRelativePath\": false,\n  \"Version\": 339\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f0c34d2-16f1-4612-bd0c-9089f899261d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoints",
+                    ":id",
+                    "edge",
+                    "stacks",
+                    ":stackId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) environment(endpoint) Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "stackId",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59a4c92d-807d-49e4-9f81-c1bc48d2498a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoints",
+                    ":id",
+                    "edge",
+                    "stacks",
+                    ":stackId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) environment(endpoint) Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "stackId",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c525c609-723b-4054-b202-40354dbd2fa9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoints",
+                    ":id",
+                    "edge",
+                    "stacks",
+                    ":stackId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) environment(endpoint) Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "stackId",
+                      "description": "(Required) EdgeStack Id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3de28011-5cc3-42c2-96cb-16c7e1832539",
+    "name": "PortainerCE auth edge_stacks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

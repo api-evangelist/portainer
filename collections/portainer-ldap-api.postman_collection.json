@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "37e8889d-634e-4d51-a5cb-45309c127498",
+      "name": "ldap",
+      "description": {
+        "content": "Manage LDAP settings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d465b9f0-45d5-43c0-82d7-c32b8f0df56d",
+          "name": "Test LDAP connectivity",
+          "request": {
+            "name": "Test LDAP connectivity",
+            "description": {
+              "content": "Test LDAP connectivity using LDAP details\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ldap",
+                "check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"LDAPSettings\": {\n    \"AnonymousMode\": \"<boolean>\",\n    \"AutoCreateUsers\": \"<boolean>\",\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"<string>\",\n        \"GroupBaseDN\": \"<string>\",\n        \"GroupFilter\": \"<string>\"\n      },\n      {\n        \"GroupAttribute\": \"<string>\",\n        \"GroupBaseDN\": \"<string>\",\n        \"GroupFilter\": \"<string>\"\n      }\n    ],\n    \"Password\": \"<string>\",\n    \"ReaderDN\": \"<string>\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"<string>\",\n        \"Filter\": \"<string>\",\n        \"UserNameAttribute\": \"<string>\"\n      },\n      {\n        \"BaseDN\": \"<string>\",\n        \"Filter\": \"<string>\",\n        \"UserNameAttribute\": \"<string>\"\n      }\n    ],\n    \"StartTLS\": \"<boolean>\",\n    \"TLSConfig\": {\n      \"TLS\": \"<boolean>\",\n      \"TLSCACert\": \"<string>\",\n      \"TLSCert\": \"<string>\",\n      \"TLSKey\": \"<string>\",\n      \"TLSSkipVerify\": \"<boolean>\"\n    },\n    \"URL\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a24e92c-b9dd-40c4-86fc-0681f09a8dee",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aed3b367-e1eb-408d-93b9-e83e3146e61c",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ec9118c-2401-4bc0-918f-37d20b97731c",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"LDAPSettings\": {\n    \"AnonymousMode\": true,\n    \"AutoCreateUsers\": true,\n    \"GroupSearchSettings\": [\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      },\n      {\n        \"GroupAttribute\": \"member\",\n        \"GroupBaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"GroupFilter\": \"(objectClass=account\"\n      }\n    ],\n    \"Password\": \"readonly-password\",\n    \"ReaderDN\": \"cn=readonly-account,dc=ldap,dc=domain,dc=tld\",\n    \"SearchSettings\": [\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      },\n      {\n        \"BaseDN\": \"dc=ldap,dc=domain,dc=tld\",\n        \"Filter\": \"(objectClass=account)\",\n        \"UserNameAttribute\": \"uid\"\n      }\n    ],\n    \"StartTLS\": true,\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"URL\": \"myldap.domain.tld:389\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a6a9f714-31c6-4289-827a-4b341d4311e6",
+    "name": "PortainerCE auth ldap API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

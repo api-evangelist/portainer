@@ -1,0 +1,253 @@
+{
+  "item": [
+    {
+      "id": "634a53d2-d379-4ce4-809b-a88c6476c39c",
+      "name": "gitops",
+      "description": {
+        "content": "Operate git repository",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "01cdfcc3-feb1-41d6-94dc-d8c2d2c97aa5",
+          "name": "preview the content of target file in the git repository",
+          "request": {
+            "name": "preview the content of target file in the git repository",
+            "description": {
+              "content": "Retrieve the compose file content based on git repository configuration\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gitops",
+                "repo",
+                "file",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"repository\": \"<string>\",\n  \"TLSSkipVerify\": \"<boolean>\",\n  \"authorizationType\": \"<integer>\",\n  \"password\": \"<string>\",\n  \"reference\": \"<string>\",\n  \"targetFile\": \"<string>\",\n  \"username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "627563c2-e3b9-4366-ab92-c2d23605c740",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gitops",
+                    "repo",
+                    "file",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"https://github.com/openfaas/faas\",\n  \"TLSSkipVerify\": false,\n  \"authorizationType\": \"<integer>\",\n  \"password\": \"myGitPassword\",\n  \"reference\": \"refs/heads/master\",\n  \"targetFile\": \"docker-compose.yml\",\n  \"username\": \"myGitUsername\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"FileContent\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c28aff5-e9b2-40a8-8674-a7bec60c791b",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gitops",
+                    "repo",
+                    "file",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"https://github.com/openfaas/faas\",\n  \"TLSSkipVerify\": false,\n  \"authorizationType\": \"<integer>\",\n  \"password\": \"myGitPassword\",\n  \"reference\": \"refs/heads/master\",\n  \"targetFile\": \"docker-compose.yml\",\n  \"username\": \"myGitUsername\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d922e3ad-6a9e-485e-bb81-ac4ddc521a85",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gitops",
+                    "repo",
+                    "file",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"https://github.com/openfaas/faas\",\n  \"TLSSkipVerify\": false,\n  \"authorizationType\": \"<integer>\",\n  \"password\": \"myGitPassword\",\n  \"reference\": \"refs/heads/master\",\n  \"targetFile\": \"docker-compose.yml\",\n  \"username\": \"myGitUsername\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f62858c8-0b92-4ed6-b9d3-e2cad531d30e",
+    "name": "PortainerCE auth gitops API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

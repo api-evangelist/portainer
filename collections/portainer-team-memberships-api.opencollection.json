@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth team_memberships API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "team_memberships",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List team memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/team_memberships"
+          },
+          "docs": "List team memberships. Access is only available to administrators and team leaders.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create a new team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/team_memberships"
+          },
+          "docs": "Create a new team memberships. Access is only available to administrators leaders of the associated team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update a team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/team_memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team membership identifier"
+              }
+            ]
+          },
+          "docs": "Update a team membership. Access is only available to administrators or leaders of the associated team.\n**Access policy**: administrator or leaders of the associated team"
+        },
+        {
+          "info": {
+            "name": "Remove a team membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/team_memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "TeamMembership identifier"
+              }
+            ]
+          },
+          "docs": "Remove a team membership. Access is only available to administrators leaders of the associated team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "List team memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/teams/:id/memberships",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team Id"
+              }
+            ]
+          },
+          "docs": "List team memberships. Access is only available to administrators and team leaders.\n**Access policy**: restricted"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

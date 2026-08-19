@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth ldap API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ldap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Test LDAP connectivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ldap/check"
+          },
+          "docs": "Test LDAP connectivity using LDAP details\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

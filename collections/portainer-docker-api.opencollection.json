@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth docker API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "docker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch container gpus data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docker/:environmentId/containers/:containerId/gpus",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "containerId",
+                "value": "",
+                "type": "path",
+                "description": "Container identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**:"
+        },
+        {
+          "info": {
+            "name": "Get counters for the dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docker/:environmentId/dashboard",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Fetch images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docker/:environmentId/images",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withUsage",
+                "value": "",
+                "type": "query",
+                "description": "Include image usage information"
+              }
+            ]
+          },
+          "docs": "**Access policy**:"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

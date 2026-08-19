@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth upload API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload TLS files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/upload/tls/:certificate",
+            "params": [
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path",
+                "description": "TLS file type. Valid values are 'ca', 'cert' or 'key'."
+              }
+            ]
+          },
+          "docs": "Use this environment(endpoint) to upload TLS files.\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

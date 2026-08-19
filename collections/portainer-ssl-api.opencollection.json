@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth ssl API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ssl",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Inspect the ssl settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ssl"
+          },
+          "docs": "Retrieve the ssl settings.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update the ssl settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ssl"
+          },
+          "docs": "Update the ssl settings.\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

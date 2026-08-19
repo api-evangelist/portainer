@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth custom_templates API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "custom_templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available custom templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom_templates",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Template types"
+              },
+              {
+                "name": "edge",
+                "value": "",
+                "type": "query",
+                "description": "Filter by edge templates"
+              }
+            ]
+          },
+          "docs": "List available custom templates.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Inspect a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Update a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/custom_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Update a template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/custom_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Remove a template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get Template stack file content.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom_templates/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the content of the Stack file for the specified custom template\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Fetch the latest config file content based on custom template's git repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/custom_templates/:id/git_fetch",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a template created from git repository method.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom_templates/create/file"
+          },
+          "docs": "Create a custom template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom_templates/create/repository"
+          },
+          "docs": "Create a custom template.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a custom template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom_templates/create/string"
+          },
+          "docs": "Create a custom template.\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

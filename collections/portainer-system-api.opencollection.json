@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth system API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve system info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/info"
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Retrieve the count of nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/nodes"
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Check Portainer status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/status"
+          },
+          "docs": "Retrieve Portainer status\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Upgrade Portainer to BE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/system/upgrade"
+          },
+          "docs": "Upgrade Portainer to BE\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Check for portainer updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/system/version"
+          },
+          "docs": "Check if portainer has an update available\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

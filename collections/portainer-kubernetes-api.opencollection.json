@@ -1,0 +1,1535 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth kubernetes API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "kubernetes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of applications across all namespaces in the cluster. If the nodeName is provided, it will return the applications running on that node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "query",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Get a list of applications across all namespaces in the cluster. If the nodeName is provided, it will return the applications running on that node.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get Applications count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/applications/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of Applications across all namespaces in the cluster. If the nodeName is provided, it will return the count of applications running on that node.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete cluster role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/cluster_role_bindings/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of cluster role bindings.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete cluster roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/cluster_roles/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of cluster roles.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes cluster role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/clusterrolebindings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes cluster role bindings within the given environment at the cluster level.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes cluster roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/clusterroles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes cluster roles within the given environment at the cluster level.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of ConfigMaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/configmaps",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "isUsed",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to include information about applications that use the ConfigMaps in the response"
+              }
+            ]
+          },
+          "docs": "Get a list of ConfigMaps across all namespaces in the cluster. For non-admin users, it will only return ConfigMaps based on the namespaces that they have access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get ConfigMaps count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/configmaps/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of ConfigMaps across all namespaces in the cluster. For non-admin users, it will only return the count of ConfigMaps based on the namespaces that they have access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes Cron Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/cron_jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes Cron Jobs that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete Cron Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/cron_jobs/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of Cron Jobs.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the dashboard summary data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/dashboard",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment (Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Get the dashboard summary data which is simply a count of a range of different commonly used kubernetes resources.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a description of a kubernetes resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/describe",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Resource name"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Resource kind"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Get a description of a kubernetes resource.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Gets kubernetes events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "The resource id of the involved kubernetes object"
+              }
+            ]
+          },
+          "docs": "Get events by query param resourceId\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of ingress controllers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "allowedOnly",
+                "value": "",
+                "type": "query",
+                "description": "Only return allowed ingress controllers"
+              }
+            ]
+          },
+          "docs": "Get a list of ingress controllers for the given environment. If the allowedOnly query parameter is set, only ingress controllers that are allowed by the environment's ingress configuration will be returned.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update (block/unblock) ingress controllers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Update (block/unblock) ingress controllers for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get kubernetes ingresses at the cluster level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withServices",
+                "value": "",
+                "type": "query",
+                "description": "Lookup services associated with each ingress"
+              }
+            ]
+          },
+          "docs": "Get kubernetes ingresses at the cluster level for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Ingresses count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresses/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the number of kubernetes ingresses within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete one or more Ingresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/ingresses/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete one or more Ingresses in the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "includeCronJobChildren",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include Jobs that have a cronjob owner"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes Jobs that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/jobs/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of Jobs.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get max CPU and memory limits of all nodes within k8s cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/max_resource_limits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Get max CPU and memory limits (unused resources) of all nodes within k8s cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the total resource requests and limits of all applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/applications_resources",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Get the total CPU (cores) and memory (bytes) requests and limits of all applications across all namespaces.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of nodes with their live metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/nodes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of metrics associated with all nodes of a cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get live metrics for a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/nodes/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Node identifier"
+              }
+            ]
+          },
+          "docs": "Get live metrics for the specified node.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of pods with their live metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/pods/:namespace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Get a list of pods with their live metrics for the specified namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get live metrics for a pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/metrics/pods/:namespace/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Pod identifier"
+              }
+            ]
+          },
+          "docs": "Get live metrics for the specified pod.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withResourceQuota",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, include the resource quota information as part of the Namespace information. Default is false"
+              },
+              {
+                "name": "withUnhealthyEvents",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, include the unhealthy events information as part of the Namespace information. Default is false"
+              }
+            ]
+          },
+          "docs": "Get a list of all namespaces within the given environment based on the user role and permissions. If the user is an admin, they can access all namespaces. If the user is not an admin, they can only access namespaces that they have access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Create a namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Update a namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete a kubernetes namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete a kubernetes namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get namespace details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to get details for"
+              },
+              {
+                "name": "withResourceQuota",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, include the resource quota information as part of the Namespace information. Default is false"
+              }
+            ]
+          },
+          "docs": "Get namespace details for the provided namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Update a namespace within the given environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a ConfigMap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/configmaps/:configmap",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name where the configmap is located"
+              },
+              {
+                "name": "configmap",
+                "value": "",
+                "type": "path",
+                "description": "The configmap name to get details for"
+              }
+            ]
+          },
+          "docs": "Get a ConfigMap by name for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Gets kubernetes events for namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name the events are associated to"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "The resource id of the involved kubernetes object"
+              }
+            ]
+          },
+          "docs": "Get events by optional query param resourceId for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list ingress controllers by namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace"
+              }
+            ]
+          },
+          "docs": "Get a list of ingress controllers for the given environment in the provided namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update (block/unblock) ingress controllers by namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresscontrollers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Update (block/unblock) ingress controllers by namespace for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of Ingresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Get a list of Ingresses. If namespace is provided, it will return the list of Ingresses in that namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create an Ingress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Create an Ingress for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update an Ingress",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Update an Ingress for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get an Ingress by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/ingresses/:ingress",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              },
+              {
+                "name": "ingress",
+                "value": "",
+                "type": "path",
+                "description": "Ingress name"
+              }
+            ]
+          },
+          "docs": "Get an Ingress by name for the provided environment.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/secrets/:secret",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name where the secret is located"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "path",
+                "description": "The secret name to get details for"
+              }
+            ]
+          },
+          "docs": "Get a Secret by name for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of services for a given namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Get a list of services for a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Create a service within a given namespace\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Update a service within a given namespace.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Toggle the system state for a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/system",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Toggle the system state for a namespace\n**Access policy**: Administrator or environment administrator."
+        },
+        {
+          "info": {
+            "name": "Get Kubernetes volumes within a namespace in the given Portainer environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/:namespace/volumes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace identifier"
+              },
+              {
+                "name": "withApplications",
+                "value": "",
+                "type": "query",
+                "description": "When set to True, include the applications that are using the volumes. It is set to false by default"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes volumes within the specified namespace in the given environment (Endpoint). The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the total number of kubernetes namespaces within the given Portainer environment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/namespaces/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the total number of kubernetes namespaces within the given environment, including the system namespaces. The total count depends on the user's role and permissions.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Drain a Kubernetes node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/nodes/:name/drain",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node to drain"
+              }
+            ]
+          },
+          "docs": "Drain a Kubernetes node by safely evicting all pods from the node, preparing it for maintenance or removal\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get CPU and memory limits of all nodes within k8s cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/nodes_limits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Get CPU and memory limits of all nodes within k8s cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Check if RBAC is enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/rbac_enabled",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Check if RBAC is enabled in the specified Kubernetes cluster.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/role_bindings/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of role bindings.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes role bindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/rolebindings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes role bindings that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes roles that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/roles/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of roles.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/secrets",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "isUsed",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, associate the Secrets with the applications that use them"
+              }
+            ]
+          },
+          "docs": "Get a list of Secrets for a given namespace. If isUsed is set to true, information about the applications that use the secrets is also returned.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Secrets count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/secrets/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of Secrets across all namespaces that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/service_accounts/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of service accounts.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of kubernetes service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/serviceaccounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get a list of kubernetes service accounts that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a list of services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/services",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withApplications",
+                "value": "",
+                "type": "query",
+                "description": "Lookup applications associated with each service"
+              }
+            ]
+          },
+          "docs": "Get a list of services that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get services count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/services/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the count of services that the user has access to.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Delete services",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kubernetes/:id/services/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Delete the provided list of services.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Kubernetes volumes within the given Portainer environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/volumes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "withApplications",
+                "value": "",
+                "type": "query",
+                "description": "When set to True, include the applications that are using the volumes. It is set to false by default"
+              }
+            ]
+          },
+          "docs": "Get a list of all kubernetes volumes within the given environment (Endpoint). The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get a Kubernetes volume within the given Portainer environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/volumes/:namespace/:volume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Namespace identifier"
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "path",
+                "description": "Volume name"
+              }
+            ]
+          },
+          "docs": "Get a Kubernetes volume within the given environment (Endpoint). The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get the total number of kubernetes volumes within the given Portainer environment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/:id/volumes/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Get the total number of kubernetes volumes within the given environment (Endpoint). The total count depends on the user's role and permissions. The Endpoint ID must be a valid Portainer environment identifier.\n**Access policy**: Authenticated user."
+        },
+        {
+          "info": {
+            "name": "Generate a kubeconfig file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kubernetes/config",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "will include only these environments(endpoints)"
+              },
+              {
+                "name": "excludeIds",
+                "value": "",
+                "type": "query",
+                "description": "will exclude these environments(endpoints)"
+              }
+            ]
+          },
+          "docs": "Generate a kubeconfig file that allows a client to communicate with the Kubernetes API server\n**Access policy**: Authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

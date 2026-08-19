@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth websocket API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "websocket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Attach a websocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/attach",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "query",
+                "description": "node name"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).\nIf the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and\nan AttachStart operation HTTP request will be created and hijacked.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Execute a websocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/exec",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "query",
+                "description": "node name"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).\nIf the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and\nan ExecStart operation HTTP request will be created and hijacked."
+        },
+        {
+          "info": {
+            "name": "Execute a websocket on kubectl shell pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/kubernetes-shell",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "The request will be upgraded to the websocket protocol. The request will proxy input from the client to the pod via long-lived websocket connection.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Execute a websocket on pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/websocket/pod",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "environment(endpoint) ID of the environment(endpoint) where the resource is located"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "namespace where the container is located"
+              },
+              {
+                "name": "podName",
+                "value": "",
+                "type": "query",
+                "description": "name of the pod containing the container"
+              },
+              {
+                "name": "containerName",
+                "value": "",
+                "type": "query",
+                "description": "name of the container"
+              },
+              {
+                "name": "command",
+                "value": "",
+                "type": "query",
+                "description": "command to execute in the container"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT token used for authentication against this environment(endpoint)"
+              }
+            ]
+          },
+          "docs": "The request will be upgraded to the websocket protocol.\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,543 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth endpoints API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List environments(endpoints)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start searching from"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to this value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort results by this value"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order sorted results by desc/asc"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query"
+              },
+              {
+                "name": "groupIds",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) of these groups"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) by this status"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) of this type"
+              },
+              {
+                "name": "tagIds",
+                "value": "",
+                "type": "query",
+                "description": "search environments(endpoints) with these tags (depends on tagsPartialMatch)"
+              },
+              {
+                "name": "tagsPartialMatch",
+                "value": "",
+                "type": "query",
+                "description": "If true, will return environment(endpoint) which has one of tagIds, if false (or missing) will return only environments(endpoints) that has all the tags"
+              },
+              {
+                "name": "endpointIds",
+                "value": "",
+                "type": "query",
+                "description": "will return only these environments(endpoints)"
+              },
+              {
+                "name": "excludeIds",
+                "value": "",
+                "type": "query",
+                "description": "will exclude these environments(endpoints)"
+              },
+              {
+                "name": "excludeGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "will exclude environments(endpoints) belonging to these endpoint groups"
+              },
+              {
+                "name": "provisioned",
+                "value": "",
+                "type": "query",
+                "description": "If true, will return environment(endpoint) that were provisioned"
+              },
+              {
+                "name": "agentVersions",
+                "value": "",
+                "type": "query",
+                "description": "will return only environments with on of these agent versions"
+              },
+              {
+                "name": "edgeAsync",
+                "value": "",
+                "type": "query",
+                "description": "if exists true show only edge async agents, false show only standard edge agents. if missing, will show both types (relevant only for edge agents)"
+              },
+              {
+                "name": "edgeDeviceUntrusted",
+                "value": "",
+                "type": "query",
+                "description": "if true, show only untrusted edge agents, if false show only trusted edge agents (relevant only for edge agents)"
+              },
+              {
+                "name": "edgeCheckInPassedSeconds",
+                "value": "",
+                "type": "query",
+                "description": "if bigger then zero, show only edge agents that checked-in in the last provided seconds (relevant only for edge agents)"
+              },
+              {
+                "name": "excludeSnapshots",
+                "value": "",
+                "type": "query",
+                "description": "if true, the snapshot data won't be retrieved"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "will return only environments(endpoints) with this name"
+              },
+              {
+                "name": "edgeStackStatus",
+                "value": "",
+                "type": "query",
+                "description": "only applied when edgeStackId exists. Filter the returned environments based on their deployment status in the stack (not the environment status!)"
+              },
+              {
+                "name": "edgeGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "List environments(endpoints) of these edge groups"
+              },
+              {
+                "name": "excludeEdgeGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Exclude environments(endpoints) of these edge groups"
+              }
+            ]
+          },
+          "docs": "List all environments(endpoints) based on the current user authorizations. Will\nreturn all environments(endpoints) if using an administrator or team leader account otherwise it will\nonly return authorized environments(endpoints).\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints"
+          },
+          "docs": "Create a new environment(endpoint) that will be used to manage an environment(endpoint).\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove multiple environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoints"
+          },
+          "docs": "Deprecated: use the `POST` endpoint instead.\nRemove multiple environments and optionally clean-up associated resources.\n**Access policy**: Administrator only."
+        },
+        {
+          "info": {
+            "name": "Inspect an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "excludeSnapshot",
+                "value": "",
+                "type": "query",
+                "description": "if true, the snapshot data won't be retrieved"
+              }
+            ]
+          },
+          "docs": "Retrieve details about an environment(endpoint).\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Update an environment(endpoint).\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoints/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Remove the environment associated to the specified identifier and optionally clean-up associated resources.\n**Access policy**: Administrator only."
+        },
+        {
+          "info": {
+            "name": "De-association an edge environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/association",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "De-association an edge environment(endpoint).\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Upload a file under a specific path on the file system of an environment (endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/docker/v2/browse/put",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "volumeID",
+                "value": "",
+                "type": "query",
+                "description": "Optional volume identifier to upload the file"
+              }
+            ]
+          },
+          "docs": "Use this environment(endpoint) to upload TLS files.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "fetch docker pull limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/dockerhub/:registryId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "endpoint ID"
+              },
+              {
+                "name": "registryId",
+                "value": "",
+                "type": "path",
+                "description": "registry ID"
+              }
+            ]
+          },
+          "docs": "get docker pull limits for a docker hub registry in the environment\n**Access policy**:"
+        },
+        {
+          "info": {
+            "name": "Update the logs collected from an Edge Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/edge/jobs/:jobID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "jobID",
+                "value": "",
+                "type": "path",
+                "description": "Job Id"
+              }
+            ]
+          },
+          "docs": "Authorized only if the request is done by an Edge Environment(Endpoint)"
+        },
+        {
+          "info": {
+            "name": "Inspect an Edge Stack for an Environment(Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/edge/stacks/:stackId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "stackId",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Get environment(endpoint) status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/edge/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "environment(endpoint) for edge agent to check status of environment(endpoint)\n**Access policy**: restricted only to Edge environments(endpoints)"
+        },
+        {
+          "info": {
+            "name": "force update a docker service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/forceupdateservice",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "endpoint identifier"
+              }
+            ]
+          },
+          "docs": "force update a docker service\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "List Registries on environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/registries",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "required if kubernetes environment, will show registries by namespace"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "List all registries based on the current user authorizations in current environment.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "update registry access for environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/registries/:registryId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "registryId",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Update settings for an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Update settings for an environment(endpoint).\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Snapshots an environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/snapshot",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Snapshots an environment(endpoint)\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove multiple environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/delete"
+          },
+          "docs": "Remove multiple environments and optionally clean-up associated resources.\n**Access policy**: Administrator only."
+        },
+        {
+          "info": {
+            "name": "Create or retrieve the endpoint for an EdgeID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/global-key"
+          },
+          "docs": "Create or retrieve the endpoint for an EdgeID"
+        },
+        {
+          "info": {
+            "name": "Update relations for a list of environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoints/relations"
+          },
+          "docs": "Update relations for a list of environments\nEdge groups, tags and environment group can be updated.\n\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Snapshot all environments(endpoints)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/snapshot"
+          },
+          "docs": "Snapshot all environments(endpoints)\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

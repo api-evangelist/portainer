@@ -1,0 +1,221 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth edge_jobs API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "edge_jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch EdgeJobs list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Delete an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch a file of an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch the list of tasks on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch the log for a specifc task on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks/:taskID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              },
+              {
+                "name": "taskID",
+                "value": "",
+                "type": "path",
+                "description": "Task Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Collect the log for a specifc task on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks/:taskID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              },
+              {
+                "name": "taskID",
+                "value": "",
+                "type": "path",
+                "description": "Task Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Clear the log for a specifc task on an EdgeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_jobs/:id/tasks/:taskID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeJob Id"
+              },
+              {
+                "name": "taskID",
+                "value": "",
+                "type": "path",
+                "description": "Task Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeJob from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_jobs/create/file"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeJob from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_jobs/create/string"
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

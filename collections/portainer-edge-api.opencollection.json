@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth edge API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "edge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update the logs collected from an Edge Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/edge/jobs/:jobID/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "jobID",
+                "value": "",
+                "type": "path",
+                "description": "Job Id"
+              }
+            ]
+          },
+          "docs": "Authorized only if the request is done by an Edge Environment(Endpoint)"
+        },
+        {
+          "info": {
+            "name": "Inspect an Edge Stack for an Environment(Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/edge/stacks/:stackId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "stackId",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

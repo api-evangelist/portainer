@@ -1,0 +1,2523 @@
+{
+  "item": [
+    {
+      "id": "d5b3b612-7d27-4b9e-b9be-23683813209d",
+      "name": "custom_templates",
+      "description": {
+        "content": "Manage Custom Templates",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59bbc356-d22d-4a67-abac-acbadc4541da",
+          "name": "List available custom templates",
+          "request": {
+            "name": "List available custom templates",
+            "description": {
+              "content": "List available custom templates.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>,<integer>",
+                  "description": "(Required) Template types"
+                },
+                {
+                  "disabled": false,
+                  "key": "edge",
+                  "value": "<boolean>",
+                  "description": "Filter by edge templates"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "13879904-f4f5-4325-899a-41d13e02c648",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "edge",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"CreatedByUserId\": 3,\n    \"Description\": \"High performance web server\",\n    \"EdgeTemplate\": false,\n    \"EntryPoint\": \"docker-compose.yml\",\n    \"GitConfig\": {\n      \"Authentication\": {\n        \"AuthorizationType\": 0,\n        \"GitCredentialID\": 0,\n        \"Password\": \"string\",\n        \"Username\": \"string\"\n      },\n      \"ConfigFilePath\": \"docker-compose.yml\",\n      \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n      \"ReferenceName\": \"refs/heads/branch_name\",\n      \"TLSSkipVerify\": false,\n      \"URL\": \"https://github.com/portainer/portainer.git\"\n    },\n    \"Id\": 1,\n    \"IsComposeFormat\": false,\n    \"Logo\": \"https://portainer.io/img/logo.svg\",\n    \"Note\": \"This is my <b>custom</b> template\",\n    \"Platform\": {\n      \"value\": \"<Error: Could not resolve allOf schema\"\n    },\n    \"ProjectPath\": \"/data/custom_template/3\",\n    \"ResourceControl\": {\n      \"AccessLevel\": 0,\n      \"AdministratorsOnly\": true,\n      \"Id\": 1,\n      \"OwnerId\": 54,\n      \"Public\": true,\n      \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n      \"SubResourceIds\": [\n        \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n      ],\n      \"System\": false,\n      \"TeamAccesses\": [\n        {\n          \"AccessLevel\": 0,\n          \"TeamId\": 6741\n        },\n        {\n          \"AccessLevel\": 1,\n          \"TeamId\": 5647\n        }\n      ],\n      \"Type\": 1,\n      \"UserAccesses\": [\n        {\n          \"AccessLevel\": 0,\n          \"UserId\": 5881\n        },\n        {\n          \"AccessLevel\": 0,\n          \"UserId\": 7657\n        }\n      ]\n    },\n    \"Title\": \"Nginx\",\n    \"Type\": {\n      \"value\": \"<Error: Could not resolve allOf schema\"\n    },\n    \"Variables\": [\n      {\n        \"defaultValue\": \"default value\",\n        \"description\": \"Description\",\n        \"label\": \"My Variable\",\n        \"name\": \"MY_VAR\"\n      },\n      {\n        \"defaultValue\": \"default value\",\n        \"description\": \"Description\",\n        \"label\": \"My Variable\",\n        \"name\": \"MY_VAR\"\n      }\n    ]\n  },\n  {\n    \"CreatedByUserId\": 3,\n    \"Description\": \"High performance web server\",\n    \"EdgeTemplate\": false,\n    \"EntryPoint\": \"docker-compose.yml\",\n    \"GitConfig\": {\n      \"Authentication\": {\n        \"AuthorizationType\": 1,\n        \"GitCredentialID\": 0,\n        \"Password\": \"string\",\n        \"Username\": \"string\"\n      },\n      \"ConfigFilePath\": \"docker-compose.yml\",\n      \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n      \"ReferenceName\": \"refs/heads/branch_name\",\n      \"TLSSkipVerify\": false,\n      \"URL\": \"https://github.com/portainer/portainer.git\"\n    },\n    \"Id\": 1,\n    \"IsComposeFormat\": false,\n    \"Logo\": \"https://portainer.io/img/logo.svg\",\n    \"Note\": \"This is my <b>custom</b> template\",\n    \"Platform\": {\n      \"value\": \"<Error: Could not resolve allOf schema\"\n    },\n    \"ProjectPath\": \"/data/custom_template/3\",\n    \"ResourceControl\": {\n      \"AccessLevel\": 1,\n      \"AdministratorsOnly\": true,\n      \"Id\": 1,\n      \"OwnerId\": 569,\n      \"Public\": true,\n      \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n      \"SubResourceIds\": [\n        \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n      ],\n      \"System\": false,\n      \"TeamAccesses\": [\n        {\n          \"AccessLevel\": 1,\n          \"TeamId\": 6109\n        },\n        {\n          \"AccessLevel\": 1,\n          \"TeamId\": 2535\n        }\n      ],\n      \"Type\": 1,\n      \"UserAccesses\": [\n        {\n          \"AccessLevel\": 1,\n          \"UserId\": 5056\n        },\n        {\n          \"AccessLevel\": 0,\n          \"UserId\": 3454\n        }\n      ]\n    },\n    \"Title\": \"Nginx\",\n    \"Type\": {\n      \"value\": \"<Error: Could not resolve allOf schema\"\n    },\n    \"Variables\": [\n      {\n        \"defaultValue\": \"default value\",\n        \"description\": \"Description\",\n        \"label\": \"My Variable\",\n        \"name\": \"MY_VAR\"\n      },\n      {\n        \"defaultValue\": \"default value\",\n        \"description\": \"Description\",\n        \"label\": \"My Variable\",\n        \"name\": \"MY_VAR\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4077958e-c774-4c94-9615-44fe0ba82337",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "edge",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76d08e0c-1676-434e-b4f1-aa6dcaf4ed29",
+          "name": "Remove a template",
+          "request": {
+            "name": "Remove a template",
+            "description": {
+              "content": "Remove a template.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Template identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "524111be-deba-45d3-9d1e-699f239b2cd6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3a23ea1-20b9-4697-82da-4d5804955a9a",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "69609054-d890-4708-8f62-126c03cef624",
+              "name": "Access denied to resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4582789d-02a3-4f4c-81b2-9046528c041c",
+              "name": "Template not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ae7e4f7-cf8b-451b-a150-38fc832d3e94",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b848dc3-e097-473e-80f1-db04b110b655",
+          "name": "Inspect a custom template",
+          "request": {
+            "name": "Inspect a custom template",
+            "description": {
+              "content": "Retrieve details about a template.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fb7b4263-1fbd-4a5a-8e35-389e72c30893",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedByUserId\": 3,\n  \"Description\": \"High performance web server\",\n  \"EdgeTemplate\": false,\n  \"EntryPoint\": \"docker-compose.yml\",\n  \"GitConfig\": {\n    \"Authentication\": {\n      \"AuthorizationType\": 1,\n      \"GitCredentialID\": 0,\n      \"Password\": \"string\",\n      \"Username\": \"string\"\n    },\n    \"ConfigFilePath\": \"docker-compose.yml\",\n    \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n    \"ReferenceName\": \"refs/heads/branch_name\",\n    \"TLSSkipVerify\": false,\n    \"URL\": \"https://github.com/portainer/portainer.git\"\n  },\n  \"Id\": 1,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ProjectPath\": \"/data/custom_template/3\",\n  \"ResourceControl\": {\n    \"AccessLevel\": 1,\n    \"AdministratorsOnly\": true,\n    \"Id\": 1,\n    \"OwnerId\": 9588,\n    \"Public\": true,\n    \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n    \"SubResourceIds\": [\n      \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n    ],\n    \"System\": false,\n    \"TeamAccesses\": [\n      {\n        \"AccessLevel\": 0,\n        \"TeamId\": 1088\n      },\n      {\n        \"AccessLevel\": 1,\n        \"TeamId\": 7085\n      }\n    ],\n    \"Type\": 1,\n    \"UserAccesses\": [\n      {\n        \"AccessLevel\": 1,\n        \"UserId\": 9010\n      },\n      {\n        \"AccessLevel\": 1,\n        \"UserId\": 8649\n      }\n    ]\n  },\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6d26849-9c27-4e85-a911-8f199749135d",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a11563a-4df8-4936-92f9-3e40edf0e078",
+              "name": "Template not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40e881d0-7bad-47a7-b46f-048ed1bbfeea",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99d76676-7a9d-422f-8815-c0fde19753f6",
+          "name": "Update a template",
+          "request": {
+            "name": "Update a template",
+            "description": {
+              "content": "Update a template.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Description\": \"<string>\",\n  \"FileContent\": \"<string>\",\n  \"RepositoryURL\": \"<string>\",\n  \"Title\": \"<string>\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": \"<boolean>\",\n  \"IsComposeFormat\": \"<boolean>\",\n  \"Logo\": \"<string>\",\n  \"Note\": \"<string>\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": \"<boolean>\",\n  \"RepositoryAuthorizationType\": \"<integer>\",\n  \"RepositoryGitCredentialID\": \"<integer>\",\n  \"RepositoryPassword\": \"<string>\",\n  \"RepositoryReferenceName\": \"<string>\",\n  \"RepositoryUsername\": \"<string>\",\n  \"TLSSkipVerify\": \"<boolean>\",\n  \"Variables\": [\n    {\n      \"defaultValue\": \"<string>\",\n      \"description\": \"<string>\",\n      \"label\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"defaultValue\": \"<string>\",\n      \"description\": \"<string>\",\n      \"label\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b2fea37-96fb-4430-80a9-c5b6945d4803",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryGitCredentialID\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedByUserId\": 3,\n  \"Description\": \"High performance web server\",\n  \"EdgeTemplate\": false,\n  \"EntryPoint\": \"docker-compose.yml\",\n  \"GitConfig\": {\n    \"Authentication\": {\n      \"AuthorizationType\": \"<integer>\",\n      \"GitCredentialID\": 0,\n      \"Password\": \"string\",\n      \"Username\": \"string\"\n    },\n    \"ConfigFilePath\": \"docker-compose.yml\",\n    \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n    \"ReferenceName\": \"refs/heads/branch_name\",\n    \"TLSSkipVerify\": false,\n    \"URL\": \"https://github.com/portainer/portainer.git\"\n  },\n  \"Id\": 1,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ProjectPath\": \"/data/custom_template/3\",\n  \"ResourceControl\": {\n    \"AccessLevel\": 0,\n    \"AdministratorsOnly\": true,\n    \"Id\": 1,\n    \"OwnerId\": 6924,\n    \"Public\": true,\n    \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n    \"SubResourceIds\": [\n      \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n    ],\n    \"System\": false,\n    \"TeamAccesses\": [\n      {\n        \"AccessLevel\": 0,\n        \"TeamId\": 1124\n      },\n      {\n        \"AccessLevel\": 1,\n        \"TeamId\": 8744\n      }\n    ],\n    \"Type\": 1,\n    \"UserAccesses\": [\n      {\n        \"AccessLevel\": 1,\n        \"UserId\": 5478\n      },\n      {\n        \"AccessLevel\": 0,\n        \"UserId\": 5352\n      }\n    ]\n  },\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccbb68cc-b855-48d6-ba6e-2ab108f03704",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryGitCredentialID\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "00a2c09f-cb1c-4218-8167-297257f4dacd",
+              "name": "Permission denied to access template",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryGitCredentialID\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddc66196-db19-4bb8-a068-f3dfcdf48c1c",
+              "name": "Template not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryGitCredentialID\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c385a9e-abd0-4055-aff6-3faba1391cfe",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryAuthorizationType\": 0,\n  \"RepositoryGitCredentialID\": 0,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27692df8-8072-4d0c-a1fa-20662981d51b",
+          "name": "Get Template stack file content.",
+          "request": {
+            "name": "Get Template stack file content.",
+            "description": {
+              "content": "Retrieve the content of the Stack file for the specified custom template\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                ":id",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "65eda5ac-9c69-422d-afec-439a6a1a1820",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"FileContent\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d5b7bf1-5a25-4a62-9a13-e69c297e38d1",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dad5e662-84d6-4807-9ffb-d4d959634e33",
+              "name": "Custom template not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b5118a6-7f24-40cd-95e0-2d5d8df56ea7",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "322c26f6-1e2a-4747-860e-f9165624249d",
+          "name": "Fetch the latest config file content based on custom template's git repository configuration",
+          "request": {
+            "name": "Fetch the latest config file content based on custom template's git repository configuration",
+            "description": {
+              "content": "Retrieve details about a template created from git repository method.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                ":id",
+                "git_fetch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "56aaae43-68a5-41a3-bdc9-a932e3f31acd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "git_fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"FileContent\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6262cb0-b7df-4097-8c56-bd5538425f6e",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "git_fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fdc9b1a6-f695-48d3-bb8f-40e36068ca82",
+              "name": "Custom template not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "git_fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab50a16d-fff4-46c5-bbf1-e2dfbcc1a198",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    ":id",
+                    "git_fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0d6c163-3465-4cfc-8fa1-090da444d4ec",
+          "name": "Create a custom template",
+          "request": {
+            "name": "Create a custom template",
+            "description": {
+              "content": "Create a custom template.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                "create",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "Title",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Title of the template"
+                },
+                {
+                  "key": "Description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Description of the template"
+                },
+                {
+                  "key": "Note",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) A note that will be displayed in the UI. Supports HTML content"
+                },
+                {
+                  "key": "Platform",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) Platform associated to the template (1 - 'linux', 2 - 'windows') (This can only be one of 1,2)"
+                },
+                {
+                  "key": "Type",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes) (This can only be one of 1,2,3)"
+                },
+                {
+                  "key": "File",
+                  "type": "file",
+                  "description": "(Required) File"
+                },
+                {
+                  "key": "Logo",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URL of the template's logo"
+                },
+                {
+                  "key": "Variables",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "A json array of variables definitions"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e82165ea-7c75-463f-9c7c-a6f33105fedc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Title of the template",
+                        "type": "text/plain"
+                      },
+                      "key": "Title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Description of the template",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) A note that will be displayed in the UI. Supports HTML content",
+                        "type": "text/plain"
+                      },
+                      "key": "Note",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Platform associated to the template (1 - 'linux', 2 - 'windows') (This can only be one of 1,2)",
+                        "type": "text/plain"
+                      },
+                      "key": "Platform",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes) (This can only be one of 1,2,3)",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) File",
+                        "type": "text/plain"
+                      },
+                      "key": "File",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the template's logo",
+                        "type": "text/plain"
+                      },
+                      "key": "Logo",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A json array of variables definitions",
+                        "type": "text/plain"
+                      },
+                      "key": "Variables",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedByUserId\": 3,\n  \"Description\": \"High performance web server\",\n  \"EdgeTemplate\": false,\n  \"EntryPoint\": \"docker-compose.yml\",\n  \"GitConfig\": {\n    \"Authentication\": {\n      \"AuthorizationType\": \"<integer>\",\n      \"GitCredentialID\": 0,\n      \"Password\": \"string\",\n      \"Username\": \"string\"\n    },\n    \"ConfigFilePath\": \"docker-compose.yml\",\n    \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n    \"ReferenceName\": \"refs/heads/branch_name\",\n    \"TLSSkipVerify\": false,\n    \"URL\": \"https://github.com/portainer/portainer.git\"\n  },\n  \"Id\": 1,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ProjectPath\": \"/data/custom_template/3\",\n  \"ResourceControl\": {\n    \"AccessLevel\": 0,\n    \"AdministratorsOnly\": true,\n    \"Id\": 1,\n    \"OwnerId\": 6924,\n    \"Public\": true,\n    \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n    \"SubResourceIds\": [\n      \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n    ],\n    \"System\": false,\n    \"TeamAccesses\": [\n      {\n        \"AccessLevel\": 0,\n        \"TeamId\": 1124\n      },\n      {\n        \"AccessLevel\": 1,\n        \"TeamId\": 8744\n      }\n    ],\n    \"Type\": 1,\n    \"UserAccesses\": [\n      {\n        \"AccessLevel\": 1,\n        \"UserId\": 5478\n      },\n      {\n        \"AccessLevel\": 0,\n        \"UserId\": 5352\n      }\n    ]\n  },\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e6718f6-4938-4495-b0d3-ea12dd6aa446",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Title of the template",
+                        "type": "text/plain"
+                      },
+                      "key": "Title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Description of the template",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) A note that will be displayed in the UI. Supports HTML content",
+                        "type": "text/plain"
+                      },
+                      "key": "Note",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Platform associated to the template (1 - 'linux', 2 - 'windows') (This can only be one of 1,2)",
+                        "type": "text/plain"
+                      },
+                      "key": "Platform",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes) (This can only be one of 1,2,3)",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) File",
+                        "type": "text/plain"
+                      },
+                      "key": "File",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the template's logo",
+                        "type": "text/plain"
+                      },
+                      "key": "Logo",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A json array of variables definitions",
+                        "type": "text/plain"
+                      },
+                      "key": "Variables",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f2f4a18-3e1e-47f1-be8e-0030be5617c6",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Title of the template",
+                        "type": "text/plain"
+                      },
+                      "key": "Title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Description of the template",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) A note that will be displayed in the UI. Supports HTML content",
+                        "type": "text/plain"
+                      },
+                      "key": "Note",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Platform associated to the template (1 - 'linux', 2 - 'windows') (This can only be one of 1,2)",
+                        "type": "text/plain"
+                      },
+                      "key": "Platform",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes) (This can only be one of 1,2,3)",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) File",
+                        "type": "text/plain"
+                      },
+                      "key": "File",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the template's logo",
+                        "type": "text/plain"
+                      },
+                      "key": "Logo",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A json array of variables definitions",
+                        "type": "text/plain"
+                      },
+                      "key": "Variables",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e7b13fd-e826-44e3-9625-ce025f75a582",
+          "name": "Create a custom template",
+          "request": {
+            "name": "Create a custom template",
+            "description": {
+              "content": "Create a custom template.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                "create",
+                "repository"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Description\": \"<string>\",\n  \"RepositoryURL\": \"<string>\",\n  \"Title\": \"<string>\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": \"<boolean>\",\n  \"IsComposeFormat\": \"<boolean>\",\n  \"Logo\": \"<string>\",\n  \"Note\": \"<string>\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": \"<boolean>\",\n  \"RepositoryPassword\": \"<string>\",\n  \"RepositoryReferenceName\": \"<string>\",\n  \"RepositoryUsername\": \"<string>\",\n  \"TLSSkipVerify\": \"<boolean>\",\n  \"Variables\": [\n    {\n      \"defaultValue\": \"<string>\",\n      \"description\": \"<string>\",\n      \"label\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"defaultValue\": \"<string>\",\n      \"description\": \"<string>\",\n      \"label\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "edf0dc18-6200-4c57-907b-a24ee995c3e8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedByUserId\": 3,\n  \"Description\": \"High performance web server\",\n  \"EdgeTemplate\": false,\n  \"EntryPoint\": \"docker-compose.yml\",\n  \"GitConfig\": {\n    \"Authentication\": {\n      \"AuthorizationType\": \"<integer>\",\n      \"GitCredentialID\": 0,\n      \"Password\": \"string\",\n      \"Username\": \"string\"\n    },\n    \"ConfigFilePath\": \"docker-compose.yml\",\n    \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n    \"ReferenceName\": \"refs/heads/branch_name\",\n    \"TLSSkipVerify\": false,\n    \"URL\": \"https://github.com/portainer/portainer.git\"\n  },\n  \"Id\": 1,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ProjectPath\": \"/data/custom_template/3\",\n  \"ResourceControl\": {\n    \"AccessLevel\": 0,\n    \"AdministratorsOnly\": true,\n    \"Id\": 1,\n    \"OwnerId\": 6924,\n    \"Public\": true,\n    \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n    \"SubResourceIds\": [\n      \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n    ],\n    \"System\": false,\n    \"TeamAccesses\": [\n      {\n        \"AccessLevel\": 0,\n        \"TeamId\": 1124\n      },\n      {\n        \"AccessLevel\": 1,\n        \"TeamId\": 8744\n      }\n    ],\n    \"Type\": 1,\n    \"UserAccesses\": [\n      {\n        \"AccessLevel\": 1,\n        \"UserId\": 5478\n      },\n      {\n        \"AccessLevel\": 0,\n        \"UserId\": 5352\n      }\n    ]\n  },\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27086615-5475-43ab-bbdd-bcfdcba1c71b",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87b58207-208f-4432-bb09-77d260c61344",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "repository"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"RepositoryURL\": \"https://github.com/openfaas/faas\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ComposeFilePathInRepository\": \"docker-compose.yml\",\n  \"EdgeTemplate\": false,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"RepositoryAuthentication\": true,\n  \"RepositoryPassword\": \"myGitPassword\",\n  \"RepositoryReferenceName\": \"refs/heads/master\",\n  \"RepositoryUsername\": \"myGitUsername\",\n  \"TLSSkipVerify\": false,\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5fde308-9c50-474b-80ba-6f642b2444df",
+          "name": "Create a custom template",
+          "request": {
+            "name": "Create a custom template",
+            "description": {
+              "content": "Create a custom template.\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_templates",
+                "create",
+                "string"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Description\": \"<string>\",\n  \"FileContent\": \"<string>\",\n  \"Title\": \"<string>\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeTemplate\": \"<boolean>\",\n  \"Logo\": \"<string>\",\n  \"Note\": \"<string>\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"<string>\",\n      \"description\": \"<string>\",\n      \"label\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"defaultValue\": \"<string>\",\n      \"description\": \"<string>\",\n      \"label\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f497dda-b204-417e-8511-d2a5a3ec2a7e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeTemplate\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CreatedByUserId\": 3,\n  \"Description\": \"High performance web server\",\n  \"EdgeTemplate\": false,\n  \"EntryPoint\": \"docker-compose.yml\",\n  \"GitConfig\": {\n    \"Authentication\": {\n      \"AuthorizationType\": \"<integer>\",\n      \"GitCredentialID\": 0,\n      \"Password\": \"string\",\n      \"Username\": \"string\"\n    },\n    \"ConfigFilePath\": \"docker-compose.yml\",\n    \"ConfigHash\": \"bc4c183d756879ea4d173315338110b31004b8e0\",\n    \"ReferenceName\": \"refs/heads/branch_name\",\n    \"TLSSkipVerify\": false,\n    \"URL\": \"https://github.com/portainer/portainer.git\"\n  },\n  \"Id\": 1,\n  \"IsComposeFormat\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"ProjectPath\": \"/data/custom_template/3\",\n  \"ResourceControl\": {\n    \"AccessLevel\": 0,\n    \"AdministratorsOnly\": true,\n    \"Id\": 1,\n    \"OwnerId\": 6924,\n    \"Public\": true,\n    \"ResourceId\": \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\",\n    \"SubResourceIds\": [\n      \"617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08\"\n    ],\n    \"System\": false,\n    \"TeamAccesses\": [\n      {\n        \"AccessLevel\": 0,\n        \"TeamId\": 1124\n      },\n      {\n        \"AccessLevel\": 1,\n        \"TeamId\": 8744\n      }\n    ],\n    \"Type\": 1,\n    \"UserAccesses\": [\n      {\n        \"AccessLevel\": 1,\n        \"UserId\": 5478\n      },\n      {\n        \"AccessLevel\": 0,\n        \"UserId\": 5352\n      }\n    ]\n  },\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "588b7bde-8d8b-4001-ac77-ae4c2ad5fa61",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeTemplate\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e61b5d67-765d-41e2-83b2-e7a8637c434e",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_templates",
+                    "create",
+                    "string"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"High performance web server\",\n  \"FileContent\": \"<string>\",\n  \"Title\": \"Nginx\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"EdgeTemplate\": false,\n  \"Logo\": \"https://portainer.io/img/logo.svg\",\n  \"Note\": \"This is my <b>custom</b> template\",\n  \"Platform\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"Variables\": [\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    },\n    {\n      \"defaultValue\": \"default value\",\n      \"description\": \"Description\",\n      \"label\": \"My Variable\",\n      \"name\": \"MY_VAR\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d36aba24-febb-4755-9cbb-8f87ee609981",
+    "name": "PortainerCE auth custom_templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

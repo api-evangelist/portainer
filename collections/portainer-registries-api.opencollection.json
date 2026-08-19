@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth registries API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "registries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Registries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/registries"
+          },
+          "docs": "List all registries based on the current user authorizations.\nWill return all registries if using an administrator account otherwise it\nwill only return authorized registries.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/registries"
+          },
+          "docs": "Create a new registry.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Inspect a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/registries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a registry.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/registries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Update a registry\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Remove a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/registries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Remove a registry\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Configures a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/registries/:id/configure",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registry identifier"
+              }
+            ]
+          },
+          "docs": "Configures a registry.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Test registry connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/registries/ping"
+          },
+          "docs": "Test connection to a registry with provided credentials\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

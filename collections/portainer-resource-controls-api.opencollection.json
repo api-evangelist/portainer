@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth resource_controls API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "resource_controls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new resource control",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/resource_controls"
+          },
+          "docs": "Create a new resource control to restrict access to a Docker resource.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update a resource control",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/resource_controls/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource control identifier"
+              }
+            ]
+          },
+          "docs": "Update a resource control\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a resource control",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/resource_controls/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource control identifier"
+              }
+            ]
+          },
+          "docs": "Remove a resource control.\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

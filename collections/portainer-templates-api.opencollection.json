@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth templates API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/templates"
+          },
+          "docs": "List available templates.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get a template's file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/templates/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Template identifier"
+              }
+            ]
+          },
+          "docs": "Get a template's file\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

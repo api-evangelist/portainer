@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth edge_stacks API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "edge_stacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetches the list of EdgeStacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_stacks",
+            "params": [
+              {
+                "name": "summarizeStatuses",
+                "value": "",
+                "type": "query",
+                "description": "will summarize the statuses"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Delete an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetches the stack file for an EdgeStack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_stacks/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an EdgeStack status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_stacks/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "Authorized only if the request is done by an Edge Environment(Endpoint)"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeStack from file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_stacks/create/file",
+            "params": [
+              {
+                "name": "dryrun",
+                "value": "",
+                "type": "query",
+                "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeStack from a git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_stacks/create/repository",
+            "params": [
+              {
+                "name": "dryrun",
+                "value": "",
+                "type": "query",
+                "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeStack from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_stacks/create/string",
+            "params": [
+              {
+                "name": "dryrun",
+                "value": "",
+                "type": "query",
+                "description": "if true, will not create an edge stack, but just will check the settings and return a non-persisted edge stack object"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an Edge Stack for an Environment(Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/edge/stacks/:stackId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "environment(endpoint) Id"
+              },
+              {
+                "name": "stackId",
+                "value": "",
+                "type": "path",
+                "description": "EdgeStack Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

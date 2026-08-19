@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth teams API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/teams",
+            "params": [
+              {
+                "name": "onlyLedTeams",
+                "value": "",
+                "type": "query",
+                "description": "Only list teams that the user is leader of"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment(endpoint) that will be used to filter the authorized teams"
+              }
+            ]
+          },
+          "docs": "List teams. For non-administrator users, will only list the teams they are member of.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/teams"
+          },
+          "docs": "Create a new team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a team. Access is only available for administrator and leaders of that team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team identifier"
+              }
+            ]
+          },
+          "docs": "Update a team.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Team Id"
+              }
+            ]
+          },
+          "docs": "Remove a team.\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

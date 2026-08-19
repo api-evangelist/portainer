@@ -1,0 +1,1896 @@
+{
+  "item": [
+    {
+      "id": "fce5236e-c7d8-45e5-9b0c-f49a5b5c030b",
+      "name": "registries",
+      "description": {
+        "content": "Manage Docker registries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eab095db-df5d-47be-b9df-088c3f4b61e3",
+          "name": "List Registries",
+          "request": {
+            "name": "List Registries",
+            "description": {
+              "content": "List all registries based on the current user authorizations.\nWill return all registries if using an administrator account otherwise it\nwill only return authorized registries.\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2b722843-72e0-40b5-ab86-658ec2305468",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AccessToken\": \"string\",\n    \"AccessTokenExpiry\": 4036,\n    \"Authentication\": true,\n    \"AuthorizedTeams\": [\n      4352,\n      6892\n    ],\n    \"AuthorizedUsers\": [\n      6127,\n      6583\n    ],\n    \"BaseURL\": \"registry.mydomain.tld:2375\",\n    \"Ecr\": {\n      \"Region\": \"ap-southeast-2\"\n    },\n    \"Github\": {\n      \"OrganisationName\": \"string\",\n      \"UseOrganisation\": true\n    },\n    \"Gitlab\": {\n      \"InstanceURL\": \"string\",\n      \"ProjectId\": 4294,\n      \"ProjectPath\": \"string\"\n    },\n    \"Id\": 1,\n    \"ManagementConfiguration\": {\n      \"AccessToken\": \"string\",\n      \"AccessTokenExpiry\": 7279,\n      \"Authentication\": true,\n      \"Ecr\": {\n        \"Region\": \"ap-southeast-2\"\n      },\n      \"Password\": \"string\",\n      \"TLSConfig\": {\n        \"TLS\": true,\n        \"TLSCACert\": \"/data/tls/ca.pem\",\n        \"TLSCert\": \"/data/tls/cert.pem\",\n        \"TLSKey\": \"/data/tls/key.pem\",\n        \"TLSSkipVerify\": false\n      },\n      \"Type\": 2,\n      \"Username\": \"string\"\n    },\n    \"Name\": \"my-registry\",\n    \"Password\": \"registry_password\",\n    \"Quay\": {\n      \"OrganisationName\": \"string\",\n      \"UseOrganisation\": false\n    },\n    \"RegistryAccesses\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"TeamAccessPolicies\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"UserAccessPolicies\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"TeamAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    },\n    \"Type\": {\n      \"value\": \"<Error: Could not resolve allOf schema\"\n    },\n    \"URL\": \"registry.mydomain.tld:2375\",\n    \"UserAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    },\n    \"Username\": \"registry user\"\n  },\n  {\n    \"AccessToken\": \"string\",\n    \"AccessTokenExpiry\": 9895,\n    \"Authentication\": true,\n    \"AuthorizedTeams\": [\n      7268,\n      6323\n    ],\n    \"AuthorizedUsers\": [\n      6602,\n      2029\n    ],\n    \"BaseURL\": \"registry.mydomain.tld:2375\",\n    \"Ecr\": {\n      \"Region\": \"ap-southeast-2\"\n    },\n    \"Github\": {\n      \"OrganisationName\": \"string\",\n      \"UseOrganisation\": true\n    },\n    \"Gitlab\": {\n      \"InstanceURL\": \"string\",\n      \"ProjectId\": 2691,\n      \"ProjectPath\": \"string\"\n    },\n    \"Id\": 1,\n    \"ManagementConfiguration\": {\n      \"AccessToken\": \"string\",\n      \"AccessTokenExpiry\": 948,\n      \"Authentication\": false,\n      \"Ecr\": {\n        \"Region\": \"ap-southeast-2\"\n      },\n      \"Password\": \"string\",\n      \"TLSConfig\": {\n        \"TLS\": true,\n        \"TLSCACert\": \"/data/tls/ca.pem\",\n        \"TLSCert\": \"/data/tls/cert.pem\",\n        \"TLSKey\": \"/data/tls/key.pem\",\n        \"TLSSkipVerify\": false\n      },\n      \"Type\": 7,\n      \"Username\": \"string\"\n    },\n    \"Name\": \"my-registry\",\n    \"Password\": \"registry_password\",\n    \"Quay\": {\n      \"OrganisationName\": \"string\",\n      \"UseOrganisation\": true\n    },\n    \"RegistryAccesses\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"TeamAccessPolicies\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"UserAccessPolicies\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"key_1\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"TeamAccessPolicies\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"UserAccessPolicies\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"TeamAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      },\n      \"key_1\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    },\n    \"Type\": {\n      \"value\": \"<Error: Could not resolve allOf schema\"\n    },\n    \"URL\": \"registry.mydomain.tld:2375\",\n    \"UserAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      },\n      \"key_1\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    },\n    \"Username\": \"registry user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "978073f8-5d1e-4e10-b9ef-09ac3f9e6596",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0192f9ba-f014-4677-a8e9-97f132574f5d",
+          "name": "Create a new registry",
+          "request": {
+            "name": "Create a new registry",
+            "description": {
+              "content": "Create a new registry.\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authentication\": \"<boolean>\",\n  \"Name\": \"<string>\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"<string>\",\n  \"BaseURL\": \"<string>\",\n  \"Ecr\": {\n    \"Region\": \"<string>\"\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Password\": \"<string>\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"TLS\": \"<boolean>\",\n  \"Username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8e10f3b-4c44-4492-b67c-622d4c0136ad",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375/feed\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccessToken\": \"string\",\n  \"AccessTokenExpiry\": 5044,\n  \"Authentication\": true,\n  \"AuthorizedTeams\": [\n    5975,\n    1303\n  ],\n  \"AuthorizedUsers\": [\n    65,\n    7771\n  ],\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Github\": {\n    \"OrganisationName\": \"string\",\n    \"UseOrganisation\": false\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Id\": 1,\n  \"ManagementConfiguration\": {\n    \"AccessToken\": \"string\",\n    \"AccessTokenExpiry\": 6543,\n    \"Authentication\": true,\n    \"Ecr\": {\n      \"Region\": \"ap-southeast-2\"\n    },\n    \"Password\": \"string\",\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"Type\": \"<integer>\",\n    \"Username\": \"string\"\n  },\n  \"Name\": \"my-registry\",\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"RoleId\": 1\n        },\n        \"key_1\": {\n          \"Namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"RoleId\": 1\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  },\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_3\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"Username\": \"registry user\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46a4db5b-b2b8-4b7e-a2ef-6b99421a6e82",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375/feed\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8e845f6-b544-408b-a76d-abb557f4b29c",
+              "name": "Another registry with the same name or same URL & credentials already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375/feed\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f20aba52-84bf-4ee3-92de-421f3ac9b730",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375/feed\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99e8c4a4-bc2b-4363-b049-cff97aed6f83",
+          "name": "Remove a registry",
+          "request": {
+            "name": "Remove a registry",
+            "description": {
+              "content": "Remove a registry\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Registry identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7ee329b8-d97f-48c1-9f33-1130999e265c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d8c3b70-5548-474a-9860-dc1a4052d0c1",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff9e8fbd-7903-4fc2-9308-a4219f4a63c3",
+              "name": "Registry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53288348-3b0b-4364-b0ec-c38f6483db12",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a69c589-e5d8-4550-9690-4b1c9caed7c7",
+          "name": "Inspect a registry",
+          "request": {
+            "name": "Inspect a registry",
+            "description": {
+              "content": "Retrieve details about a registry.\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Registry identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8fb49ebb-301b-42fa-bcb6-67b7dc32f807",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccessToken\": \"string\",\n  \"AccessTokenExpiry\": 5044,\n  \"Authentication\": true,\n  \"AuthorizedTeams\": [\n    5975,\n    1303\n  ],\n  \"AuthorizedUsers\": [\n    65,\n    7771\n  ],\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Github\": {\n    \"OrganisationName\": \"string\",\n    \"UseOrganisation\": false\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Id\": 1,\n  \"ManagementConfiguration\": {\n    \"AccessToken\": \"string\",\n    \"AccessTokenExpiry\": 6543,\n    \"Authentication\": true,\n    \"Ecr\": {\n      \"Region\": \"ap-southeast-2\"\n    },\n    \"Password\": \"string\",\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"Type\": \"<integer>\",\n    \"Username\": \"string\"\n  },\n  \"Name\": \"my-registry\",\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"RoleId\": 1\n        },\n        \"key_1\": {\n          \"Namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"RoleId\": 1\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  },\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_3\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"Username\": \"registry user\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "336184d7-8ede-4434-a671-08ba8e092a80",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "74e7e401-46a5-4c53-8f08-1606f9604726",
+              "name": "Permission denied to access registry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0fad30c6-e3fe-4f22-a19b-a02b16c43bd3",
+              "name": "Registry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f0ab23d-4f58-438d-ba7b-d8dbb81ba8da",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "269b1e6c-76ab-424e-abc4-7ad5207fd9a9",
+          "name": "Update a registry",
+          "request": {
+            "name": "Update a registry",
+            "description": {
+              "content": "Update a registry\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Registry identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authentication\": \"<boolean>\",\n  \"Name\": \"<string>\",\n  \"URL\": \"<string>\",\n  \"BaseURL\": \"<string>\",\n  \"Ecr\": {\n    \"Region\": \"<string>\"\n  },\n  \"Password\": \"<string>\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"Username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4625d451-13f8-49d9-ae3e-84500a78a4ea",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_2\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccessToken\": \"string\",\n  \"AccessTokenExpiry\": 1725,\n  \"Authentication\": true,\n  \"AuthorizedTeams\": [\n    5543,\n    1962\n  ],\n  \"AuthorizedUsers\": [\n    4408,\n    7260\n  ],\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Github\": {\n    \"OrganisationName\": \"string\",\n    \"UseOrganisation\": true\n  },\n  \"Gitlab\": {\n    \"InstanceURL\": \"<string>\",\n    \"ProjectId\": \"<integer>\",\n    \"ProjectPath\": \"<string>\"\n  },\n  \"Id\": 1,\n  \"ManagementConfiguration\": {\n    \"AccessToken\": \"string\",\n    \"AccessTokenExpiry\": 6790,\n    \"Authentication\": true,\n    \"Ecr\": {\n      \"Region\": \"ap-southeast-2\"\n    },\n    \"Password\": \"string\",\n    \"TLSConfig\": {\n      \"TLS\": true,\n      \"TLSCACert\": \"/data/tls/ca.pem\",\n      \"TLSCert\": \"/data/tls/cert.pem\",\n      \"TLSKey\": \"/data/tls/key.pem\",\n      \"TLSSkipVerify\": false\n    },\n    \"Type\": \"<integer>\",\n    \"Username\": \"string\"\n  },\n  \"Name\": \"my-registry\",\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"RoleId\": 1\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"RoleId\": 1\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  },\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"Username\": \"registry user\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9edbf170-af13-4dd3-994a-7c505cf92a23",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_2\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70c98027-1995-4c8a-bc5f-2dd27099af2e",
+              "name": "Registry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_2\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be2e4d0d-be07-40c7-9237-216a664f5922",
+              "name": "Another registry with the same name or same URL & credentials already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_2\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "296281c9-9b8b-474a-9fb5-81c50306941e",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Name\": \"my-registry\",\n  \"URL\": \"registry.mydomain.tld:2375\",\n  \"BaseURL\": \"registry.mydomain.tld:2375\",\n  \"Ecr\": {\n    \"Region\": \"ap-southeast-2\"\n  },\n  \"Password\": \"registry_password\",\n  \"Quay\": {\n    \"OrganisationName\": \"<string>\",\n    \"UseOrganisation\": \"<boolean>\"\n  },\n  \"RegistryAccesses\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_1\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key_2\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TeamAccessPolicies\": {\n        \"key_0\": {\n          \"Namespaces\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"RoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"UserAccessPolicies\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a83a2913-ffef-4f59-b16a-cce540aacd15",
+          "name": "Configures a registry",
+          "request": {
+            "name": "Configures a registry",
+            "description": {
+              "content": "Configures a registry.\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries",
+                ":id",
+                "configure"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Registry identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authentication\": \"<boolean>\",\n  \"Password\": \"<string>\",\n  \"Region\": \"<string>\",\n  \"TLS\": \"<boolean>\",\n  \"TLSCACertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSCertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSKeyFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSSkipVerify\": \"<boolean>\",\n  \"Username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6ca5548-089a-49fb-99a5-deedc96e115c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id",
+                    "configure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Password\": \"registry_password\",\n  \"Region\": \"<string>\",\n  \"TLS\": true,\n  \"TLSCACertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSCertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSKeyFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSSkipVerify\": false,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "401399a5-4cf2-4847-9351-d5e80c7cbe7a",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id",
+                    "configure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Password\": \"registry_password\",\n  \"Region\": \"<string>\",\n  \"TLS\": true,\n  \"TLSCACertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSCertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSKeyFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSSkipVerify\": false,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b522255f-29d2-40df-b38a-77b055390d30",
+              "name": "Permission denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id",
+                    "configure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Password\": \"registry_password\",\n  \"Region\": \"<string>\",\n  \"TLS\": true,\n  \"TLSCACertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSCertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSKeyFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSSkipVerify\": false,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5499d49d-fc7a-4cc6-95ec-140a59e714c5",
+              "name": "Registry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id",
+                    "configure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Password\": \"registry_password\",\n  \"Region\": \"<string>\",\n  \"TLS\": true,\n  \"TLSCACertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSCertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSKeyFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSSkipVerify\": false,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61b24e59-d403-4642-bc0a-cece95efcdc4",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    ":id",
+                    "configure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Registry identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Authentication\": false,\n  \"Password\": \"registry_password\",\n  \"Region\": \"<string>\",\n  \"TLS\": true,\n  \"TLSCACertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSCertFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSKeyFile\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TLSSkipVerify\": false,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d38d465-e2a9-485b-ba4f-6d794a70998e",
+          "name": "Test registry connection",
+          "request": {
+            "name": "Test registry connection",
+            "description": {
+              "content": "Test connection to a registry with provided credentials\n**Access policy**: authenticated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registries",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"<string>\",\n  \"Password\": \"<string>\",\n  \"TLS\": \"<boolean>\",\n  \"Username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be7891a0-f593-4ac5-a985-972acc10ad4e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry-1.docker.io\",\n  \"Password\": \"registry_password\",\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Registry connection successful\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32f1dd72-240c-4293-bd4c-6a9330a102e0",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry-1.docker.io\",\n  \"Password\": \"registry_password\",\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac5c9aef-7a2e-44f9-8fc4-d146a012184f",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registries",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": {\n    \"value\": \"<Error: Could not resolve allOf schema\"\n  },\n  \"URL\": \"registry-1.docker.io\",\n  \"Password\": \"registry_password\",\n  \"TLS\": true,\n  \"Username\": \"registry_user\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cba7bbcd-311a-43b4-a0e9-975e4d1efde8",
+    "name": "PortainerCE auth registries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth"
+          },
+          "docs": "**Access policy**: public\nUse this environment(endpoint) to authenticate against Portainer using a username and password."
+        },
+        {
+          "info": {
+            "name": "Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout"
+          },
+          "docs": "**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Authenticate with OAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/oauth/validate"
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth webhooks API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/webhooks",
+            "params": [
+              {
+                "name": "filters",
+                "value": "{\"EndpointID\":1,\"ResourceID\":\"abc12345-abcd-2345-ab12-58005b4a0260\"}",
+                "type": "query",
+                "description": "Filters (json-string)"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webhooks"
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Execute a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook token"
+              }
+            ]
+          },
+          "docs": "Acts on a passed in token UUID to restart the docker service\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Update a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

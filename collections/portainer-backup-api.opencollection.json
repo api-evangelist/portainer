@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth backup API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "backup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates an archive with a system data snapshot that could be used to restore the system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backup"
+          },
+          "docs": "Creates an archive with a system data snapshot that could be used to restore the system.\n**Access policy**: admin"
+        },
+        {
+          "info": {
+            "name": "Triggers a system restore using provided backup file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restore"
+          },
+          "docs": "Triggers a system restore using provided backup file\n**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

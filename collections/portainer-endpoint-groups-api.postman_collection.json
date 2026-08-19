@@ -1,0 +1,1759 @@
+{
+  "item": [
+    {
+      "id": "62bed607-92a4-4b65-a9fe-d7d4cda8e251",
+      "name": "endpoint_groups",
+      "description": {
+        "content": "Manage environment(endpoint) groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "197a0bd1-4f7e-4ab8-b05b-7b0c256a47cf",
+          "name": "List Environment(Endpoint) groups",
+          "request": {
+            "name": "List Environment(Endpoint) groups",
+            "description": {
+              "content": "List all environment(endpoint) groups based on the current user authorizations. Will\nreturn all environment(endpoint) groups if using an administrator account otherwise it will\nonly return authorized environment(endpoint) groups.\n**Access policy**: restricted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f003fb4d-7af0-4383-809e-3d52292418d2",
+              "name": "Environment(Endpoint) group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AuthorizedTeams\": [\n      1191,\n      7173\n    ],\n    \"AuthorizedUsers\": [\n      9919,\n      6381\n    ],\n    \"Description\": \"Environment(Endpoint) group description\",\n    \"Id\": 1,\n    \"Labels\": [\n      {\n        \"name\": \"name\",\n        \"value\": \"value\"\n      },\n      {\n        \"name\": \"name\",\n        \"value\": \"value\"\n      }\n    ],\n    \"Name\": \"my-environment-group\",\n    \"TagIds\": [\n      3898,\n      5240\n    ],\n    \"Tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"TeamAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      },\n      \"key_1\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      },\n      \"key_2\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    },\n    \"UserAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      },\n      \"key_1\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      },\n      \"key_2\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    }\n  },\n  {\n    \"AuthorizedTeams\": [\n      7890,\n      417\n    ],\n    \"AuthorizedUsers\": [\n      2229,\n      9581\n    ],\n    \"Description\": \"Environment(Endpoint) group description\",\n    \"Id\": 1,\n    \"Labels\": [\n      {\n        \"name\": \"name\",\n        \"value\": \"value\"\n      },\n      {\n        \"name\": \"name\",\n        \"value\": \"value\"\n      }\n    ],\n    \"Name\": \"my-environment-group\",\n    \"TagIds\": [\n      3327,\n      611\n    ],\n    \"Tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"TeamAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    },\n    \"UserAccessPolicies\": {\n      \"key_0\": {\n        \"Namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"RoleId\": 1\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ebf6763-1313-404a-a6fe-9eb28f379963",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da5fcca7-f553-4a40-ad27-1ea64b3dcb8b",
+          "name": "Create an Environment(Endpoint) Group",
+          "request": {
+            "name": "Create an Environment(Endpoint) Group",
+            "description": {
+              "content": "Create a new environment(endpoint) group.\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"AssociatedEndpoints\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"Description\": \"<string>\",\n  \"TagIDs\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b6ea1de-5dcf-4fd1-8436-0f6a0f5a8f18",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"my-environment-group\",\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"TagIDs\": [\n    1,\n    2\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AuthorizedTeams\": [\n    8475,\n    5527\n  ],\n  \"AuthorizedUsers\": [\n    1301,\n    3709\n  ],\n  \"Description\": \"Environment(Endpoint) group description\",\n  \"Id\": 1,\n  \"Labels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"Name\": \"my-environment-group\",\n  \"TagIds\": [\n    7347,\n    6154\n  ],\n  \"Tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_3\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "207e2ebf-a52e-4d21-80eb-47066ca79f38",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"my-environment-group\",\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"TagIDs\": [\n    1,\n    2\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20e7bd24-bfd0-488c-a7af-6b019299da19",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"my-environment-group\",\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"TagIDs\": [\n    1,\n    2\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b18719ea-ceae-4a8e-9435-419ed99b3e82",
+          "name": "Remove an environment(endpoint) group",
+          "request": {
+            "name": "Remove an environment(endpoint) group",
+            "description": {
+              "content": "Remove an environment(endpoint) group.\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EndpointGroup identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6d7b0dcd-fee0-48f9-87db-febfccfd8f01",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ce6893a-4de5-4cc0-b602-d85d62e28b5e",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93d1d597-df21-4885-9f56-6be6d51d80c7",
+              "name": "EndpointGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c80fbdd-81a5-4985-9e89-5b7f1fffab68",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c5d85d3-cbc3-49e7-b14d-10ec4e8cf02a",
+          "name": "Inspect an Environment(Endpoint) group",
+          "request": {
+            "name": "Inspect an Environment(Endpoint) group",
+            "description": {
+              "content": "Retrieve details abont an environment(endpoint) group.\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Environment(Endpoint) group identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8bf4943d-acde-4123-b0c6-6111ae13e91e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Environment(Endpoint) group identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AuthorizedTeams\": [\n    8475,\n    5527\n  ],\n  \"AuthorizedUsers\": [\n    1301,\n    3709\n  ],\n  \"Description\": \"Environment(Endpoint) group description\",\n  \"Id\": 1,\n  \"Labels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"Name\": \"my-environment-group\",\n  \"TagIds\": [\n    7347,\n    6154\n  ],\n  \"Tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_3\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0781cfb8-b4be-4390-a8e9-802f1c9753ff",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Environment(Endpoint) group identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac07a3ec-8630-47d6-8034-45f655df40f3",
+              "name": "EndpointGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Environment(Endpoint) group identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebca88c3-0033-4da8-b6af-e42becf3ca9f",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Environment(Endpoint) group identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20816752-4e35-4722-ba3a-887333a355b5",
+          "name": "Update an environment(endpoint) group",
+          "request": {
+            "name": "Update an environment(endpoint) group",
+            "description": {
+              "content": "Update an environment(endpoint) group.\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EndpointGroup identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AssociatedEndpoints\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"Description\": \"<string>\",\n  \"Name\": \"<string>\",\n  \"TagIDs\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": \"<integer>\"\n    },\n    \"key_1\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": \"<integer>\"\n    },\n    \"key_2\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": \"<integer>\"\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": \"<integer>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89d21562-2f4c-458c-a293-0fb1768aca82",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"Name\": \"my-environment-group\",\n  \"TagIDs\": [\n    3,\n    4\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AuthorizedTeams\": [\n    3291,\n    8354\n  ],\n  \"AuthorizedUsers\": [\n    5208,\n    5729\n  ],\n  \"Description\": \"Environment(Endpoint) group description\",\n  \"Id\": 1,\n  \"Labels\": [\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    },\n    {\n      \"name\": \"name\",\n      \"value\": \"value\"\n    }\n  ],\n  \"Name\": \"my-environment-group\",\n  \"TagIds\": [\n    530,\n    7684\n  ],\n  \"Tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68645715-2f1a-4471-956a-f267430a38fe",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"Name\": \"my-environment-group\",\n  \"TagIDs\": [\n    3,\n    4\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9df75ecc-2457-470e-a0a9-ba22d3fee685",
+              "name": "EndpointGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"Name\": \"my-environment-group\",\n  \"TagIDs\": [\n    3,\n    4\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e2da9d7-0c39-45f0-a675-e4146c54f893",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AssociatedEndpoints\": [\n    1,\n    3\n  ],\n  \"Description\": \"description\",\n  \"Name\": \"my-environment-group\",\n  \"TagIDs\": [\n    3,\n    4\n  ],\n  \"TeamAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  },\n  \"UserAccessPolicies\": {\n    \"key_0\": {\n      \"Namespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"RoleId\": 1\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ee0f3e7-cdc0-485f-913d-d6d95c5d21e0",
+          "name": "Removes environment(endpoint) from an environment(endpoint) group",
+          "request": {
+            "name": "Removes environment(endpoint) from an environment(endpoint) group",
+            "description": {
+              "content": "**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups",
+                ":id",
+                "endpoints",
+                ":endpointId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EndpointGroup identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "endpointId",
+                  "description": "(Required) Environment(Endpoint) identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ecedea50-56c5-47d8-93a0-9e605e67b964",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "953ef1cb-8b9d-4d4a-876f-622ec0952fb9",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f34e96e0-6a75-4f75-afc6-0681f35e8532",
+              "name": "EndpointGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58554e82-30c3-40a2-9300-e9868157a423",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1e9c3a0-6cdb-432d-a51f-20814baf90f0",
+          "name": "Add an environment(endpoint) to an environment(endpoint) group",
+          "request": {
+            "name": "Add an environment(endpoint) to an environment(endpoint) group",
+            "description": {
+              "content": "Add an environment(endpoint) to an environment(endpoint) group\n**Access policy**: administrator",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "endpoint_groups",
+                ":id",
+                "endpoints",
+                ":endpointId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) EndpointGroup identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "endpointId",
+                  "description": "(Required) Environment(Endpoint) identifier"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a15b5f6-7d96-4c84-8351-08935f05d4f2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1a4aacf-a275-46f6-b788-4517a38828cc",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "951e25c8-1bd2-42b0-a27a-f0535d9e0463",
+              "name": "EndpointGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b23cb524-c512-4ade-873f-6ba705124200",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "endpoint_groups",
+                    ":id",
+                    "endpoints",
+                    ":endpointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) EndpointGroup identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "endpointId",
+                      "description": "(Required) Environment(Endpoint) identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "28f4f210-4470-42a0-b879-b607e3900bdc",
+    "name": "PortainerCE auth endpoint_groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.\nExamples are available at https://documentation.portainer.io/api/api-examples/\nYou can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).\n\n# Authentication\n\nMost of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.\nPortainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request\nwith the **Bearer** authentication mechanism.\n\nExample:\n\n```\nBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE\n```\n\n# Security\n\nEach API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).\n\nDifferent access policies are available:\n\n- Public access\n- Authenticated access\n- Restricted access\n- Administrator access\n\n### Public access\n\nNo authentication is required to access the environments(endpoints) with this access policy.\n\n### Authenticated access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\n\n### Restricted access\n\nAuthentication is required to access the environments(endpoints) with this access policy.\nExtra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.\n\n### Administrator access\n\nAuthentication as well as an administrator role are required to access the environments(endpoints) with this access policy.\n\n# Execute Docker requests\n\nPortainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).\n\nInstead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.\n\nTo do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).\n\n# Private Registry\n\nUsing private registry, you will need to pass a based64 encoded JSON string ‘{\"registryId\":\\<registryID value\\>}’ inside the Request Header. The parameter name is \"X-Registry-Auth\".\n\\<registryID value\\> - The registry ID where the repository was created.\n\nExample:\n\n```\neyJyZWdpc3RyeUlkIjoxfQ==\n```\n\n**NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).\n\n\nContact Support:\n Email: info@portainer.io",
+      "type": "text/plain"
+    }
+  }
+}

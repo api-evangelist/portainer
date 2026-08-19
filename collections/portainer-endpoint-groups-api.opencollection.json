@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth endpoint_groups API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "endpoint_groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environment(Endpoint) groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoint_groups"
+          },
+          "docs": "List all environment(endpoint) groups based on the current user authorizations. Will\nreturn all environment(endpoint) groups if using an administrator account otherwise it will\nonly return authorized environment(endpoint) groups.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create an Environment(Endpoint) Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoint_groups"
+          },
+          "docs": "Create a new environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect an Environment(Endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoint_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) group identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details abont an environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoint_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              }
+            ]
+          },
+          "docs": "Update an environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoint_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              }
+            ]
+          },
+          "docs": "Remove an environment(endpoint) group.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Add an environment(endpoint) to an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/endpoint_groups/:id/endpoints/:endpointId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Add an environment(endpoint) to an environment(endpoint) group\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Removes environment(endpoint) from an environment(endpoint) group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoint_groups/:id/endpoints/:endpointId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EndpointGroup identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

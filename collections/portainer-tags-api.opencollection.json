@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth tags API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tags"
+          },
+          "docs": "List tags.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a new tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tags"
+          },
+          "docs": "Create a new tag.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Remove a tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Tag identifier"
+              }
+            ]
+          },
+          "docs": "Remove a tag.\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

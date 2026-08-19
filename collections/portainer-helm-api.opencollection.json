@@ -1,0 +1,383 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth helm API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "helm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Helm Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional filter"
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional selector"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Install Helm Chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query",
+                "description": "Dry run"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get a helm release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Helm release name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              },
+              {
+                "name": "showResources",
+                "value": "",
+                "type": "query",
+                "description": "show resources of the release"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional revision"
+              }
+            ]
+          },
+          "docs": "Get details of a helm release by release name\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Delete Helm Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:release",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "path",
+                "description": "The name of the release/application to uninstall"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "An optional namespace"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get a historical list of releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:release/history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Helm release name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              }
+            ]
+          },
+          "docs": "Get a historical list of releases by release name\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Rollback a helm release",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/endpoints/:id/kubernetes/helm/:release/rollback",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "path",
+                "description": "Helm release name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "specify an optional namespace"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "specify the revision to rollback to (defaults to previous revision if not specified)"
+              },
+              {
+                "name": "wait",
+                "value": "",
+                "type": "query",
+                "description": "wait for resources to be ready (default: false)"
+              },
+              {
+                "name": "waitForJobs",
+                "value": "",
+                "type": "query",
+                "description": "wait for jobs to complete before marking the release as successful (default: false)"
+              },
+              {
+                "name": "recreate",
+                "value": "",
+                "type": "query",
+                "description": "performs pods restart for the resource if applicable (default: true)"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "force resource update through delete/recreate if needed (default: false)"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "time to wait for any individual Kubernetes operation in seconds (default: 300)"
+              }
+            ]
+          },
+          "docs": "Rollback a helm release to a previous revision\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Search Helm Charts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/templates/helm",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Helm repository URL"
+              },
+              {
+                "name": "chart",
+                "value": "",
+                "type": "query",
+                "description": "Helm chart name"
+              },
+              {
+                "name": "useCache",
+                "value": "",
+                "type": "query",
+                "description": "If true will use cache to search"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Show Helm Chart Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/templates/helm/:command",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Helm repository URL"
+              },
+              {
+                "name": "chart",
+                "value": "",
+                "type": "query",
+                "description": "Chart name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Chart version"
+              },
+              {
+                "name": "command",
+                "value": "",
+                "type": "path",
+                "description": "chart/values/readme"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "List a users helm repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/helm/repositories",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Inspect a user helm repositories.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Create a user helm repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:id/helm/repositories",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Create a user helm repository.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Delete a users helm repositoryies",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:id/helm/repositories/:repositoryID",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "repositoryID",
+                "value": "",
+                "type": "path",
+                "description": "Repository identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

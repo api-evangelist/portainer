@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth settings API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Portainer settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings"
+          },
+          "docs": "Retrieve Portainer settings.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Update Portainer settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings"
+          },
+          "docs": "Update Portainer settings.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Retrieve Portainer public settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/public"
+          },
+          "docs": "Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.\n**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

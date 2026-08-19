@@ -1,0 +1,514 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth stacks API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "stacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List stacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/stacks",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters to process on the stack list. Encoded as JSON (a map[string]string). For example, {'SwarmID': 'jpofkc0i9uo9wtx1zesuk649w'} will only return stacks that are part of the specified Swarm cluster. Available filters: EndpointID, SwarmID."
+              }
+            ]
+          },
+          "docs": "List all stacks based on the current user authorizations.\nWill return all stacks if using an administrator account otherwise it\nwill only return the list of stacks the user have access to.\nLimited stacks will not be returned by this endpoint.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Inspect a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a stack.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Update a stack, only for file based stacks.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/stacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "external",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to delete an external stack. Only external Swarm stacks are supported"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Remove a stack.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Associate an orphaned stack to a new environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/stacks/:id/associate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "swarmId",
+                "value": "",
+                "type": "query",
+                "description": "Swarm identifier"
+              },
+              {
+                "name": "orphanedRunning",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the stack is orphaned"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Retrieve the content of the Stack file for the specified stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/stacks/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              }
+            ]
+          },
+          "docs": "Get Stack file content.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update a stack's Git configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/git",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack."
+              }
+            ]
+          },
+          "docs": "Update the Git settings in a stack, e.g., RepositoryReferenceName and AutoUpdate\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Redeploy a stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/stacks/:id/git/redeploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack."
+              }
+            ]
+          },
+          "docs": "Pull and redeploy a stack via Git\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Migrate a stack to another environment(endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/migrate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack."
+              }
+            ]
+          },
+          "docs": "Migrate a stack from an environment(endpoint) to another environment(endpoint). It will re-create the stack inside the target environment(endpoint) before removing the original stack.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Starts a stopped Stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Starts a stopped Stack.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Stops a stopped Stack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/:id/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Stops a stopped Stack.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new kubernetes stack from a git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/kubernetes/repository",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new kubernetes stack from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/kubernetes/string",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new kubernetes stack from a url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/kubernetes/url",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new compose stack from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/standalone/file",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new compose stack from repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/standalone/repository",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new compose stack from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/standalone/string",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new swarm stack from a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/swarm/file",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new swarm stack from a git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/swarm/repository",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Deploy a new swarm stack from a text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/create/swarm/string",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment that will be used to deploy the stack"
+              }
+            ]
+          },
+          "docs": "Deploy a new stack into a Docker environment specified via the environment identifier.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove Kubernetes stacks by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/stacks/name/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Stack name"
+              },
+              {
+                "name": "external",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to delete an external stack. Only external Swarm stacks are supported"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Remove a stack.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Webhook for triggering stack updates from git",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/stacks/webhooks/:webhookID",
+            "params": [
+              {
+                "name": "webhookID",
+                "value": "",
+                "type": "path",
+                "description": "Stack identifier"
+              }
+            ]
+          },
+          "docs": "**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

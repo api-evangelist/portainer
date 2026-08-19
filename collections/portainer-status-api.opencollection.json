@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth status API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Portainer status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/status"
+          },
+          "docs": "Deprecated: use the `/system/status` endpoint instead.\nRetrieve Portainer status\n**Access policy**: public"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

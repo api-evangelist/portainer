@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth edge_groups API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "edge_groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list EdgeGroups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_groups"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Create an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/edge_groups"
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspects an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/edge_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeGroup Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Updates an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/edge_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeGroup Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Deletes an EdgeGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/edge_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EdgeGroup Id"
+              }
+            ]
+          },
+          "docs": "**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth intel API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "intel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enable Portainer's OpenAMT capabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt"
+          },
+          "docs": "Enable Portainer's OpenAMT capabilities\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Activate OpenAMT device and associate to agent endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt/:id/activate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Activate OpenAMT device and associate to agent endpoint\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Fetch OpenAMT managed devices information for endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/open_amt/:id/devices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment(Endpoint) identifier"
+              }
+            ]
+          },
+          "docs": "Fetch OpenAMT managed devices information for endpoint\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Execute out of band action on an AMT managed device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt/:id/devices/:deviceId/action",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Device identifier"
+              }
+            ]
+          },
+          "docs": "Execute out of band action on an AMT managed device\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Enable features on an AMT managed device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/open_amt/:id/devices_features/:deviceId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              },
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Device identifier"
+              }
+            ]
+          },
+          "docs": "Enable features on an AMT managed device\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Request OpenAMT info from a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/open_amt/:id/info",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Environment identifier"
+              }
+            ]
+          },
+          "docs": "Request OpenAMT info from a node\n**Access policy**: administrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PortainerCE auth users API",
+    "version": "2.39.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the environment(endpoint) that will be used to filter the authorized users"
+              }
+            ]
+          },
+          "docs": "List Portainer users.\nNon-administrator users will only be able to list other non-administrator user accounts.\nUser passwords are filtered out, and should never be accessible.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Create a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users"
+          },
+          "docs": "Create a new Portainer user.\nOnly administrators can create users.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Inspect a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a user.\nUser passwords are filtered out, and should never be accessible.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Update user details. A regular user account can only update his details.\nA regular user account cannot change their username or role.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Remove a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Remove a user.\n**Access policy**: administrator"
+        },
+        {
+          "info": {
+            "name": "Inspect a user memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/memberships",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Inspect a user memberships.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Update password for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/users/:id/passwd",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "identifier"
+              }
+            ]
+          },
+          "docs": "Update password for the specified user.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Get all API keys for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Gets all API keys for a user.\nOnly the calling user or admin can retrieve api-keys.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Generate an API key for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:id/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Generates an API key for a user.\nOnly the calling user can generate a token for themselves.\nPassword is required only for internal authentication.\n**Access policy**: restricted"
+        },
+        {
+          "info": {
+            "name": "Remove an api-key associated to a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:id/tokens/:keyID",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "path",
+                "description": "Api Key identifier"
+              }
+            ]
+          },
+          "docs": "Remove an api-key associated to a user..\nOnly the calling user or admin can remove api-key.\n**Access policy**: authenticated"
+        },
+        {
+          "info": {
+            "name": "Check administrator account existence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/admin/check"
+          },
+          "docs": "Check if an administrator account exists in the database.\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Initialize administrator account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/admin/init"
+          },
+          "docs": "Initialize the 'admin' user account.\n**Access policy**: public"
+        },
+        {
+          "info": {
+            "name": "Inspect the current user user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/me"
+          },
+          "docs": "Retrieve details about the current  user.\nUser passwords are filtered out, and should never be accessible.\n**Access policy**: authenticated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
