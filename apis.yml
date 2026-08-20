@@ -34,6 +34,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -50,6 +52,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Backup
+  tags_raw:
   - backup
   properties:
   - type: OpenAPI
@@ -66,6 +70,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Custom Templates
+  tags_raw:
   - custom_templates
   properties:
   - type: OpenAPI
@@ -82,6 +88,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Docker
+  tags_raw:
   - docker
   properties:
   - type: OpenAPI
@@ -98,6 +106,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Edge
+  tags_raw:
   - edge
   properties:
   - type: OpenAPI
@@ -113,7 +123,8 @@ apis:
   description: Manage Edge Groups
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
+  tags: []
+  tags_raw:
   - edge_groups
   properties:
   - type: OpenAPI
@@ -129,7 +140,8 @@ apis:
   description: Manage Edge Jobs
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
+  tags: []
+  tags_raw:
   - edge_jobs
   properties:
   - type: OpenAPI
@@ -145,7 +157,8 @@ apis:
   description: Manage Edge Stacks
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
+  tags: []
+  tags_raw:
   - edge_stacks
   properties:
   - type: OpenAPI
@@ -161,7 +174,8 @@ apis:
   description: Manage environment(endpoint) groups
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
+  tags: []
+  tags_raw:
   - endpoint_groups
   properties:
   - type: OpenAPI
@@ -177,7 +191,8 @@ apis:
   description: Manage Docker environments(endpoints)
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
+  tags: []
+  tags_raw:
   - endpoints
   properties:
   - type: OpenAPI
@@ -194,6 +209,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - GitOps
+  tags_raw:
   - gitops
   properties:
   - type: OpenAPI
@@ -210,6 +227,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Helm
+  tags_raw:
   - helm
   properties:
   - type: OpenAPI
@@ -226,6 +245,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Intel
+  tags_raw:
   - intel
   properties:
   - type: OpenAPI
@@ -242,6 +263,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Kubernetes
+  tags_raw:
   - kubernetes
   properties:
   - type: OpenAPI
@@ -258,6 +281,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - LDAP
+  tags_raw:
   - ldap
   properties:
   - type: OpenAPI
@@ -290,6 +315,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Registries
+  tags_raw:
   - registries
   properties:
   - type: OpenAPI
@@ -305,7 +332,8 @@ apis:
   description: Manage access control on Docker resources
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
+  tags: []
+  tags_raw:
   - resource_controls
   properties:
   - type: OpenAPI
@@ -322,6 +350,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Roles
+  tags_raw:
   - roles
   properties:
   - type: OpenAPI
@@ -338,6 +368,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Settings
+  tags_raw:
   - settings
   properties:
   - type: OpenAPI
@@ -354,6 +386,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - SSL
+  tags_raw:
   - ssl
   properties:
   - type: OpenAPI
@@ -370,6 +404,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Stacks
+  tags_raw:
   - stacks
   properties:
   - type: OpenAPI
@@ -386,6 +422,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Status
+  tags_raw:
   - status
   properties:
   - type: OpenAPI
@@ -402,6 +440,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
@@ -418,6 +458,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Tags
+  tags_raw:
   - tags
   properties:
   - type: OpenAPI
@@ -434,6 +476,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Team Memberships
+  tags_raw:
   - team_memberships
   properties:
   - type: OpenAPI
@@ -450,6 +494,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Team
+  tags_raw:
   - teams
   properties:
   - type: OpenAPI
@@ -466,6 +512,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Templates
+  tags_raw:
   - templates
   properties:
   - type: OpenAPI
@@ -482,6 +530,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Upload
+  tags_raw:
   - upload
   properties:
   - type: OpenAPI
@@ -498,6 +548,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -514,6 +566,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
@@ -530,6 +584,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - WebSocket
+  tags_raw:
   - websocket
   properties:
   - type: OpenAPI
