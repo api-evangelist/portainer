@@ -13,10 +13,9 @@
       "feed_url": "https://api-docs.portainer.io/",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     }
   ],
-  "post_count": 95,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 99,
+  "fetched": "2026-08-22T20:20:02Z"
 }
