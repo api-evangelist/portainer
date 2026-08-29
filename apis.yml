@@ -4,6 +4,20 @@ description: >-
   Portainer is an open source container management platform that simplifies deploying, managing, and monitoring Docker,
   Swarm, Podman, and Kubernetes environments through a unified web UI and REST API.
 type: Index
+deliveryModel:
+  model: open-core
+  license: Zlib
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -597,6 +611,16 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 common:
+  - type: IssueTracker
+    url: https://github.com/portainer/portainer/issues
+  - type: Releases
+    url: https://github.com/portainer/portainer/releases
+  - type: SecurityPolicy
+    url: https://github.com/portainer/portainer/blob/develop/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/portainer/portainer/blob/develop/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/portainer/portainer/blob/develop/CONTRIBUTING.md
   - type: License
     name: Zlib
     url: https://github.com/portainer/portainer/blob/develop/LICENSE
