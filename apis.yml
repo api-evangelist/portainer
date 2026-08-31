@@ -83,8 +83,7 @@ apis:
   description: Manage Custom Templates
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
-  - Custom Templates
+  tags: []
   tags_raw:
   - custom_templates
   properties:
@@ -102,7 +101,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Docker
+  - docker
   tags_raw:
   - docker
   properties:
@@ -120,7 +119,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Edge
+  - edge
   tags_raw:
   - edge
   properties:
@@ -223,7 +222,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - GitOps
+  - gitops
   tags_raw:
   - gitops
   properties:
@@ -241,7 +240,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Helm
+  - helm
   tags_raw:
   - helm
   properties:
@@ -259,7 +258,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Intel
+  - intel
   tags_raw:
   - intel
   properties:
@@ -277,7 +276,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Kubernetes
+  - kubernetes
   tags_raw:
   - kubernetes
   properties:
@@ -295,7 +294,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - LDAP
+  - ldap
   tags_raw:
   - ldap
   properties:
@@ -329,7 +328,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Registries
+  - registries
   tags_raw:
   - registries
   properties:
@@ -400,7 +399,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - SSL
+  - ssl
   tags_raw:
   - ssl
   properties:
@@ -418,7 +417,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - Stacks
+  - stacks
   tags_raw:
   - stacks
   properties:
@@ -489,8 +488,7 @@ apis:
   description: Manage team memberships
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
-  tags:
-  - Team Memberships
+  tags: []
   tags_raw:
   - team_memberships
   properties:
@@ -598,7 +596,7 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - WebSocket
+  - websocket
   tags_raw:
   - websocket
   properties:
