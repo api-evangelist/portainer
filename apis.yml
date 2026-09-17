@@ -218,24 +218,6 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
-- aid: portainer:portainer-gitops-api
-  name: Portainer gitops API
-  description: Operate git repository
-  humanURL: https://www.portainer.io/
-  baseURL: https://api-docs.portainer.io
-  tags:
-  - GitOps
-  tags_raw:
-  - gitops
-  properties:
-  - type: OpenAPI
-    url: openapi/portainer-gitops-api-openapi.yml
-  - type: Documentation
-    url: https://docs.portainer.io/
-  - type: APIReference
-    url: https://api-docs.portainer.io/
-  - type: GettingStarted
-    url: https://docs.portainer.io/start
 - aid: portainer:portainer-helm-api
   name: Portainer helm API
   description: Manage Helm charts
@@ -605,6 +587,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/portainer-websocket-api-openapi.yml
+  - type: Documentation
+    url: https://docs.portainer.io/
+  - type: APIReference
+    url: https://api-docs.portainer.io/
+  - type: GettingStarted
+    url: https://docs.portainer.io/start
+- aid: portainer:portainer-git-ops-api
+  name: Portainer Git Ops API
+  description: Operate git repository
+  humanURL: https://www.portainer.io/
+  baseURL: https://api-docs.portainer.io
+  tags:
+  - Git Ops
+  properties:
+  - type: OpenAPI
+    url: openapi/portainer-git-ops-api-openapi.yml
   - type: Documentation
     url: https://docs.portainer.io/
   - type: APIReference
