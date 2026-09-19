@@ -599,6 +599,8 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
+  - GitOps
+  tags_raw:
   - Git Ops
   properties:
   - type: OpenAPI
