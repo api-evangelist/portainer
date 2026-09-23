@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: info@portainer.io
+  description: Portainer API is an HTTP API served by Portainer.
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
+  title: PortainerCE Gitops API
+  version: 2.39.1
+servers:
+- url: /api
+tags:
+- description: Operate git repository
+  name: Git Ops
+paths:
+  /gitops/repo/file/preview:
+    post:
+      description: 'Retrieve the compose file content based on git repository configuration
+
+        **Access policy**: authenticated'
+      operationId: GitOperationRepoFilePreview
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gitops.fileResponse'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: preview the content of target file in the git repository
+      tags:
+      - Git Ops
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/gitops.repositoryFilePreviewPayload'
+        description: Template details
+        required: true
+components:
+  schemas:
+    gitops.repositoryFilePreviewPayload:
+      properties:
+        TLSSkipVerify:
+          description: TLSSkipVerify skips SSL verification when cloning the Git repository
+          example: false
+          type: boolean
+        authorizationType:
+          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
+        password:
+          example: myGitPassword
+          type: string
+        reference:
+          example: refs/heads/master
+          type: string
+        repository:
+          example: https://github.com/openfaas/faas
+          type: string
+        targetFile:
+          description: Path to file whose content will be read
+          example: docker-compose.yml
+          type: string
+        username:
+          example: myGitUsername
+          type: string
+      required:
+      - repository
+      type: object
+    gittypes.GitCredentialAuthType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - GitCredentialAuthType_Basic
+      - GitCredentialAuthType_Token
+    gitops.fileResponse:
+      properties:
+        FileContent:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-KEY
+      type: apiKey
+    jwt:
+      in: header
+      name: Authorization
+      type: apiKey

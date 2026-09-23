@@ -1,123 +1,18 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   contact:
     email: info@portainer.io
-  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
-
-    Examples are available at https://documentation.portainer.io/api/api-examples/
-
-    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
-
-
-    # Authentication
-
-
-    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
-
-    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
-
-    with the **Bearer** authentication mechanism.
-
-
-    Example:
-
-
-    ```
-
-    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
-
-    ```
-
-
-    # Security
-
-
-    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
-
-
-    Different access policies are available:
-
-
-    - Public access
-
-    - Authenticated access
-
-    - Restricted access
-
-    - Administrator access
-
-
-    ### Public access
-
-
-    No authentication is required to access the environments(endpoints) with this access policy.
-
-
-    ### Authenticated access
-
-
-    Authentication is required to access the environments(endpoints) with this access policy.
-
-
-    ### Restricted access
-
-
-    Authentication is required to access the environments(endpoints) with this access policy.
-
-    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
-
-
-    ### Administrator access
-
-
-    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
-
-
-    # Execute Docker requests
-
-
-    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
-
-
-    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
-
-
-    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
-
-
-    # Private Registry
-
-
-    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
-
-    \<registryID value\> - The registry ID where the repository was created.
-
-
-    Example:
-
-
-    ```
-
-    eyJyZWdpc3RyeUlkIjoxfQ==
-
-    ```
-
-
-    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
-
-    '
+  description: Portainer API is an HTTP API served by Portainer.
   license:
     name: zlib
     url: https://github.com/portainer/portainer/blob/develop/LICENSE
-  title: PortainerCE auth teams API
+  title: PortainerCE Teams API
   version: 2.39.1
-basePath: /api
-schemes:
-- http
-- https
+servers:
+- url: /api
 tags:
 - description: Manage teams
-  name: teams
+  name: Teams
 paths:
   /teams:
     get:
@@ -129,20 +24,22 @@ paths:
       - description: Only list teams that the user is leader of
         in: query
         name: onlyLedTeams
-        type: boolean
+        schema:
+          type: boolean
       - description: Identifier of the environment(endpoint) that will be used to filter the authorized teams
         in: query
         name: environmentId
-        type: integer
-      produces:
-      - application/json
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
-          schema:
-            items:
-              $ref: '#/definitions/portainer.Team'
-            type: array
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/portainer.Team'
+                type: array
         '500':
           description: Server error
       security:
@@ -150,28 +47,19 @@ paths:
       - jwt: []
       summary: List teams
       tags:
-      - teams
+      - Teams
     post:
-      consumes:
-      - application/json
       description: 'Create a new team.
 
         **Access policy**: administrator'
       operationId: TeamCreate
-      parameters:
-      - description: details
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/teams.teamCreatePayload'
-      produces:
-      - application/json
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/portainer.Team'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portainer.Team'
         '400':
           description: Invalid request
         '409':
@@ -183,7 +71,14 @@ paths:
       - jwt: []
       summary: Create a new team
       tags:
-      - teams
+      - Teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/teams.teamCreatePayload'
+        description: details
+        required: true
   /teams/{id}:
     delete:
       description: 'Remove a team.
@@ -195,7 +90,8 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        schema:
+          type: integer
       responses:
         '204':
           description: Success
@@ -212,7 +108,7 @@ paths:
       - jwt: []
       summary: Remove a team
       tags:
-      - teams
+      - Teams
     get:
       description: 'Retrieve details about a team. Access is only available for administrator and leaders of that team.
 
@@ -223,14 +119,15 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
-      produces:
-      - application/json
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/portainer.Team'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portainer.Team'
         '400':
           description: Invalid request
         '403':
@@ -244,10 +141,8 @@ paths:
       - jwt: []
       summary: Inspect a team
       tags:
-      - teams
+      - Teams
     put:
-      consumes:
-      - application/json
       description: 'Update a team.
 
         **Access policy**: administrator'
@@ -257,20 +152,15 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
-      - description: Team details
-        in: body
-        name: body
-        required: true
         schema:
-          $ref: '#/definitions/teams.teamUpdatePayload'
-      produces:
-      - application/json
+          type: integer
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/portainer.Team'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portainer.Team'
         '400':
           description: Invalid request
         '403':
@@ -284,49 +174,57 @@ paths:
       - jwt: []
       summary: Update a team
       tags:
-      - teams
-definitions:
-  teams.teamCreatePayload:
-    properties:
-      Name:
-        description: Name
-        example: developers
-        type: string
-      TeamLeaders:
-        description: TeamLeaders
-        example:
-        - 3
-        - 5
-        items:
+      - Teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/teams.teamUpdatePayload'
+        description: Team details
+        required: true
+components:
+  schemas:
+    teams.teamUpdatePayload:
+      properties:
+        Name:
+          description: Name
+          example: developers
+          type: string
+      type: object
+    teams.teamCreatePayload:
+      properties:
+        Name:
+          description: Name
+          example: developers
+          type: string
+        TeamLeaders:
+          description: TeamLeaders
+          example:
+          - 3
+          - 5
+          items:
+            type: integer
+          type: array
+      required:
+      - Name
+      type: object
+    portainer.Team:
+      properties:
+        Id:
+          description: Team Identifier
+          example: 1
           type: integer
-        type: array
-    required:
-    - Name
-    type: object
-  teams.teamUpdatePayload:
-    properties:
-      Name:
-        description: Name
-        example: developers
-        type: string
-    type: object
-  portainer.Team:
-    properties:
-      Id:
-        description: Team Identifier
-        example: 1
-        type: integer
-      Name:
-        description: Team name
-        example: developers
-        type: string
-    type: object
-securityDefinitions:
-  ApiKeyAuth:
-    in: header
-    name: X-API-KEY
-    type: apiKey
-  jwt:
-    in: header
-    name: Authorization
-    type: apiKey
+        Name:
+          description: Team name
+          example: developers
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-KEY
+      type: apiKey
+    jwt:
+      in: header
+      name: Authorization
+      type: apiKey

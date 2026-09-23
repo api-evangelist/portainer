@@ -1,142 +1,26 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   contact:
     email: info@portainer.io
-  description: 'Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
-
-    Examples are available at https://documentation.portainer.io/api/api-examples/
-
-    You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
-
-
-    # Authentication
-
-
-    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
-
-    Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
-
-    with the **Bearer** authentication mechanism.
-
-
-    Example:
-
-
-    ```
-
-    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
-
-    ```
-
-
-    # Security
-
-
-    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
-
-
-    Different access policies are available:
-
-
-    - Public access
-
-    - Authenticated access
-
-    - Restricted access
-
-    - Administrator access
-
-
-    ### Public access
-
-
-    No authentication is required to access the environments(endpoints) with this access policy.
-
-
-    ### Authenticated access
-
-
-    Authentication is required to access the environments(endpoints) with this access policy.
-
-
-    ### Restricted access
-
-
-    Authentication is required to access the environments(endpoints) with this access policy.
-
-    Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
-
-
-    ### Administrator access
-
-
-    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
-
-
-    # Execute Docker requests
-
-
-    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
-
-
-    Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
-
-
-    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
-
-
-    # Private Registry
-
-
-    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
-
-    \<registryID value\> - The registry ID where the repository was created.
-
-
-    Example:
-
-
-    ```
-
-    eyJyZWdpc3RyeUlkIjoxfQ==
-
-    ```
-
-
-    **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
-
-    '
+  description: Portainer API is an HTTP API served by Portainer.
   license:
     name: zlib
     url: https://github.com/portainer/portainer/blob/develop/LICENSE
-  title: PortainerCE auth intel API
+  title: PortainerCE Intel API
   version: 2.39.1
-basePath: /api
-schemes:
-- http
-- https
+servers:
+- url: /api
 tags:
 - description: Manage Intel AMT settings
-  name: intel
+  name: Intel
 paths:
   /open_amt:
     post:
-      consumes:
-      - application/json
       deprecated: true
       description: 'Enable Portainer''s OpenAMT capabilities
 
         **Access policy**: administrator'
       operationId: OpenAMTConfigure
-      parameters:
-      - description: OpenAMT Settings
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/openamt.openAMTConfigurePayload'
-      produces:
-      - application/json
       responses:
         '204':
           description: Success
@@ -150,7 +34,14 @@ paths:
       - jwt: []
       summary: Enable Portainer's OpenAMT capabilities
       tags:
-      - intel
+      - Intel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/openamt.openAMTConfigurePayload'
+        description: OpenAMT Settings
+        required: true
   /open_amt/{id}/activate:
     post:
       deprecated: true
@@ -163,9 +54,8 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
-      produces:
-      - application/json
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
@@ -179,7 +69,7 @@ paths:
       - jwt: []
       summary: Activate OpenAMT device and associate to agent endpoint
       tags:
-      - intel
+      - Intel
   /open_amt/{id}/devices:
     get:
       deprecated: true
@@ -192,9 +82,8 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
-      produces:
-      - application/json
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
@@ -208,11 +97,9 @@ paths:
       - jwt: []
       summary: Fetch OpenAMT managed devices information for endpoint
       tags:
-      - intel
+      - Intel
   /open_amt/{id}/devices/{deviceId}/action:
     post:
-      consumes:
-      - application/json
       deprecated: true
       description: 'Execute out of band action on an AMT managed device
 
@@ -223,20 +110,14 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        schema:
+          type: integer
       - description: Device identifier
         in: path
         name: deviceId
         required: true
-        type: integer
-      - description: Device Action
-        in: body
-        name: body
-        required: true
         schema:
-          $ref: '#/definitions/openamt.deviceActionPayload'
-      produces:
-      - application/json
+          type: integer
       responses:
         '204':
           description: Success
@@ -250,11 +131,16 @@ paths:
       - jwt: []
       summary: Execute out of band action on an AMT managed device
       tags:
-      - intel
+      - Intel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/openamt.deviceActionPayload'
+        description: Device Action
+        required: true
   /open_amt/{id}/devices_features/{deviceId}:
     post:
-      consumes:
-      - application/json
       deprecated: true
       description: 'Enable features on an AMT managed device
 
@@ -265,20 +151,14 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        schema:
+          type: integer
       - description: Device identifier
         in: path
         name: deviceId
         required: true
-        type: integer
-      - description: Device Features
-        in: body
-        name: body
-        required: true
         schema:
-          $ref: '#/definitions/openamt.deviceFeaturesPayload'
-      produces:
-      - application/json
+          type: integer
       responses:
         '204':
           description: Success
@@ -292,7 +172,14 @@ paths:
       - jwt: []
       summary: Enable features on an AMT managed device
       tags:
-      - intel
+      - Intel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/openamt.deviceFeaturesPayload'
+        description: Device Features
+        required: true
   /open_amt/{id}/info:
     get:
       deprecated: true
@@ -305,9 +192,8 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
-      produces:
-      - application/json
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
@@ -321,56 +207,57 @@ paths:
       - jwt: []
       summary: Request OpenAMT info from a node
       tags:
-      - intel
-definitions:
-  openamt.deviceFeaturesPayload:
-    properties:
-      Features:
-        $ref: '#/definitions/portainer.OpenAMTDeviceEnabledFeatures'
-    type: object
-  openamt.deviceActionPayload:
-    properties:
-      Action:
-        type: string
-    type: object
-  openamt.openAMTConfigurePayload:
-    properties:
-      CertFileContent:
-        type: string
-      CertFileName:
-        type: string
-      CertFilePassword:
-        type: string
-      DomainName:
-        type: string
-      Enabled:
-        type: boolean
-      MPSPassword:
-        type: string
-      MPSServer:
-        type: string
-      MPSUser:
-        type: string
-    type: object
-  portainer.OpenAMTDeviceEnabledFeatures:
-    properties:
-      IDER:
-        type: boolean
-      KVM:
-        type: boolean
-      SOL:
-        type: boolean
-      redirection:
-        type: boolean
-      userConsent:
-        type: string
-    type: object
-securityDefinitions:
-  ApiKeyAuth:
-    in: header
-    name: X-API-KEY
-    type: apiKey
-  jwt:
-    in: header
-    name: Authorization
-    type: apiKey
+      - Intel
+components:
+  schemas:
+    portainer.OpenAMTDeviceEnabledFeatures:
+      properties:
+        IDER:
+          type: boolean
+        KVM:
+          type: boolean
+        SOL:
+          type: boolean
+        redirection:
+          type: boolean
+        userConsent:
+          type: string
+      type: object
+    openamt.openAMTConfigurePayload:
+      properties:
+        CertFileContent:
+          type: string
+        CertFileName:
+          type: string
+        CertFilePassword:
+          type: string
+        DomainName:
+          type: string
+        Enabled:
+          type: boolean
+        MPSPassword:
+          type: string
+        MPSServer:
+          type: string
+        MPSUser:
+          type: string
+      type: object
+    openamt.deviceFeaturesPayload:
+      properties:
+        Features:
+          $ref: '#/components/schemas/portainer.OpenAMTDeviceEnabledFeatures'
+      type: object
+    openamt.deviceActionPayload:
+      properties:
+        Action:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-KEY
+      type: apiKey
+    jwt:
+      in: header
+      name: Authorization
+      type: apiKey
