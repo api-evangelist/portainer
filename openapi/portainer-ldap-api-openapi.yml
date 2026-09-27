@@ -42,48 +42,20 @@ paths:
         required: true
 components:
   schemas:
-    portainer.LDAPGroupSearchSettings:
+    portainer.LDAPSearchSettings:
       properties:
-        GroupAttribute:
-          description: LDAP attribute which denotes the group membership
-          example: member
-          type: string
-        GroupBaseDN:
-          description: The distinguished name of the element from which the LDAP server will search for groups
+        BaseDN:
+          description: The distinguished name of the element from which the LDAP server will search for users
           example: dc=ldap,dc=domain,dc=tld
           type: string
-        GroupFilter:
-          description: The LDAP search filter used to select group elements, optional
-          example: (objectClass=account
+        Filter:
+          description: Optional LDAP search filter used to select user elements
+          example: (objectClass=account)
           type: string
-      type: object
-    ldap.checkPayload:
-      properties:
-        LDAPSettings:
-          $ref: '#/components/schemas/portainer.LDAPSettings'
-      type: object
-    portainer.TLSConfiguration:
-      properties:
-        TLS:
-          description: Use TLS
-          example: true
-          type: boolean
-        TLSCACert:
-          description: Path to the TLS CA certificate file
-          example: /data/tls/ca.pem
+        UserNameAttribute:
+          description: LDAP attribute which denotes the username
+          example: uid
           type: string
-        TLSCert:
-          description: Path to the TLS client certificate file
-          example: /data/tls/cert.pem
-          type: string
-        TLSKey:
-          description: Path to the TLS client key file
-          example: /data/tls/key.pem
-          type: string
-        TLSSkipVerify:
-          description: Skip the verification of the server TLS certificate
-          example: false
-          type: boolean
       type: object
     portainer.LDAPSettings:
       properties:
@@ -122,20 +94,48 @@ components:
           example: myldap.domain.tld:389
           type: string
       type: object
-    portainer.LDAPSearchSettings:
+    portainer.LDAPGroupSearchSettings:
       properties:
-        BaseDN:
-          description: The distinguished name of the element from which the LDAP server will search for users
+        GroupAttribute:
+          description: LDAP attribute which denotes the group membership
+          example: member
+          type: string
+        GroupBaseDN:
+          description: The distinguished name of the element from which the LDAP server will search for groups
           example: dc=ldap,dc=domain,dc=tld
           type: string
-        Filter:
-          description: Optional LDAP search filter used to select user elements
-          example: (objectClass=account)
+        GroupFilter:
+          description: The LDAP search filter used to select group elements, optional
+          example: (objectClass=account
           type: string
-        UserNameAttribute:
-          description: LDAP attribute which denotes the username
-          example: uid
+      type: object
+    portainer.TLSConfiguration:
+      properties:
+        TLS:
+          description: Use TLS
+          example: true
+          type: boolean
+        TLSCACert:
+          description: Path to the TLS CA certificate file
+          example: /data/tls/ca.pem
           type: string
+        TLSCert:
+          description: Path to the TLS client certificate file
+          example: /data/tls/cert.pem
+          type: string
+        TLSKey:
+          description: Path to the TLS client key file
+          example: /data/tls/key.pem
+          type: string
+        TLSSkipVerify:
+          description: Skip the verification of the server TLS certificate
+          example: false
+          type: boolean
+      type: object
+    ldap.checkPayload:
+      properties:
+        LDAPSettings:
+          $ref: '#/components/schemas/portainer.LDAPSettings'
       type: object
   securitySchemes:
     ApiKeyAuth:

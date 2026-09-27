@@ -236,6 +236,46 @@ paths:
       - endpoint_groups
 components:
   schemas:
+    endpointgroups.endpointGroupUpdatePayload:
+      properties:
+        AssociatedEndpoints:
+          description: List of environment(endpoint) identifiers that will be part of this group
+          example:
+          - 1
+          - 3
+          items:
+            type: integer
+          type: array
+        Description:
+          description: Environment(Endpoint) group description
+          example: description
+          type: string
+        Name:
+          description: Environment(Endpoint) group name
+          example: my-environment-group
+          type: string
+        TagIDs:
+          description: List of tag identifiers associated to the environment(endpoint) group
+          example:
+          - 3
+          - 4
+          items:
+            type: integer
+          type: array
+        TeamAccessPolicies:
+          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+        UserAccessPolicies:
+          $ref: '#/components/schemas/portainer.UserAccessPolicies'
+      type: object
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
+      type: object
     portainer.EndpointGroup:
       properties:
         AuthorizedTeams:
@@ -279,6 +319,26 @@ components:
         UserAccessPolicies:
           $ref: '#/components/schemas/portainer.UserAccessPolicies'
       type: object
+    portainer.TeamAccessPolicies:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.AccessPolicy'
+      type: object
+    portainer.UserAccessPolicies:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.AccessPolicy'
+      type: object
+    portainer.AccessPolicy:
+      properties:
+        Namespaces:
+          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+          items:
+            type: string
+          type: array
+        RoleId:
+          description: Role identifier. Reference the role that will be associated to this access policy
+          example: 1
+          type: integer
+      type: object
     endpointgroups.endpointGroupCreatePayload:
       properties:
         AssociatedEndpoints:
@@ -307,66 +367,6 @@ components:
           type: array
       required:
       - Name
-      type: object
-    portainer.TeamAccessPolicies:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.AccessPolicy'
-      type: object
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    portainer.UserAccessPolicies:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.AccessPolicy'
-      type: object
-    endpointgroups.endpointGroupUpdatePayload:
-      properties:
-        AssociatedEndpoints:
-          description: List of environment(endpoint) identifiers that will be part of this group
-          example:
-          - 1
-          - 3
-          items:
-            type: integer
-          type: array
-        Description:
-          description: Environment(Endpoint) group description
-          example: description
-          type: string
-        Name:
-          description: Environment(Endpoint) group name
-          example: my-environment-group
-          type: string
-        TagIDs:
-          description: List of tag identifiers associated to the environment(endpoint) group
-          example:
-          - 3
-          - 4
-          items:
-            type: integer
-          type: array
-        TeamAccessPolicies:
-          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-        UserAccessPolicies:
-          $ref: '#/components/schemas/portainer.UserAccessPolicies'
-      type: object
-    portainer.AccessPolicy:
-      properties:
-        Namespaces:
-          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
-          items:
-            type: string
-          type: array
-        RoleId:
-          description: Role identifier. Reference the role that will be associated to this access policy
-          example: 1
-          type: integer
       type: object
   securitySchemes:
     ApiKeyAuth:

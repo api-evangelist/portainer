@@ -98,14 +98,6 @@ paths:
       - Tags
 components:
   schemas:
-    tags.tagCreatePayload:
-      properties:
-        Name:
-          example: org/acme
-          type: string
-      required:
-      - Name
-      type: object
     portainer.Tag:
       properties:
         EndpointGroups:
@@ -126,6 +118,14 @@ components:
           description: Tag name
           example: org/acme
           type: string
+      type: object
+    tags.tagCreatePayload:
+      properties:
+        Name:
+          example: org/acme
+          type: string
+      required:
+      - Name
       type: object
   securitySchemes:
     ApiKeyAuth:

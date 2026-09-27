@@ -2695,7 +2695,127 @@ paths:
       - Kubernetes
 components:
   schemas:
-    v1beta1.PodMetricsList:
+    kubernetes.K8sIngressTLS:
+      properties:
+        Hosts:
+          items:
+            type: string
+          type: array
+        SecretName:
+          type: string
+      type: object
+    v1.SeccompProfileType:
+      enum:
+      - Unconfined
+      - RuntimeDefault
+      - Localhost
+      type: string
+      x-enum-varnames:
+      - SeccompProfileTypeUnconfined
+      - SeccompProfileTypeRuntimeDefault
+      - SeccompProfileTypeLocalhost
+    kubernetes.K8sApplicationResource:
+      properties:
+        CpuLimit:
+          type: number
+        CpuRequest:
+          type: number
+        MemoryLimit:
+          type: integer
+        MemoryRequest:
+          type: integer
+      type: object
+    v1.NamespaceConditionType:
+      enum:
+      - NamespaceDeletionDiscoveryFailure
+      - NamespaceDeletionContentFailure
+      - NamespaceDeletionGroupVersionParsingFailure
+      - NamespaceContentRemaining
+      - NamespaceFinalizersRemaining
+      type: string
+      x-enum-varnames:
+      - NamespaceDeletionDiscoveryFailure
+      - NamespaceDeletionContentFailure
+      - NamespaceDeletionGVParsingFailure
+      - NamespaceContentRemaining
+      - NamespaceFinalizersRemaining
+    v1.ContainerRestartRuleOnExitCodesOperator:
+      enum:
+      - In
+      - NotIn
+      type: string
+      x-enum-varnames:
+      - ContainerRestartRuleOnExitCodesOpIn
+      - ContainerRestartRuleOnExitCodesOpNotIn
+    kubernetes.K8sResourceQuota:
+      properties:
+        cpu:
+          type: string
+        enabled:
+          type: boolean
+        memory:
+          type: string
+      type: object
+    v1.ScopedResourceSelectorRequirement:
+      properties:
+        operator:
+          allOf:
+          - $ref: '#/components/schemas/v1.ScopeSelectorOperator'
+          description: 'Represents a scope''s relationship to a set of values.
+
+            Valid operators are In, NotIn, Exists, DoesNotExist.'
+        scopeName:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceQuotaScope'
+          description: The name of the scope that the selector applies to.
+        values:
+          description: 'An array of string values. If the operator is In or NotIn,
+
+            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+
+            the values array must be empty.
+
+            This array is replaced during a strategic merge patch.
+
+            +optional
+
+            +listType=atomic'
+          items:
+            type: string
+          type: array
+      type: object
+    k8s_io_api_rbac_v1.Subject:
+      properties:
+        apiGroup:
+          description: 'APIGroup holds the API group of the referenced subject.
+
+            Defaults to "" for ServiceAccount subjects.
+
+            Defaults to "rbac.authorization.k8s.io" for User and Group subjects.
+
+            +optional'
+          type: string
+        kind:
+          description: 'Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount".
+
+            If the Authorizer does not recognized the kind value, the Authorizer should report an error.'
+          type: string
+        name:
+          description: 'Name of the object being referenced.
+
+            +required
+
+            +k8s:required'
+          type: string
+        namespace:
+          description: 'Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty
+
+            the Authorizer should report an error.
+
+            +optional'
+          type: string
+      type: object
+    v1beta1.PodMetrics:
       properties:
         apiVersion:
           description: 'APIVersion defines the versioned schema of this representation of an object.
@@ -2708,10 +2828,12 @@ components:
 
             +optional'
           type: string
-        items:
-          description: List of pod metrics.
+        containers:
+          description: 'Metrics for all containers are collected within the same time window.
+
+            +listType=atomic'
           items:
-            $ref: '#/components/schemas/v1beta1.PodMetrics'
+            $ref: '#/components/schemas/v1beta1.ContainerMetrics'
           type: array
         kind:
           description: 'Kind is a string value representing the REST resource this object represents.
@@ -2728,144 +2850,449 @@ components:
           type: string
         metadata:
           allOf:
-          - $ref: '#/components/schemas/v1.ListMeta'
-          description: 'Standard list metadata.
+          - $ref: '#/components/schemas/v1.ObjectMeta'
+          description: 'Standard object''s metadata.
 
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-      type: object
-    v1.ResourceQuotaScope:
-      enum:
-      - Terminating
-      - NotTerminating
-      - BestEffort
-      - NotBestEffort
-      - PriorityClass
-      - CrossNamespacePodAffinity
-      - VolumeAttributesClass
-      type: string
-      x-enum-varnames:
-      - ResourceQuotaScopeTerminating
-      - ResourceQuotaScopeNotTerminating
-      - ResourceQuotaScopeBestEffort
-      - ResourceQuotaScopeNotBestEffort
-      - ResourceQuotaScopePriorityClass
-      - ResourceQuotaScopeCrossNamespacePodAffinity
-      - ResourceQuotaScopeVolumeAttributesClass
-    v1.PersistentVolumeReclaimPolicy:
-      enum:
-      - Recycle
-      - Delete
-      - Retain
-      type: string
-      x-enum-varnames:
-      - PersistentVolumeReclaimRecycle
-      - PersistentVolumeReclaimDelete
-      - PersistentVolumeReclaimRetain
-    v1.VolumeMount:
-      properties:
-        mountPath:
-          description: 'Path within the container at which the volume should be mounted.  Must
-
-            not contain '':''.'
-          type: string
-        mountPropagation:
-          allOf:
-          - $ref: '#/components/schemas/v1.MountPropagationMode'
-          description: 'mountPropagation determines how mounts are propagated from the host
-
-            to container and the other way around.
-
-            When not set, MountPropagationNone is used.
-
-            This field is beta in 1.10.
-
-            When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
-
-            (which defaults to None).
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
             +optional'
-        name:
-          description: This must match the Name of a Volume.
-          type: string
-        readOnly:
-          description: 'Mounted read-only if true, read-write otherwise (false or unspecified).
+        timestamp:
+          description: 'The following fields define time interval from which metrics were
 
-            Defaults to false.
+            collected from the interval [Timestamp-Window, Timestamp].'
+          type: string
+        window:
+          $ref: '#/components/schemas/v1.Duration'
+      type: object
+    v1.ConfigMapEnvSource:
+      properties:
+        name:
+          description: 'Name of the referent.
+
+            This field is effectively required, but due to backwards compatibility is
+
+            allowed to be empty. Instances of this type with an empty value here are
+
+            almost certainly wrong.
+
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+            +optional
+
+            +default=""
+
+            +kubebuilder:default=""
+
+            TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
+          type: string
+        optional:
+          description: 'Specify whether the ConfigMap must be defined
 
             +optional'
           type: boolean
-        recursiveReadOnly:
-          allOf:
-          - $ref: '#/components/schemas/v1.RecursiveReadOnlyMode'
-          description: 'RecursiveReadOnly specifies whether read-only mounts should be handled
-
-            recursively.
-
-
-            If ReadOnly is false, this field has no meaning and must be unspecified.
-
-
-            If ReadOnly is true, and this field is set to Disabled, the mount is not made
-
-            recursively read-only.  If this field is set to IfPossible, the mount is made
-
-            recursively read-only, if it is supported by the container runtime.  If this
-
-            field is set to Enabled, the mount is made recursively read-only if it is
-
-            supported by the container runtime, otherwise the pod will not be started and
-
-            an error will be generated to indicate the reason.
-
-
-            If this field is set to IfPossible or Enabled, MountPropagation must be set to
-
-            None (or be unspecified, which defaults to None).
-
-
-            If this field is not specified, it is treated as an equivalent of Disabled.
-
-            +optional'
-        subPath:
-          description: 'Path within the volume from which the container''s volume should be mounted.
-
-            Defaults to "" (volume''s root).
-
-            +optional'
-          type: string
-        subPathExpr:
-          description: 'Expanded path within the volume from which the container''s volume should be mounted.
-
-            Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container''s environment.
-
-            Defaults to "" (volume''s root).
-
-            SubPathExpr and SubPath are mutually exclusive.
-
-            +optional'
-          type: string
       type: object
-    v1.Capabilities:
+    v1.SecretKeySelector:
       properties:
-        add:
-          description: 'Added capabilities
+        key:
+          description: The key of the secret to select from.  Must be a valid secret key.
+          type: string
+        name:
+          description: 'Name of the referent.
+
+            This field is effectively required, but due to backwards compatibility is
+
+            allowed to be empty. Instances of this type with an empty value here are
+
+            almost certainly wrong.
+
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 
             +optional
 
-            +listType=atomic'
+            +default=""
+
+            +kubebuilder:default=""
+
+            TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
+          type: string
+        optional:
+          description: 'Specify whether the Secret or its key must be defined
+
+            +optional'
+          type: boolean
+      type: object
+    v1.SELinuxOptions:
+      properties:
+        level:
+          description: 'Level is SELinux level label that applies to the container.
+
+            +optional'
+          type: string
+        role:
+          description: 'Role is a SELinux role label that applies to the container.
+
+            +optional'
+          type: string
+        type:
+          description: 'Type is a SELinux type label that applies to the container.
+
+            +optional'
+          type: string
+        user:
+          description: 'User is a SELinux user label that applies to the container.
+
+            +optional'
+          type: string
+      type: object
+    v1.ContainerRestartRule:
+      properties:
+        action:
+          allOf:
+          - $ref: '#/components/schemas/v1.ContainerRestartRuleAction'
+          description: 'Specifies the action taken on a container exit if the requirements
+
+            are satisfied. The only possible value is "Restart" to restart the
+
+            container.
+
+            +required'
+        exitCodes:
+          allOf:
+          - $ref: '#/components/schemas/v1.ContainerRestartRuleOnExitCodes'
+          description: 'Represents the exit codes to check on container exits.
+
+            +optional
+
+            +oneOf=when'
+      type: object
+    portainer.K8sNodesLimits:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.K8sNodeLimits'
+      type: object
+    kubernetes.K8sRoleDeleteRequests:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      type: object
+    v1.ResourceRequirements:
+      properties:
+        claims:
+          description: 'Claims lists the names of resources, defined in spec.resourceClaims,
+
+            that are used by this container.
+
+
+            This field depends on the
+
+            DynamicResourceAllocation feature gate.
+
+
+            This field is immutable. It can only be set for containers.
+
+
+            +listType=map
+
+            +listMapKey=name
+
+            +featureGate=DynamicResourceAllocation
+
+            +optional'
           items:
-            type: string
+            $ref: '#/components/schemas/k8s_io_api_core_v1.ResourceClaim'
           type: array
-        drop:
-          description: 'Removed capabilities
+        limits:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceList'
+          description: 'Limits describes the maximum amount of compute resources allowed.
+
+            More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+            +optional'
+        requests:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceList'
+          description: 'Requests describes the minimum amount of compute resources required.
+
+            If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+
+            otherwise to an implementation-defined value. Requests cannot exceed Limits.
+
+            More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+            +optional'
+      type: object
+    kubernetes.namespacesToggleSystemPayload:
+      properties:
+        System:
+          description: Toggle the system state of this namespace to true or false
+          example: true
+          type: boolean
+      type: object
+    kubernetes.IngressRule:
+      properties:
+        Host:
+          type: string
+        IP:
+          type: string
+        Path:
+          type: string
+        TLS:
+          items:
+            $ref: '#/components/schemas/kubernetes.TLSInfo'
+          type: array
+      type: object
+    v1.ScopeSelectorOperator:
+      enum:
+      - In
+      - NotIn
+      - Exists
+      - DoesNotExist
+      type: string
+      x-enum-varnames:
+      - ScopeSelectorOpIn
+      - ScopeSelectorOpNotIn
+      - ScopeSelectorOpExists
+      - ScopeSelectorOpDoesNotExist
+    v1.NamespaceStatus:
+      properties:
+        conditions:
+          description: 'Represents the latest available observations of a namespace''s current state.
 
             +optional
 
-            +listType=atomic'
+            +patchMergeKey=type
+
+            +patchStrategy=merge
+
+            +listType=map
+
+            +listMapKey=type'
+          items:
+            $ref: '#/components/schemas/v1.NamespaceCondition'
+          type: array
+        phase:
+          allOf:
+          - $ref: '#/components/schemas/v1.NamespacePhase'
+          description: 'Phase is the current lifecycle phase of the namespace.
+
+            More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+
+            +optional'
+      type: object
+    kubernetes.K8sRoleBindingDeleteRequests:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      type: object
+    kubernetes.TLSInfo:
+      properties:
+        hosts:
           items:
             type: string
           type: array
       type: object
+    v1.ScopeSelector:
+      properties:
+        matchExpressions:
+          description: 'A list of scope selector requirements by scope of the resources.
+
+            +optional
+
+            +listType=atomic'
+          items:
+            $ref: '#/components/schemas/v1.ScopedResourceSelectorRequirement'
+          type: array
+      type: object
+    kubernetes.K8sIngressPath:
+      properties:
+        HasService:
+          type: boolean
+        Host:
+          type: string
+        IngressName:
+          type: string
+        Path:
+          type: string
+        PathType:
+          type: string
+        Port:
+          type: integer
+        ServiceName:
+          type: string
+      type: object
+    v1.URIScheme:
+      enum:
+      - HTTP
+      - HTTPS
+      type: string
+      x-enum-varnames:
+      - URISchemeHTTP
+      - URISchemeHTTPS
+    kubernetes.K8sClusterRole:
+      properties:
+        creationDate:
+          type: string
+        isSystem:
+          type: boolean
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    kubernetes.K8sStorageClass:
+      properties:
+        allowVolumeExpansion:
+          type: boolean
+        name:
+          type: string
+        provisioner:
+          type: string
+        reclaimPolicy:
+          $ref: '#/components/schemas/v1.PersistentVolumeReclaimPolicy'
+      type: object
+    kubernetes.K8sServiceAccount:
+      properties:
+        creationDate:
+          type: string
+        isSystem:
+          type: boolean
+        name:
+          type: string
+        namespace:
+          type: string
+        uid:
+          type: string
+      type: object
+    kubernetes.PublishedPort:
+      properties:
+        IngressRules:
+          items:
+            $ref: '#/components/schemas/kubernetes.IngressRule'
+          type: array
+        Port:
+          type: integer
+      type: object
+    portainer.K8sNodeLimits:
+      properties:
+        CPU:
+          type: integer
+        Memory:
+          type: integer
+      type: object
+    kubernetes.K8sSecret:
+      properties:
+        Annotations:
+          additionalProperties:
+            type: string
+          type: object
+        ConfigurationOwner:
+          type: string
+        ConfigurationOwnerId:
+          type: string
+        ConfigurationOwners:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sConfigurationOwnerResource'
+          type: array
+        CreationDate:
+          type: string
+        Data:
+          additionalProperties:
+            type: string
+          type: object
+        IsUsed:
+          type: boolean
+        Labels:
+          additionalProperties:
+            type: string
+          type: object
+        Name:
+          type: string
+        Namespace:
+          type: string
+        SecretType:
+          type: string
+        UID:
+          type: string
+      type: object
+    portainer.K8sNamespaceInfo:
+      properties:
+        Annotations:
+          additionalProperties:
+            type: string
+          type: object
+        CreationDate:
+          type: string
+        Id:
+          type: string
+        IsDefault:
+          type: boolean
+        IsSystem:
+          type: boolean
+        Name:
+          type: string
+        NamespaceOwner:
+          type: string
+        ResourceQuota:
+          $ref: '#/components/schemas/v1.ResourceQuota'
+        Status:
+          $ref: '#/components/schemas/v1.NamespaceStatus'
+        UnhealthyEventCount:
+          type: integer
+      type: object
+    v1.EnvVarSource:
+      properties:
+        configMapKeyRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.ConfigMapKeySelector'
+          description: 'Selects a key of a ConfigMap.
+
+            +optional'
+        fieldRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.ObjectFieldSelector'
+          description: 'Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels[''<KEY>'']`, `metadata.annotations[''<KEY>'']`,
+
+            spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+
+            +optional'
+        fileKeyRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.FileKeySelector'
+          description: 'FileKeyRef selects a key of the env file.
+
+            Requires the EnvFiles feature gate to be enabled.
+
+
+            +featureGate=EnvFiles
+
+            +optional'
+        resourceFieldRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceFieldSelector'
+          description: 'Selects a resource of the container: only resources limits and requests
+
+            (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
+
+            +optional'
+        secretKeyRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.SecretKeySelector'
+          description: 'Selects a key of a secret in the pod''s namespace
+
+            +optional'
+      type: object
+    v1.MountPropagationMode:
+      enum:
+      - None
+      - HostToContainer
+      - Bidirectional
+      type: string
+      x-enum-varnames:
+      - MountPropagationNone
+      - MountPropagationHostToContainer
+      - MountPropagationBidirectional
     kubernetes.K8sConfigMap:
       properties:
         Annotations:
@@ -2899,438 +3326,104 @@ components:
         UID:
           type: string
       type: object
-    kubernetes.namespacesToggleSystemPayload:
-      properties:
-        System:
-          description: Toggle the system state of this namespace to true or false
-          example: true
-          type: boolean
+    v1.ResourceList:
+      additionalProperties:
+        $ref: '#/components/schemas/resource.Quantity'
       type: object
-    k8s_io_api_rbac_v1.Subject:
+    v1.ContainerResizePolicy:
       properties:
-        apiGroup:
-          description: 'APIGroup holds the API group of the referenced subject.
+        resourceName:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceName'
+          description: 'Name of the resource to which this resource resize policy applies.
 
-            Defaults to "" for ServiceAccount subjects.
+            Supported values: cpu, memory.'
+        restartPolicy:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceResizeRestartPolicy'
+          description: 'Restart policy to apply when specified resource is resized.
 
-            Defaults to "rbac.authorization.k8s.io" for User and Group subjects.
+            If not specified, it defaults to NotRequired.'
+      type: object
+    v1.PullPolicy:
+      enum:
+      - Always
+      - Never
+      - IfNotPresent
+      type: string
+      x-enum-varnames:
+      - PullAlways
+      - PullNever
+      - PullIfNotPresent
+    v1.ResourceQuota:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation of an object.
+
+            Servers should convert recognized schemas to the latest internal value, and
+
+            may reject unrecognized values.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
 
             +optional'
           type: string
         kind:
-          description: 'Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount".
+          description: 'Kind is a string value representing the REST resource this object represents.
 
-            If the Authorizer does not recognized the kind value, the Authorizer should report an error.'
-          type: string
-        name:
-          description: 'Name of the object being referenced.
+            Servers may infer this from the endpoint the client submits requests to.
 
-            +required
+            Cannot be updated.
 
-            +k8s:required'
-          type: string
-        namespace:
-          description: 'Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty
+            In CamelCase.
 
-            the Authorizer should report an error.
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
             +optional'
           type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/v1.ObjectMeta'
+          description: 'Standard object''s metadata.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+            +optional'
+        spec:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceQuotaSpec'
+          description: 'Spec defines the desired quota.
+
+            https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+            +optional'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceQuotaStatus'
+          description: 'Status defines the actual enforced quota and its current usage.
+
+            https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+            +optional'
       type: object
-    kubernetes.K8sVolumeInfo:
-      properties:
-        persistentVolume:
-          $ref: '#/components/schemas/kubernetes.K8sPersistentVolume'
-        persistentVolumeClaim:
-          $ref: '#/components/schemas/kubernetes.K8sPersistentVolumeClaim'
-        storageClass:
-          $ref: '#/components/schemas/kubernetes.K8sStorageClass'
-      type: object
-    kubernetes.K8sIngressDeleteRequests:
+    kubernetes.K8sServiceDeleteRequests:
       additionalProperties:
         items:
           type: string
         type: array
       type: object
-    v1.ListMeta:
+    kubernetes.K8sNamespaceDetails:
       properties:
-        continue:
-          description: 'continue may be set if the user set a limit on the number of items returned, and indicates that
-
-            the server has more data available. The value is opaque and may be used to issue another request
-
-            to the endpoint that served this list to retrieve the next set of available objects. Continuing a
-
-            consistent list may not be possible if the server configuration has changed or more than a few
-
-            minutes have passed. The resourceVersion field returned when using this continue value will be
-
-            identical to the value in the first response, unless you have received this token from an error
-
-            message.'
-          type: string
-        remainingItemCount:
-          description: 'remainingItemCount is the number of subsequent items in the list which are not included in this
-
-            list response. If the list request contained label or field selectors, then the number of
-
-            remaining items is unknown and the field will be left unset and omitted during serialization.
-
-            If the list is complete (either because it is not chunking or because this is the last chunk),
-
-            then there are no more remaining items and this field will be left unset and omitted during
-
-            serialization.
-
-            Servers older than v1.15 do not set this field.
-
-            The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
-
-            should not rely on the remainingItemCount to be set or to be exact.
-
-            +optional'
-          type: integer
-        resourceVersion:
-          description: 'String that identifies the server''s internal version of this object that
-
-            can be used by clients to determine when objects have changed.
-
-            Value must be treated as opaque by clients and passed unmodified back to the server.
-
-            Populated by the system.
-
-            Read-only.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
-
-            +optional'
-          type: string
-        selfLink:
-          description: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
-
-            +optional'
-          type: string
-      type: object
-    kubernetes.K8sPersistentVolume:
-      properties:
-        accessModes:
-          items:
-            $ref: '#/components/schemas/v1.PersistentVolumeAccessMode'
-          type: array
-        annotations:
+        Annotations:
           additionalProperties:
             type: string
           type: object
-        capacity:
-          $ref: '#/components/schemas/v1.ResourceList'
-        claimRef:
-          $ref: '#/components/schemas/v1.ObjectReference'
-        csi:
-          $ref: '#/components/schemas/v1.CSIPersistentVolumeSource'
-        name:
-          type: string
-        persistentVolumeReclaimPolicy:
-          $ref: '#/components/schemas/v1.PersistentVolumeReclaimPolicy'
-        storageClassName:
-          type: string
-        volumeMode:
-          $ref: '#/components/schemas/v1.PersistentVolumeMode'
-      type: object
-    v1.ObjectFieldSelector:
-      properties:
-        apiVersion:
-          description: 'Version of the schema the FieldPath is written in terms of, defaults to "v1".
-
-            +optional'
-          type: string
-        fieldPath:
-          description: Path of the field to select in the specified API version.
-          type: string
-      type: object
-    portainer.K8sNodesLimits:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.K8sNodeLimits'
-      type: object
-    v1.SecurityContext:
-      properties:
-        allowPrivilegeEscalation:
-          description: 'AllowPrivilegeEscalation controls whether a process can gain more
-
-            privileges than its parent process. This bool directly controls if
-
-            the no_new_privs flag will be set on the container process.
-
-            AllowPrivilegeEscalation is true always when the container is:
-
-            1) run as Privileged
-
-            2) has CAP_SYS_ADMIN
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-          type: boolean
-        appArmorProfile:
-          allOf:
-          - $ref: '#/components/schemas/v1.AppArmorProfile'
-          description: 'appArmorProfile is the AppArmor options to use by this container. If set, this profile
-
-            overrides the pod''s appArmorProfile.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-        capabilities:
-          allOf:
-          - $ref: '#/components/schemas/v1.Capabilities'
-          description: 'The capabilities to add/drop when running containers.
-
-            Defaults to the default set of capabilities granted by the container runtime.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-        privileged:
-          description: 'Run container in privileged mode.
-
-            Processes in privileged containers are essentially equivalent to root on the host.
-
-            Defaults to false.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-          type: boolean
-        procMount:
-          allOf:
-          - $ref: '#/components/schemas/v1.ProcMountType'
-          description: 'procMount denotes the type of proc mount to use for the containers.
-
-            The default value is Default which uses the container runtime defaults for
-
-            readonly paths and masked paths.
-
-            This requires the ProcMountType feature flag to be enabled.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-        readOnlyRootFilesystem:
-          description: 'Whether this container has a read-only root filesystem.
-
-            Default is false.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-          type: boolean
-        runAsGroup:
-          description: 'The GID to run the entrypoint of the container process.
-
-            Uses runtime default if unset.
-
-            May also be set in PodSecurityContext.  If set in both SecurityContext and
-
-            PodSecurityContext, the value specified in SecurityContext takes precedence.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-          type: integer
-        runAsNonRoot:
-          description: 'Indicates that the container must run as a non-root user.
-
-            If true, the Kubelet will validate the image at runtime to ensure that it
-
-            does not run as UID 0 (root) and fail to start the container if it does.
-
-            If unset or false, no such validation will be performed.
-
-            May also be set in PodSecurityContext.  If set in both SecurityContext and
-
-            PodSecurityContext, the value specified in SecurityContext takes precedence.
-
-            +optional'
-          type: boolean
-        runAsUser:
-          description: 'The UID to run the entrypoint of the container process.
-
-            Defaults to user specified in image metadata if unspecified.
-
-            May also be set in PodSecurityContext.  If set in both SecurityContext and
-
-            PodSecurityContext, the value specified in SecurityContext takes precedence.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-          type: integer
-        seLinuxOptions:
-          allOf:
-          - $ref: '#/components/schemas/v1.SELinuxOptions'
-          description: 'The SELinux context to be applied to the container.
-
-            If unspecified, the container runtime will allocate a random SELinux context for each
-
-            container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
-
-            PodSecurityContext, the value specified in SecurityContext takes precedence.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-        seccompProfile:
-          allOf:
-          - $ref: '#/components/schemas/v1.SeccompProfile'
-          description: 'The seccomp options to use by this container. If seccomp options are
-
-            provided at both the pod & container level, the container options
-
-            override the pod options.
-
-            Note that this field cannot be set when spec.os.name is windows.
-
-            +optional'
-        windowsOptions:
-          allOf:
-          - $ref: '#/components/schemas/v1.WindowsSecurityContextOptions'
-          description: 'The Windows specific settings applied to all containers.
-
-            If unspecified, the options from the PodSecurityContext will be used.
-
-            If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
-
-            Note that this field cannot be set when spec.os.name is linux.
-
-            +optional'
-      type: object
-    kubernetes.K8sStorageClass:
-      properties:
-        allowVolumeExpansion:
-          type: boolean
-        name:
-          type: string
-        provisioner:
-          type: string
-        reclaimPolicy:
-          $ref: '#/components/schemas/v1.PersistentVolumeReclaimPolicy'
-      type: object
-    kubernetes.K8sIngressController:
-      properties:
-        Availability:
-          type: boolean
-        ClassName:
-          type: string
         Name:
           type: string
-        New:
-          type: boolean
-        Type:
+        Owner:
           type: string
-        Used:
-          type: boolean
-      type: object
-    v1.Protocol:
-      enum:
-      - TCP
-      - UDP
-      - SCTP
-      type: string
-      x-enum-varnames:
-      - ProtocolTCP
-      - ProtocolUDP
-      - ProtocolSCTP
-    v1.ExecAction:
-      properties:
-        command:
-          description: 'Command is the command line to execute inside the container, the working directory for the
-
-            command  is root (''/'') in the container''s filesystem. The command is simply exec''d, it is
-
-            not run inside a shell, so traditional shell instructions (''|'', etc) won''t work. To use
-
-            a shell, you need to explicitly call out to that shell.
-
-            Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
-
-            +optional
-
-            +listType=atomic'
-          items:
-            type: string
-          type: array
-      type: object
-    kubernetes.K8sEvent:
-      properties:
-        count:
-          type: integer
-        eventTime:
-          type: string
-        firstTimestamp:
-          type: string
-        involvedObject:
-          $ref: '#/components/schemas/kubernetes.K8sEventInvolvedObject'
-        kind:
-          type: string
-        lastTimestamp:
-          type: string
-        message:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-        reason:
-          type: string
-        type:
-          type: string
-        uid:
-          type: string
-      type: object
-    kubernetes.K8sPersistentVolumeClaim:
-      properties:
-        accessModes:
-          items:
-            $ref: '#/components/schemas/v1.PersistentVolumeAccessMode'
-          type: array
-        creationDate:
-          type: string
-        id:
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          type: string
-        namespace:
-          type: string
-        owningApplications:
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sApplication'
-          type: array
-        phase:
-          $ref: '#/components/schemas/v1.PersistentVolumeClaimPhase'
-        resourcesRequests:
-          $ref: '#/components/schemas/v1.ResourceList'
-        storage:
-          type: integer
-        storageClass:
-          type: string
-        volumeMode:
-          $ref: '#/components/schemas/v1.PersistentVolumeMode'
-        volumeName:
-          type: string
-      type: object
-    v1beta1.ContainerMetrics:
-      properties:
-        name:
-          description: Container name corresponding to the one from pod.spec.containers.
-          type: string
-        usage:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceList'
-          description: The memory usage is the memory working set.
+        ResourceQuota:
+          $ref: '#/components/schemas/kubernetes.K8sResourceQuota'
       type: object
     k8s_io_api_core_v1.ConditionStatus:
       enum:
@@ -3342,212 +3435,209 @@ components:
       - ConditionTrue
       - ConditionFalse
       - ConditionUnknown
-    v1.SecretReference:
+    v1.Duration:
       properties:
-        name:
-          description: 'name is unique within a namespace to reference a secret resource.
-
-            +optional'
-          type: string
-        namespace:
-          description: 'namespace defines the space within which the secret name must be unique.
-
-            +optional'
-          type: string
-      type: object
-    v1.ResourceResizeRestartPolicy:
-      enum:
-      - NotRequired
-      - RestartContainer
-      type: string
-      x-enum-varnames:
-      - NotRequired
-      - RestartContainer
-    v1.RoleRef:
-      properties:
-        apiGroup:
-          description: APIGroup is the group for the resource being referenced
-          type: string
-        kind:
-          description: Kind is the type of resource being referenced
-          type: string
-        name:
-          description: 'Name is the name of resource being referenced
-
-            +required
-
-            +k8s:required'
-          type: string
-      type: object
-    v1.ContainerRestartPolicy:
-      enum:
-      - Always
-      - Never
-      - OnFailure
-      type: string
-      x-enum-varnames:
-      - ContainerRestartPolicyAlways
-      - ContainerRestartPolicyNever
-      - ContainerRestartPolicyOnFailure
-    kubernetes.K8sJobDeleteRequests:
-      additionalProperties:
-        items:
-          type: string
-        type: array
-      type: object
-    kubernetes.K8sIngressPath:
-      properties:
-        HasService:
-          type: boolean
-        Host:
-          type: string
-        IngressName:
-          type: string
-        Path:
-          type: string
-        PathType:
-          type: string
-        Port:
-          type: integer
-        ServiceName:
-          type: string
-      type: object
-    resource.Quantity:
-      properties:
-        Format:
+        time.Duration:
           enum:
-          - DecimalExponent
-          - BinarySI
-          - DecimalSI
-          type: string
-          x-enum-comments:
-            BinarySI: e.g., 12Mi (12 * 2^20)
-            DecimalExponent: e.g., 12e6
-            DecimalSI: e.g., 12M  (12 * 10^6)
+          - -9223372036854775808
+          - 9223372036854775807
+          - 1
+          - 1000
+          - 1000000
+          - 1000000000
+          - 60000000000
+          - 3600000000000
+          type: integer
           x-enum-varnames:
-          - DecimalExponent
-          - BinarySI
-          - DecimalSI
+          - minDuration
+          - maxDuration
+          - Nanosecond
+          - Microsecond
+          - Millisecond
+          - Second
+          - Minute
+          - Hour
       type: object
-    kubernetes.K8sApplication:
+    v1.ResourceQuotaSpec:
       properties:
-        Annotations:
-          additionalProperties:
-            type: string
-          type: object
-        ApplicationOwner:
-          type: string
-        ApplicationType:
-          type: string
-        Configurations:
-          items:
-            $ref: '#/components/schemas/kubernetes.Configuration'
-          type: array
-        Containers:
-          items: {}
-          type: array
-        CreationDate:
-          type: string
-        CustomResourceMetadata:
-          $ref: '#/components/schemas/kubernetes.CustomResourceMetadata'
-        DeploymentType:
-          type: string
-        Id:
-          type: string
-        Image:
-          type: string
-        Kind:
-          type: string
-        Labels:
-          additionalProperties:
-            type: string
-          type: object
-        LoadBalancerIPAddress:
-          type: string
-        MatchLabels:
-          additionalProperties:
-            type: string
-          type: object
-        Metadata:
-          $ref: '#/components/schemas/kubernetes.Metadata'
-        Name:
-          type: string
-        Namespace:
-          type: string
-        Pods:
-          items:
-            $ref: '#/components/schemas/kubernetes.Pod'
-          type: array
-        PublishedPorts:
-          items:
-            $ref: '#/components/schemas/kubernetes.PublishedPort'
-          type: array
-        Resource:
-          $ref: '#/components/schemas/kubernetes.K8sApplicationResource'
-        ResourcePool:
-          type: string
-        RunningPodsCount:
-          type: integer
-        ServiceId:
-          type: string
-        ServiceName:
-          type: string
-        ServiceType:
-          type: string
-        StackId:
-          type: string
-        StackKind:
-          type: string
-        StackName:
-          type: string
-        Status:
-          type: string
-        TotalPodsCount:
-          type: integer
-        Uid:
-          type: string
-      type: object
-    v1.NamespaceConditionType:
-      enum:
-      - NamespaceDeletionDiscoveryFailure
-      - NamespaceDeletionContentFailure
-      - NamespaceDeletionGroupVersionParsingFailure
-      - NamespaceContentRemaining
-      - NamespaceFinalizersRemaining
-      type: string
-      x-enum-varnames:
-      - NamespaceDeletionDiscoveryFailure
-      - NamespaceDeletionContentFailure
-      - NamespaceDeletionGVParsingFailure
-      - NamespaceContentRemaining
-      - NamespaceFinalizersRemaining
-    v1.SecretEnvSource:
-      properties:
-        name:
-          description: 'Name of the referent.
+        hard:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceList'
+          description: 'hard is the set of desired hard limits for each named resource.
 
-            This field is effectively required, but due to backwards compatibility is
+            More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
 
-            allowed to be empty. Instances of this type with an empty value here are
+            +optional'
+        scopeSelector:
+          allOf:
+          - $ref: '#/components/schemas/v1.ScopeSelector'
+          description: 'scopeSelector is also a collection of filters like scopes that must match each object tracked by a quota
 
-            almost certainly wrong.
+            but expressed using ScopeSelectorOperator in combination with possible values.
 
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+            For a resource to match, both scopes AND scopeSelector (if specified in spec), must be matched.
+
+            +optional'
+        scopes:
+          description: 'A collection of filters that must match each object tracked by a quota.
+
+            If not specified, the quota matches all objects.
 
             +optional
 
-            +default=""
+            +listType=atomic'
+          items:
+            $ref: '#/components/schemas/v1.ResourceQuotaScope'
+          type: array
+      type: object
+    v1.FileKeySelector:
+      properties:
+        key:
+          description: 'The key within the env file. An invalid key will prevent the pod from starting.
 
-            +kubebuilder:default=""
+            The keys defined within a source may consist of any printable ASCII characters except ''=''.
 
-            TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
+            During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+
+            +required'
           type: string
         optional:
-          description: 'Specify whether the Secret must be defined
+          description: 'Specify whether the file or its key must be defined. If the file or key
+
+            does not exist, then the env var is not published.
+
+            If optional is set to true and the specified key does not exist,
+
+            the environment variable will not be set in the Pod''s containers.
+
+
+            If optional is set to false and the specified key does not exist,
+
+            an error will be returned during Pod creation.
+
+            +optional
+
+            +default=false'
+          type: boolean
+        path:
+          description: 'The path within the volume from which to select the file.
+
+            Must be relative and may not contain the ''..'' path or start with ''..''.
+
+            +required'
+          type: string
+        volumeName:
+          description: 'The name of the volume mount containing the env file.
+
+            +required'
+          type: string
+      type: object
+    v1.ResourceName:
+      enum:
+      - cpu
+      - memory
+      - storage
+      - ephemeral-storage
+      - pods
+      - services
+      - replicationcontrollers
+      - resourcequotas
+      - secrets
+      - configmaps
+      - persistentvolumeclaims
+      - services.nodeports
+      - services.loadbalancers
+      - requests.cpu
+      - requests.memory
+      - requests.storage
+      - requests.ephemeral-storage
+      - limits.cpu
+      - limits.memory
+      - limits.ephemeral-storage
+      type: string
+      x-enum-varnames:
+      - ResourceCPU
+      - ResourceMemory
+      - ResourceStorage
+      - ResourceEphemeralStorage
+      - ResourcePods
+      - ResourceServices
+      - ResourceReplicationControllers
+      - ResourceQuotas
+      - ResourceSecrets
+      - ResourceConfigMaps
+      - ResourcePersistentVolumeClaims
+      - ResourceServicesNodePorts
+      - ResourceServicesLoadBalancers
+      - ResourceRequestsCPU
+      - ResourceRequestsMemory
+      - ResourceRequestsStorage
+      - ResourceRequestsEphemeralStorage
+      - ResourceLimitsCPU
+      - ResourceLimitsMemory
+      - ResourceLimitsEphemeralStorage
+    v1.NamespaceCondition:
+      properties:
+        lastTransitionTime:
+          description: 'Last time the condition transitioned from one status to another.
 
             +optional'
-          type: boolean
+          type: string
+        message:
+          description: 'Human-readable message indicating details about last transition.
+
+            +optional'
+          type: string
+        reason:
+          description: 'Unique, one-word, CamelCase reason for the condition''s last transition.
+
+            +optional'
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/k8s_io_api_core_v1.ConditionStatus'
+          description: Status of the condition, one of True, False, Unknown.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/v1.NamespaceConditionType'
+          description: Type of namespace controller condition.
       type: object
+    v1.PersistentVolumeReclaimPolicy:
+      enum:
+      - Recycle
+      - Delete
+      - Retain
+      type: string
+      x-enum-varnames:
+      - PersistentVolumeReclaimRecycle
+      - PersistentVolumeReclaimDelete
+      - PersistentVolumeReclaimRetain
+    v1beta1.ContainerMetrics:
+      properties:
+        name:
+          description: Container name corresponding to the one from pod.spec.containers.
+          type: string
+        usage:
+          allOf:
+          - $ref: '#/components/schemas/v1.ResourceList'
+          description: The memory usage is the memory working set.
+      type: object
+    v1.NamespacePhase:
+      enum:
+      - Active
+      - Terminating
+      type: string
+      x-enum-varnames:
+      - NamespaceActive
+      - NamespaceTerminating
+    v1.TerminationMessagePolicy:
+      enum:
+      - File
+      - FallbackToLogsOnError
+      type: string
+      x-enum-varnames:
+      - TerminationMessageReadFile
+      - TerminationMessageFallbackToLogsOnError
     v1.RecursiveReadOnlyMode:
       enum:
       - Disabled
@@ -3558,12 +3648,6 @@ components:
       - RecursiveReadOnlyDisabled
       - RecursiveReadOnlyIfPossible
       - RecursiveReadOnlyEnabled
-    kubernetes.K8sCronJobDeleteRequests:
-      additionalProperties:
-        items:
-          type: string
-        type: array
-      type: object
     v1.Probe:
       properties:
         exec:
@@ -3651,326 +3735,53 @@ components:
             +optional'
           type: integer
       type: object
-    kubernetes.Metadata:
+    kubernetes.K8sServiceIngress:
       properties:
-        annotations:
-          additionalProperties:
-            type: string
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-      type: object
-    v1.ResourceList:
-      additionalProperties:
-        $ref: '#/components/schemas/resource.Quantity'
-      type: object
-    kubernetes.K8sIngressInfo:
-      properties:
-        Annotations:
-          additionalProperties:
-            type: string
-          type: object
-        ClassName:
+        Hostname:
           type: string
-        CreationDate:
-          type: string
-        Hosts:
-          items:
-            type: string
-          type: array
-        Labels:
-          additionalProperties:
-            type: string
-          type: object
-        Name:
-          type: string
-        Namespace:
-          type: string
-        Paths:
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sIngressPath'
-          type: array
-        TLS:
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sIngressTLS'
-          type: array
-        Type:
-          type: string
-        UID:
+        IP:
           type: string
       type: object
-    kubernetes.K8sConfigurationOwnerResource:
+    v1.WindowsSecurityContextOptions:
       properties:
-        Id:
-          type: string
-        Name:
-          type: string
-        ResourceKind:
-          type: string
-      type: object
-    v1.ContainerRestartRuleOnExitCodes:
-      properties:
-        operator:
-          allOf:
-          - $ref: '#/components/schemas/v1.ContainerRestartRuleOnExitCodesOperator'
-          description: "Represents the relationship between the container exit code(s) and the\nspecified values. Possible values are:\n- In: the requirement is satisfied if the container exit code is in the\n  set of specified values.\n- NotIn: the requirement is satisfied if the container exit code is\n  not in the set of specified values.\n+required"
-        values:
-          description: 'Specifies the set of values to check for container exit codes.
+        gmsaCredentialSpec:
+          description: 'GMSACredentialSpec is where the GMSA admission webhook
 
-            At most 255 elements are allowed.
+            (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
 
-            +optional
-
-            +listType=set'
-          items:
-            type: integer
-          type: array
-      type: object
-    v1.Signal:
-      enum:
-      - SIGABRT
-      - SIGALRM
-      - SIGBUS
-      - SIGCHLD
-      - SIGCLD
-      - SIGCONT
-      - SIGFPE
-      - SIGHUP
-      - SIGILL
-      - SIGINT
-      - SIGIO
-      - SIGIOT
-      - SIGKILL
-      - SIGPIPE
-      - SIGPOLL
-      - SIGPROF
-      - SIGPWR
-      - SIGQUIT
-      - SIGSEGV
-      - SIGSTKFLT
-      - SIGSTOP
-      - SIGSYS
-      - SIGTERM
-      - SIGTRAP
-      - SIGTSTP
-      - SIGTTIN
-      - SIGTTOU
-      - SIGURG
-      - SIGUSR1
-      - SIGUSR2
-      - SIGVTALRM
-      - SIGWINCH
-      - SIGXCPU
-      - SIGXFSZ
-      - SIGRTMIN
-      - SIGRTMIN+1
-      - SIGRTMIN+2
-      - SIGRTMIN+3
-      - SIGRTMIN+4
-      - SIGRTMIN+5
-      - SIGRTMIN+6
-      - SIGRTMIN+7
-      - SIGRTMIN+8
-      - SIGRTMIN+9
-      - SIGRTMIN+10
-      - SIGRTMIN+11
-      - SIGRTMIN+12
-      - SIGRTMIN+13
-      - SIGRTMIN+14
-      - SIGRTMIN+15
-      - SIGRTMAX-14
-      - SIGRTMAX-13
-      - SIGRTMAX-12
-      - SIGRTMAX-11
-      - SIGRTMAX-10
-      - SIGRTMAX-9
-      - SIGRTMAX-8
-      - SIGRTMAX-7
-      - SIGRTMAX-6
-      - SIGRTMAX-5
-      - SIGRTMAX-4
-      - SIGRTMAX-3
-      - SIGRTMAX-2
-      - SIGRTMAX-1
-      - SIGRTMAX
-      type: string
-      x-enum-varnames:
-      - SIGABRT
-      - SIGALRM
-      - SIGBUS
-      - SIGCHLD
-      - SIGCLD
-      - SIGCONT
-      - SIGFPE
-      - SIGHUP
-      - SIGILL
-      - SIGINT
-      - SIGIO
-      - SIGIOT
-      - SIGKILL
-      - SIGPIPE
-      - SIGPOLL
-      - SIGPROF
-      - SIGPWR
-      - SIGQUIT
-      - SIGSEGV
-      - SIGSTKFLT
-      - SIGSTOP
-      - SIGSYS
-      - SIGTERM
-      - SIGTRAP
-      - SIGTSTP
-      - SIGTTIN
-      - SIGTTOU
-      - SIGURG
-      - SIGUSR1
-      - SIGUSR2
-      - SIGVTALRM
-      - SIGWINCH
-      - SIGXCPU
-      - SIGXFSZ
-      - SIGRTMIN
-      - SIGRTMINPLUS1
-      - SIGRTMINPLUS2
-      - SIGRTMINPLUS3
-      - SIGRTMINPLUS4
-      - SIGRTMINPLUS5
-      - SIGRTMINPLUS6
-      - SIGRTMINPLUS7
-      - SIGRTMINPLUS8
-      - SIGRTMINPLUS9
-      - SIGRTMINPLUS10
-      - SIGRTMINPLUS11
-      - SIGRTMINPLUS12
-      - SIGRTMINPLUS13
-      - SIGRTMINPLUS14
-      - SIGRTMINPLUS15
-      - SIGRTMAXMINUS14
-      - SIGRTMAXMINUS13
-      - SIGRTMAXMINUS12
-      - SIGRTMAXMINUS11
-      - SIGRTMAXMINUS10
-      - SIGRTMAXMINUS9
-      - SIGRTMAXMINUS8
-      - SIGRTMAXMINUS7
-      - SIGRTMAXMINUS6
-      - SIGRTMAXMINUS5
-      - SIGRTMAXMINUS4
-      - SIGRTMAXMINUS3
-      - SIGRTMAXMINUS2
-      - SIGRTMAXMINUS1
-      - SIGRTMAX
-    kubernetes.K8sNamespaceDetails:
-      properties:
-        Annotations:
-          additionalProperties:
-            type: string
-          type: object
-        Name:
-          type: string
-        Owner:
-          type: string
-        ResourceQuota:
-          $ref: '#/components/schemas/kubernetes.K8sResourceQuota'
-      type: object
-    v1.VolumeDevice:
-      properties:
-        devicePath:
-          description: devicePath is the path inside of the container that the device will be mapped to.
-          type: string
-        name:
-          description: name must match the name of a persistentVolumeClaim in the pod
-          type: string
-      type: object
-    v1.NamespacePhase:
-      enum:
-      - Active
-      - Terminating
-      type: string
-      x-enum-varnames:
-      - NamespaceActive
-      - NamespaceTerminating
-    kubernetes.K8sServicePort:
-      properties:
-        Name:
-          type: string
-        NodePort:
-          type: integer
-        Port:
-          type: integer
-        Protocol:
-          type: string
-        TargetPort:
-          type: string
-      type: object
-    v1.EnvFromSource:
-      properties:
-        configMapRef:
-          allOf:
-          - $ref: '#/components/schemas/v1.ConfigMapEnvSource'
-          description: 'The ConfigMap to select from
-
-            +optional'
-        prefix:
-          description: 'Optional text to prepend to the name of each environment variable.
-
-            May consist of any printable ASCII characters except ''=''.
+            GMSA credential spec named by the GMSACredentialSpecName field.
 
             +optional'
           type: string
-        secretRef:
-          allOf:
-          - $ref: '#/components/schemas/v1.SecretEnvSource'
-          description: 'The Secret to select from
-
-            +optional'
-      type: object
-    v1.NamespaceCondition:
-      properties:
-        lastTransitionTime:
-          description: 'Last time the condition transitioned from one status to another.
+        gmsaCredentialSpecName:
+          description: 'GMSACredentialSpecName is the name of the GMSA credential spec to use.
 
             +optional'
           type: string
-        message:
-          description: 'Human-readable message indicating details about last transition.
+        hostProcess:
+          description: 'HostProcess determines if a container should be run as a ''Host Process'' container.
+
+            All of a Pod''s containers must have the same effective HostProcess value
+
+            (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+
+            In addition, if HostProcess is true then HostNetwork must also be set to true.
 
             +optional'
-          type: string
-        reason:
-          description: 'Unique, one-word, CamelCase reason for the condition''s last transition.
+          type: boolean
+        runAsUserName:
+          description: 'The UserName in Windows to run the entrypoint of the container process.
+
+            Defaults to the user specified in image metadata if unspecified.
+
+            May also be set in PodSecurityContext. If set in both SecurityContext and
+
+            PodSecurityContext, the value specified in SecurityContext takes precedence.
 
             +optional'
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/k8s_io_api_core_v1.ConditionStatus'
-          description: Status of the condition, one of True, False, Unknown.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/v1.NamespaceConditionType'
-          description: Type of namespace controller condition.
-      type: object
-    v1.ResourceFieldSelector:
-      properties:
-        containerName:
-          description: 'Container name: required for volumes, optional for env vars
-
-            +optional'
-          type: string
-        divisor:
-          allOf:
-          - $ref: '#/components/schemas/resource.Quantity'
-          description: 'Specifies the output format of the exposed resources, defaults to "1"
-
-            +optional'
-        resource:
-          description: 'Required: resource to select'
           type: string
       type: object
-    v1.ConfigMapEnvSource:
+    v1.SecretEnvSource:
       properties:
         name:
           description: 'Name of the referent.
@@ -3992,10 +3803,28 @@ components:
             TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
           type: string
         optional:
-          description: 'Specify whether the ConfigMap must be defined
+          description: 'Specify whether the Secret must be defined
 
             +optional'
           type: boolean
+      type: object
+    v1.AppArmorProfile:
+      properties:
+        localhostProfile:
+          description: 'localhostProfile indicates a profile loaded on the node that should be used.
+
+            The profile must be preconfigured on the node to work.
+
+            Must match the loaded name of the profile.
+
+            Must be set if and only if type is "Localhost".
+
+            +optional'
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/v1.AppArmorProfileType'
+          description: "type indicates which kind of AppArmor profile will be applied.\nValid options are:\n  Localhost - a profile pre-loaded on the node.\n  RuntimeDefault - the container runtime's default profile.\n  Unconfined - no AppArmor enforcement.\n+unionDiscriminator"
       type: object
     v1.Container:
       properties:
@@ -4402,6 +4231,141 @@ components:
             +optional'
           type: string
       type: object
+    kubernetes.K8sClusterRoleBinding:
+      properties:
+        creationDate:
+          type: string
+        isSystem:
+          type: boolean
+        name:
+          type: string
+        namespace:
+          type: string
+        roleRef:
+          $ref: '#/components/schemas/v1.RoleRef'
+        subjects:
+          items:
+            $ref: '#/components/schemas/k8s_io_api_rbac_v1.Subject'
+          type: array
+        uid:
+          type: string
+      type: object
+    kubernetes.K8sApplication:
+      properties:
+        Annotations:
+          additionalProperties:
+            type: string
+          type: object
+        ApplicationOwner:
+          type: string
+        ApplicationType:
+          type: string
+        Configurations:
+          items:
+            $ref: '#/components/schemas/kubernetes.Configuration'
+          type: array
+        Containers:
+          items: {}
+          type: array
+        CreationDate:
+          type: string
+        CustomResourceMetadata:
+          $ref: '#/components/schemas/kubernetes.CustomResourceMetadata'
+        DeploymentType:
+          type: string
+        Id:
+          type: string
+        Image:
+          type: string
+        Kind:
+          type: string
+        Labels:
+          additionalProperties:
+            type: string
+          type: object
+        LoadBalancerIPAddress:
+          type: string
+        MatchLabels:
+          additionalProperties:
+            type: string
+          type: object
+        Metadata:
+          $ref: '#/components/schemas/kubernetes.Metadata'
+        Name:
+          type: string
+        Namespace:
+          type: string
+        Pods:
+          items:
+            $ref: '#/components/schemas/kubernetes.Pod'
+          type: array
+        PublishedPorts:
+          items:
+            $ref: '#/components/schemas/kubernetes.PublishedPort'
+          type: array
+        Resource:
+          $ref: '#/components/schemas/kubernetes.K8sApplicationResource'
+        ResourcePool:
+          type: string
+        RunningPodsCount:
+          type: integer
+        ServiceId:
+          type: string
+        ServiceName:
+          type: string
+        ServiceType:
+          type: string
+        StackId:
+          type: string
+        StackKind:
+          type: string
+        StackName:
+          type: string
+        Status:
+          type: string
+        TotalPodsCount:
+          type: integer
+        Uid:
+          type: string
+      type: object
+    v1beta1.NodeMetricsList:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation of an object.
+
+            Servers should convert recognized schemas to the latest internal value, and
+
+            may reject unrecognized values.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+            +optional'
+          type: string
+        items:
+          description: List of node metrics.
+          items:
+            $ref: '#/components/schemas/v1beta1.NodeMetrics'
+          type: array
+        kind:
+          description: 'Kind is a string value representing the REST resource this object represents.
+
+            Servers may infer this from the endpoint the client submits requests to.
+
+            Cannot be updated.
+
+            In CamelCase.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+            +optional'
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/v1.ListMeta'
+          description: 'Standard list metadata.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+      type: object
     kubernetes.Configuration:
       properties:
         ConfigurationOwner:
@@ -4410,6 +4374,287 @@ components:
           additionalProperties: {}
           type: object
         Kind:
+          type: string
+      type: object
+    kubernetes.describeResourceResponse:
+      properties:
+        describe:
+          type: string
+      type: object
+    intstr.IntOrString:
+      properties:
+        IntVal:
+          type: integer
+        StrVal:
+          type: string
+        Type:
+          $ref: '#/components/schemas/intstr.Type'
+      type: object
+    kubernetes.K8sServiceInfo:
+      properties:
+        AllocateLoadBalancerNodePorts:
+          type: boolean
+        Annotations:
+          additionalProperties:
+            type: string
+          type: object
+        Applications:
+          description: serviceList screen
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sApplication'
+          type: array
+        ClusterIPs:
+          items:
+            type: string
+          type: array
+        CreationDate:
+          type: string
+        ExternalIPs:
+          items:
+            type: string
+          type: array
+        ExternalName:
+          type: string
+        IngressStatus:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sServiceIngress'
+          type: array
+        Labels:
+          additionalProperties:
+            type: string
+          type: object
+        Name:
+          type: string
+        Namespace:
+          type: string
+        Ports:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sServicePort'
+          type: array
+        Selector:
+          additionalProperties:
+            type: string
+          type: object
+        Type:
+          type: string
+        UID:
+          type: string
+      type: object
+    kubernetes.CustomResourceMetadata:
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+        plural:
+          type: string
+        scope:
+          type: string
+      type: object
+    kubernetes.K8sJobDeleteRequests:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      type: object
+    v1.SeccompProfile:
+      properties:
+        localhostProfile:
+          description: 'localhostProfile indicates a profile defined in a file on the node should be used.
+
+            The profile must be preconfigured on the node to work.
+
+            Must be a descending path, relative to the kubelet''s configured seccomp profile location.
+
+            Must be set if type is "Localhost". Must NOT be set for any other type.
+
+            +optional'
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/v1.SeccompProfileType'
+          description: 'type indicates which kind of seccomp profile will be applied.
+
+            Valid options are:
+
+
+            Localhost - a profile defined in a file on the node should be used.
+
+            RuntimeDefault - the container runtime default profile should be used.
+
+            Unconfined - no profile should be applied.
+
+            +unionDiscriminator'
+      type: object
+    kubernetes.K8sVolumeInfo:
+      properties:
+        persistentVolume:
+          $ref: '#/components/schemas/kubernetes.K8sPersistentVolume'
+        persistentVolumeClaim:
+          $ref: '#/components/schemas/kubernetes.K8sPersistentVolumeClaim'
+        storageClass:
+          $ref: '#/components/schemas/kubernetes.K8sStorageClass'
+      type: object
+    v1.ConfigMapKeySelector:
+      properties:
+        key:
+          description: The key to select.
+          type: string
+        name:
+          description: 'Name of the referent.
+
+            This field is effectively required, but due to backwards compatibility is
+
+            allowed to be empty. Instances of this type with an empty value here are
+
+            almost certainly wrong.
+
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+            +optional
+
+            +default=""
+
+            +kubebuilder:default=""
+
+            TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
+          type: string
+        optional:
+          description: 'Specify whether the ConfigMap or its key must be defined
+
+            +optional'
+          type: boolean
+      type: object
+    kubernetes.K8sJob:
+      properties:
+        BackoffLimit:
+          type: integer
+        Command:
+          type: string
+        Completions:
+          type: integer
+        Container:
+          $ref: '#/components/schemas/v1.Container'
+        Duration:
+          type: string
+        FailedReason:
+          type: string
+        FinishTime:
+          type: string
+        Id:
+          type: string
+        IsSystem:
+          type: boolean
+        Name:
+          type: string
+        Namespace:
+          type: string
+        PodName:
+          type: string
+        StartTime:
+          type: string
+        Status:
+          type: string
+      type: object
+    v1.VolumeDevice:
+      properties:
+        devicePath:
+          description: devicePath is the path inside of the container that the device will be mapped to.
+          type: string
+        name:
+          description: name must match the name of a persistentVolumeClaim in the pod
+          type: string
+      type: object
+    v1.EnvVar:
+      properties:
+        name:
+          description: 'Name of the environment variable.
+
+            May consist of any printable ASCII characters except ''=''.'
+          type: string
+        value:
+          description: 'Variable references $(VAR_NAME) are expanded
+
+            using the previously defined environment variables in the container and
+
+            any service environment variables. If a variable cannot be resolved,
+
+            the reference in the input string will be unchanged. Double $$ are reduced
+
+            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+
+            "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+
+            Escaped references will never be expanded, regardless of whether the variable
+
+            exists or not.
+
+            Defaults to "".
+
+            +optional'
+          type: string
+        valueFrom:
+          allOf:
+          - $ref: '#/components/schemas/v1.EnvVarSource'
+          description: 'Source for the environment variable''s value. Cannot be used if value is not empty.
+
+            +optional'
+      type: object
+    v1.Protocol:
+      enum:
+      - TCP
+      - UDP
+      - SCTP
+      type: string
+      x-enum-varnames:
+      - ProtocolTCP
+      - ProtocolUDP
+      - ProtocolSCTP
+    v1.OwnerReference:
+      properties:
+        apiVersion:
+          description: API version of the referent.
+          type: string
+        blockOwnerDeletion:
+          description: 'If true, AND if the owner has the "foregroundDeletion" finalizer, then
+
+            the owner cannot be deleted from the key-value store until this
+
+            reference is removed.
+
+            See https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion
+
+            for how the garbage collector interacts with this field and enforces the foreground deletion.
+
+            Defaults to false.
+
+            To set this field, a user needs "delete" permission of the owner,
+
+            otherwise 422 (Unprocessable Entity) will be returned.
+
+            +optional'
+          type: boolean
+        controller:
+          description: 'If true, this reference points to the managing controller.
+
+            +optional'
+          type: boolean
+        kind:
+          description: 'Kind of the referent.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        name:
+          description: 'Name of the referent.
+
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names'
+          type: string
+        uid:
+          description: 'UID of the referent.
+
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids'
           type: string
       type: object
     v1.Lifecycle:
@@ -4459,188 +4704,141 @@ components:
 
             +optional'
       type: object
-    intstr.IntOrString:
+    v1.HTTPHeader:
       properties:
-        IntVal:
-          type: integer
-        StrVal:
-          type: string
-        Type:
-          $ref: '#/components/schemas/intstr.Type'
-      type: object
-    kubernetes.K8sClusterRole:
-      properties:
-        creationDate:
-          type: string
-        isSystem:
-          type: boolean
         name:
+          description: 'The header field name.
+
+            This will be canonicalized upon output, so case-variant names will be understood as the same header.'
           type: string
-        uid:
-          type: string
-      type: object
-    kubernetes.K8sRoleBinding:
-      properties:
-        creationDate:
-          type: string
-        isSystem:
-          type: boolean
-        name:
-          type: string
-        namespace:
-          type: string
-        roleRef:
-          $ref: '#/components/schemas/v1.RoleRef'
-        subjects:
-          items:
-            $ref: '#/components/schemas/k8s_io_api_rbac_v1.Subject'
-          type: array
-        uid:
+        value:
+          description: The header field value
           type: string
       type: object
-    kubernetes.CustomResourceMetadata:
+    kubernetes.K8sEventInvolvedObject:
       properties:
-        apiVersion:
-          type: string
         kind:
           type: string
         name:
           type: string
-        plural:
+        namespace:
           type: string
-        scope:
+        uid:
           type: string
       type: object
-    kubernetes.K8sSecret:
+    kubernetes.K8sServiceAccountDeleteRequests:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      type: object
+    v1.RoleRef:
       properties:
-        Annotations:
-          additionalProperties:
-            type: string
-          type: object
-        ConfigurationOwner:
+        apiGroup:
+          description: APIGroup is the group for the resource being referenced
           type: string
-        ConfigurationOwnerId:
+        kind:
+          description: Kind is the type of resource being referenced
           type: string
-        ConfigurationOwners:
+        name:
+          description: 'Name is the name of resource being referenced
+
+            +required
+
+            +k8s:required'
+          type: string
+      type: object
+    v1.PersistentVolumeClaimPhase:
+      enum:
+      - Pending
+      - Bound
+      - Lost
+      type: string
+      x-enum-varnames:
+      - ClaimPending
+      - ClaimBound
+      - ClaimLost
+    v1.ProcMountType:
+      enum:
+      - Default
+      - Unmasked
+      type: string
+      x-enum-varnames:
+      - DefaultProcMount
+      - UnmaskedProcMount
+    v1.Capabilities:
+      properties:
+        add:
+          description: 'Added capabilities
+
+            +optional
+
+            +listType=atomic'
           items:
-            $ref: '#/components/schemas/kubernetes.K8sConfigurationOwnerResource'
+            type: string
           type: array
-        CreationDate:
+        drop:
+          description: 'Removed capabilities
+
+            +optional
+
+            +listType=atomic'
+          items:
+            type: string
+          type: array
+      type: object
+    v1.AppArmorProfileType:
+      enum:
+      - Unconfined
+      - RuntimeDefault
+      - Localhost
+      type: string
+      x-enum-varnames:
+      - AppArmorProfileTypeUnconfined
+      - AppArmorProfileTypeRuntimeDefault
+      - AppArmorProfileTypeLocalhost
+    kubernetes.K8sConfigurationOwnerResource:
+      properties:
+        Id:
           type: string
-        Data:
-          additionalProperties:
-            type: string
-          type: object
-        IsUsed:
-          type: boolean
-        Labels:
-          additionalProperties:
-            type: string
-          type: object
         Name:
           type: string
-        Namespace:
-          type: string
-        SecretType:
-          type: string
-        UID:
+        ResourceKind:
           type: string
       type: object
-    v1.EnvVarSource:
+    v1.ResourceQuotaStatus:
       properties:
-        configMapKeyRef:
+        hard:
           allOf:
-          - $ref: '#/components/schemas/v1.ConfigMapKeySelector'
-          description: 'Selects a key of a ConfigMap.
+          - $ref: '#/components/schemas/v1.ResourceList'
+          description: 'Hard is the set of enforced hard limits for each named resource.
+
+            More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
 
             +optional'
-        fieldRef:
+        used:
           allOf:
-          - $ref: '#/components/schemas/v1.ObjectFieldSelector'
-          description: 'Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels[''<KEY>'']`, `metadata.annotations[''<KEY>'']`,
-
-            spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
-
-            +optional'
-        fileKeyRef:
-          allOf:
-          - $ref: '#/components/schemas/v1.FileKeySelector'
-          description: 'FileKeyRef selects a key of the env file.
-
-            Requires the EnvFiles feature gate to be enabled.
-
-
-            +featureGate=EnvFiles
-
-            +optional'
-        resourceFieldRef:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceFieldSelector'
-          description: 'Selects a resource of the container: only resources limits and requests
-
-            (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
-
-            +optional'
-        secretKeyRef:
-          allOf:
-          - $ref: '#/components/schemas/v1.SecretKeySelector'
-          description: 'Selects a key of a secret in the pod''s namespace
+          - $ref: '#/components/schemas/v1.ResourceList'
+          description: 'Used is the current observed total usage of the resource in the namespace.
 
             +optional'
       type: object
-    v1.TerminationMessagePolicy:
-      enum:
-      - File
-      - FallbackToLogsOnError
-      type: string
-      x-enum-varnames:
-      - TerminationMessageReadFile
-      - TerminationMessageFallbackToLogsOnError
-    v1.PersistentVolumeMode:
-      enum:
-      - Block
-      - Filesystem
-      type: string
-      x-enum-varnames:
-      - PersistentVolumeBlock
-      - PersistentVolumeFilesystem
-    v1.WindowsSecurityContextOptions:
+    v1.GRPCAction:
       properties:
-        gmsaCredentialSpec:
-          description: 'GMSACredentialSpec is where the GMSA admission webhook
+        port:
+          description: Port number of the gRPC service. Number must be in the range 1 to 65535.
+          type: integer
+        service:
+          description: 'Service is the name of the service to place in the gRPC HealthCheckRequest
 
-            (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+            (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
 
-            GMSA credential spec named by the GMSACredentialSpecName field.
 
-            +optional'
-          type: string
-        gmsaCredentialSpecName:
-          description: 'GMSACredentialSpecName is the name of the GMSA credential spec to use.
+            If this is not specified, the default behavior is defined by gRPC.
 
-            +optional'
-          type: string
-        hostProcess:
-          description: 'HostProcess determines if a container should be run as a ''Host Process'' container.
+            +optional
 
-            All of a Pod''s containers must have the same effective HostProcess value
-
-            (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
-
-            In addition, if HostProcess is true then HostNetwork must also be set to true.
-
-            +optional'
-          type: boolean
-        runAsUserName:
-          description: 'The UserName in Windows to run the entrypoint of the container process.
-
-            Defaults to the user specified in image metadata if unspecified.
-
-            May also be set in PodSecurityContext. If set in both SecurityContext and
-
-            PodSecurityContext, the value specified in SecurityContext takes precedence.
-
-            +optional'
+            +default=""'
           type: string
       type: object
     v1.ObjectMeta:
@@ -4925,308 +5123,305 @@ components:
             +optional'
           type: string
       type: object
-    v1.URIScheme:
-      enum:
-      - HTTP
-      - HTTPS
-      type: string
-      x-enum-varnames:
-      - URISchemeHTTP
-      - URISchemeHTTPS
-    k8s_io_api_core_v1.ResourceClaim:
+    v1.ContainerRestartRuleOnExitCodes:
       properties:
-        name:
-          description: 'Name must match the name of one entry in pod.spec.resourceClaims of
-
-            the Pod where this field is used. It makes that resource available
-
-            inside a container.'
-          type: string
-        request:
-          description: 'Request is the name chosen for a request in the referenced claim.
-
-            If empty, everything from the claim is made available, otherwise
-
-            only the result of this request.
-
-
-            +optional'
-          type: string
-      type: object
-    v1.AppArmorProfileType:
-      enum:
-      - Unconfined
-      - RuntimeDefault
-      - Localhost
-      type: string
-      x-enum-varnames:
-      - AppArmorProfileTypeUnconfined
-      - AppArmorProfileTypeRuntimeDefault
-      - AppArmorProfileTypeLocalhost
-    portainer.K8sNamespaceInfo:
-      properties:
-        Annotations:
-          additionalProperties:
-            type: string
-          type: object
-        CreationDate:
-          type: string
-        Id:
-          type: string
-        IsDefault:
-          type: boolean
-        IsSystem:
-          type: boolean
-        Name:
-          type: string
-        NamespaceOwner:
-          type: string
-        ResourceQuota:
-          $ref: '#/components/schemas/v1.ResourceQuota'
-        Status:
-          $ref: '#/components/schemas/v1.NamespaceStatus'
-        UnhealthyEventCount:
-          type: integer
-      type: object
-    v1.ContainerResizePolicy:
-      properties:
-        resourceName:
+        operator:
           allOf:
-          - $ref: '#/components/schemas/v1.ResourceName'
-          description: 'Name of the resource to which this resource resize policy applies.
+          - $ref: '#/components/schemas/v1.ContainerRestartRuleOnExitCodesOperator'
+          description: "Represents the relationship between the container exit code(s) and the\nspecified values. Possible values are:\n- In: the requirement is satisfied if the container exit code is in the\n  set of specified values.\n- NotIn: the requirement is satisfied if the container exit code is\n  not in the set of specified values.\n+required"
+        values:
+          description: 'Specifies the set of values to check for container exit codes.
 
-            Supported values: cpu, memory.'
-        restartPolicy:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceResizeRestartPolicy'
-          description: 'Restart policy to apply when specified resource is resized.
-
-            If not specified, it defaults to NotRequired.'
-      type: object
-    v1.PersistentVolumeClaimPhase:
-      enum:
-      - Pending
-      - Bound
-      - Lost
-      type: string
-      x-enum-varnames:
-      - ClaimPending
-      - ClaimBound
-      - ClaimLost
-    kubernetes.IngressRule:
-      properties:
-        Host:
-          type: string
-        IP:
-          type: string
-        Path:
-          type: string
-        TLS:
-          items:
-            $ref: '#/components/schemas/kubernetes.TLSInfo'
-          type: array
-      type: object
-    v1.ManagedFieldsOperationType:
-      enum:
-      - Apply
-      - Update
-      type: string
-      x-enum-varnames:
-      - ManagedFieldsOperationApply
-      - ManagedFieldsOperationUpdate
-    v1.SeccompProfile:
-      properties:
-        localhostProfile:
-          description: 'localhostProfile indicates a profile defined in a file on the node should be used.
-
-            The profile must be preconfigured on the node to work.
-
-            Must be a descending path, relative to the kubelet''s configured seccomp profile location.
-
-            Must be set if type is "Localhost". Must NOT be set for any other type.
-
-            +optional'
-          type: string
-        type:
-          allOf:
-          - $ref: '#/components/schemas/v1.SeccompProfileType'
-          description: 'type indicates which kind of seccomp profile will be applied.
-
-            Valid options are:
-
-
-            Localhost - a profile defined in a file on the node should be used.
-
-            RuntimeDefault - the container runtime default profile should be used.
-
-            Unconfined - no profile should be applied.
-
-            +unionDiscriminator'
-      type: object
-    v1.OwnerReference:
-      properties:
-        apiVersion:
-          description: API version of the referent.
-          type: string
-        blockOwnerDeletion:
-          description: 'If true, AND if the owner has the "foregroundDeletion" finalizer, then
-
-            the owner cannot be deleted from the key-value store until this
-
-            reference is removed.
-
-            See https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion
-
-            for how the garbage collector interacts with this field and enforces the foreground deletion.
-
-            Defaults to false.
-
-            To set this field, a user needs "delete" permission of the owner,
-
-            otherwise 422 (Unprocessable Entity) will be returned.
-
-            +optional'
-          type: boolean
-        controller:
-          description: 'If true, this reference points to the managing controller.
-
-            +optional'
-          type: boolean
-        kind:
-          description: 'Kind of the referent.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-          type: string
-        name:
-          description: 'Name of the referent.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names'
-          type: string
-        uid:
-          description: 'UID of the referent.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids'
-          type: string
-      type: object
-    v1.HTTPGetAction:
-      properties:
-        host:
-          description: 'Host name to connect to, defaults to the pod IP. You probably want to set
-
-            "Host" in httpHeaders instead.
-
-            +optional'
-          type: string
-        httpHeaders:
-          description: 'Custom headers to set in the request. HTTP allows repeated headers.
+            At most 255 elements are allowed.
 
             +optional
 
-            +listType=atomic'
+            +listType=set'
           items:
-            $ref: '#/components/schemas/v1.HTTPHeader'
+            type: integer
           type: array
-        path:
-          description: 'Path to access on the HTTP server.
+      type: object
+    v1.Signal:
+      enum:
+      - SIGABRT
+      - SIGALRM
+      - SIGBUS
+      - SIGCHLD
+      - SIGCLD
+      - SIGCONT
+      - SIGFPE
+      - SIGHUP
+      - SIGILL
+      - SIGINT
+      - SIGIO
+      - SIGIOT
+      - SIGKILL
+      - SIGPIPE
+      - SIGPOLL
+      - SIGPROF
+      - SIGPWR
+      - SIGQUIT
+      - SIGSEGV
+      - SIGSTKFLT
+      - SIGSTOP
+      - SIGSYS
+      - SIGTERM
+      - SIGTRAP
+      - SIGTSTP
+      - SIGTTIN
+      - SIGTTOU
+      - SIGURG
+      - SIGUSR1
+      - SIGUSR2
+      - SIGVTALRM
+      - SIGWINCH
+      - SIGXCPU
+      - SIGXFSZ
+      - SIGRTMIN
+      - SIGRTMIN+1
+      - SIGRTMIN+2
+      - SIGRTMIN+3
+      - SIGRTMIN+4
+      - SIGRTMIN+5
+      - SIGRTMIN+6
+      - SIGRTMIN+7
+      - SIGRTMIN+8
+      - SIGRTMIN+9
+      - SIGRTMIN+10
+      - SIGRTMIN+11
+      - SIGRTMIN+12
+      - SIGRTMIN+13
+      - SIGRTMIN+14
+      - SIGRTMIN+15
+      - SIGRTMAX-14
+      - SIGRTMAX-13
+      - SIGRTMAX-12
+      - SIGRTMAX-11
+      - SIGRTMAX-10
+      - SIGRTMAX-9
+      - SIGRTMAX-8
+      - SIGRTMAX-7
+      - SIGRTMAX-6
+      - SIGRTMAX-5
+      - SIGRTMAX-4
+      - SIGRTMAX-3
+      - SIGRTMAX-2
+      - SIGRTMAX-1
+      - SIGRTMAX
+      type: string
+      x-enum-varnames:
+      - SIGABRT
+      - SIGALRM
+      - SIGBUS
+      - SIGCHLD
+      - SIGCLD
+      - SIGCONT
+      - SIGFPE
+      - SIGHUP
+      - SIGILL
+      - SIGINT
+      - SIGIO
+      - SIGIOT
+      - SIGKILL
+      - SIGPIPE
+      - SIGPOLL
+      - SIGPROF
+      - SIGPWR
+      - SIGQUIT
+      - SIGSEGV
+      - SIGSTKFLT
+      - SIGSTOP
+      - SIGSYS
+      - SIGTERM
+      - SIGTRAP
+      - SIGTSTP
+      - SIGTTIN
+      - SIGTTOU
+      - SIGURG
+      - SIGUSR1
+      - SIGUSR2
+      - SIGVTALRM
+      - SIGWINCH
+      - SIGXCPU
+      - SIGXFSZ
+      - SIGRTMIN
+      - SIGRTMINPLUS1
+      - SIGRTMINPLUS2
+      - SIGRTMINPLUS3
+      - SIGRTMINPLUS4
+      - SIGRTMINPLUS5
+      - SIGRTMINPLUS6
+      - SIGRTMINPLUS7
+      - SIGRTMINPLUS8
+      - SIGRTMINPLUS9
+      - SIGRTMINPLUS10
+      - SIGRTMINPLUS11
+      - SIGRTMINPLUS12
+      - SIGRTMINPLUS13
+      - SIGRTMINPLUS14
+      - SIGRTMINPLUS15
+      - SIGRTMAXMINUS14
+      - SIGRTMAXMINUS13
+      - SIGRTMAXMINUS12
+      - SIGRTMAXMINUS11
+      - SIGRTMAXMINUS10
+      - SIGRTMAXMINUS9
+      - SIGRTMAXMINUS8
+      - SIGRTMAXMINUS7
+      - SIGRTMAXMINUS6
+      - SIGRTMAXMINUS5
+      - SIGRTMAXMINUS4
+      - SIGRTMAXMINUS3
+      - SIGRTMAXMINUS2
+      - SIGRTMAXMINUS1
+      - SIGRTMAX
+    kubernetes.K8sRoleBinding:
+      properties:
+        creationDate:
+          type: string
+        isSystem:
+          type: boolean
+        name:
+          type: string
+        namespace:
+          type: string
+        roleRef:
+          $ref: '#/components/schemas/v1.RoleRef'
+        subjects:
+          items:
+            $ref: '#/components/schemas/k8s_io_api_rbac_v1.Subject'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1.ObjectFieldSelector:
+      properties:
+        apiVersion:
+          description: 'Version of the schema the FieldPath is written in terms of, defaults to "v1".
 
             +optional'
           type: string
-        port:
+        fieldPath:
+          description: Path of the field to select in the specified API version.
+          type: string
+      type: object
+    resource.Quantity:
+      properties:
+        Format:
+          enum:
+          - DecimalExponent
+          - BinarySI
+          - DecimalSI
+          type: string
+          x-enum-comments:
+            BinarySI: e.g., 12Mi (12 * 2^20)
+            DecimalExponent: e.g., 12e6
+            DecimalSI: e.g., 12M  (12 * 10^6)
+          x-enum-varnames:
+          - DecimalExponent
+          - BinarySI
+          - DecimalSI
+      type: object
+    kubernetes.K8sPersistentVolumeClaim:
+      properties:
+        accessModes:
+          items:
+            $ref: '#/components/schemas/v1.PersistentVolumeAccessMode'
+          type: array
+        creationDate:
+          type: string
+        id:
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+        namespace:
+          type: string
+        owningApplications:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sApplication'
+          type: array
+        phase:
+          $ref: '#/components/schemas/v1.PersistentVolumeClaimPhase'
+        resourcesRequests:
+          $ref: '#/components/schemas/v1.ResourceList'
+        storage:
+          type: integer
+        storageClass:
+          type: string
+        volumeMode:
+          $ref: '#/components/schemas/v1.PersistentVolumeMode'
+        volumeName:
+          type: string
+      type: object
+    v1.ManagedFieldsEntry:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the version of this resource that this field set
+
+            applies to. The format is "group/version" just like the top-level
+
+            APIVersion field. It is necessary to track the version of a field
+
+            set because it cannot be automatically converted.'
+          type: string
+        fieldsType:
+          description: 'FieldsType is the discriminator for the different fields format and version.
+
+            There is currently only one possible value: "FieldsV1"'
+          type: string
+        fieldsV1:
           allOf:
-          - $ref: '#/components/schemas/intstr.IntOrString'
-          description: 'Name or number of the port to access on the container.
-
-            Number must be in the range 1 to 65535.
-
-            Name must be an IANA_SVC_NAME.'
-        scheme:
-          allOf:
-          - $ref: '#/components/schemas/v1.URIScheme'
-          description: 'Scheme to use for connecting to the host.
-
-            Defaults to HTTP.
+          - $ref: '#/components/schemas/v1.FieldsV1'
+          description: 'FieldsV1 holds the first JSON version format as described in the "FieldsV1" type.
 
             +optional'
+        manager:
+          description: Manager is an identifier of the workflow managing these fields.
+          type: string
+        operation:
+          allOf:
+          - $ref: '#/components/schemas/v1.ManagedFieldsOperationType'
+          description: 'Operation is the type of operation which lead to this ManagedFieldsEntry being created.
+
+            The only valid values for this field are ''Apply'' and ''Update''.'
+        subresource:
+          description: 'Subresource is the name of the subresource used to update that object, or
+
+            empty string if the object was updated through the main resource. The
+
+            value of this field is used to distinguish between managers, even if they
+
+            share the same name. For example, a status update will be distinct from a
+
+            regular update using the same manager name.
+
+            Note that the APIVersion field is not related to the Subresource field and
+
+            it always corresponds to the version of the main resource.'
+          type: string
+        time:
+          description: 'Time is the timestamp of when the ManagedFields entry was added. The
+
+            timestamp will also be updated if a field is added, the manager
+
+            changes any of the owned fields value or removes a field. The
+
+            timestamp does not update when a field is removed from the entry
+
+            because another manager took it over.
+
+            +optional'
+          type: string
       type: object
-    kubernetes.K8sServiceAccountDeleteRequests:
+    kubernetes.K8sIngressDeleteRequests:
       additionalProperties:
         items:
           type: string
         type: array
-      type: object
-    v1.ResourceQuota:
-      properties:
-        apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation of an object.
-
-            Servers should convert recognized schemas to the latest internal value, and
-
-            may reject unrecognized values.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-
-            +optional'
-          type: string
-        kind:
-          description: 'Kind is a string value representing the REST resource this object represents.
-
-            Servers may infer this from the endpoint the client submits requests to.
-
-            Cannot be updated.
-
-            In CamelCase.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-
-            +optional'
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/v1.ObjectMeta'
-          description: 'Standard object''s metadata.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-
-            +optional'
-        spec:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceQuotaSpec'
-          description: 'Spec defines the desired quota.
-
-            https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-
-            +optional'
-        status:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceQuotaStatus'
-          description: 'Status defines the actual enforced quota and its current usage.
-
-            https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-
-            +optional'
-      type: object
-    kubernetes.K8sCronJob:
-      properties:
-        Command:
-          type: string
-        Id:
-          type: string
-        IsSystem:
-          type: boolean
-        Jobs:
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sJob'
-          type: array
-        Name:
-          type: string
-        Namespace:
-          type: string
-        Schedule:
-          type: string
-        Suspend:
-          type: boolean
-        Timezone:
-          type: string
       type: object
     v1.SleepAction:
       properties:
@@ -5234,74 +5429,24 @@ components:
           description: Seconds is the number of seconds to sleep.
           type: integer
       type: object
-    v1.ObjectReference:
-      properties:
-        apiVersion:
-          description: 'API version of the referent.
-
-            +optional'
-          type: string
-        fieldPath:
-          description: 'If referring to a piece of an object instead of an entire object, this string
-
-            should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2].
-
-            For example, if the object reference is to a container within a pod, this would take on a value like:
-
-            "spec.containers{name}" (where "name" refers to the name of the container that triggered
-
-            the event) or if no container name is specified "spec.containers[2]" (container with
-
-            index 2 in this pod). This syntax is chosen only to have some well-defined way of
-
-            referencing a part of an object.
-
-            TODO: this design is not final and this field is subject to change in the future.
-
-            +optional'
-          type: string
-        kind:
-          description: 'Kind of the referent.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-
-            +optional'
-          type: string
-        name:
-          description: 'Name of the referent.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-
-            +optional'
-          type: string
-        namespace:
-          description: 'Namespace of the referent.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
-
-            +optional'
-          type: string
-        resourceVersion:
-          description: 'Specific resourceVersion to which this reference is made, if any.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
-
-            +optional'
-          type: string
-        uid:
-          description: 'UID of the referent.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
-
-            +optional'
-          type: string
-      type: object
-    kubernetes.K8sServiceDeleteRequests:
-      additionalProperties:
-        items:
-          type: string
-        type: array
-      type: object
+    v1.ResourceQuotaScope:
+      enum:
+      - Terminating
+      - NotTerminating
+      - BestEffort
+      - NotBestEffort
+      - PriorityClass
+      - CrossNamespacePodAffinity
+      - VolumeAttributesClass
+      type: string
+      x-enum-varnames:
+      - ResourceQuotaScopeTerminating
+      - ResourceQuotaScopeNotTerminating
+      - ResourceQuotaScopeBestEffort
+      - ResourceQuotaScopeNotBestEffort
+      - ResourceQuotaScopePriorityClass
+      - ResourceQuotaScopeCrossNamespacePodAffinity
+      - ResourceQuotaScopeVolumeAttributesClass
     v1beta1.NodeMetrics:
       properties:
         apiVersion:
@@ -5348,90 +5493,42 @@ components:
         window:
           $ref: '#/components/schemas/v1.Duration'
       type: object
-    v1.ContainerRestartRule:
+    kubernetes.K8sIngressController:
       properties:
-        action:
-          allOf:
-          - $ref: '#/components/schemas/v1.ContainerRestartRuleAction'
-          description: 'Specifies the action taken on a container exit if the requirements
-
-            are satisfied. The only possible value is "Restart" to restart the
-
-            container.
-
-            +required'
-        exitCodes:
-          allOf:
-          - $ref: '#/components/schemas/v1.ContainerRestartRuleOnExitCodes'
-          description: 'Represents the exit codes to check on container exits.
-
-            +optional
-
-            +oneOf=when'
+        Availability:
+          type: boolean
+        ClassName:
+          type: string
+        Name:
+          type: string
+        New:
+          type: boolean
+        Type:
+          type: string
+        Used:
+          type: boolean
       type: object
-    kubernetes.K8sIngressTLS:
+    kubernetes.K8sServicePort:
       properties:
-        Hosts:
-          items:
-            type: string
-          type: array
-        SecretName:
+        Name:
+          type: string
+        NodePort:
+          type: integer
+        Port:
+          type: integer
+        Protocol:
+          type: string
+        TargetPort:
           type: string
       type: object
-    v1.AppArmorProfile:
-      properties:
-        localhostProfile:
-          description: 'localhostProfile indicates a profile loaded on the node that should be used.
-
-            The profile must be preconfigured on the node to work.
-
-            Must match the loaded name of the profile.
-
-            Must be set if and only if type is "Localhost".
-
-            +optional'
-          type: string
-        type:
-          allOf:
-          - $ref: '#/components/schemas/v1.AppArmorProfileType'
-          description: "type indicates which kind of AppArmor profile will be applied.\nValid options are:\n  Localhost - a profile pre-loaded on the node.\n  RuntimeDefault - the container runtime's default profile.\n  Unconfined - no AppArmor enforcement.\n+unionDiscriminator"
-      type: object
-    v1.SeccompProfileType:
+    v1.ContainerRestartRuleAction:
       enum:
-      - Unconfined
-      - RuntimeDefault
-      - Localhost
+      - Restart
+      - RestartAllContainers
       type: string
       x-enum-varnames:
-      - SeccompProfileTypeUnconfined
-      - SeccompProfileTypeRuntimeDefault
-      - SeccompProfileTypeLocalhost
-    kubernetes.K8sEventInvolvedObject:
-      properties:
-        kind:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-        uid:
-          type: string
-      type: object
-    portainer.K8sNodeLimits:
-      properties:
-        CPU:
-          type: integer
-        Memory:
-          type: integer
-      type: object
-    v1.ContainerRestartRuleOnExitCodesOperator:
-      enum:
-      - In
-      - NotIn
-      type: string
-      x-enum-varnames:
-      - ContainerRestartRuleOnExitCodesOpIn
-      - ContainerRestartRuleOnExitCodesOpNotIn
+      - ContainerRestartRuleActionRestart
+      - ContainerRestartRuleActionRestartAllContainers
     v1.TCPSocketAction:
       properties:
         host:
@@ -5448,194 +5545,134 @@ components:
 
             Name must be an IANA_SVC_NAME.'
       type: object
-    v1.ResourceQuotaStatus:
+    v1.PersistentVolumeMode:
+      enum:
+      - Block
+      - Filesystem
+      type: string
+      x-enum-varnames:
+      - PersistentVolumeBlock
+      - PersistentVolumeFilesystem
+    kubernetes.K8sRole:
       properties:
-        hard:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceList'
-          description: 'Hard is the set of enforced hard limits for each named resource.
-
-            More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
-
-            +optional'
-        used:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceList'
-          description: 'Used is the current observed total usage of the resource in the namespace.
-
-            +optional'
-      type: object
-    kubernetes.K8sRoleDeleteRequests:
-      additionalProperties:
-        items:
+        creationDate:
           type: string
-        type: array
-      type: object
-    v1.ConfigMapKeySelector:
-      properties:
-        key:
-          description: The key to select.
-          type: string
+        isSystem:
+          description: 'isSystem is true if prefixed with "system:" or exists in the kube-system namespace
+
+            or is one of the portainer roles'
+          type: boolean
         name:
-          description: 'Name of the referent.
+          type: string
+        namespace:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1.HTTPGetAction:
+      properties:
+        host:
+          description: 'Host name to connect to, defaults to the pod IP. You probably want to set
 
-            This field is effectively required, but due to backwards compatibility is
+            "Host" in httpHeaders instead.
 
-            allowed to be empty. Instances of this type with an empty value here are
-
-            almost certainly wrong.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+            +optional'
+          type: string
+        httpHeaders:
+          description: 'Custom headers to set in the request. HTTP allows repeated headers.
 
             +optional
 
-            +default=""
-
-            +kubebuilder:default=""
-
-            TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
-          type: string
-        optional:
-          description: 'Specify whether the ConfigMap or its key must be defined
-
-            +optional'
-          type: boolean
-      type: object
-    v1.Duration:
-      properties:
-        time.Duration:
-          enum:
-          - -9223372036854775808
-          - 9223372036854775807
-          - 1
-          - 1000
-          - 1000000
-          - 1000000000
-          - 60000000000
-          - 3600000000000
-          type: integer
-          x-enum-varnames:
-          - minDuration
-          - maxDuration
-          - Nanosecond
-          - Microsecond
-          - Millisecond
-          - Second
-          - Minute
-          - Hour
-      type: object
-    v1.SecretKeySelector:
-      properties:
-        key:
-          description: The key of the secret to select from.  Must be a valid secret key.
-          type: string
-        name:
-          description: 'Name of the referent.
-
-            This field is effectively required, but due to backwards compatibility is
-
-            allowed to be empty. Instances of this type with an empty value here are
-
-            almost certainly wrong.
-
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-
-            +optional
-
-            +default=""
-
-            +kubebuilder:default=""
-
-            TODO: Drop `kubebuilder:default` when controller-gen doesn''t need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.'
-          type: string
-        optional:
-          description: 'Specify whether the Secret or its key must be defined
-
-            +optional'
-          type: boolean
-      type: object
-    v1.EnvVar:
-      properties:
-        name:
-          description: 'Name of the environment variable.
-
-            May consist of any printable ASCII characters except ''=''.'
-          type: string
-        value:
-          description: 'Variable references $(VAR_NAME) are expanded
-
-            using the previously defined environment variables in the container and
-
-            any service environment variables. If a variable cannot be resolved,
-
-            the reference in the input string will be unchanged. Double $$ are reduced
-
-            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-
-            "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-
-            Escaped references will never be expanded, regardless of whether the variable
-
-            exists or not.
-
-            Defaults to "".
-
-            +optional'
-          type: string
-        valueFrom:
-          allOf:
-          - $ref: '#/components/schemas/v1.EnvVarSource'
-          description: 'Source for the environment variable''s value. Cannot be used if value is not empty.
-
-            +optional'
-      type: object
-    kubernetes.PublishedPort:
-      properties:
-        IngressRules:
+            +listType=atomic'
           items:
-            $ref: '#/components/schemas/kubernetes.IngressRule'
+            $ref: '#/components/schemas/v1.HTTPHeader'
           type: array
-        Port:
-          type: integer
+        path:
+          description: 'Path to access on the HTTP server.
+
+            +optional'
+          type: string
+        port:
+          allOf:
+          - $ref: '#/components/schemas/intstr.IntOrString'
+          description: 'Name or number of the port to access on the container.
+
+            Number must be in the range 1 to 65535.
+
+            Name must be an IANA_SVC_NAME.'
+        scheme:
+          allOf:
+          - $ref: '#/components/schemas/v1.URIScheme'
+          description: 'Scheme to use for connecting to the host.
+
+            Defaults to HTTP.
+
+            +optional'
       type: object
-    kubernetes.K8sResourceQuota:
+    intstr.Type:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-comments:
+        Int: The IntOrString holds an int.
+        String: The IntOrString holds a string.
+      x-enum-varnames:
+      - Int
+      - String
+    v1beta1.PodMetricsList:
       properties:
-        cpu:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation of an object.
+
+            Servers should convert recognized schemas to the latest internal value, and
+
+            may reject unrecognized values.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+            +optional'
           type: string
-        enabled:
-          type: boolean
-        memory:
+        items:
+          description: List of pod metrics.
+          items:
+            $ref: '#/components/schemas/v1beta1.PodMetrics'
+          type: array
+        kind:
+          description: 'Kind is a string value representing the REST resource this object represents.
+
+            Servers may infer this from the endpoint the client submits requests to.
+
+            Cannot be updated.
+
+            In CamelCase.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+            +optional'
           type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/v1.ListMeta'
+          description: 'Standard list metadata.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
       type: object
-    kubernetes.K8sJob:
+    v1.ResourceFieldSelector:
       properties:
-        BackoffLimit:
-          type: integer
-        Command:
+        containerName:
+          description: 'Container name: required for volumes, optional for env vars
+
+            +optional'
           type: string
-        Completions:
-          type: integer
-        Container:
-          $ref: '#/components/schemas/v1.Container'
-        Duration:
-          type: string
-        FailedReason:
-          type: string
-        FinishTime:
-          type: string
-        Id:
-          type: string
-        IsSystem:
-          type: boolean
-        Name:
-          type: string
-        Namespace:
-          type: string
-        PodName:
-          type: string
-        StartTime:
-          type: string
-        Status:
+        divisor:
+          allOf:
+          - $ref: '#/components/schemas/resource.Quantity'
+          description: 'Specifies the output format of the exposed resources, defaults to "1"
+
+            +optional'
+        resource:
+          description: 'Required: resource to select'
           type: string
       type: object
     v1.CSIPersistentVolumeSource:
@@ -5744,123 +5781,37 @@ components:
             Required.'
           type: string
       type: object
-    kubernetes.K8sServiceAccount:
+    v1.ExecAction:
       properties:
-        creationDate:
-          type: string
-        isSystem:
-          type: boolean
-        name:
-          type: string
-        namespace:
-          type: string
-        uid:
-          type: string
-      type: object
-    kubernetes.TLSInfo:
-      properties:
-        hosts:
+        command:
+          description: 'Command is the command line to execute inside the container, the working directory for the
+
+            command  is root (''/'') in the container''s filesystem. The command is simply exec''d, it is
+
+            not run inside a shell, so traditional shell instructions (''|'', etc) won''t work. To use
+
+            a shell, you need to explicitly call out to that shell.
+
+            Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
+
+            +optional
+
+            +listType=atomic'
           items:
             type: string
           type: array
       type: object
-    v1.FieldsV1:
-      type: object
-    v1.ManagedFieldsEntry:
+    kubernetes.Metadata:
       properties:
-        apiVersion:
-          description: 'APIVersion defines the version of this resource that this field set
-
-            applies to. The format is "group/version" just like the top-level
-
-            APIVersion field. It is necessary to track the version of a field
-
-            set because it cannot be automatically converted.'
-          type: string
-        fieldsType:
-          description: 'FieldsType is the discriminator for the different fields format and version.
-
-            There is currently only one possible value: "FieldsV1"'
-          type: string
-        fieldsV1:
-          allOf:
-          - $ref: '#/components/schemas/v1.FieldsV1'
-          description: 'FieldsV1 holds the first JSON version format as described in the "FieldsV1" type.
-
-            +optional'
-        manager:
-          description: Manager is an identifier of the workflow managing these fields.
-          type: string
-        operation:
-          allOf:
-          - $ref: '#/components/schemas/v1.ManagedFieldsOperationType'
-          description: 'Operation is the type of operation which lead to this ManagedFieldsEntry being created.
-
-            The only valid values for this field are ''Apply'' and ''Update''.'
-        subresource:
-          description: 'Subresource is the name of the subresource used to update that object, or
-
-            empty string if the object was updated through the main resource. The
-
-            value of this field is used to distinguish between managers, even if they
-
-            share the same name. For example, a status update will be distinct from a
-
-            regular update using the same manager name.
-
-            Note that the APIVersion field is not related to the Subresource field and
-
-            it always corresponds to the version of the main resource.'
-          type: string
-        time:
-          description: 'Time is the timestamp of when the ManagedFields entry was added. The
-
-            timestamp will also be updated if a field is added, the manager
-
-            changes any of the owned fields value or removes a field. The
-
-            timestamp does not update when a field is removed from the entry
-
-            because another manager took it over.
-
-            +optional'
-          type: string
+        annotations:
+          additionalProperties:
+            type: string
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          type: object
       type: object
-    kubernetes.K8sClusterRoleBinding:
-      properties:
-        creationDate:
-          type: string
-        isSystem:
-          type: boolean
-        name:
-          type: string
-        namespace:
-          type: string
-        roleRef:
-          $ref: '#/components/schemas/v1.RoleRef'
-        subjects:
-          items:
-            $ref: '#/components/schemas/k8s_io_api_rbac_v1.Subject'
-          type: array
-        uid:
-          type: string
-      type: object
-    kubernetes.describeResourceResponse:
-      properties:
-        describe:
-          type: string
-      type: object
-    intstr.Type:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-comments:
-        Int: The IntOrString holds an int.
-        String: The IntOrString holds a string.
-      x-enum-varnames:
-      - Int
-      - String
     kubernetes.K8sDashboard:
       properties:
         applicationsCount:
@@ -5878,372 +5829,186 @@ components:
         volumesCount:
           type: integer
       type: object
-    v1.SELinuxOptions:
+    v1.EnvFromSource:
       properties:
-        level:
-          description: 'Level is SELinux level label that applies to the container.
+        configMapRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.ConfigMapEnvSource'
+          description: 'The ConfigMap to select from
+
+            +optional'
+        prefix:
+          description: 'Optional text to prepend to the name of each environment variable.
+
+            May consist of any printable ASCII characters except ''=''.
 
             +optional'
           type: string
-        role:
-          description: 'Role is a SELinux role label that applies to the container.
+        secretRef:
+          allOf:
+          - $ref: '#/components/schemas/v1.SecretEnvSource'
+          description: 'The Secret to select from
+
+            +optional'
+      type: object
+    v1.ResourceResizeRestartPolicy:
+      enum:
+      - NotRequired
+      - RestartContainer
+      type: string
+      x-enum-varnames:
+      - NotRequired
+      - RestartContainer
+    v1.VolumeMount:
+      properties:
+        mountPath:
+          description: 'Path within the container at which the volume should be mounted.  Must
+
+            not contain '':''.'
+          type: string
+        mountPropagation:
+          allOf:
+          - $ref: '#/components/schemas/v1.MountPropagationMode'
+          description: 'mountPropagation determines how mounts are propagated from the host
+
+            to container and the other way around.
+
+            When not set, MountPropagationNone is used.
+
+            This field is beta in 1.10.
+
+            When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+
+            (which defaults to None).
+
+            +optional'
+        name:
+          description: This must match the Name of a Volume.
+          type: string
+        readOnly:
+          description: 'Mounted read-only if true, read-write otherwise (false or unspecified).
+
+            Defaults to false.
+
+            +optional'
+          type: boolean
+        recursiveReadOnly:
+          allOf:
+          - $ref: '#/components/schemas/v1.RecursiveReadOnlyMode'
+          description: 'RecursiveReadOnly specifies whether read-only mounts should be handled
+
+            recursively.
+
+
+            If ReadOnly is false, this field has no meaning and must be unspecified.
+
+
+            If ReadOnly is true, and this field is set to Disabled, the mount is not made
+
+            recursively read-only.  If this field is set to IfPossible, the mount is made
+
+            recursively read-only, if it is supported by the container runtime.  If this
+
+            field is set to Enabled, the mount is made recursively read-only if it is
+
+            supported by the container runtime, otherwise the pod will not be started and
+
+            an error will be generated to indicate the reason.
+
+
+            If this field is set to IfPossible or Enabled, MountPropagation must be set to
+
+            None (or be unspecified, which defaults to None).
+
+
+            If this field is not specified, it is treated as an equivalent of Disabled.
+
+            +optional'
+        subPath:
+          description: 'Path within the volume from which the container''s volume should be mounted.
+
+            Defaults to "" (volume''s root).
 
             +optional'
           type: string
-        type:
-          description: 'Type is a SELinux type label that applies to the container.
+        subPathExpr:
+          description: 'Expanded path within the volume from which the container''s volume should be mounted.
 
-            +optional'
-          type: string
-        user:
-          description: 'User is a SELinux user label that applies to the container.
+            Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container''s environment.
+
+            Defaults to "" (volume''s root).
+
+            SubPathExpr and SubPath are mutually exclusive.
 
             +optional'
           type: string
       type: object
-    v1.LifecycleHandler:
-      properties:
-        exec:
-          allOf:
-          - $ref: '#/components/schemas/v1.ExecAction'
-          description: 'Exec specifies a command to execute in the container.
-
-            +optional'
-        httpGet:
-          allOf:
-          - $ref: '#/components/schemas/v1.HTTPGetAction'
-          description: 'HTTPGet specifies an HTTP GET request to perform.
-
-            +optional'
-        sleep:
-          allOf:
-          - $ref: '#/components/schemas/v1.SleepAction'
-          description: 'Sleep represents a duration that the container should sleep.
-
-            +optional'
-        tcpSocket:
-          allOf:
-          - $ref: '#/components/schemas/v1.TCPSocketAction'
-          description: 'Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-
-            for backward compatibility. There is no validation of this field and
-
-            lifecycle hooks will fail at runtime when it is specified.
-
-            +optional'
+    kubernetes.K8sCronJobDeleteRequests:
+      additionalProperties:
+        items:
+          type: string
+        type: array
       type: object
-    v1beta1.NodeMetricsList:
+    v1.ObjectReference:
       properties:
         apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation of an object.
-
-            Servers should convert recognized schemas to the latest internal value, and
-
-            may reject unrecognized values.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+          description: 'API version of the referent.
 
             +optional'
           type: string
-        items:
-          description: List of node metrics.
-          items:
-            $ref: '#/components/schemas/v1beta1.NodeMetrics'
-          type: array
+        fieldPath:
+          description: 'If referring to a piece of an object instead of an entire object, this string
+
+            should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2].
+
+            For example, if the object reference is to a container within a pod, this would take on a value like:
+
+            "spec.containers{name}" (where "name" refers to the name of the container that triggered
+
+            the event) or if no container name is specified "spec.containers[2]" (container with
+
+            index 2 in this pod). This syntax is chosen only to have some well-defined way of
+
+            referencing a part of an object.
+
+            TODO: this design is not final and this field is subject to change in the future.
+
+            +optional'
+          type: string
         kind:
-          description: 'Kind is a string value representing the REST resource this object represents.
-
-            Servers may infer this from the endpoint the client submits requests to.
-
-            Cannot be updated.
-
-            In CamelCase.
+          description: 'Kind of the referent.
 
             More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
             +optional'
           type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/v1.ListMeta'
-          description: 'Standard list metadata.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-      type: object
-    v1.ProcMountType:
-      enum:
-      - Default
-      - Unmasked
-      type: string
-      x-enum-varnames:
-      - DefaultProcMount
-      - UnmaskedProcMount
-    v1.PullPolicy:
-      enum:
-      - Always
-      - Never
-      - IfNotPresent
-      type: string
-      x-enum-varnames:
-      - PullAlways
-      - PullNever
-      - PullIfNotPresent
-    v1.ScopedResourceSelectorRequirement:
-      properties:
-        operator:
-          allOf:
-          - $ref: '#/components/schemas/v1.ScopeSelectorOperator'
-          description: 'Represents a scope''s relationship to a set of values.
-
-            Valid operators are In, NotIn, Exists, DoesNotExist.'
-        scopeName:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceQuotaScope'
-          description: The name of the scope that the selector applies to.
-        values:
-          description: 'An array of string values. If the operator is In or NotIn,
-
-            the values array must be non-empty. If the operator is Exists or DoesNotExist,
-
-            the values array must be empty.
-
-            This array is replaced during a strategic merge patch.
-
-            +optional
-
-            +listType=atomic'
-          items:
-            type: string
-          type: array
-      type: object
-    v1.ResourceRequirements:
-      properties:
-        claims:
-          description: 'Claims lists the names of resources, defined in spec.resourceClaims,
-
-            that are used by this container.
-
-
-            This field depends on the
-
-            DynamicResourceAllocation feature gate.
-
-
-            This field is immutable. It can only be set for containers.
-
-
-            +listType=map
-
-            +listMapKey=name
-
-            +featureGate=DynamicResourceAllocation
-
-            +optional'
-          items:
-            $ref: '#/components/schemas/k8s_io_api_core_v1.ResourceClaim'
-          type: array
-        limits:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceList'
-          description: 'Limits describes the maximum amount of compute resources allowed.
-
-            More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-
-            +optional'
-        requests:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceList'
-          description: 'Requests describes the minimum amount of compute resources required.
-
-            If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
-
-            otherwise to an implementation-defined value. Requests cannot exceed Limits.
-
-            More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-
-            +optional'
-      type: object
-    v1.PersistentVolumeAccessMode:
-      enum:
-      - ReadWriteOnce
-      - ReadOnlyMany
-      - ReadWriteMany
-      - ReadWriteOncePod
-      type: string
-      x-enum-varnames:
-      - ReadWriteOnce
-      - ReadOnlyMany
-      - ReadWriteMany
-      - ReadWriteOncePod
-    v1.ResourceQuotaSpec:
-      properties:
-        hard:
-          allOf:
-          - $ref: '#/components/schemas/v1.ResourceList'
-          description: 'hard is the set of desired hard limits for each named resource.
-
-            More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
-
-            +optional'
-        scopeSelector:
-          allOf:
-          - $ref: '#/components/schemas/v1.ScopeSelector'
-          description: 'scopeSelector is also a collection of filters like scopes that must match each object tracked by a quota
-
-            but expressed using ScopeSelectorOperator in combination with possible values.
-
-            For a resource to match, both scopes AND scopeSelector (if specified in spec), must be matched.
-
-            +optional'
-        scopes:
-          description: 'A collection of filters that must match each object tracked by a quota.
-
-            If not specified, the quota matches all objects.
-
-            +optional
-
-            +listType=atomic'
-          items:
-            $ref: '#/components/schemas/v1.ResourceQuotaScope'
-          type: array
-      type: object
-    kubernetes.K8sServiceIngress:
-      properties:
-        Hostname:
-          type: string
-        IP:
-          type: string
-      type: object
-    v1.ContainerRestartRuleAction:
-      enum:
-      - Restart
-      - RestartAllContainers
-      type: string
-      x-enum-varnames:
-      - ContainerRestartRuleActionRestart
-      - ContainerRestartRuleActionRestartAllContainers
-    v1.MountPropagationMode:
-      enum:
-      - None
-      - HostToContainer
-      - Bidirectional
-      type: string
-      x-enum-varnames:
-      - MountPropagationNone
-      - MountPropagationHostToContainer
-      - MountPropagationBidirectional
-    v1.ScopeSelectorOperator:
-      enum:
-      - In
-      - NotIn
-      - Exists
-      - DoesNotExist
-      type: string
-      x-enum-varnames:
-      - ScopeSelectorOpIn
-      - ScopeSelectorOpNotIn
-      - ScopeSelectorOpExists
-      - ScopeSelectorOpDoesNotExist
-    v1.HTTPHeader:
-      properties:
         name:
-          description: 'The header field name.
+          description: 'Name of the referent.
 
-            This will be canonicalized upon output, so case-variant names will be understood as the same header.'
-          type: string
-        value:
-          description: The header field value
-          type: string
-      type: object
-    v1.GRPCAction:
-      properties:
-        port:
-          description: Port number of the gRPC service. Number must be in the range 1 to 65535.
-          type: integer
-        service:
-          description: 'Service is the name of the service to place in the gRPC HealthCheckRequest
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 
-            (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
+            +optional'
+          type: string
+        namespace:
+          description: 'Namespace of the referent.
 
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 
-            If this is not specified, the default behavior is defined by gRPC.
+            +optional'
+          type: string
+        resourceVersion:
+          description: 'Specific resourceVersion to which this reference is made, if any.
 
-            +optional
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
 
-            +default=""'
+            +optional'
           type: string
-      type: object
-    kubernetes.K8sServiceInfo:
-      properties:
-        AllocateLoadBalancerNodePorts:
-          type: boolean
-        Annotations:
-          additionalProperties:
-            type: string
-          type: object
-        Applications:
-          description: serviceList screen
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sApplication'
-          type: array
-        ClusterIPs:
-          items:
-            type: string
-          type: array
-        CreationDate:
-          type: string
-        ExternalIPs:
-          items:
-            type: string
-          type: array
-        ExternalName:
-          type: string
-        IngressStatus:
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sServiceIngress'
-          type: array
-        Labels:
-          additionalProperties:
-            type: string
-          type: object
-        Name:
-          type: string
-        Namespace:
-          type: string
-        Ports:
-          items:
-            $ref: '#/components/schemas/kubernetes.K8sServicePort'
-          type: array
-        Selector:
-          additionalProperties:
-            type: string
-          type: object
-        Type:
-          type: string
-        UID:
-          type: string
-      type: object
-    kubernetes.Pod:
-      properties:
-        ContainerName:
-          type: string
-        CreationDate:
-          type: string
-        Image:
-          type: string
-        ImagePullPolicy:
-          type: string
-        Name:
-          type: string
-        NodeName:
-          type: string
-        PodIP:
-          type: string
-        Resource:
-          $ref: '#/components/schemas/kubernetes.K8sApplicationResource'
-        Status:
-          type: string
-        Uid:
+        uid:
+          description: 'UID of the referent.
+
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+            +optional'
           type: string
       type: object
     v1.ContainerPort:
@@ -6289,211 +6054,446 @@ components:
 
             +default="TCP"'
       type: object
-    v1.NamespaceStatus:
+    kubernetes.K8sEvent:
       properties:
-        conditions:
-          description: 'Represents the latest available observations of a namespace''s current state.
-
-            +optional
-
-            +patchMergeKey=type
-
-            +patchStrategy=merge
-
-            +listType=map
-
-            +listMapKey=type'
-          items:
-            $ref: '#/components/schemas/v1.NamespaceCondition'
-          type: array
-        phase:
-          allOf:
-          - $ref: '#/components/schemas/v1.NamespacePhase'
-          description: 'Phase is the current lifecycle phase of the namespace.
-
-            More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
-
-            +optional'
-      type: object
-    v1.FileKeySelector:
-      properties:
-        key:
-          description: 'The key within the env file. An invalid key will prevent the pod from starting.
-
-            The keys defined within a source may consist of any printable ASCII characters except ''=''.
-
-            During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
-
-            +required'
+        count:
+          type: integer
+        eventTime:
           type: string
-        optional:
-          description: 'Specify whether the file or its key must be defined. If the file or key
-
-            does not exist, then the env var is not published.
-
-            If optional is set to true and the specified key does not exist,
-
-            the environment variable will not be set in the Pod''s containers.
-
-
-            If optional is set to false and the specified key does not exist,
-
-            an error will be returned during Pod creation.
-
-            +optional
-
-            +default=false'
-          type: boolean
-        path:
-          description: 'The path within the volume from which to select the file.
-
-            Must be relative and may not contain the ''..'' path or start with ''..''.
-
-            +required'
+        firstTimestamp:
           type: string
-        volumeName:
-          description: 'The name of the volume mount containing the env file.
-
-            +required'
+        involvedObject:
+          $ref: '#/components/schemas/kubernetes.K8sEventInvolvedObject'
+        kind:
           type: string
-      type: object
-    kubernetes.K8sRole:
-      properties:
-        creationDate:
+        lastTimestamp:
           type: string
-        isSystem:
-          description: 'isSystem is true if prefixed with "system:" or exists in the kube-system namespace
-
-            or is one of the portainer roles'
-          type: boolean
+        message:
+          type: string
         name:
           type: string
         namespace:
           type: string
+        reason:
+          type: string
+        type:
+          type: string
         uid:
           type: string
       type: object
-    v1.ResourceName:
+    v1.PersistentVolumeAccessMode:
       enum:
-      - cpu
-      - memory
-      - storage
-      - ephemeral-storage
-      - pods
-      - services
-      - replicationcontrollers
-      - resourcequotas
-      - secrets
-      - configmaps
-      - persistentvolumeclaims
-      - services.nodeports
-      - services.loadbalancers
-      - requests.cpu
-      - requests.memory
-      - requests.storage
-      - requests.ephemeral-storage
-      - limits.cpu
-      - limits.memory
-      - limits.ephemeral-storage
+      - ReadWriteOnce
+      - ReadOnlyMany
+      - ReadWriteMany
+      - ReadWriteOncePod
       type: string
       x-enum-varnames:
-      - ResourceCPU
-      - ResourceMemory
-      - ResourceStorage
-      - ResourceEphemeralStorage
-      - ResourcePods
-      - ResourceServices
-      - ResourceReplicationControllers
-      - ResourceQuotas
-      - ResourceSecrets
-      - ResourceConfigMaps
-      - ResourcePersistentVolumeClaims
-      - ResourceServicesNodePorts
-      - ResourceServicesLoadBalancers
-      - ResourceRequestsCPU
-      - ResourceRequestsMemory
-      - ResourceRequestsStorage
-      - ResourceRequestsEphemeralStorage
-      - ResourceLimitsCPU
-      - ResourceLimitsMemory
-      - ResourceLimitsEphemeralStorage
-    v1beta1.PodMetrics:
+      - ReadWriteOnce
+      - ReadOnlyMany
+      - ReadWriteMany
+      - ReadWriteOncePod
+    v1.SecurityContext:
       properties:
-        apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation of an object.
+        allowPrivilegeEscalation:
+          description: 'AllowPrivilegeEscalation controls whether a process can gain more
 
-            Servers should convert recognized schemas to the latest internal value, and
+            privileges than its parent process. This bool directly controls if
 
-            may reject unrecognized values.
+            the no_new_privs flag will be set on the container process.
 
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            AllowPrivilegeEscalation is true always when the container is:
 
-            +optional'
-          type: string
-        containers:
-          description: 'Metrics for all containers are collected within the same time window.
+            1) run as Privileged
 
-            +listType=atomic'
-          items:
-            $ref: '#/components/schemas/v1beta1.ContainerMetrics'
-          type: array
-        kind:
-          description: 'Kind is a string value representing the REST resource this object represents.
+            2) has CAP_SYS_ADMIN
 
-            Servers may infer this from the endpoint the client submits requests to.
-
-            Cannot be updated.
-
-            In CamelCase.
-
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            Note that this field cannot be set when spec.os.name is windows.
 
             +optional'
-          type: string
-        metadata:
+          type: boolean
+        appArmorProfile:
           allOf:
-          - $ref: '#/components/schemas/v1.ObjectMeta'
-          description: 'Standard object''s metadata.
+          - $ref: '#/components/schemas/v1.AppArmorProfile'
+          description: 'appArmorProfile is the AppArmor options to use by this container. If set, this profile
 
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+            overrides the pod''s appArmorProfile.
+
+            Note that this field cannot be set when spec.os.name is windows.
 
             +optional'
-        timestamp:
-          description: 'The following fields define time interval from which metrics were
+        capabilities:
+          allOf:
+          - $ref: '#/components/schemas/v1.Capabilities'
+          description: 'The capabilities to add/drop when running containers.
 
-            collected from the interval [Timestamp-Window, Timestamp].'
-          type: string
-        window:
-          $ref: '#/components/schemas/v1.Duration'
-      type: object
-    kubernetes.K8sRoleBindingDeleteRequests:
-      additionalProperties:
-        items:
-          type: string
-        type: array
-      type: object
-    kubernetes.K8sApplicationResource:
-      properties:
-        CpuLimit:
-          type: number
-        CpuRequest:
-          type: number
-        MemoryLimit:
+            Defaults to the default set of capabilities granted by the container runtime.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
+        privileged:
+          description: 'Run container in privileged mode.
+
+            Processes in privileged containers are essentially equivalent to root on the host.
+
+            Defaults to false.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
+          type: boolean
+        procMount:
+          allOf:
+          - $ref: '#/components/schemas/v1.ProcMountType'
+          description: 'procMount denotes the type of proc mount to use for the containers.
+
+            The default value is Default which uses the container runtime defaults for
+
+            readonly paths and masked paths.
+
+            This requires the ProcMountType feature flag to be enabled.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
+        readOnlyRootFilesystem:
+          description: 'Whether this container has a read-only root filesystem.
+
+            Default is false.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
+          type: boolean
+        runAsGroup:
+          description: 'The GID to run the entrypoint of the container process.
+
+            Uses runtime default if unset.
+
+            May also be set in PodSecurityContext.  If set in both SecurityContext and
+
+            PodSecurityContext, the value specified in SecurityContext takes precedence.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
           type: integer
-        MemoryRequest:
+        runAsNonRoot:
+          description: 'Indicates that the container must run as a non-root user.
+
+            If true, the Kubelet will validate the image at runtime to ensure that it
+
+            does not run as UID 0 (root) and fail to start the container if it does.
+
+            If unset or false, no such validation will be performed.
+
+            May also be set in PodSecurityContext.  If set in both SecurityContext and
+
+            PodSecurityContext, the value specified in SecurityContext takes precedence.
+
+            +optional'
+          type: boolean
+        runAsUser:
+          description: 'The UID to run the entrypoint of the container process.
+
+            Defaults to user specified in image metadata if unspecified.
+
+            May also be set in PodSecurityContext.  If set in both SecurityContext and
+
+            PodSecurityContext, the value specified in SecurityContext takes precedence.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
           type: integer
+        seLinuxOptions:
+          allOf:
+          - $ref: '#/components/schemas/v1.SELinuxOptions'
+          description: 'The SELinux context to be applied to the container.
+
+            If unspecified, the container runtime will allocate a random SELinux context for each
+
+            container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+
+            PodSecurityContext, the value specified in SecurityContext takes precedence.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
+        seccompProfile:
+          allOf:
+          - $ref: '#/components/schemas/v1.SeccompProfile'
+          description: 'The seccomp options to use by this container. If seccomp options are
+
+            provided at both the pod & container level, the container options
+
+            override the pod options.
+
+            Note that this field cannot be set when spec.os.name is windows.
+
+            +optional'
+        windowsOptions:
+          allOf:
+          - $ref: '#/components/schemas/v1.WindowsSecurityContextOptions'
+          description: 'The Windows specific settings applied to all containers.
+
+            If unspecified, the options from the PodSecurityContext will be used.
+
+            If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+
+            Note that this field cannot be set when spec.os.name is linux.
+
+            +optional'
       type: object
-    v1.ScopeSelector:
+    kubernetes.Pod:
       properties:
-        matchExpressions:
-          description: 'A list of scope selector requirements by scope of the resources.
-
-            +optional
-
-            +listType=atomic'
+        ContainerName:
+          type: string
+        CreationDate:
+          type: string
+        Image:
+          type: string
+        ImagePullPolicy:
+          type: string
+        Name:
+          type: string
+        NodeName:
+          type: string
+        PodIP:
+          type: string
+        Resource:
+          $ref: '#/components/schemas/kubernetes.K8sApplicationResource'
+        Status:
+          type: string
+        Uid:
+          type: string
+      type: object
+    kubernetes.K8sIngressInfo:
+      properties:
+        Annotations:
+          additionalProperties:
+            type: string
+          type: object
+        ClassName:
+          type: string
+        CreationDate:
+          type: string
+        Hosts:
           items:
-            $ref: '#/components/schemas/v1.ScopedResourceSelectorRequirement'
+            type: string
           type: array
+        Labels:
+          additionalProperties:
+            type: string
+          type: object
+        Name:
+          type: string
+        Namespace:
+          type: string
+        Paths:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sIngressPath'
+          type: array
+        TLS:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sIngressTLS'
+          type: array
+        Type:
+          type: string
+        UID:
+          type: string
+      type: object
+    v1.ManagedFieldsOperationType:
+      enum:
+      - Apply
+      - Update
+      type: string
+      x-enum-varnames:
+      - ManagedFieldsOperationApply
+      - ManagedFieldsOperationUpdate
+    v1.FieldsV1:
+      type: object
+    v1.ContainerRestartPolicy:
+      enum:
+      - Always
+      - Never
+      - OnFailure
+      type: string
+      x-enum-varnames:
+      - ContainerRestartPolicyAlways
+      - ContainerRestartPolicyNever
+      - ContainerRestartPolicyOnFailure
+    kubernetes.K8sPersistentVolume:
+      properties:
+        accessModes:
+          items:
+            $ref: '#/components/schemas/v1.PersistentVolumeAccessMode'
+          type: array
+        annotations:
+          additionalProperties:
+            type: string
+          type: object
+        capacity:
+          $ref: '#/components/schemas/v1.ResourceList'
+        claimRef:
+          $ref: '#/components/schemas/v1.ObjectReference'
+        csi:
+          $ref: '#/components/schemas/v1.CSIPersistentVolumeSource'
+        name:
+          type: string
+        persistentVolumeReclaimPolicy:
+          $ref: '#/components/schemas/v1.PersistentVolumeReclaimPolicy'
+        storageClassName:
+          type: string
+        volumeMode:
+          $ref: '#/components/schemas/v1.PersistentVolumeMode'
+      type: object
+    v1.SecretReference:
+      properties:
+        name:
+          description: 'name is unique within a namespace to reference a secret resource.
+
+            +optional'
+          type: string
+        namespace:
+          description: 'namespace defines the space within which the secret name must be unique.
+
+            +optional'
+          type: string
+      type: object
+    kubernetes.K8sCronJob:
+      properties:
+        Command:
+          type: string
+        Id:
+          type: string
+        IsSystem:
+          type: boolean
+        Jobs:
+          items:
+            $ref: '#/components/schemas/kubernetes.K8sJob'
+          type: array
+        Name:
+          type: string
+        Namespace:
+          type: string
+        Schedule:
+          type: string
+        Suspend:
+          type: boolean
+        Timezone:
+          type: string
+      type: object
+    v1.LifecycleHandler:
+      properties:
+        exec:
+          allOf:
+          - $ref: '#/components/schemas/v1.ExecAction'
+          description: 'Exec specifies a command to execute in the container.
+
+            +optional'
+        httpGet:
+          allOf:
+          - $ref: '#/components/schemas/v1.HTTPGetAction'
+          description: 'HTTPGet specifies an HTTP GET request to perform.
+
+            +optional'
+        sleep:
+          allOf:
+          - $ref: '#/components/schemas/v1.SleepAction'
+          description: 'Sleep represents a duration that the container should sleep.
+
+            +optional'
+        tcpSocket:
+          allOf:
+          - $ref: '#/components/schemas/v1.TCPSocketAction'
+          description: 'Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
+
+            for backward compatibility. There is no validation of this field and
+
+            lifecycle hooks will fail at runtime when it is specified.
+
+            +optional'
+      type: object
+    k8s_io_api_core_v1.ResourceClaim:
+      properties:
+        name:
+          description: 'Name must match the name of one entry in pod.spec.resourceClaims of
+
+            the Pod where this field is used. It makes that resource available
+
+            inside a container.'
+          type: string
+        request:
+          description: 'Request is the name chosen for a request in the referenced claim.
+
+            If empty, everything from the claim is made available, otherwise
+
+            only the result of this request.
+
+
+            +optional'
+          type: string
+      type: object
+    v1.ListMeta:
+      properties:
+        continue:
+          description: 'continue may be set if the user set a limit on the number of items returned, and indicates that
+
+            the server has more data available. The value is opaque and may be used to issue another request
+
+            to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+
+            consistent list may not be possible if the server configuration has changed or more than a few
+
+            minutes have passed. The resourceVersion field returned when using this continue value will be
+
+            identical to the value in the first response, unless you have received this token from an error
+
+            message.'
+          type: string
+        remainingItemCount:
+          description: 'remainingItemCount is the number of subsequent items in the list which are not included in this
+
+            list response. If the list request contained label or field selectors, then the number of
+
+            remaining items is unknown and the field will be left unset and omitted during serialization.
+
+            If the list is complete (either because it is not chunking or because this is the last chunk),
+
+            then there are no more remaining items and this field will be left unset and omitted during
+
+            serialization.
+
+            Servers older than v1.15 do not set this field.
+
+            The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
+
+            should not rely on the remainingItemCount to be set or to be exact.
+
+            +optional'
+          type: integer
+        resourceVersion:
+          description: 'String that identifies the server''s internal version of this object that
+
+            can be used by clients to determine when objects have changed.
+
+            Value must be treated as opaque by clients and passed unmodified back to the server.
+
+            Populated by the system.
+
+            Read-only.
+
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+            +optional'
+          type: string
+        selfLink:
+          description: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
+
+            +optional'
+          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

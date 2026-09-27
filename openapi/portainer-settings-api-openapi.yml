@@ -84,24 +84,159 @@ paths:
       - Settings
 components:
   schemas:
-    portainer.Edge:
+    portainer.LDAPSearchSettings:
       properties:
-        AsyncMode:
-          description: Deprecated 2.18
+        BaseDN:
+          description: The distinguished name of the element from which the LDAP server will search for users
+          example: dc=ldap,dc=domain,dc=tld
+          type: string
+        Filter:
+          description: Optional LDAP search filter used to select user elements
+          example: (objectClass=account)
+          type: string
+        UserNameAttribute:
+          description: LDAP attribute which denotes the username
+          example: uid
+          type: string
+      type: object
+    portainer.LDAPSettings:
+      properties:
+        AnonymousMode:
+          description: Enable this option if the server is configured for Anonymous access. When enabled, ReaderDN and Password will not be used
+          example: true
+          type: boolean
+        AutoCreateUsers:
+          description: Automatically provision users and assign them to matching LDAP group names
+          example: true
+          type: boolean
+        GroupSearchSettings:
+          items:
+            $ref: '#/components/schemas/portainer.LDAPGroupSearchSettings'
+          type: array
+        Password:
+          description: Password of the account that will be used to search users
+          example: readonly-password
+          type: string
+        ReaderDN:
+          description: Account that will be used to search for users
+          example: cn=readonly-account,dc=ldap,dc=domain,dc=tld
+          type: string
+        SearchSettings:
+          items:
+            $ref: '#/components/schemas/portainer.LDAPSearchSettings'
+          type: array
+        StartTLS:
+          description: Whether LDAP connection should use StartTLS
+          example: true
+          type: boolean
+        TLSConfig:
+          $ref: '#/components/schemas/portainer.TLSConfiguration'
+        URL:
+          description: URL or IP address of the LDAP server
+          example: myldap.domain.tld:389
+          type: string
+      type: object
+    oauth2.AuthStyle:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      x-enum-varnames:
+      - AuthStyleAutoDetect
+      - AuthStyleInParams
+      - AuthStyleInHeader
+    settings.publicSettingsResponse:
+      properties:
+        AuthenticationMethod:
+          allOf:
+          - $ref: '#/components/schemas/portainer.AuthenticationMethod'
+          description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
+          example: 1
+        Edge:
+          properties:
+            CheckinInterval:
+              description: The check in interval for edge agent (in seconds) - used in non async mode [seconds]
+              example: 60
+              type: integer
+            CommandInterval:
+              description: The command list interval for edge agent - used in edge async mode [seconds]
+              example: 60
+              type: integer
+            PingInterval:
+              description: The ping interval for edge agent - used in edge async mode [seconds]
+              example: 60
+              type: integer
+            SnapshotInterval:
+              description: The snapshot interval for edge agent - used in edge async mode [seconds]
+              example: 60
+              type: integer
+          type: object
+        EnableEdgeComputeFeatures:
+          description: Whether edge compute features are enabled
+          example: true
+          type: boolean
+        Features:
+          additionalProperties:
+            type: boolean
+          description: Supported feature flags
+          type: object
+        GlobalDeploymentOptions:
+          allOf:
+          - $ref: '#/components/schemas/portainer.GlobalDeploymentOptions'
+          description: Deployment options for encouraging deployment as code
+        IsAMTEnabled:
+          description: Whether AMT is enabled
+          type: boolean
+        IsDockerDesktopExtension:
           example: false
           type: boolean
-        CommandInterval:
-          description: The command list interval for edge agent - used in edge async mode (in seconds)
-          example: 5
+        KubeconfigExpiry:
+          default: '0'
+          description: The expiry of a Kubeconfig
+          example: 24h
+          type: string
+        LogoURL:
+          description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
+          example: https://mycompany.mydomain.tld/logo.png
+          type: string
+        OAuthLoginURI:
+          description: The URL used for oauth login
+          example: https://gitlab.com/oauth
+          type: string
+        OAuthLogoutURI:
+          description: The URL used for oauth logout
+          example: https://gitlab.com/oauth/logout
+          type: string
+        RequiredPasswordLength:
+          description: The minimum required length for a password of any user when using internal auth mode
+          example: 1
           type: integer
-        PingInterval:
-          description: The ping interval for edge agent - used in edge async mode (in seconds)
-          example: 5
-          type: integer
-        SnapshotInterval:
-          description: The snapshot interval for edge agent - used in edge async mode (in seconds)
-          example: 5
-          type: integer
+        TeamSync:
+          description: Whether team sync is enabled
+          example: true
+          type: boolean
+      type: object
+    portainer.AuthenticationMethod:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      x-enum-varnames:
+      - _
+      - AuthenticationInternal
+      - AuthenticationLDAP
+      - AuthenticationOAuth
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
       type: object
     portainer.LDAPGroupSearchSettings:
       properties:
@@ -118,11 +253,118 @@ components:
           example: (objectClass=account
           type: string
       type: object
+    portainer.InternalAuthSettings:
+      properties:
+        RequiredPasswordLength:
+          type: integer
+      type: object
     portainer.GlobalDeploymentOptions:
       properties:
         hideStacksFunctionality:
           example: false
           type: boolean
+      type: object
+    settings.settingsUpdatePayload:
+      properties:
+        AuthenticationMethod:
+          description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
+          example: 1
+          type: integer
+        BlackListedLabels:
+          description: A list of label name & value that will be used to hide containers when querying containers
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        EdgeAgentCheckinInterval:
+          example: 5
+          type: integer
+        EdgePortainerURL:
+          description: EdgePortainerURL is the URL that is exposed to edge agents
+          type: string
+        EnableEdgeComputeFeatures:
+          description: Whether edge compute features are enabled
+          example: true
+          type: boolean
+        EnforceEdgeID:
+          description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
+          example: false
+          type: boolean
+        GlobalDeploymentOptions:
+          allOf:
+          - $ref: '#/components/schemas/portainer.GlobalDeploymentOptions'
+          description: Deployment options for encouraging deployment as code
+        HelmRepositoryURL:
+          description: Helm repository URL
+          example: https://charts.bitnami.com/bitnami
+          type: string
+        InternalAuthSettings:
+          $ref: '#/components/schemas/portainer.InternalAuthSettings'
+        KubeconfigExpiry:
+          default: '0'
+          description: The expiry of a Kubeconfig
+          example: 24h
+          type: string
+        KubectlShellImage:
+          description: Kubectl Shell Image
+          example: portainer/kubectl-shell:latest
+          type: string
+        LDAPSettings:
+          $ref: '#/components/schemas/portainer.LDAPSettings'
+        LogoURL:
+          description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
+          example: https://mycompany.mydomain.tld/logo.png
+          type: string
+        OAuthSettings:
+          $ref: '#/components/schemas/portainer.OAuthSettings'
+        SnapshotInterval:
+          description: The interval in which environment(endpoint) snapshots are created
+          example: 5m
+          type: string
+        TemplatesURL:
+          description: URL to the templates that will be displayed in the UI when navigating to App Templates
+          example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
+          type: string
+        TrustOnFirstConnect:
+          description: TrustOnFirstConnect makes Portainer accepting edge agent connection by default
+          example: false
+          type: boolean
+        UserSessionTimeout:
+          description: The duration of a user session
+          example: 5m
+          type: string
+      type: object
+    portainer.OAuthSettings:
+      properties:
+        AccessTokenURI:
+          type: string
+        AuthStyle:
+          $ref: '#/components/schemas/oauth2.AuthStyle'
+        AuthorizationURI:
+          type: string
+        ClientID:
+          type: string
+        ClientSecret:
+          type: string
+        DefaultTeamID:
+          type: integer
+        KubeSecretKey:
+          items:
+            type: integer
+          type: array
+        LogoutURI:
+          type: string
+        OAuthAutoCreateUsers:
+          type: boolean
+        RedirectURI:
+          type: string
+        ResourceURI:
+          type: string
+        SSO:
+          type: boolean
+        Scopes:
+          type: string
+        UserIdentifier:
+          type: string
       type: object
     portainer.Settings:
       properties:
@@ -228,237 +470,24 @@ components:
         openAMTConfiguration:
           $ref: '#/components/schemas/portainer.OpenAMTConfiguration'
       type: object
-    settings.settingsUpdatePayload:
+    portainer.Edge:
       properties:
-        AuthenticationMethod:
-          description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
-          example: 1
-          type: integer
-        BlackListedLabels:
-          description: A list of label name & value that will be used to hide containers when querying containers
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        EdgeAgentCheckinInterval:
+        AsyncMode:
+          description: Deprecated 2.18
+          example: false
+          type: boolean
+        CommandInterval:
+          description: The command list interval for edge agent - used in edge async mode (in seconds)
           example: 5
           type: integer
-        EdgePortainerURL:
-          description: EdgePortainerURL is the URL that is exposed to edge agents
-          type: string
-        EnableEdgeComputeFeatures:
-          description: Whether edge compute features are enabled
-          example: true
-          type: boolean
-        EnforceEdgeID:
-          description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
-          example: false
-          type: boolean
-        GlobalDeploymentOptions:
-          allOf:
-          - $ref: '#/components/schemas/portainer.GlobalDeploymentOptions'
-          description: Deployment options for encouraging deployment as code
-        HelmRepositoryURL:
-          description: Helm repository URL
-          example: https://charts.bitnami.com/bitnami
-          type: string
-        InternalAuthSettings:
-          $ref: '#/components/schemas/portainer.InternalAuthSettings'
-        KubeconfigExpiry:
-          default: '0'
-          description: The expiry of a Kubeconfig
-          example: 24h
-          type: string
-        KubectlShellImage:
-          description: Kubectl Shell Image
-          example: portainer/kubectl-shell:latest
-          type: string
-        LDAPSettings:
-          $ref: '#/components/schemas/portainer.LDAPSettings'
-        LogoURL:
-          description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
-          example: https://mycompany.mydomain.tld/logo.png
-          type: string
-        OAuthSettings:
-          $ref: '#/components/schemas/portainer.OAuthSettings'
+        PingInterval:
+          description: The ping interval for edge agent - used in edge async mode (in seconds)
+          example: 5
+          type: integer
         SnapshotInterval:
-          description: The interval in which environment(endpoint) snapshots are created
-          example: 5m
-          type: string
-        TemplatesURL:
-          description: URL to the templates that will be displayed in the UI when navigating to App Templates
-          example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
-          type: string
-        TrustOnFirstConnect:
-          description: TrustOnFirstConnect makes Portainer accepting edge agent connection by default
-          example: false
-          type: boolean
-        UserSessionTimeout:
-          description: The duration of a user session
-          example: 5m
-          type: string
-      type: object
-    oauth2.AuthStyle:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      x-enum-varnames:
-      - AuthStyleAutoDetect
-      - AuthStyleInParams
-      - AuthStyleInHeader
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    portainer.InternalAuthSettings:
-      properties:
-        RequiredPasswordLength:
+          description: The snapshot interval for edge agent - used in edge async mode (in seconds)
+          example: 5
           type: integer
-      type: object
-    portainer.OAuthSettings:
-      properties:
-        AccessTokenURI:
-          type: string
-        AuthStyle:
-          $ref: '#/components/schemas/oauth2.AuthStyle'
-        AuthorizationURI:
-          type: string
-        ClientID:
-          type: string
-        ClientSecret:
-          type: string
-        DefaultTeamID:
-          type: integer
-        KubeSecretKey:
-          items:
-            type: integer
-          type: array
-        LogoutURI:
-          type: string
-        OAuthAutoCreateUsers:
-          type: boolean
-        RedirectURI:
-          type: string
-        ResourceURI:
-          type: string
-        SSO:
-          type: boolean
-        Scopes:
-          type: string
-        UserIdentifier:
-          type: string
-      type: object
-    settings.publicSettingsResponse:
-      properties:
-        AuthenticationMethod:
-          allOf:
-          - $ref: '#/components/schemas/portainer.AuthenticationMethod'
-          description: 'Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth'
-          example: 1
-        Edge:
-          properties:
-            CheckinInterval:
-              description: The check in interval for edge agent (in seconds) - used in non async mode [seconds]
-              example: 60
-              type: integer
-            CommandInterval:
-              description: The command list interval for edge agent - used in edge async mode [seconds]
-              example: 60
-              type: integer
-            PingInterval:
-              description: The ping interval for edge agent - used in edge async mode [seconds]
-              example: 60
-              type: integer
-            SnapshotInterval:
-              description: The snapshot interval for edge agent - used in edge async mode [seconds]
-              example: 60
-              type: integer
-          type: object
-        EnableEdgeComputeFeatures:
-          description: Whether edge compute features are enabled
-          example: true
-          type: boolean
-        Features:
-          additionalProperties:
-            type: boolean
-          description: Supported feature flags
-          type: object
-        GlobalDeploymentOptions:
-          allOf:
-          - $ref: '#/components/schemas/portainer.GlobalDeploymentOptions'
-          description: Deployment options for encouraging deployment as code
-        IsAMTEnabled:
-          description: Whether AMT is enabled
-          type: boolean
-        IsDockerDesktopExtension:
-          example: false
-          type: boolean
-        KubeconfigExpiry:
-          default: '0'
-          description: The expiry of a Kubeconfig
-          example: 24h
-          type: string
-        LogoURL:
-          description: URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
-          example: https://mycompany.mydomain.tld/logo.png
-          type: string
-        OAuthLoginURI:
-          description: The URL used for oauth login
-          example: https://gitlab.com/oauth
-          type: string
-        OAuthLogoutURI:
-          description: The URL used for oauth logout
-          example: https://gitlab.com/oauth/logout
-          type: string
-        RequiredPasswordLength:
-          description: The minimum required length for a password of any user when using internal auth mode
-          example: 1
-          type: integer
-        TeamSync:
-          description: Whether team sync is enabled
-          example: true
-          type: boolean
-      type: object
-    portainer.AuthenticationMethod:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      x-enum-varnames:
-      - _
-      - AuthenticationInternal
-      - AuthenticationLDAP
-      - AuthenticationOAuth
-    portainer.TLSConfiguration:
-      properties:
-        TLS:
-          description: Use TLS
-          example: true
-          type: boolean
-        TLSCACert:
-          description: Path to the TLS CA certificate file
-          example: /data/tls/ca.pem
-          type: string
-        TLSCert:
-          description: Path to the TLS client certificate file
-          example: /data/tls/cert.pem
-          type: string
-        TLSKey:
-          description: Path to the TLS client key file
-          example: /data/tls/key.pem
-          type: string
-        TLSSkipVerify:
-          description: Skip the verification of the server TLS certificate
-          example: false
-          type: boolean
       type: object
     portainer.OpenAMTConfiguration:
       properties:
@@ -482,57 +511,28 @@ components:
         mpsUser:
           type: string
       type: object
-    portainer.LDAPSettings:
+    portainer.TLSConfiguration:
       properties:
-        AnonymousMode:
-          description: Enable this option if the server is configured for Anonymous access. When enabled, ReaderDN and Password will not be used
+        TLS:
+          description: Use TLS
           example: true
           type: boolean
-        AutoCreateUsers:
-          description: Automatically provision users and assign them to matching LDAP group names
-          example: true
+        TLSCACert:
+          description: Path to the TLS CA certificate file
+          example: /data/tls/ca.pem
+          type: string
+        TLSCert:
+          description: Path to the TLS client certificate file
+          example: /data/tls/cert.pem
+          type: string
+        TLSKey:
+          description: Path to the TLS client key file
+          example: /data/tls/key.pem
+          type: string
+        TLSSkipVerify:
+          description: Skip the verification of the server TLS certificate
+          example: false
           type: boolean
-        GroupSearchSettings:
-          items:
-            $ref: '#/components/schemas/portainer.LDAPGroupSearchSettings'
-          type: array
-        Password:
-          description: Password of the account that will be used to search users
-          example: readonly-password
-          type: string
-        ReaderDN:
-          description: Account that will be used to search for users
-          example: cn=readonly-account,dc=ldap,dc=domain,dc=tld
-          type: string
-        SearchSettings:
-          items:
-            $ref: '#/components/schemas/portainer.LDAPSearchSettings'
-          type: array
-        StartTLS:
-          description: Whether LDAP connection should use StartTLS
-          example: true
-          type: boolean
-        TLSConfig:
-          $ref: '#/components/schemas/portainer.TLSConfiguration'
-        URL:
-          description: URL or IP address of the LDAP server
-          example: myldap.domain.tld:389
-          type: string
-      type: object
-    portainer.LDAPSearchSettings:
-      properties:
-        BaseDN:
-          description: The distinguished name of the element from which the LDAP server will search for users
-          example: dc=ldap,dc=domain,dc=tld
-          type: string
-        Filter:
-          description: Optional LDAP search filter used to select user elements
-          example: (objectClass=account)
-          type: string
-        UserNameAttribute:
-          description: LDAP attribute which denotes the username
-          example: uid
-          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

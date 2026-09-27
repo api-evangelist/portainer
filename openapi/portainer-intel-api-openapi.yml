@@ -210,19 +210,6 @@ paths:
       - Intel
 components:
   schemas:
-    portainer.OpenAMTDeviceEnabledFeatures:
-      properties:
-        IDER:
-          type: boolean
-        KVM:
-          type: boolean
-        SOL:
-          type: boolean
-        redirection:
-          type: boolean
-        userConsent:
-          type: string
-      type: object
     openamt.openAMTConfigurePayload:
       properties:
         CertFileContent:
@@ -242,15 +229,28 @@ components:
         MPSUser:
           type: string
       type: object
-    openamt.deviceFeaturesPayload:
-      properties:
-        Features:
-          $ref: '#/components/schemas/portainer.OpenAMTDeviceEnabledFeatures'
-      type: object
     openamt.deviceActionPayload:
       properties:
         Action:
           type: string
+      type: object
+    portainer.OpenAMTDeviceEnabledFeatures:
+      properties:
+        IDER:
+          type: boolean
+        KVM:
+          type: boolean
+        SOL:
+          type: boolean
+        redirection:
+          type: boolean
+        userConsent:
+          type: string
+      type: object
+    openamt.deviceFeaturesPayload:
+      properties:
+        Features:
+          $ref: '#/components/schemas/portainer.OpenAMTDeviceEnabledFeatures'
       type: object
   securitySchemes:
     ApiKeyAuth:

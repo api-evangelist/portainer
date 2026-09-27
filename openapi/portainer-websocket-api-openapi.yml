@@ -6,7 +6,7 @@ info:
   license:
     name: zlib
     url: https://github.com/portainer/portainer/blob/develop/LICENSE
-  title: PortainerCE Websocket API
+  title: PortainerCE WebSocket API
   version: 2.39.1
 servers:
 - url: /api

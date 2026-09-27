@@ -46,6 +46,11 @@ paths:
         required: true
 components:
   schemas:
+    gitops.fileResponse:
+      properties:
+        FileContent:
+          type: string
+      type: object
     gitops.repositoryFilePreviewPayload:
       properties:
         TLSSkipVerify:
@@ -81,11 +86,6 @@ components:
       x-enum-varnames:
       - GitCredentialAuthType_Basic
       - GitCredentialAuthType_Token
-    gitops.fileResponse:
-      properties:
-        FileContent:
-          type: string
-      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

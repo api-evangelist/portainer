@@ -105,12 +105,21 @@ paths:
       - System
 components:
   schemas:
-    build.RuntimeInfo:
+    build.DependenciesInfo:
       properties:
-        Env:
-          items:
-            type: string
-          type: array
+        ComposeVersion:
+          type: string
+        DockerVersion:
+          type: string
+        HelmVersion:
+          type: string
+        KubectlVersion:
+          type: string
+      type: object
+    system.nodesCountResponse:
+      properties:
+        nodes:
+          type: integer
       type: object
     system.systemInfoResponse:
       properties:
@@ -121,6 +130,27 @@ components:
         platform:
           $ref: '#/components/schemas/platform.ContainerPlatform'
       type: object
+    build.RuntimeInfo:
+      properties:
+        Env:
+          items:
+            type: string
+          type: array
+      type: object
+    platform.ContainerPlatform:
+      enum:
+      - Docker
+      - Docker Standalone
+      - Docker Swarm
+      - Kubernetes
+      - Podman
+      type: string
+      x-enum-varnames:
+      - PlatformDocker
+      - PlatformDockerStandalone
+      - PlatformDockerSwarm
+      - PlatformKubernetes
+      - PlatformPodman
     build.BuildInfo:
       properties:
         BuildNumber:
@@ -136,28 +166,6 @@ components:
         PnpmVersion:
           type: string
         WebpackVersion:
-          type: string
-      type: object
-    system.status:
-      properties:
-        InstanceID:
-          description: Server Instance ID
-          example: 299ab403-70a8-4c05-92f7-bf7a994d50df
-          type: string
-        Version:
-          description: Portainer API version
-          example: 2.0.0
-          type: string
-      type: object
-    build.DependenciesInfo:
-      properties:
-        ComposeVersion:
-          type: string
-        DockerVersion:
-          type: string
-        HelmVersion:
-          type: string
-        KubectlVersion:
           type: string
       type: object
     system.versionResponse:
@@ -187,24 +195,16 @@ components:
           example: STS/LTS
           type: string
       type: object
-    platform.ContainerPlatform:
-      enum:
-      - Docker
-      - Docker Standalone
-      - Docker Swarm
-      - Kubernetes
-      - Podman
-      type: string
-      x-enum-varnames:
-      - PlatformDocker
-      - PlatformDockerStandalone
-      - PlatformDockerSwarm
-      - PlatformKubernetes
-      - PlatformPodman
-    system.nodesCountResponse:
+    system.status:
       properties:
-        nodes:
-          type: integer
+        InstanceID:
+          description: Server Instance ID
+          example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+          type: string
+        Version:
+          description: Portainer API version
+          example: 2.0.0
+          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

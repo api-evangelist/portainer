@@ -44,7 +44,7 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
 - aid: portainer:portainer-auth-api
-  name: Portainer auth API
+  name: Portainer Auth API
   description: Authenticate against Portainer HTTP API
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -62,7 +62,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-backup-api
-  name: Portainer backup API
+  name: Portainer Backup API
   description: Manage backups
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -80,7 +80,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-custom-templates-api
-  name: Portainer custom_templates API
+  name: Portainer Custom Templates API
   description: Manage Custom Templates
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -98,7 +98,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-docker-api
-  name: Portainer docker API
+  name: Portainer Docker API
   description: Manage Docker resources
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -116,7 +116,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-edge-api
-  name: Portainer edge API
+  name: Portainer Edge API
   description: Manage Edge related environment(endpoint) settings
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -134,7 +134,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-edge-groups-api
-  name: Portainer edge_groups API
+  name: Portainer Edge Groups API
   description: Manage Edge Groups
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -151,7 +151,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-edge-jobs-api
-  name: Portainer edge_jobs API
+  name: Portainer Edge Jobs API
   description: Manage Edge Jobs
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -168,7 +168,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-edge-stacks-api
-  name: Portainer edge_stacks API
+  name: Portainer Edge Stacks API
   description: Manage Edge Stacks
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -185,7 +185,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-endpoint-groups-api
-  name: Portainer endpoint_groups API
+  name: Portainer Endpoint Groups API
   description: Manage environment(endpoint) groups
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -202,7 +202,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-endpoints-api
-  name: Portainer endpoints API
+  name: Portainer Endpoints API
   description: Manage Docker environments(endpoints)
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -219,7 +219,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-helm-api
-  name: Portainer helm API
+  name: Portainer Helm API
   description: Manage Helm charts
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -237,7 +237,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-intel-api
-  name: Portainer intel API
+  name: Portainer Intel API
   description: Manage Intel AMT settings
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -255,7 +255,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-kubernetes-api
-  name: Portainer kubernetes API
+  name: Portainer Kubernetes API
   description: Manage Kubernetes cluster
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -273,7 +273,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-ldap-api
-  name: Portainer ldap API
+  name: Portainer Ldap API
   description: Manage LDAP settings
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -291,7 +291,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-motd-api
-  name: Portainer motd API
+  name: Portainer Motd API
   description: Fetch the message of the day
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -307,7 +307,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-registries-api
-  name: Portainer registries API
+  name: Portainer Registries API
   description: Manage Docker registries
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -325,7 +325,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-resource-controls-api
-  name: Portainer resource_controls API
+  name: Portainer Resource Controls API
   description: Manage access control on Docker resources
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -342,7 +342,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-roles-api
-  name: Portainer roles API
+  name: Portainer Roles API
   description: Manage roles
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -360,7 +360,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-settings-api
-  name: Portainer settings API
+  name: Portainer Settings API
   description: Manage Portainer settings
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -378,7 +378,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-ssl-api
-  name: Portainer ssl API
+  name: Portainer Ssl API
   description: Manage ssl settings
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -396,7 +396,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-stacks-api
-  name: Portainer stacks API
+  name: Portainer Stacks API
   description: Manage stacks
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -414,7 +414,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-status-api
-  name: Portainer status API
+  name: Portainer Status API
   description: Information about the Portainer instance
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -432,7 +432,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-system-api
-  name: Portainer system API
+  name: Portainer System API
   description: Manage Portainer system
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -450,7 +450,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-tags-api
-  name: Portainer tags API
+  name: Portainer Tags API
   description: Manage tags
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -468,7 +468,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-team-memberships-api
-  name: Portainer team_memberships API
+  name: Portainer Team Memberships API
   description: Manage team memberships
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -486,7 +486,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-teams-api
-  name: Portainer teams API
+  name: Portainer Teams API
   description: Manage teams
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -504,7 +504,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-templates-api
-  name: Portainer templates API
+  name: Portainer Templates API
   description: Manage App Templates
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -522,7 +522,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-upload-api
-  name: Portainer upload API
+  name: Portainer Upload API
   description: Upload files
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -540,7 +540,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-users-api
-  name: Portainer users API
+  name: Portainer Users API
   description: Manage users
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -558,7 +558,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-webhooks-api
-  name: Portainer webhooks API
+  name: Portainer Webhooks API
   description: Manage webhooks
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -576,7 +576,7 @@ apis:
   - type: GettingStarted
     url: https://docs.portainer.io/start
 - aid: portainer:portainer-websocket-api
-  name: Portainer websocket API
+  name: Portainer Websocket API
   description: Create exec sessions using websockets
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
@@ -599,8 +599,6 @@ apis:
   humanURL: https://www.portainer.io/
   baseURL: https://api-docs.portainer.io
   tags:
-  - GitOps
-  tags_raw:
   - Git Ops
   properties:
   - type: OpenAPI

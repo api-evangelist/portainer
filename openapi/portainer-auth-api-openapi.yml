@@ -87,6 +87,19 @@ paths:
         required: true
 components:
   schemas:
+    auth.authenticateResponse:
+      properties:
+        jwt:
+          description: JWT token used to authenticate against the API
+          example: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzAB
+          type: string
+      type: object
+    auth.oauthPayload:
+      properties:
+        Code:
+          description: OAuth code returned from OAuth Provided
+          type: string
+      type: object
     auth.authenticatePayload:
       properties:
         Password:
@@ -100,19 +113,6 @@ components:
       required:
       - Password
       - Username
-      type: object
-    auth.authenticateResponse:
-      properties:
-        jwt:
-          description: JWT token used to authenticate against the API
-          example: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzAB
-          type: string
-      type: object
-    auth.oauthPayload:
-      properties:
-        Code:
-          description: OAuth code returned from OAuth Provided
-          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

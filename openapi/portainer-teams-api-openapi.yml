@@ -184,13 +184,6 @@ paths:
         required: true
 components:
   schemas:
-    teams.teamUpdatePayload:
-      properties:
-        Name:
-          description: Name
-          example: developers
-          type: string
-      type: object
     teams.teamCreatePayload:
       properties:
         Name:
@@ -216,6 +209,13 @@ components:
           type: integer
         Name:
           description: Team name
+          example: developers
+          type: string
+      type: object
+    teams.teamUpdatePayload:
+      properties:
+        Name:
+          description: Name
           example: developers
           type: string
       type: object

@@ -372,31 +372,10 @@ paths:
         required: true
 components:
   schemas:
-    roar.Roar-portainer_EndpointID:
-      type: object
     edgejobs.edgeJobFileResponse:
       properties:
         FileContent:
           type: string
-      type: object
-    portainer.EdgeJobLogsStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      x-enum-varnames:
-      - _
-      - EdgeJobLogsStatusIdle
-      - EdgeJobLogsStatusPending
-      - EdgeJobLogsStatusCollected
-    portainer.EdgeJobEndpointMeta:
-      properties:
-        CollectLogs:
-          type: boolean
-        LogsStatus:
-          $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
       type: object
     portainer.EdgeGroup:
       properties:
@@ -422,6 +401,42 @@ components:
             type: integer
           type: array
       type: object
+    edgejobs.edgeJobUpdatePayload:
+      properties:
+        CronExpression:
+          type: string
+        EdgeGroups:
+          items:
+            type: integer
+          type: array
+        Endpoints:
+          items:
+            type: integer
+          type: array
+        FileContent:
+          type: string
+        Name:
+          type: string
+        Recurring:
+          type: boolean
+      type: object
+    edgejobs.fileResponse:
+      properties:
+        FileContent:
+          type: string
+      type: object
+    portainer.EdgeJobLogsStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      x-enum-varnames:
+      - _
+      - EdgeJobLogsStatusIdle
+      - EdgeJobLogsStatusPending
+      - EdgeJobLogsStatusCollected
     edgejobs.edgeJobCreateFromFileContentPayload:
       properties:
         CronExpression:
@@ -440,6 +455,24 @@ components:
           type: string
         Recurring:
           type: boolean
+      type: object
+    edgejobs.taskContainer:
+      properties:
+        EndpointId:
+          type: integer
+        EndpointName:
+          type: string
+        Id:
+          type: string
+        LogsStatus:
+          $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
+      type: object
+    portainer.EdgeJobEndpointMeta:
+      properties:
+        CollectLogs:
+          type: boolean
+        LogsStatus:
+          $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
       type: object
     portainer.EdgeJob:
       properties:
@@ -473,40 +506,7 @@ components:
         Version:
           type: integer
       type: object
-    edgejobs.taskContainer:
-      properties:
-        EndpointId:
-          type: integer
-        EndpointName:
-          type: string
-        Id:
-          type: string
-        LogsStatus:
-          $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
-      type: object
-    edgejobs.edgeJobUpdatePayload:
-      properties:
-        CronExpression:
-          type: string
-        EdgeGroups:
-          items:
-            type: integer
-          type: array
-        Endpoints:
-          items:
-            type: integer
-          type: array
-        FileContent:
-          type: string
-        Name:
-          type: string
-        Recurring:
-          type: boolean
-      type: object
-    edgejobs.fileResponse:
-      properties:
-        FileContent:
-          type: string
+    roar.Roar-portainer_EndpointID:
       type: object
   securitySchemes:
     ApiKeyAuth:

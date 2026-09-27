@@ -352,45 +352,109 @@ paths:
         required: true
 components:
   schemas:
-    portainer.ResourceControlType:
+    portainer.TeamResourceAccess:
+      properties:
+        AccessLevel:
+          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
+        TeamId:
+          type: integer
+      type: object
+    portainer.CustomTemplate:
+      properties:
+        CreatedByUserId:
+          description: User identifier who created this template
+          example: 3
+          type: integer
+        Description:
+          description: Description of the template
+          example: High performance web server
+          type: string
+        EdgeTemplate:
+          description: EdgeTemplate indicates if this template purpose for Edge Stack
+          example: false
+          type: boolean
+        EntryPoint:
+          description: Path to the Stack file
+          example: docker-compose.yml
+          type: string
+        GitConfig:
+          $ref: '#/components/schemas/gittypes.RepoConfig'
+        Id:
+          description: CustomTemplate Identifier
+          example: 1
+          type: integer
+        IsComposeFormat:
+          description: IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+          example: false
+          type: boolean
+        Logo:
+          description: URL of the template's logo
+          example: https://portainer.io/img/logo.svg
+          type: string
+        Note:
+          description: A note that will be displayed in the UI. Supports HTML content
+          example: This is my <b>custom</b> template
+          type: string
+        Platform:
+          allOf:
+          - $ref: '#/components/schemas/portainer.CustomTemplatePlatform'
+          description: 'Platform associated to the template.
+
+            Valid values are: 1 - ''linux'', 2 - ''windows'''
+          enum:
+          - 1
+          - 2
+          example: 1
+        ProjectPath:
+          description: Path on disk to the repository hosting the Stack file
+          example: /data/custom_template/3
+          type: string
+        ResourceControl:
+          $ref: '#/components/schemas/portainer.ResourceControl'
+        Title:
+          description: Title of the template
+          example: Nginx
+          type: string
+        Type:
+          allOf:
+          - $ref: '#/components/schemas/portainer.StackType'
+          description: 'Type of created stack:
+
+            * 1 - swarm
+
+            * 2 - compose
+
+            * 3 - kubernetes'
+          enum:
+          - 1
+          - 2
+          - 3
+          example: 1
+        Variables:
+          items:
+            $ref: '#/components/schemas/portainer.CustomTemplateVariableDefinition'
+          type: array
+      type: object
+    portainer.StackType:
       enum:
       - 0
       - 1
       - 2
       - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
       type: integer
       x-enum-varnames:
       - _
-      - ContainerResourceControl
-      - ServiceResourceControl
-      - VolumeResourceControl
-      - NetworkResourceControl
-      - SecretResourceControl
-      - StackResourceControl
-      - ConfigResourceControl
-      - CustomTemplateResourceControl
-      - ContainerGroupResourceControl
-    portainer.CustomTemplateVariableDefinition:
-      properties:
-        defaultValue:
-          example: default value
-          type: string
-        description:
-          example: Description
-          type: string
-        label:
-          example: My Variable
-          type: string
-        name:
-          example: MY_VAR
-          type: string
-      type: object
+      - DockerSwarmStack
+      - DockerComposeStack
+      - KubernetesStack
+    gittypes.GitCredentialAuthType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - GitCredentialAuthType_Basic
+      - GitCredentialAuthType_Token
     portainer.ResourceAccessLevel:
       enum:
       - 0
@@ -399,6 +463,23 @@ components:
       x-enum-varnames:
       - _
       - ReadWriteAccessLevel
+    gittypes.GitAuthentication:
+      properties:
+        AuthorizationType:
+          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
+        GitCredentialID:
+          description: 'Git credentials identifier when the value is not 0
+
+            When the value is 0, Username, Password, and Authtype are set without using saved credential
+
+            This is introduced since 2.15.0'
+          example: 0
+          type: integer
+        Password:
+          type: string
+        Username:
+          type: string
+      type: object
     customtemplates.customTemplateFromGitRepositoryPayload:
       properties:
         ComposeFilePathInRepository:
@@ -491,87 +572,6 @@ components:
       - Title
       - Type
       type: object
-    customtemplates.fileResponse:
-      properties:
-        FileContent:
-          type: string
-      type: object
-    portainer.CustomTemplate:
-      properties:
-        CreatedByUserId:
-          description: User identifier who created this template
-          example: 3
-          type: integer
-        Description:
-          description: Description of the template
-          example: High performance web server
-          type: string
-        EdgeTemplate:
-          description: EdgeTemplate indicates if this template purpose for Edge Stack
-          example: false
-          type: boolean
-        EntryPoint:
-          description: Path to the Stack file
-          example: docker-compose.yml
-          type: string
-        GitConfig:
-          $ref: '#/components/schemas/gittypes.RepoConfig'
-        Id:
-          description: CustomTemplate Identifier
-          example: 1
-          type: integer
-        IsComposeFormat:
-          description: IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
-          example: false
-          type: boolean
-        Logo:
-          description: URL of the template's logo
-          example: https://portainer.io/img/logo.svg
-          type: string
-        Note:
-          description: A note that will be displayed in the UI. Supports HTML content
-          example: This is my <b>custom</b> template
-          type: string
-        Platform:
-          allOf:
-          - $ref: '#/components/schemas/portainer.CustomTemplatePlatform'
-          description: 'Platform associated to the template.
-
-            Valid values are: 1 - ''linux'', 2 - ''windows'''
-          enum:
-          - 1
-          - 2
-          example: 1
-        ProjectPath:
-          description: Path on disk to the repository hosting the Stack file
-          example: /data/custom_template/3
-          type: string
-        ResourceControl:
-          $ref: '#/components/schemas/portainer.ResourceControl'
-        Title:
-          description: Title of the template
-          example: Nginx
-          type: string
-        Type:
-          allOf:
-          - $ref: '#/components/schemas/portainer.StackType'
-          description: 'Type of created stack:
-
-            * 1 - swarm
-
-            * 2 - compose
-
-            * 3 - kubernetes'
-          enum:
-          - 1
-          - 2
-          - 3
-          example: 1
-        Variables:
-          items:
-            $ref: '#/components/schemas/portainer.CustomTemplateVariableDefinition'
-          type: array
-      type: object
     customtemplates.customTemplateFromFileContentPayload:
       properties:
         Description:
@@ -645,18 +645,136 @@ components:
       - _
       - CustomTemplatePlatformLinux
       - CustomTemplatePlatformWindows
-    portainer.StackType:
+    portainer.ResourceControl:
+      properties:
+        AccessLevel:
+          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
+        AdministratorsOnly:
+          description: Permit access to resource only to admins
+          example: true
+          type: boolean
+        Id:
+          description: ResourceControl Identifier
+          example: 1
+          type: integer
+        OwnerId:
+          description: 'Deprecated fields
+
+            Deprecated in DBVersion == 2'
+          type: integer
+        Public:
+          description: Permit access to the associated resource to any user
+          example: true
+          type: boolean
+        ResourceId:
+          description: 'Docker resource identifier on which access control will be applied.\
+
+            In the case of a resource control applied to a stack, use the stack name as identifier'
+          example: 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
+          type: string
+        SubResourceIds:
+          description: List of Docker resources that will inherit this access control
+          example:
+          - 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
+          items:
+            type: string
+          type: array
+        System:
+          type: boolean
+        TeamAccesses:
+          items:
+            $ref: '#/components/schemas/portainer.TeamResourceAccess'
+          type: array
+        Type:
+          allOf:
+          - $ref: '#/components/schemas/portainer.ResourceControlType'
+          description: 'Type of Docker resource. Valid values are: 1- container, 2 -service
+
+            3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template'
+          example: 1
+        UserAccesses:
+          items:
+            $ref: '#/components/schemas/portainer.UserResourceAccess'
+          type: array
+      type: object
+    portainer.CustomTemplateVariableDefinition:
+      properties:
+        defaultValue:
+          example: default value
+          type: string
+        description:
+          example: Description
+          type: string
+        label:
+          example: My Variable
+          type: string
+        name:
+          example: MY_VAR
+          type: string
+      type: object
+    portainer.UserResourceAccess:
+      properties:
+        AccessLevel:
+          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
+        UserId:
+          type: integer
+      type: object
+    customtemplates.fileResponse:
+      properties:
+        FileContent:
+          type: string
+      type: object
+    portainer.ResourceControlType:
       enum:
       - 0
       - 1
       - 2
       - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
       type: integer
       x-enum-varnames:
       - _
-      - DockerSwarmStack
-      - DockerComposeStack
-      - KubernetesStack
+      - ContainerResourceControl
+      - ServiceResourceControl
+      - VolumeResourceControl
+      - NetworkResourceControl
+      - SecretResourceControl
+      - StackResourceControl
+      - ConfigResourceControl
+      - CustomTemplateResourceControl
+      - ContainerGroupResourceControl
+    gittypes.RepoConfig:
+      properties:
+        Authentication:
+          allOf:
+          - $ref: '#/components/schemas/gittypes.GitAuthentication'
+          description: Git credentials
+        ConfigFilePath:
+          description: Path to where the config file is in this url/refName
+          example: docker-compose.yml
+          type: string
+        ConfigHash:
+          description: Repository hash
+          example: bc4c183d756879ea4d173315338110b31004b8e0
+          type: string
+        ReferenceName:
+          description: The reference name
+          example: refs/heads/branch_name
+          type: string
+        TLSSkipVerify:
+          description: TLSSkipVerify skips SSL verification when cloning the Git repository
+          example: false
+          type: boolean
+        URL:
+          description: The repo url
+          example: https://github.com/portainer/portainer.git
+          type: string
+      type: object
     customtemplates.customTemplateUpdatePayload:
       properties:
         ComposeFilePathInRepository:
@@ -762,124 +880,6 @@ components:
       - RepositoryURL
       - Title
       - Type
-      type: object
-    gittypes.RepoConfig:
-      properties:
-        Authentication:
-          allOf:
-          - $ref: '#/components/schemas/gittypes.GitAuthentication'
-          description: Git credentials
-        ConfigFilePath:
-          description: Path to where the config file is in this url/refName
-          example: docker-compose.yml
-          type: string
-        ConfigHash:
-          description: Repository hash
-          example: bc4c183d756879ea4d173315338110b31004b8e0
-          type: string
-        ReferenceName:
-          description: The reference name
-          example: refs/heads/branch_name
-          type: string
-        TLSSkipVerify:
-          description: TLSSkipVerify skips SSL verification when cloning the Git repository
-          example: false
-          type: boolean
-        URL:
-          description: The repo url
-          example: https://github.com/portainer/portainer.git
-          type: string
-      type: object
-    portainer.UserResourceAccess:
-      properties:
-        AccessLevel:
-          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
-        UserId:
-          type: integer
-      type: object
-    gittypes.GitAuthentication:
-      properties:
-        AuthorizationType:
-          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
-        GitCredentialID:
-          description: 'Git credentials identifier when the value is not 0
-
-            When the value is 0, Username, Password, and Authtype are set without using saved credential
-
-            This is introduced since 2.15.0'
-          example: 0
-          type: integer
-        Password:
-          type: string
-        Username:
-          type: string
-      type: object
-    portainer.TeamResourceAccess:
-      properties:
-        AccessLevel:
-          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
-        TeamId:
-          type: integer
-      type: object
-    gittypes.GitCredentialAuthType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - GitCredentialAuthType_Basic
-      - GitCredentialAuthType_Token
-    portainer.ResourceControl:
-      properties:
-        AccessLevel:
-          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
-        AdministratorsOnly:
-          description: Permit access to resource only to admins
-          example: true
-          type: boolean
-        Id:
-          description: ResourceControl Identifier
-          example: 1
-          type: integer
-        OwnerId:
-          description: 'Deprecated fields
-
-            Deprecated in DBVersion == 2'
-          type: integer
-        Public:
-          description: Permit access to the associated resource to any user
-          example: true
-          type: boolean
-        ResourceId:
-          description: 'Docker resource identifier on which access control will be applied.\
-
-            In the case of a resource control applied to a stack, use the stack name as identifier'
-          example: 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
-          type: string
-        SubResourceIds:
-          description: List of Docker resources that will inherit this access control
-          example:
-          - 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
-          items:
-            type: string
-          type: array
-        System:
-          type: boolean
-        TeamAccesses:
-          items:
-            $ref: '#/components/schemas/portainer.TeamResourceAccess'
-          type: array
-        Type:
-          allOf:
-          - $ref: '#/components/schemas/portainer.ResourceControlType'
-          description: 'Type of Docker resource. Valid values are: 1- container, 2 -service
-
-            3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template'
-          example: 1
-        UserAccesses:
-          items:
-            $ref: '#/components/schemas/portainer.UserResourceAccess'
-          type: array
       type: object
   securitySchemes:
     ApiKeyAuth:

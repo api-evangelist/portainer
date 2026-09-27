@@ -80,6 +80,44 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    filesystem.DirEntry:
+      properties:
+        Content:
+          type: string
+        IsFile:
+          type: boolean
+        Name:
+          type: string
+        Permissions:
+          $ref: '#/components/schemas/os.FileMode'
+      type: object
+    portainer.HelmConfig:
+      properties:
+        Atomic:
+          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
+          example: true
+          type: boolean
+        ChartPath:
+          description: Path to a Helm chart folder for Helm git deployments
+          example: charts/my-app
+          type: string
+        Timeout:
+          description: Timeout for Helm operations (equivalent to helm --timeout flag)
+          example: 5m0s
+          type: string
+        ValuesFiles:
+          description: Array of paths to Helm values YAML files for Helm git deployments
+          example:
+          - '[''values/prod.yaml'''
+          - ' ''values/secrets.yaml'']'
+          items:
+            type: string
+          type: array
+        Version:
+          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
+          example: 1.2.3
+          type: string
+      type: object
     edge.DeployerOptionsPayload:
       properties:
         ForceRecreate:
@@ -112,17 +150,6 @@ components:
             Used only for EE'
           type: boolean
       type: object
-    filesystem.DirEntry:
-      properties:
-        Content:
-          type: string
-        IsFile:
-          type: boolean
-        Name:
-          type: string
-        Permissions:
-          $ref: '#/components/schemas/os.FileMode'
-      type: object
     portainer.Pair:
       properties:
         name:
@@ -130,6 +157,79 @@ components:
           type: string
         value:
           example: value
+          type: string
+      type: object
+    os.FileMode:
+      enum:
+      - 2147483648
+      - 1073741824
+      - 536870912
+      - 268435456
+      - 134217728
+      - 67108864
+      - 33554432
+      - 16777216
+      - 8388608
+      - 4194304
+      - 2097152
+      - 1048576
+      - 524288
+      - 2401763328
+      - 511
+      - 2147483648
+      - 1073741824
+      - 536870912
+      - 268435456
+      - 134217728
+      - 67108864
+      - 33554432
+      - 16777216
+      - 8388608
+      - 4194304
+      - 2097152
+      - 1048576
+      - 524288
+      - 2401763328
+      - 511
+      type: integer
+      x-enum-comments:
+        ModeAppend: 'a: append-only'
+        ModeCharDevice: 'c: Unix character device, when ModeDevice is set'
+        ModeDevice: 'D: device file'
+        ModeDir: 'd: is a directory'
+        ModeExclusive: 'l: exclusive use'
+        ModeIrregular: '?: non-regular file; nothing else is known about this file'
+        ModeNamedPipe: 'p: named pipe (FIFO)'
+        ModePerm: Unix permission bits, 0o777
+        ModeSetgid: 'g: setgid'
+        ModeSetuid: 'u: setuid'
+        ModeSocket: 'S: Unix domain socket'
+        ModeSticky: 't: sticky'
+        ModeSymlink: 'L: symbolic link'
+        ModeTemporary: 'T: temporary file; Plan 9 only'
+      x-enum-varnames:
+      - ModeDir
+      - ModeAppend
+      - ModeExclusive
+      - ModeTemporary
+      - ModeSymlink
+      - ModeDevice
+      - ModeNamedPipe
+      - ModeSocket
+      - ModeSetuid
+      - ModeSetgid
+      - ModeCharDevice
+      - ModeSticky
+      - ModeIrregular
+      - ModeType
+      - ModePerm
+    edge.RegistryCredentials:
+      properties:
+        Secret:
+          type: string
+        ServerURL:
+          type: string
+        Username:
           type: string
       type: object
     edge.StackPayload:
@@ -240,106 +340,6 @@ components:
         Version:
           description: Version of the stack file
           type: integer
-      type: object
-    os.FileMode:
-      enum:
-      - 2147483648
-      - 1073741824
-      - 536870912
-      - 268435456
-      - 134217728
-      - 67108864
-      - 33554432
-      - 16777216
-      - 8388608
-      - 4194304
-      - 2097152
-      - 1048576
-      - 524288
-      - 2401763328
-      - 511
-      - 2147483648
-      - 1073741824
-      - 536870912
-      - 268435456
-      - 134217728
-      - 67108864
-      - 33554432
-      - 16777216
-      - 8388608
-      - 4194304
-      - 2097152
-      - 1048576
-      - 524288
-      - 2401763328
-      - 511
-      type: integer
-      x-enum-comments:
-        ModeAppend: 'a: append-only'
-        ModeCharDevice: 'c: Unix character device, when ModeDevice is set'
-        ModeDevice: 'D: device file'
-        ModeDir: 'd: is a directory'
-        ModeExclusive: 'l: exclusive use'
-        ModeIrregular: '?: non-regular file; nothing else is known about this file'
-        ModeNamedPipe: 'p: named pipe (FIFO)'
-        ModePerm: Unix permission bits, 0o777
-        ModeSetgid: 'g: setgid'
-        ModeSetuid: 'u: setuid'
-        ModeSocket: 'S: Unix domain socket'
-        ModeSticky: 't: sticky'
-        ModeSymlink: 'L: symbolic link'
-        ModeTemporary: 'T: temporary file; Plan 9 only'
-      x-enum-varnames:
-      - ModeDir
-      - ModeAppend
-      - ModeExclusive
-      - ModeTemporary
-      - ModeSymlink
-      - ModeDevice
-      - ModeNamedPipe
-      - ModeSocket
-      - ModeSetuid
-      - ModeSetgid
-      - ModeCharDevice
-      - ModeSticky
-      - ModeIrregular
-      - ModeType
-      - ModePerm
-    edge.RegistryCredentials:
-      properties:
-        Secret:
-          type: string
-        ServerURL:
-          type: string
-        Username:
-          type: string
-      type: object
-    portainer.HelmConfig:
-      properties:
-        Atomic:
-          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
-          example: true
-          type: boolean
-        ChartPath:
-          description: Path to a Helm chart folder for Helm git deployments
-          example: charts/my-app
-          type: string
-        Timeout:
-          description: Timeout for Helm operations (equivalent to helm --timeout flag)
-          example: 5m0s
-          type: string
-        ValuesFiles:
-          description: Array of paths to Helm values YAML files for Helm git deployments
-          example:
-          - '[''values/prod.yaml'''
-          - ' ''values/secrets.yaml'']'
-          items:
-            type: string
-          type: array
-        Version:
-          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
-          example: 1.2.3
-          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:
