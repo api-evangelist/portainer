@@ -457,30 +457,6 @@ paths:
       - Users
 components:
   schemas:
-    portainer.APIKey:
-      properties:
-        dateCreated:
-          description: Unix timestamp (UTC) when the API key was created
-          type: integer
-        description:
-          example: portainer-api-key
-          type: string
-        digest:
-          description: Digest represents SHA256 hash of the raw API key
-          type: string
-        id:
-          example: 1
-          type: integer
-        lastUsed:
-          description: Unix timestamp (UTC) when the API key was last used
-          type: integer
-        prefix:
-          description: API key identifier (7 char prefix)
-          type: string
-        userId:
-          example: 1
-          type: integer
-      type: object
     portainer.MembershipRole:
       enum:
       - 0
@@ -491,6 +467,16 @@ components:
       - _
       - TeamLeader
       - TeamMember
+    portainer.UserRole:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      x-enum-varnames:
+      - _
+      - AdministratorRole
+      - StandardUserRole
     users.adminInitPayload:
       properties:
         Password:
@@ -504,6 +490,13 @@ components:
       required:
       - Password
       - Username
+      type: object
+    users.accessTokenResponse:
+      properties:
+        apiKey:
+          $ref: '#/components/schemas/portainer.APIKey'
+        rawAPIKey:
+          type: string
       type: object
     portainer.TeamMembership:
       properties:
@@ -525,52 +518,6 @@ components:
           example: 1
           type: integer
       type: object
-    users.userUpdatePayload:
-      properties:
-        NewPassword:
-          example: asfj2emv
-          type: string
-        Password:
-          example: cg9Wgky3
-          type: string
-        Role:
-          description: User role (1 for administrator account and 2 for regular account)
-          enum:
-          - 1
-          - 2
-          example: 2
-          type: integer
-        Theme:
-          $ref: '#/components/schemas/users.themePayload'
-        UseCache:
-          example: true
-          type: boolean
-        Username:
-          example: bob
-          type: string
-      required:
-      - NewPassword
-      - Password
-      - Role
-      - UseCache
-      - Username
-      type: object
-    users.userAccessTokenCreatePayload:
-      properties:
-        description:
-          example: github-api-key
-          type: string
-        password:
-          example: password
-          type: string
-      required:
-      - description
-      - password
-      type: object
-    portainer.EndpointAuthorizations:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.Authorizations'
-      type: object
     users.userCreatePayload:
       properties:
         Password:
@@ -590,24 +537,6 @@ components:
       - Password
       - Role
       - Username
-      type: object
-    portainer.Authorizations:
-      additionalProperties:
-        type: boolean
-      type: object
-    users.userUpdatePasswordPayload:
-      properties:
-        NewPassword:
-          description: New Password
-          example: new_passwd
-          type: string
-        Password:
-          description: Current Password
-          example: passwd
-          type: string
-      required:
-      - NewPassword
-      - Password
       type: object
     portainer.User:
       properties:
@@ -644,23 +573,74 @@ components:
           example: bob
           type: string
       type: object
-    users.accessTokenResponse:
+    users.userUpdatePayload:
       properties:
-        apiKey:
-          $ref: '#/components/schemas/portainer.APIKey'
-        rawAPIKey:
+        NewPassword:
+          example: asfj2emv
           type: string
+        Password:
+          example: cg9Wgky3
+          type: string
+        Role:
+          description: User role (1 for administrator account and 2 for regular account)
+          enum:
+          - 1
+          - 2
+          example: 2
+          type: integer
+        Theme:
+          $ref: '#/components/schemas/users.themePayload'
+        UseCache:
+          example: true
+          type: boolean
+        Username:
+          example: bob
+          type: string
+      required:
+      - NewPassword
+      - Password
+      - Role
+      - UseCache
+      - Username
       type: object
-    portainer.UserRole:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      x-enum-varnames:
-      - _
-      - AdministratorRole
-      - StandardUserRole
+    users.userUpdatePasswordPayload:
+      properties:
+        NewPassword:
+          description: New Password
+          example: new_passwd
+          type: string
+        Password:
+          description: Current Password
+          example: passwd
+          type: string
+      required:
+      - NewPassword
+      - Password
+      type: object
+    portainer.APIKey:
+      properties:
+        dateCreated:
+          description: Unix timestamp (UTC) when the API key was created
+          type: integer
+        description:
+          example: portainer-api-key
+          type: string
+        digest:
+          description: Digest represents SHA256 hash of the raw API key
+          type: string
+        id:
+          example: 1
+          type: integer
+        lastUsed:
+          description: Unix timestamp (UTC) when the API key was last used
+          type: integer
+        prefix:
+          description: API key identifier (7 char prefix)
+          type: string
+        userId:
+          example: 1
+          type: integer
+      type: object
     portainer.UserThemeSettings:
       properties:
         color:
@@ -673,6 +653,22 @@ components:
           example: dark
           type: string
       type: object
+    users.userAccessTokenCreatePayload:
+      properties:
+        description:
+          example: github-api-key
+          type: string
+        password:
+          example: password
+          type: string
+      required:
+      - description
+      - password
+      type: object
+    portainer.Authorizations:
+      additionalProperties:
+        type: boolean
+      type: object
     users.themePayload:
       properties:
         color:
@@ -684,6 +680,10 @@ components:
           - auto
           example: dark
           type: string
+      type: object
+    portainer.EndpointAuthorizations:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.Authorizations'
       type: object
   securitySchemes:
     ApiKeyAuth:

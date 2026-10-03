@@ -201,6 +201,13 @@ components:
       required:
       - Name
       type: object
+    teams.teamUpdatePayload:
+      properties:
+        Name:
+          description: Name
+          example: developers
+          type: string
+      type: object
     portainer.Team:
       properties:
         Id:
@@ -209,13 +216,6 @@ components:
           type: integer
         Name:
           description: Team name
-          example: developers
-          type: string
-      type: object
-    teams.teamUpdatePayload:
-      properties:
-        Name:
-          description: Name
           example: developers
           type: string
       type: object

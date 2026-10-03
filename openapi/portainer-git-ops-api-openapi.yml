@@ -46,6 +46,14 @@ paths:
         required: true
 components:
   schemas:
+    gittypes.GitCredentialAuthType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - GitCredentialAuthType_Basic
+      - GitCredentialAuthType_Token
     gitops.fileResponse:
       properties:
         FileContent:
@@ -78,14 +86,6 @@ components:
       required:
       - repository
       type: object
-    gittypes.GitCredentialAuthType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - GitCredentialAuthType_Basic
-      - GitCredentialAuthType_Token
   securitySchemes:
     ApiKeyAuth:
       in: header

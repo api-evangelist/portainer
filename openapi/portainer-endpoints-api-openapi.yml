@@ -941,46 +941,14 @@ paths:
       - Endpoints
 components:
   schemas:
-    filesystem.DirEntry:
+    portainer.KubernetesFlags:
       properties:
-        Content:
-          type: string
-        IsFile:
+        IsServerIngressClassDetected:
           type: boolean
-        Name:
-          type: string
-        Permissions:
-          $ref: '#/components/schemas/os.FileMode'
-      type: object
-    portainer.EndpointPostInitMigrations:
-      properties:
-        MigrateGPUs:
+        IsServerMetricsDetected:
           type: boolean
-        MigrateIngresses:
+        IsServerStorageDetected:
           type: boolean
-      type: object
-    portainer.RegistryManagementConfiguration:
-      properties:
-        AccessToken:
-          type: string
-        AccessTokenExpiry:
-          type: integer
-        Authentication:
-          type: boolean
-        Ecr:
-          $ref: '#/components/schemas/portainer.EcrData'
-        Password:
-          type: string
-        TLSConfig:
-          $ref: '#/components/schemas/portainer.TLSConfiguration'
-        Type:
-          $ref: '#/components/schemas/portainer.RegistryType'
-        Username:
-          type: string
-      type: object
-    portainer.TeamAccessPolicies:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.AccessPolicy'
       type: object
     portainer.TLSConfiguration:
       properties:
@@ -1005,179 +973,120 @@ components:
           example: false
           type: boolean
       type: object
+    portainer.GithubRegistryData:
+      properties:
+        OrganisationName:
+          type: string
+        UseOrganisation:
+          type: boolean
+      type: object
+    edge.RegistryCredentials:
+      properties:
+        Secret:
+          type: string
+        ServerURL:
+          type: string
+        Username:
+          type: string
+      type: object
     portainer.EcrData:
       properties:
         Region:
           example: ap-southeast-2
           type: string
       type: object
-    portainer.EndpointSecuritySettings:
+    endpoints.forceUpdateServicePayload:
       properties:
-        allowBindMountsForRegularUsers:
-          description: Whether non-administrator should be able to use bind mounts when creating containers
-          example: false
+        PullImage:
+          description: PullImage if true will pull the image
           type: boolean
-        allowContainerCapabilitiesForRegularUsers:
-          description: Whether non-administrator should be able to use container capabilities
+        ServiceID:
+          description: ServiceId to update
+          type: string
+      type: object
+    portainer.Registry:
+      properties:
+        AccessToken:
+          description: Stores temporary access token
+          type: string
+        AccessTokenExpiry:
+          type: integer
+        Authentication:
+          description: Is authentication against this registry enabled
           example: true
           type: boolean
-        allowDeviceMappingForRegularUsers:
-          description: Whether non-administrator should be able to use device mapping
-          example: true
-          type: boolean
-        allowHostNamespaceForRegularUsers:
-          description: Whether non-administrator should be able to use the host pid
-          example: true
-          type: boolean
-        allowPrivilegedModeForRegularUsers:
-          description: Whether non-administrator should be able to use privileged mode when creating containers
-          example: false
-          type: boolean
-        allowStackManagementForRegularUsers:
-          description: Whether non-administrator should be able to manage stacks
-          example: true
-          type: boolean
-        allowSysctlSettingForRegularUsers:
-          description: Whether non-administrator should be able to use sysctl settings
-          example: true
-          type: boolean
-        allowVolumeBrowserForRegularUsers:
-          description: Whether non-administrator should be able to browse volumes
-          example: true
-          type: boolean
-        enableHostManagementFeatures:
-          description: Whether host management features are enabled
-          example: true
-          type: boolean
+        AuthorizedTeams:
+          description: Deprecated in DBVersion == 18
+          items:
+            type: integer
+          type: array
+        AuthorizedUsers:
+          description: Deprecated in DBVersion == 18
+          items:
+            type: integer
+          type: array
+        BaseURL:
+          description: Base URL, introduced for ProGet registry
+          example: registry.mydomain.tld:2375
+          type: string
+        Ecr:
+          $ref: '#/components/schemas/portainer.EcrData'
+        Github:
+          $ref: '#/components/schemas/portainer.GithubRegistryData'
+        Gitlab:
+          $ref: '#/components/schemas/portainer.GitlabRegistryData'
+        Id:
+          description: Registry Identifier
+          example: 1
+          type: integer
+        ManagementConfiguration:
+          $ref: '#/components/schemas/portainer.RegistryManagementConfiguration'
+        Name:
+          description: Registry Name
+          example: my-registry
+          type: string
+        Password:
+          description: Password or SecretAccessKey used to authenticate against this registry
+          example: registry_password
+          type: string
+        Quay:
+          $ref: '#/components/schemas/portainer.QuayRegistryData'
+        RegistryAccesses:
+          $ref: '#/components/schemas/portainer.RegistryAccesses'
+        TeamAccessPolicies:
+          allOf:
+          - $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+          description: Deprecated in DBVersion == 31
+        Type:
+          allOf:
+          - $ref: '#/components/schemas/portainer.RegistryType'
+          description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+        URL:
+          description: URL or IP address of the Docker registry
+          example: registry.mydomain.tld:2375
+          type: string
+        UserAccessPolicies:
+          allOf:
+          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
+          description: 'Deprecated fields
+
+            Deprecated in DBVersion == 31'
+        Username:
+          description: Username or AccessKeyID used to authenticate against this registry
+          example: registry user
+          type: string
       type: object
     portainer.UserAccessPolicies:
       additionalProperties:
         $ref: '#/components/schemas/portainer.AccessPolicy'
-      type: object
-    endpoints.endpointDeleteBatchPartialResponse:
-      properties:
-        deleted:
-          items:
-            type: integer
-          type: array
-        errors:
-          items:
-            type: integer
-          type: array
-      type: object
-    endpoints.endpointDeleteRequest:
-      properties:
-        deleteCluster:
-          type: boolean
-        id:
-          type: integer
-      type: object
-    endpoints.endpointCreateGlobalKeyResponse:
-      properties:
-        endpointID:
-          type: integer
-      type: object
-    portainer.RegistryAccessPolicies:
-      properties:
-        Namespaces:
-          description: Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
-          items:
-            type: string
-          type: array
-        TeamAccessPolicies:
-          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-        UserAccessPolicies:
-          allOf:
-          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
-          description: Docker specific fields (with docker, users/teams have access to a registry)
-      type: object
-    endpointedge.stackStatusResponse:
-      properties:
-        ID:
-          description: EdgeStack Identifier
-          example: 1
-          type: integer
-        Version:
-          description: Version of this stack
-          example: 3
-          type: integer
-      type: object
-    portainer.PerformanceMetrics:
-      properties:
-        CPUUsage:
-          type: number
-        MemoryUsage:
-          type: number
-        NetworkUsage:
-          type: number
-      type: object
-    portainer.HelmConfig:
-      properties:
-        Atomic:
-          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
-          example: true
-          type: boolean
-        ChartPath:
-          description: Path to a Helm chart folder for Helm git deployments
-          example: charts/my-app
-          type: string
-        Timeout:
-          description: Timeout for Helm operations (equivalent to helm --timeout flag)
-          example: 5m0s
-          type: string
-        ValuesFiles:
-          description: Array of paths to Helm values YAML files for Helm git deployments
-          example:
-          - '[''values/prod.yaml'''
-          - ' ''values/secrets.yaml'']'
-          items:
-            type: string
-          type: array
-        Version:
-          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
-          example: 1.2.3
-          type: string
-      type: object
-    portainer.AzureCredentials:
-      properties:
-        ApplicationID:
-          description: Azure application ID
-          example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
-          type: string
-        AuthenticationKey:
-          description: Azure authentication key
-          example: cOrXoK/1D35w8YQ8nH1/8ZGwzz45JIYD5jxHKXEQknk=
-          type: string
-        TenantID:
-          description: Azure tenant ID
-          example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
-          type: string
-      type: object
-    portainer.DiagnosticsData:
-      properties:
-        DNS:
-          additionalProperties:
-            type: string
-          type: object
-        Log:
-          type: string
-        Proxy:
-          additionalProperties:
-            type: string
-          type: object
-        Telnet:
-          additionalProperties:
-            type: string
-          type: object
-      type: object
-    portainer.KubernetesFlags:
-      properties:
-        IsServerIngressClassDetected:
-          type: boolean
-        IsServerMetricsDetected:
-          type: boolean
-        IsServerStorageDetected:
-          type: boolean
       type: object
     portainer.EndpointStatus:
       enum:
@@ -1189,86 +1098,88 @@ components:
       - _
       - EndpointStatusUp
       - EndpointStatusDown
-    os.FileMode:
-      enum:
-      - 2147483648
-      - 1073741824
-      - 536870912
-      - 268435456
-      - 134217728
-      - 67108864
-      - 33554432
-      - 16777216
-      - 8388608
-      - 4194304
-      - 2097152
-      - 1048576
-      - 524288
-      - 2401763328
-      - 511
-      - 2147483648
-      - 1073741824
-      - 536870912
-      - 268435456
-      - 134217728
-      - 67108864
-      - 33554432
-      - 16777216
-      - 8388608
-      - 4194304
-      - 2097152
-      - 1048576
-      - 524288
-      - 2401763328
-      - 511
-      type: integer
-      x-enum-comments:
-        ModeAppend: 'a: append-only'
-        ModeCharDevice: 'c: Unix character device, when ModeDevice is set'
-        ModeDevice: 'D: device file'
-        ModeDir: 'd: is a directory'
-        ModeExclusive: 'l: exclusive use'
-        ModeIrregular: '?: non-regular file; nothing else is known about this file'
-        ModeNamedPipe: 'p: named pipe (FIFO)'
-        ModePerm: Unix permission bits, 0o777
-        ModeSetgid: 'g: setgid'
-        ModeSetuid: 'u: setuid'
-        ModeSocket: 'S: Unix domain socket'
-        ModeSticky: 't: sticky'
-        ModeSymlink: 'L: symbolic link'
-        ModeTemporary: 'T: temporary file; Plan 9 only'
-      x-enum-varnames:
-      - ModeDir
-      - ModeAppend
-      - ModeExclusive
-      - ModeTemporary
-      - ModeSymlink
-      - ModeDevice
-      - ModeNamedPipe
-      - ModeSocket
-      - ModeSetuid
-      - ModeSetgid
-      - ModeCharDevice
-      - ModeSticky
-      - ModeIrregular
-      - ModeType
-      - ModePerm
-    portainer.KubernetesSnapshot:
+    portainer.KubernetesStorageClassConfig:
       properties:
-        DiagnosticsData:
-          $ref: '#/components/schemas/portainer.DiagnosticsData'
-        KubernetesVersion:
+        AccessModes:
+          items:
+            type: string
+          type: array
+        AllowVolumeExpansion:
+          type: boolean
+        Name:
           type: string
-        NodeCount:
+        Provisioner:
+          type: string
+      type: object
+    portainer.RegistryManagementConfiguration:
+      properties:
+        AccessToken:
+          type: string
+        AccessTokenExpiry:
           type: integer
-        PerformanceMetrics:
-          $ref: '#/components/schemas/portainer.PerformanceMetrics'
-        Time:
+        Authentication:
+          type: boolean
+        Ecr:
+          $ref: '#/components/schemas/portainer.EcrData'
+        Password:
+          type: string
+        TLSConfig:
+          $ref: '#/components/schemas/portainer.TLSConfiguration'
+        Type:
+          $ref: '#/components/schemas/portainer.RegistryType'
+        Username:
+          type: string
+      type: object
+    endpoints.endpointDeleteRequest:
+      properties:
+        deleteCluster:
+          type: boolean
+        id:
           type: integer
-        TotalCPU:
+      type: object
+    endpointedge.edgeJobResponse:
+      properties:
+        CollectLogs:
+          description: Whether to collect logs
+          example: true
+          type: boolean
+        CronExpression:
+          description: A cron expression to schedule this job
+          example: '* * * * *'
+          type: string
+        Id:
+          description: EdgeJob Identifier
+          example: 2
           type: integer
-        TotalMemory:
+        Script:
+          description: Script to run
+          example: echo hello
+          type: string
+        Version:
+          description: Version of this EdgeJob
+          example: 2
           type: integer
+      type: object
+    portainer.AccessPolicy:
+      properties:
+        Namespaces:
+          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+          items:
+            type: string
+          type: array
+        RoleId:
+          description: Role identifier. Reference the role that will be associated to this access policy
+          example: 1
+          type: integer
+      type: object
+    portainer.GitlabRegistryData:
+      properties:
+        InstanceURL:
+          type: string
+        ProjectId:
+          type: integer
+        ProjectPath:
+          type: string
       type: object
     endpoints.endpointSettingsUpdatePayload:
       properties:
@@ -1316,20 +1227,287 @@ components:
             $ref: '#/components/schemas/portainer.Pair'
           type: array
       type: object
+    portainer.KubernetesSnapshot:
+      properties:
+        DiagnosticsData:
+          $ref: '#/components/schemas/portainer.DiagnosticsData'
+        KubernetesVersion:
+          type: string
+        NodeCount:
+          type: integer
+        PerformanceMetrics:
+          $ref: '#/components/schemas/portainer.PerformanceMetrics'
+        Time:
+          type: integer
+        TotalCPU:
+          type: integer
+        TotalMemory:
+          type: integer
+      type: object
+    filesystem.DirEntry:
+      properties:
+        Content:
+          type: string
+        IsFile:
+          type: boolean
+        Name:
+          type: string
+        Permissions:
+          $ref: '#/components/schemas/os.FileMode'
+      type: object
+    portainer.EnvironmentEdgeSettings:
+      properties:
+        AsyncMode:
+          description: Whether the device has been started in edge async mode
+          type: boolean
+        CommandInterval:
+          description: The command list interval for edge agent - used in edge async mode [seconds]
+          example: 60
+          type: integer
+        PingInterval:
+          description: The ping interval for edge agent - used in edge async mode [seconds]
+          example: 60
+          type: integer
+        SnapshotInterval:
+          description: The snapshot interval for edge agent - used in edge async mode [seconds]
+          example: 60
+          type: integer
+      type: object
     portainer.RegistryAccesses:
       additionalProperties:
         $ref: '#/components/schemas/portainer.RegistryAccessPolicies'
       type: object
-    portainer.AccessPolicy:
+    portainer.HelmConfig:
       properties:
-        Namespaces:
-          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+        Atomic:
+          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
+          example: true
+          type: boolean
+        ChartPath:
+          description: Path to a Helm chart folder for Helm git deployments
+          example: charts/my-app
+          type: string
+        Timeout:
+          description: Timeout for Helm operations (equivalent to helm --timeout flag)
+          example: 5m0s
+          type: string
+        ValuesFiles:
+          description: Array of paths to Helm values YAML files for Helm git deployments
+          example:
+          - '[''values/prod.yaml'''
+          - ' ''values/secrets.yaml'']'
           items:
             type: string
           type: array
-        RoleId:
-          description: Role identifier. Reference the role that will be associated to this access policy
+        Version:
+          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
+          example: 1.2.3
+          type: string
+      type: object
+    endpoints.endpointDeleteBatchPayload:
+      properties:
+        endpoints:
+          items:
+            $ref: '#/components/schemas/endpoints.endpointDeleteRequest'
+          type: array
+      type: object
+    endpoints.dockerhubStatusResponse:
+      properties:
+        limit:
+          description: Daily limit
+          type: integer
+        remaining:
+          description: Remaiming images to pull
+          type: integer
+      type: object
+    portainer.TeamAccessPolicies:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.AccessPolicy'
+      type: object
+    portainer.DiagnosticsData:
+      properties:
+        DNS:
+          additionalProperties:
+            type: string
+          type: object
+        Log:
+          type: string
+        Proxy:
+          additionalProperties:
+            type: string
+          type: object
+        Telnet:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    portainer.QuayRegistryData:
+      properties:
+        OrganisationName:
+          type: string
+        UseOrganisation:
+          type: boolean
+      type: object
+    edge.DeployerOptionsPayload:
+      properties:
+        ForceRecreate:
+          description: 'ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
+
+            This field is only used when the Force Redeployment is triggered.
+
+            Once the stack is redeployed, this field will be reset to false.
+
+            For standard edge agent, this field is used in agent side
+
+            For async edge agent, this field is used in both agent side and server side.
+
+            This flag drives `docker compose up --force-recreate` option'
+          type: boolean
+        Prune:
+          description: 'Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
+
+            This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
+
+            Used only for EE'
+          type: boolean
+        RemoveVolumes:
+          description: 'RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
+
+            in the compose file and anonymouse volumes attached to containers
+
+            This flag drives `docker compose down --volumes` option
+
+            Used only for EE'
+          type: boolean
+      type: object
+    portainer.EndpointPostInitMigrations:
+      properties:
+        MigrateGPUs:
+          type: boolean
+        MigrateIngresses:
+          type: boolean
+      type: object
+    endpoints.endpointUpdatePayload:
+      properties:
+        AzureApplicationID:
+          description: Azure application ID
+          example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
+          type: string
+        AzureAuthenticationKey:
+          description: Azure authentication key
+          example: cOrXoK/1D35w8YQ8nH1/8ZGwzz45JIYD5jxHKXEQknk=
+          type: string
+        AzureTenantID:
+          description: Azure tenant ID
+          example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
+          type: string
+        EdgeCheckinInterval:
+          description: The check in interval for edge agent (in seconds)
+          example: 5
+          type: integer
+        Gpus:
+          description: GPUs information
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        GroupID:
+          description: Group identifier
           example: 1
+          type: integer
+        Kubernetes:
+          allOf:
+          - $ref: '#/components/schemas/portainer.KubernetesData'
+          description: Associated Kubernetes data
+        Name:
+          description: Name that will be used to identify this environment(endpoint)
+          example: my-environment
+          type: string
+        PublicURL:
+          description: 'URL or IP address where exposed containers will be reachable.\
+
+            Defaults to URL if not specified'
+          example: docker.mydomain.tld:2375
+          type: string
+        Status:
+          description: The status of the environment(endpoint) (1 - up, 2 - down)
+          example: 1
+          type: integer
+        TLS:
+          description: Require TLS to connect against this environment(endpoint)
+          example: true
+          type: boolean
+        TLSSkipClientVerify:
+          description: Skip client verification when using TLS
+          example: false
+          type: boolean
+        TLSSkipVerify:
+          description: Skip server verification when using TLS
+          example: false
+          type: boolean
+        TagIDs:
+          description: List of tag identifiers to which this environment(endpoint) is associated
+          example:
+          - 1
+          - 2
+          items:
+            type: integer
+          type: array
+        TeamAccessPolicies:
+          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+        URL:
+          description: URL or IP address of a Docker host
+          example: docker.mydomain.tld:2375
+          type: string
+        UserAccessPolicies:
+          $ref: '#/components/schemas/portainer.UserAccessPolicies'
+      type: object
+    portainer.DockerSnapshotRaw:
+      type: object
+    portainer.DockerSnapshot:
+      properties:
+        ContainerCount:
+          type: integer
+        DiagnosticsData:
+          $ref: '#/components/schemas/portainer.DiagnosticsData'
+        DockerSnapshotRaw:
+          $ref: '#/components/schemas/portainer.DockerSnapshotRaw'
+        DockerVersion:
+          type: string
+        GpuUseAll:
+          type: boolean
+        GpuUseList:
+          items:
+            type: string
+          type: array
+        HealthyContainerCount:
+          type: integer
+        ImageCount:
+          type: integer
+        IsPodman:
+          type: boolean
+        NodeCount:
+          type: integer
+        PerformanceMetrics:
+          $ref: '#/components/schemas/portainer.PerformanceMetrics'
+        RunningContainerCount:
+          type: integer
+        ServiceCount:
+          type: integer
+        StackCount:
+          type: integer
+        StoppedContainerCount:
+          type: integer
+        Swarm:
+          type: boolean
+        Time:
+          type: integer
+        TotalCPU:
+          type: integer
+        TotalMemory:
+          type: integer
+        UnhealthyContainerCount:
+          type: integer
+        VolumeCount:
           type: integer
       type: object
     portainer.Endpoint:
@@ -1473,350 +1651,6 @@ components:
           description: Whether the device has been trusted or not by the user
           type: boolean
       type: object
-    endpoints.dockerhubStatusResponse:
-      properties:
-        limit:
-          description: Daily limit
-          type: integer
-        remaining:
-          description: Remaiming images to pull
-          type: integer
-      type: object
-    endpoints.forceUpdateServicePayload:
-      properties:
-        PullImage:
-          description: PullImage if true will pull the image
-          type: boolean
-        ServiceID:
-          description: ServiceId to update
-          type: string
-      type: object
-    portainer.QuayRegistryData:
-      properties:
-        OrganisationName:
-          type: string
-        UseOrganisation:
-          type: boolean
-      type: object
-    portainer.KubernetesConfiguration:
-      properties:
-        AllowNoneIngressClass:
-          type: boolean
-        EnableResourceOverCommit:
-          type: boolean
-        IngressAvailabilityPerNamespace:
-          type: boolean
-        IngressClasses:
-          items:
-            $ref: '#/components/schemas/portainer.KubernetesIngressClassConfig'
-          type: array
-        ResourceOverCommitPercentage:
-          type: integer
-        RestrictDefaultNamespace:
-          type: boolean
-        StorageClasses:
-          items:
-            $ref: '#/components/schemas/portainer.KubernetesStorageClassConfig'
-          type: array
-        UseLoadBalancer:
-          type: boolean
-        UseServerMetrics:
-          type: boolean
-      type: object
-    endpointedge.edgeJobResponse:
-      properties:
-        CollectLogs:
-          description: Whether to collect logs
-          example: true
-          type: boolean
-        CronExpression:
-          description: A cron expression to schedule this job
-          example: '* * * * *'
-          type: string
-        Id:
-          description: EdgeJob Identifier
-          example: 2
-          type: integer
-        Script:
-          description: Script to run
-          example: echo hello
-          type: string
-        Version:
-          description: Version of this EdgeJob
-          example: 2
-          type: integer
-      type: object
-    portainer.GithubRegistryData:
-      properties:
-        OrganisationName:
-          type: string
-        UseOrganisation:
-          type: boolean
-      type: object
-    endpoints.endpointDeleteBatchPayload:
-      properties:
-        endpoints:
-          items:
-            $ref: '#/components/schemas/endpoints.endpointDeleteRequest'
-          type: array
-      type: object
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    portainer.KubernetesIngressClassConfig:
-      properties:
-        Blocked:
-          type: boolean
-        BlockedNamespaces:
-          items:
-            type: string
-          type: array
-        Name:
-          type: string
-        Type:
-          type: string
-      type: object
-    endpoints.endpointUpdatePayload:
-      properties:
-        AzureApplicationID:
-          description: Azure application ID
-          example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
-          type: string
-        AzureAuthenticationKey:
-          description: Azure authentication key
-          example: cOrXoK/1D35w8YQ8nH1/8ZGwzz45JIYD5jxHKXEQknk=
-          type: string
-        AzureTenantID:
-          description: Azure tenant ID
-          example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
-          type: string
-        EdgeCheckinInterval:
-          description: The check in interval for edge agent (in seconds)
-          example: 5
-          type: integer
-        Gpus:
-          description: GPUs information
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        GroupID:
-          description: Group identifier
-          example: 1
-          type: integer
-        Kubernetes:
-          allOf:
-          - $ref: '#/components/schemas/portainer.KubernetesData'
-          description: Associated Kubernetes data
-        Name:
-          description: Name that will be used to identify this environment(endpoint)
-          example: my-environment
-          type: string
-        PublicURL:
-          description: 'URL or IP address where exposed containers will be reachable.\
-
-            Defaults to URL if not specified'
-          example: docker.mydomain.tld:2375
-          type: string
-        Status:
-          description: The status of the environment(endpoint) (1 - up, 2 - down)
-          example: 1
-          type: integer
-        TLS:
-          description: Require TLS to connect against this environment(endpoint)
-          example: true
-          type: boolean
-        TLSSkipClientVerify:
-          description: Skip client verification when using TLS
-          example: false
-          type: boolean
-        TLSSkipVerify:
-          description: Skip server verification when using TLS
-          example: false
-          type: boolean
-        TagIDs:
-          description: List of tag identifiers to which this environment(endpoint) is associated
-          example:
-          - 1
-          - 2
-          items:
-            type: integer
-          type: array
-        TeamAccessPolicies:
-          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-        URL:
-          description: URL or IP address of a Docker host
-          example: docker.mydomain.tld:2375
-          type: string
-        UserAccessPolicies:
-          $ref: '#/components/schemas/portainer.UserAccessPolicies'
-      type: object
-    portainer.KubernetesData:
-      properties:
-        Configuration:
-          $ref: '#/components/schemas/portainer.KubernetesConfiguration'
-        Flags:
-          $ref: '#/components/schemas/portainer.KubernetesFlags'
-        Snapshots:
-          items:
-            $ref: '#/components/schemas/portainer.KubernetesSnapshot'
-          type: array
-      type: object
-    portainer.EndpointType:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      type: integer
-      x-enum-varnames:
-      - _
-      - DockerEnvironment
-      - AgentOnDockerEnvironment
-      - AzureEnvironment
-      - EdgeAgentOnDockerEnvironment
-      - KubernetesLocalEnvironment
-      - AgentOnKubernetesEnvironment
-      - EdgeAgentOnKubernetesEnvironment
-    portainer.EnvironmentEdgeSettings:
-      properties:
-        AsyncMode:
-          description: Whether the device has been started in edge async mode
-          type: boolean
-        CommandInterval:
-          description: The command list interval for edge agent - used in edge async mode [seconds]
-          example: 60
-          type: integer
-        PingInterval:
-          description: The ping interval for edge agent - used in edge async mode [seconds]
-          example: 60
-          type: integer
-        SnapshotInterval:
-          description: The snapshot interval for edge agent - used in edge async mode [seconds]
-          example: 60
-          type: integer
-      type: object
-    edge.DeployerOptionsPayload:
-      properties:
-        ForceRecreate:
-          description: 'ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
-
-            This field is only used when the Force Redeployment is triggered.
-
-            Once the stack is redeployed, this field will be reset to false.
-
-            For standard edge agent, this field is used in agent side
-
-            For async edge agent, this field is used in both agent side and server side.
-
-            This flag drives `docker compose up --force-recreate` option'
-          type: boolean
-        Prune:
-          description: 'Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
-
-            This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
-
-            Used only for EE'
-          type: boolean
-        RemoveVolumes:
-          description: 'RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
-
-            in the compose file and anonymouse volumes attached to containers
-
-            This flag drives `docker compose down --volumes` option
-
-            Used only for EE'
-          type: boolean
-      type: object
-    endpoints.endpointUpdateRelationsPayload:
-      properties:
-        Relations:
-          additionalProperties:
-            properties:
-              EdgeGroups:
-                items:
-                  type: integer
-                type: array
-              Group:
-                type: integer
-              Tags:
-                items:
-                  type: integer
-                type: array
-            type: object
-          type: object
-      type: object
-    portainer.DockerSnapshotRaw:
-      type: object
-    portainer.KubernetesStorageClassConfig:
-      properties:
-        AccessModes:
-          items:
-            type: string
-          type: array
-        AllowVolumeExpansion:
-          type: boolean
-        Name:
-          type: string
-        Provisioner:
-          type: string
-      type: object
-    portainer.DockerSnapshot:
-      properties:
-        ContainerCount:
-          type: integer
-        DiagnosticsData:
-          $ref: '#/components/schemas/portainer.DiagnosticsData'
-        DockerSnapshotRaw:
-          $ref: '#/components/schemas/portainer.DockerSnapshotRaw'
-        DockerVersion:
-          type: string
-        GpuUseAll:
-          type: boolean
-        GpuUseList:
-          items:
-            type: string
-          type: array
-        HealthyContainerCount:
-          type: integer
-        ImageCount:
-          type: integer
-        IsPodman:
-          type: boolean
-        NodeCount:
-          type: integer
-        PerformanceMetrics:
-          $ref: '#/components/schemas/portainer.PerformanceMetrics'
-        RunningContainerCount:
-          type: integer
-        ServiceCount:
-          type: integer
-        StackCount:
-          type: integer
-        StoppedContainerCount:
-          type: integer
-        Swarm:
-          type: boolean
-        Time:
-          type: integer
-        TotalCPU:
-          type: integer
-        TotalMemory:
-          type: integer
-        UnhealthyContainerCount:
-          type: integer
-        VolumeCount:
-          type: integer
-      type: object
     swarm.ServiceUpdateResponse:
       properties:
         Warnings:
@@ -1824,24 +1658,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    edge.RegistryCredentials:
-      properties:
-        Secret:
-          type: string
-        ServerURL:
-          type: string
-        Username:
-          type: string
-      type: object
-    portainer.GitlabRegistryData:
-      properties:
-        InstanceURL:
-          type: string
-        ProjectId:
-          type: integer
-        ProjectPath:
-          type: string
       type: object
     portainer.RegistryType:
       enum:
@@ -1865,16 +1681,49 @@ components:
       - DockerHubRegistry
       - EcrRegistry
       - GithubRegistry
-    endpoints.registryAccessPayload:
+    portainer.Pair:
       properties:
-        Namespaces:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
+      type: object
+    portainer.KubernetesData:
+      properties:
+        Configuration:
+          $ref: '#/components/schemas/portainer.KubernetesConfiguration'
+        Flags:
+          $ref: '#/components/schemas/portainer.KubernetesFlags'
+        Snapshots:
           items:
-            type: string
+            $ref: '#/components/schemas/portainer.KubernetesSnapshot'
           type: array
-        TeamAccessPolicies:
-          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-        UserAccessPolicies:
-          $ref: '#/components/schemas/portainer.UserAccessPolicies'
+      type: object
+    portainer.PerformanceMetrics:
+      properties:
+        CPUUsage:
+          type: number
+        MemoryUsage:
+          type: number
+        NetworkUsage:
+          type: number
+      type: object
+    portainer.AzureCredentials:
+      properties:
+        ApplicationID:
+          description: Azure application ID
+          example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
+          type: string
+        AuthenticationKey:
+          description: Azure authentication key
+          example: cOrXoK/1D35w8YQ8nH1/8ZGwzz45JIYD5jxHKXEQknk=
+          type: string
+        TenantID:
+          description: Azure tenant ID
+          example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
+          type: string
       type: object
     edge.StackPayload:
       properties:
@@ -1985,85 +1834,158 @@ components:
           description: Version of the stack file
           type: integer
       type: object
-    portainer.Registry:
+    endpoints.registryAccessPayload:
       properties:
-        AccessToken:
-          description: Stores temporary access token
-          type: string
-        AccessTokenExpiry:
-          type: integer
-        Authentication:
-          description: Is authentication against this registry enabled
-          example: true
-          type: boolean
-        AuthorizedTeams:
-          description: Deprecated in DBVersion == 18
+        Namespaces:
           items:
-            type: integer
+            type: string
           type: array
-        AuthorizedUsers:
-          description: Deprecated in DBVersion == 18
-          items:
-            type: integer
-          type: array
-        BaseURL:
-          description: Base URL, introduced for ProGet registry
-          example: registry.mydomain.tld:2375
-          type: string
-        Ecr:
-          $ref: '#/components/schemas/portainer.EcrData'
-        Github:
-          $ref: '#/components/schemas/portainer.GithubRegistryData'
-        Gitlab:
-          $ref: '#/components/schemas/portainer.GitlabRegistryData'
-        Id:
-          description: Registry Identifier
+        TeamAccessPolicies:
+          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+        UserAccessPolicies:
+          $ref: '#/components/schemas/portainer.UserAccessPolicies'
+      type: object
+    endpointedge.stackStatusResponse:
+      properties:
+        ID:
+          description: EdgeStack Identifier
           example: 1
           type: integer
-        ManagementConfiguration:
-          $ref: '#/components/schemas/portainer.RegistryManagementConfiguration'
+        Version:
+          description: Version of this stack
+          example: 3
+          type: integer
+      type: object
+    portainer.KubernetesConfiguration:
+      properties:
+        AllowNoneIngressClass:
+          type: boolean
+        EnableResourceOverCommit:
+          type: boolean
+        IngressAvailabilityPerNamespace:
+          type: boolean
+        IngressClasses:
+          items:
+            $ref: '#/components/schemas/portainer.KubernetesIngressClassConfig'
+          type: array
+        ResourceOverCommitPercentage:
+          type: integer
+        RestrictDefaultNamespace:
+          type: boolean
+        StorageClasses:
+          items:
+            $ref: '#/components/schemas/portainer.KubernetesStorageClassConfig'
+          type: array
+        UseLoadBalancer:
+          type: boolean
+        UseServerMetrics:
+          type: boolean
+      type: object
+    portainer.KubernetesIngressClassConfig:
+      properties:
+        Blocked:
+          type: boolean
+        BlockedNamespaces:
+          items:
+            type: string
+          type: array
         Name:
-          description: Registry Name
-          example: my-registry
           type: string
-        Password:
-          description: Password or SecretAccessKey used to authenticate against this registry
-          example: registry_password
-          type: string
-        Quay:
-          $ref: '#/components/schemas/portainer.QuayRegistryData'
-        RegistryAccesses:
-          $ref: '#/components/schemas/portainer.RegistryAccesses'
-        TeamAccessPolicies:
-          allOf:
-          - $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-          description: Deprecated in DBVersion == 31
         Type:
-          allOf:
-          - $ref: '#/components/schemas/portainer.RegistryType'
-          description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-        URL:
-          description: URL or IP address of the Docker registry
-          example: registry.mydomain.tld:2375
           type: string
-        UserAccessPolicies:
-          allOf:
-          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
-          description: 'Deprecated fields
-
-            Deprecated in DBVersion == 31'
-        Username:
-          description: Username or AccessKeyID used to authenticate against this registry
-          example: registry user
-          type: string
+      type: object
+    endpoints.endpointDeleteBatchPartialResponse:
+      properties:
+        deleted:
+          items:
+            type: integer
+          type: array
+        errors:
+          items:
+            type: integer
+          type: array
+      type: object
+    os.FileMode:
+      enum:
+      - 2147483648
+      - 1073741824
+      - 536870912
+      - 268435456
+      - 134217728
+      - 67108864
+      - 33554432
+      - 16777216
+      - 8388608
+      - 4194304
+      - 2097152
+      - 1048576
+      - 524288
+      - 2401763328
+      - 511
+      - 2147483648
+      - 1073741824
+      - 536870912
+      - 268435456
+      - 134217728
+      - 67108864
+      - 33554432
+      - 16777216
+      - 8388608
+      - 4194304
+      - 2097152
+      - 1048576
+      - 524288
+      - 2401763328
+      - 511
+      type: integer
+      x-enum-comments:
+        ModeAppend: 'a: append-only'
+        ModeCharDevice: 'c: Unix character device, when ModeDevice is set'
+        ModeDevice: 'D: device file'
+        ModeDir: 'd: is a directory'
+        ModeExclusive: 'l: exclusive use'
+        ModeIrregular: '?: non-regular file; nothing else is known about this file'
+        ModeNamedPipe: 'p: named pipe (FIFO)'
+        ModePerm: Unix permission bits, 0o777
+        ModeSetgid: 'g: setgid'
+        ModeSetuid: 'u: setuid'
+        ModeSocket: 'S: Unix domain socket'
+        ModeSticky: 't: sticky'
+        ModeSymlink: 'L: symbolic link'
+        ModeTemporary: 'T: temporary file; Plan 9 only'
+      x-enum-varnames:
+      - ModeDir
+      - ModeAppend
+      - ModeExclusive
+      - ModeTemporary
+      - ModeSymlink
+      - ModeDevice
+      - ModeNamedPipe
+      - ModeSocket
+      - ModeSetuid
+      - ModeSetgid
+      - ModeCharDevice
+      - ModeSticky
+      - ModeIrregular
+      - ModeType
+      - ModePerm
+    endpoints.endpointUpdateRelationsPayload:
+      properties:
+        Relations:
+          additionalProperties:
+            properties:
+              EdgeGroups:
+                items:
+                  type: integer
+                type: array
+              Group:
+                type: integer
+              Tags:
+                items:
+                  type: integer
+                type: array
+            type: object
+          type: object
       type: object
     endpointedge.endpointEdgeStatusInspectResponse:
       properties:
@@ -2092,6 +2014,84 @@ components:
           example: REQUIRED
           type: string
       type: object
+    endpoints.endpointCreateGlobalKeyResponse:
+      properties:
+        endpointID:
+          type: integer
+      type: object
+    portainer.RegistryAccessPolicies:
+      properties:
+        Namespaces:
+          description: Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
+          items:
+            type: string
+          type: array
+        TeamAccessPolicies:
+          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+        UserAccessPolicies:
+          allOf:
+          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
+          description: Docker specific fields (with docker, users/teams have access to a registry)
+      type: object
+    portainer.EndpointSecuritySettings:
+      properties:
+        allowBindMountsForRegularUsers:
+          description: Whether non-administrator should be able to use bind mounts when creating containers
+          example: false
+          type: boolean
+        allowContainerCapabilitiesForRegularUsers:
+          description: Whether non-administrator should be able to use container capabilities
+          example: true
+          type: boolean
+        allowDeviceMappingForRegularUsers:
+          description: Whether non-administrator should be able to use device mapping
+          example: true
+          type: boolean
+        allowHostNamespaceForRegularUsers:
+          description: Whether non-administrator should be able to use the host pid
+          example: true
+          type: boolean
+        allowPrivilegedModeForRegularUsers:
+          description: Whether non-administrator should be able to use privileged mode when creating containers
+          example: false
+          type: boolean
+        allowStackManagementForRegularUsers:
+          description: Whether non-administrator should be able to manage stacks
+          example: true
+          type: boolean
+        allowSysctlSettingForRegularUsers:
+          description: Whether non-administrator should be able to use sysctl settings
+          example: true
+          type: boolean
+        allowVolumeBrowserForRegularUsers:
+          description: Whether non-administrator should be able to browse volumes
+          example: true
+          type: boolean
+        enableHostManagementFeatures:
+          description: Whether host management features are enabled
+          example: true
+          type: boolean
+      type: object
+    portainer.EndpointType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      x-enum-varnames:
+      - _
+      - DockerEnvironment
+      - AgentOnDockerEnvironment
+      - AzureEnvironment
+      - EdgeAgentOnDockerEnvironment
+      - KubernetesLocalEnvironment
+      - AgentOnKubernetesEnvironment
+      - EdgeAgentOnKubernetesEnvironment
   securitySchemes:
     ApiKeyAuth:
       in: header

@@ -64,6 +64,11 @@ paths:
         required: true
 components:
   schemas:
+    backup.backupPayload:
+      properties:
+        Password:
+          type: string
+      type: object
     backup.restorePayload:
       properties:
         FileContent:
@@ -72,11 +77,6 @@ components:
           type: array
         FileName:
           type: string
-        Password:
-          type: string
-      type: object
-    backup.backupPayload:
-      properties:
         Password:
           type: string
       type: object

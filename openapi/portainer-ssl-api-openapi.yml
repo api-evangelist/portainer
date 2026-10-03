@@ -68,16 +68,6 @@ paths:
         required: true
 components:
   schemas:
-    ssl.sslUpdatePayload:
-      properties:
-        Cert:
-          description: SSL Certificates
-          type: string
-        HTTPEnabled:
-          type: boolean
-        Key:
-          type: string
-      type: object
     portainer.SSLSettings:
       properties:
         certPath:
@@ -88,6 +78,16 @@ components:
           type: string
         selfSigned:
           type: boolean
+      type: object
+    ssl.sslUpdatePayload:
+      properties:
+        Cert:
+          description: SSL Certificates
+          type: string
+        HTTPEnabled:
+          type: boolean
+        Key:
+          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

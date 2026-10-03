@@ -372,90 +372,6 @@ paths:
         required: true
 components:
   schemas:
-    edgejobs.edgeJobFileResponse:
-      properties:
-        FileContent:
-          type: string
-      type: object
-    portainer.EdgeGroup:
-      properties:
-        Dynamic:
-          type: boolean
-        EndpointIds:
-          $ref: '#/components/schemas/roar.Roar-portainer_EndpointID'
-        Endpoints:
-          description: 'Deprecated: only used for API responses'
-          items:
-            type: integer
-          type: array
-        Id:
-          description: EdgeGroup Identifier
-          example: 1
-          type: integer
-        Name:
-          type: string
-        PartialMatch:
-          type: boolean
-        TagIds:
-          items:
-            type: integer
-          type: array
-      type: object
-    edgejobs.edgeJobUpdatePayload:
-      properties:
-        CronExpression:
-          type: string
-        EdgeGroups:
-          items:
-            type: integer
-          type: array
-        Endpoints:
-          items:
-            type: integer
-          type: array
-        FileContent:
-          type: string
-        Name:
-          type: string
-        Recurring:
-          type: boolean
-      type: object
-    edgejobs.fileResponse:
-      properties:
-        FileContent:
-          type: string
-      type: object
-    portainer.EdgeJobLogsStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      x-enum-varnames:
-      - _
-      - EdgeJobLogsStatusIdle
-      - EdgeJobLogsStatusPending
-      - EdgeJobLogsStatusCollected
-    edgejobs.edgeJobCreateFromFileContentPayload:
-      properties:
-        CronExpression:
-          type: string
-        EdgeGroups:
-          items:
-            type: integer
-          type: array
-        Endpoints:
-          items:
-            type: integer
-          type: array
-        FileContent:
-          type: string
-        Name:
-          type: string
-        Recurring:
-          type: boolean
-      type: object
     edgejobs.taskContainer:
       properties:
         EndpointId:
@@ -464,13 +380,6 @@ components:
           type: string
         Id:
           type: string
-        LogsStatus:
-          $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
-      type: object
-    portainer.EdgeJobEndpointMeta:
-      properties:
-        CollectLogs:
-          type: boolean
         LogsStatus:
           $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
       type: object
@@ -506,7 +415,98 @@ components:
         Version:
           type: integer
       type: object
+    edgejobs.edgeJobCreateFromFileContentPayload:
+      properties:
+        CronExpression:
+          type: string
+        EdgeGroups:
+          items:
+            type: integer
+          type: array
+        Endpoints:
+          items:
+            type: integer
+          type: array
+        FileContent:
+          type: string
+        Name:
+          type: string
+        Recurring:
+          type: boolean
+      type: object
+    edgejobs.fileResponse:
+      properties:
+        FileContent:
+          type: string
+      type: object
+    portainer.EdgeJobLogsStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      x-enum-varnames:
+      - _
+      - EdgeJobLogsStatusIdle
+      - EdgeJobLogsStatusPending
+      - EdgeJobLogsStatusCollected
     roar.Roar-portainer_EndpointID:
+      type: object
+    edgejobs.edgeJobFileResponse:
+      properties:
+        FileContent:
+          type: string
+      type: object
+    edgejobs.edgeJobUpdatePayload:
+      properties:
+        CronExpression:
+          type: string
+        EdgeGroups:
+          items:
+            type: integer
+          type: array
+        Endpoints:
+          items:
+            type: integer
+          type: array
+        FileContent:
+          type: string
+        Name:
+          type: string
+        Recurring:
+          type: boolean
+      type: object
+    portainer.EdgeGroup:
+      properties:
+        Dynamic:
+          type: boolean
+        EndpointIds:
+          $ref: '#/components/schemas/roar.Roar-portainer_EndpointID'
+        Endpoints:
+          description: 'Deprecated: only used for API responses'
+          items:
+            type: integer
+          type: array
+        Id:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        Name:
+          type: string
+        PartialMatch:
+          type: boolean
+        TagIds:
+          items:
+            type: integer
+          type: array
+      type: object
+    portainer.EdgeJobEndpointMeta:
+      properties:
+        CollectLogs:
+          type: boolean
+        LogsStatus:
+          $ref: '#/components/schemas/portainer.EdgeJobLogsStatus'
       type: object
   securitySchemes:
     ApiKeyAuth:

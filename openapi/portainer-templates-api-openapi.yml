@@ -67,11 +67,88 @@ paths:
       - Templates
 components:
   schemas:
-    templates.fileResponse:
+    portainer.Pair:
       properties:
-        FileContent:
-          description: The requested file content
-          example: version:2
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
+      type: object
+    templates.listResponse:
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/portainer.Template'
+          type: array
+        version:
+          type: string
+      type: object
+    portainer.TemplateVolume:
+      properties:
+        bind:
+          description: Path on the host
+          example: /tmp
+          type: string
+        container:
+          description: Path inside the container
+          example: /data
+          type: string
+        readonly:
+          description: Whether the volume used should be readonly
+          example: true
+          type: boolean
+      type: object
+    portainer.TemplateEnv:
+      properties:
+        default:
+          description: Default value that will be set for the variable
+          example: default_value
+          type: string
+        description:
+          description: Content of the tooltip that will be generated in the UI
+          example: MySQL root account password
+          type: string
+        label:
+          description: Text for the label that will be generated in the UI
+          example: Root password
+          type: string
+        name:
+          description: name of the environment(endpoint) variable
+          example: MYSQL_ROOT_PASSWORD
+          type: string
+        preset:
+          description: If set to true, will not generate any input for this variable in the UI
+          example: false
+          type: boolean
+        select:
+          description: A list of name/value that will be used to generate a dropdown in the UI
+          items:
+            $ref: '#/components/schemas/portainer.TemplateEnvSelect'
+          type: array
+      type: object
+    portainer.TemplateType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      x-enum-varnames:
+      - _
+      - ContainerTemplate
+      - SwarmStackTemplate
+      - ComposeStackTemplate
+    portainer.TemplateRepository:
+      properties:
+        stackfile:
+          description: Path to the stack file inside the git repository
+          example: ./subfolder/docker-compose.yml
+          type: string
+        url:
+          description: URL of a git repository used to deploy a stack template. Mandatory for a Swarm/Compose stack template
+          example: https://github.com/portainer/portainer-compose
           type: string
       type: object
     portainer.Template:
@@ -196,90 +273,13 @@ components:
             $ref: '#/components/schemas/portainer.TemplateVolume'
           type: array
       type: object
-    templates.listResponse:
+    templates.fileResponse:
       properties:
-        templates:
-          items:
-            $ref: '#/components/schemas/portainer.Template'
-          type: array
-        version:
+        FileContent:
+          description: The requested file content
+          example: version:2
           type: string
       type: object
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    portainer.TemplateVolume:
-      properties:
-        bind:
-          description: Path on the host
-          example: /tmp
-          type: string
-        container:
-          description: Path inside the container
-          example: /data
-          type: string
-        readonly:
-          description: Whether the volume used should be readonly
-          example: true
-          type: boolean
-      type: object
-    portainer.TemplateEnv:
-      properties:
-        default:
-          description: Default value that will be set for the variable
-          example: default_value
-          type: string
-        description:
-          description: Content of the tooltip that will be generated in the UI
-          example: MySQL root account password
-          type: string
-        label:
-          description: Text for the label that will be generated in the UI
-          example: Root password
-          type: string
-        name:
-          description: name of the environment(endpoint) variable
-          example: MYSQL_ROOT_PASSWORD
-          type: string
-        preset:
-          description: If set to true, will not generate any input for this variable in the UI
-          example: false
-          type: boolean
-        select:
-          description: A list of name/value that will be used to generate a dropdown in the UI
-          items:
-            $ref: '#/components/schemas/portainer.TemplateEnvSelect'
-          type: array
-      type: object
-    portainer.TemplateRepository:
-      properties:
-        stackfile:
-          description: Path to the stack file inside the git repository
-          example: ./subfolder/docker-compose.yml
-          type: string
-        url:
-          description: URL of a git repository used to deploy a stack template. Mandatory for a Swarm/Compose stack template
-          example: https://github.com/portainer/portainer-compose
-          type: string
-      type: object
-    portainer.TemplateType:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      x-enum-varnames:
-      - _
-      - ContainerTemplate
-      - SwarmStackTemplate
-      - ComposeStackTemplate
     portainer.TemplateEnvSelect:
       properties:
         default:

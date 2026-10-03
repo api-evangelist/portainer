@@ -153,6 +153,23 @@ paths:
         required: true
 components:
   schemas:
+    edgegroups.edgeGroupUpdatePayload:
+      properties:
+        Dynamic:
+          type: boolean
+        Endpoints:
+          items:
+            type: integer
+          type: array
+        Name:
+          type: string
+        PartialMatch:
+          type: boolean
+        TagIDs:
+          items:
+            type: integer
+          type: array
+      type: object
     edgegroups.decoratedEdgeGroup:
       properties:
         Dynamic:
@@ -207,42 +224,7 @@ components:
             type: integer
           type: array
       type: object
-    portainer.EndpointType:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      type: integer
-      x-enum-varnames:
-      - _
-      - DockerEnvironment
-      - AgentOnDockerEnvironment
-      - AzureEnvironment
-      - EdgeAgentOnDockerEnvironment
-      - KubernetesLocalEnvironment
-      - AgentOnKubernetesEnvironment
-      - EdgeAgentOnKubernetesEnvironment
-    edgegroups.edgeGroupUpdatePayload:
-      properties:
-        Dynamic:
-          type: boolean
-        Endpoints:
-          items:
-            type: integer
-          type: array
-        Name:
-          type: string
-        PartialMatch:
-          type: boolean
-        TagIDs:
-          items:
-            type: integer
-          type: array
+    roar.Roar-portainer_EndpointID:
       type: object
     portainer.EdgeGroup:
       properties:
@@ -268,8 +250,26 @@ components:
             type: integer
           type: array
       type: object
-    roar.Roar-portainer_EndpointID:
-      type: object
+    portainer.EndpointType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      x-enum-varnames:
+      - _
+      - DockerEnvironment
+      - AgentOnDockerEnvironment
+      - AzureEnvironment
+      - EdgeAgentOnDockerEnvironment
+      - KubernetesLocalEnvironment
+      - AgentOnKubernetesEnvironment
+      - EdgeAgentOnKubernetesEnvironment
   securitySchemes:
     ApiKeyAuth:
       in: header

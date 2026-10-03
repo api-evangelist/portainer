@@ -112,26 +112,6 @@ paths:
       - docker
 components:
   schemas:
-    docker.dashboardResponse:
-      properties:
-        containers:
-          $ref: '#/components/schemas/stats.ContainerStats'
-        images:
-          $ref: '#/components/schemas/docker.imagesCounters'
-        networks:
-          type: integer
-        services:
-          type: integer
-        stacks:
-          type: integer
-        volumes:
-          type: integer
-      type: object
-    containers.containerGpusResponse:
-      properties:
-        gpus:
-          type: string
-      type: object
     stats.ContainerStats:
       properties:
         healthy:
@@ -144,6 +124,11 @@ components:
           type: integer
         unhealthy:
           type: integer
+      type: object
+    containers.containerGpusResponse:
+      properties:
+        gpus:
+          type: string
       type: object
     images.ImageResponse:
       properties:
@@ -164,6 +149,21 @@ components:
 
             supplied only when withUsage is true'
           type: boolean
+      type: object
+    docker.dashboardResponse:
+      properties:
+        containers:
+          $ref: '#/components/schemas/stats.ContainerStats'
+        images:
+          $ref: '#/components/schemas/docker.imagesCounters'
+        networks:
+          type: integer
+        services:
+          type: integer
+        stacks:
+          type: integer
+        volumes:
+          type: integer
       type: object
     docker.imagesCounters:
       properties:
