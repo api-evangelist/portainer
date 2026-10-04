@@ -59,6 +59,9 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: MCPServer
+  url: mcp/portainer-mcp.yml
+  name: Portainer Documentation MCP Server — GitBook-hosted remote https://docs.portainer.io/~gitbook/mcp
 - type: FinOps
   url: finops/portainer-finops.yml
 - type: RateLimits
