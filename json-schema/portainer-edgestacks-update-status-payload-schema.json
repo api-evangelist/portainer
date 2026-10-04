@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-edgestacks-update-status-payload-schema.json",
+  "title": "edgestacks.updateStatusPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-edge-stacks-api-openapi.yml#/components/schemas/edgestacks.updateStatusPayload",
+  "properties": {
+    "EndpointID": {
+      "type": "integer"
+    },
+    "Error": {
+      "type": "string"
+    },
+    "Status": {
+      "$ref": "#/$defs/portainer.EdgeStackStatusType"
+    },
+    "Time": {
+      "type": "integer"
+    },
+    "Version": {
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.EdgeStackStatusType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "EdgeStackStatusPending",
+        "EdgeStackStatusDeploymentReceived",
+        "EdgeStackStatusError",
+        "EdgeStackStatusAcknowledged",
+        "EdgeStackStatusRemoved",
+        "EdgeStackStatusRemoteUpdateSuccess",
+        "EdgeStackStatusImagesPulled",
+        "EdgeStackStatusRunning",
+        "EdgeStackStatusDeploying",
+        "EdgeStackStatusRemoving",
+        "EdgeStackStatusPausedDeploying",
+        "EdgeStackStatusRollingBack",
+        "EdgeStackStatusRolledBack",
+        "EdgeStackStatusCompleted"
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.portainer.io/whats-new.md
+sources:
+- https://docs.portainer.io/whats-new.md
+- https://docs.portainer.io/release-notes.md
+- https://docs.portainer.io/advanced/deprecated.md
+- https://docs.portainer.io/advanced/deprecated/nomad.md
+entries:
+- breaking: false
+  highlights:
+  - Hardened outbound requests against SSRF. Helm chart resolution and Git HTTP/HTTPS operations now go through the SSRF-aware transport, and
+    the static rules that enforce this now match by type rather than by import alias, so an aliased import can no longer slip past them
+  - Certificate-based authentication for Azure Blob backups is now disabled in FIPS mode
+  - Added build-time static analysis that catches FIPS violations before they ship
+  - Removed unused non-FIPS code paths from FIPS builds
+  date: '2026-09-17'
+- breaking: false
+  highlights:
+  - Added advanced Kubernetes node drain options with agent failover
+  - Added native Portainer APIs for writing Kubernetes secrets, configmaps, deployments and persistent volume claims, replacing direct kube‑apiserver
+    proxy calls
+  - Edge Compute settings can now be configured during initial setup and via cli flags
+  - The add‑on catalog is now fetched dynamically, so new add‑ons no longer require a Portainer patch release
+  date: '2026-08-27'
+current_version: 2.45.1
+note: Only the two most recent releases are listed; the page contains no explicit versioning‑scheme description, but releases follow a major.minor.patch
+  pattern (e.g., 2.45.0, 2.45.1).
+docs: https://docs.portainer.io/whats-new.md

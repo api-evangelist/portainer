@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-role-schema.json",
+  "title": "portainer.Role",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-roles-api-openapi.yml#/components/schemas/portainer.Role",
+  "properties": {
+    "Authorizations": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.Authorizations"
+        }
+      ],
+      "description": "Authorizations associated to a role"
+    },
+    "Description": {
+      "description": "Role description",
+      "type": "string"
+    },
+    "Id": {
+      "description": "Role Identifier",
+      "type": "integer"
+    },
+    "Name": {
+      "description": "Role name",
+      "type": "string"
+    },
+    "Priority": {
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.Authorizations": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "type": "object"
+    }
+  }
+}

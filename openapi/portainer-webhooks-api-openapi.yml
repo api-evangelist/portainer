@@ -162,6 +162,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    portainer.WebhookType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - _
+      - ServiceWebhook
     portainer.Webhook:
       properties:
         EndpointId:
@@ -199,14 +207,6 @@ components:
         RegistryID:
           type: integer
       type: object
-    portainer.WebhookType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - _
-      - ServiceWebhook
   securitySchemes:
     ApiKeyAuth:
       in: header

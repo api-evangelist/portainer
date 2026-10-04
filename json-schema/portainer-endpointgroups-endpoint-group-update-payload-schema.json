@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-endpointgroups-endpoint-group-update-payload-schema.json",
+  "title": "endpointgroups.endpointGroupUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoint-groups-api-openapi.yml#/components/schemas/endpointgroups.endpointGroupUpdatePayload",
+  "properties": {
+    "AssociatedEndpoints": {
+      "description": "List of environment(endpoint) identifiers that will be part of this group",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Description": {
+      "description": "Environment(Endpoint) group description",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Environment(Endpoint) group name",
+      "type": "string"
+    },
+    "TagIDs": {
+      "description": "List of tag identifiers associated to the environment(endpoint) group",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "TeamAccessPolicies": {
+      "$ref": "#/$defs/portainer.TeamAccessPolicies"
+    },
+    "UserAccessPolicies": {
+      "$ref": "#/$defs/portainer.UserAccessPolicies"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.AccessPolicy": {
+      "properties": {
+        "Namespaces": {
+          "description": "Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "description": "Role identifier. Reference the role that will be associated to this access policy",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.TeamAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    },
+    "portainer.UserAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    }
+  }
+}

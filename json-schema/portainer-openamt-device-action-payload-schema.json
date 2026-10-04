@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-openamt-device-action-payload-schema.json",
+  "title": "openamt.deviceActionPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-intel-api-openapi.yml#/components/schemas/openamt.deviceActionPayload",
+  "properties": {
+    "Action": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

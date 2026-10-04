@@ -67,39 +67,6 @@ paths:
       - Templates
 components:
   schemas:
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    templates.listResponse:
-      properties:
-        templates:
-          items:
-            $ref: '#/components/schemas/portainer.Template'
-          type: array
-        version:
-          type: string
-      type: object
-    portainer.TemplateVolume:
-      properties:
-        bind:
-          description: Path on the host
-          example: /tmp
-          type: string
-        container:
-          description: Path inside the container
-          example: /data
-          type: string
-        readonly:
-          description: Whether the volume used should be readonly
-          example: true
-          type: boolean
-      type: object
     portainer.TemplateEnv:
       properties:
         default:
@@ -140,6 +107,61 @@ components:
       - ContainerTemplate
       - SwarmStackTemplate
       - ComposeStackTemplate
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
+      type: object
+    templates.fileResponse:
+      properties:
+        FileContent:
+          description: The requested file content
+          example: version:2
+          type: string
+      type: object
+    templates.listResponse:
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/portainer.Template'
+          type: array
+        version:
+          type: string
+      type: object
+    portainer.TemplateEnvSelect:
+      properties:
+        default:
+          description: Will set this choice as the default choice
+          example: false
+          type: boolean
+        text:
+          description: Some text that will displayed as a choice
+          example: text value
+          type: string
+        value:
+          description: A value that will be associated to the choice
+          example: value
+          type: string
+      type: object
+    portainer.TemplateVolume:
+      properties:
+        bind:
+          description: Path on the host
+          example: /tmp
+          type: string
+        container:
+          description: Path inside the container
+          example: /data
+          type: string
+        readonly:
+          description: Whether the volume used should be readonly
+          example: true
+          type: boolean
+      type: object
     portainer.TemplateRepository:
       properties:
         stackfile:
@@ -272,28 +294,6 @@ components:
           items:
             $ref: '#/components/schemas/portainer.TemplateVolume'
           type: array
-      type: object
-    templates.fileResponse:
-      properties:
-        FileContent:
-          description: The requested file content
-          example: version:2
-          type: string
-      type: object
-    portainer.TemplateEnvSelect:
-      properties:
-        default:
-          description: Will set this choice as the default choice
-          example: false
-          type: boolean
-        text:
-          description: Some text that will displayed as a choice
-          example: text value
-          type: string
-        value:
-          description: A value that will be associated to the choice
-          example: value
-          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

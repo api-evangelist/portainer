@@ -80,47 +80,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    edge.DeployerOptionsPayload:
-      properties:
-        ForceRecreate:
-          description: 'ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
-
-            This field is only used when the Force Redeployment is triggered.
-
-            Once the stack is redeployed, this field will be reset to false.
-
-            For standard edge agent, this field is used in agent side
-
-            For async edge agent, this field is used in both agent side and server side.
-
-            This flag drives `docker compose up --force-recreate` option'
-          type: boolean
-        Prune:
-          description: 'Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
-
-            This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
-
-            Used only for EE'
-          type: boolean
-        RemoveVolumes:
-          description: 'RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
-
-            in the compose file and anonymouse volumes attached to containers
-
-            This flag drives `docker compose down --volumes` option
-
-            Used only for EE'
-          type: boolean
-      type: object
     edge.StackPayload:
       properties:
         AlwaysCloneGitRepoForRelativePath:
@@ -241,6 +200,74 @@ components:
         Permissions:
           $ref: '#/components/schemas/os.FileMode'
       type: object
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
+      type: object
+    portainer.HelmConfig:
+      properties:
+        Atomic:
+          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
+          example: true
+          type: boolean
+        ChartPath:
+          description: Path to a Helm chart folder for Helm git deployments
+          example: charts/my-app
+          type: string
+        Timeout:
+          description: Timeout for Helm operations (equivalent to helm --timeout flag)
+          example: 5m0s
+          type: string
+        ValuesFiles:
+          description: Array of paths to Helm values YAML files for Helm git deployments
+          example:
+          - '[''values/prod.yaml'''
+          - ' ''values/secrets.yaml'']'
+          items:
+            type: string
+          type: array
+        Version:
+          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
+          example: 1.2.3
+          type: string
+      type: object
+    edge.DeployerOptionsPayload:
+      properties:
+        ForceRecreate:
+          description: 'ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
+
+            This field is only used when the Force Redeployment is triggered.
+
+            Once the stack is redeployed, this field will be reset to false.
+
+            For standard edge agent, this field is used in agent side
+
+            For async edge agent, this field is used in both agent side and server side.
+
+            This flag drives `docker compose up --force-recreate` option'
+          type: boolean
+        Prune:
+          description: 'Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
+
+            This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
+
+            Used only for EE'
+          type: boolean
+        RemoveVolumes:
+          description: 'RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
+
+            in the compose file and anonymouse volumes attached to containers
+
+            This flag drives `docker compose down --volumes` option
+
+            Used only for EE'
+          type: boolean
+      type: object
     os.FileMode:
       enum:
       - 2147483648
@@ -312,33 +339,6 @@ components:
         ServerURL:
           type: string
         Username:
-          type: string
-      type: object
-    portainer.HelmConfig:
-      properties:
-        Atomic:
-          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
-          example: true
-          type: boolean
-        ChartPath:
-          description: Path to a Helm chart folder for Helm git deployments
-          example: charts/my-app
-          type: string
-        Timeout:
-          description: Timeout for Helm operations (equivalent to helm --timeout flag)
-          example: 5m0s
-          type: string
-        ValuesFiles:
-          description: Array of paths to Helm values YAML files for Helm git deployments
-          example:
-          - '[''values/prod.yaml'''
-          - ' ''values/secrets.yaml'']'
-          items:
-            type: string
-          type: array
-        Version:
-          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
-          example: 1.2.3
           type: string
       type: object
   securitySchemes:

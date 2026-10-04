@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-registries-registry-ping-response-schema.json",
+  "title": "registries.registryPingResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-registries-api-openapi.yml#/components/schemas/registries.registryPingResponse",
+  "properties": {
+    "message": {
+      "description": "Message provides details about the connection test result",
+      "type": "string"
+    },
+    "success": {
+      "description": "Success indicates if the registry connection was successful",
+      "type": "boolean"
+    }
+  },
+  "type": "object"
+}

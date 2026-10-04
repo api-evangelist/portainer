@@ -153,6 +153,25 @@ paths:
         required: true
 components:
   schemas:
+    roar.Roar-portainer_EndpointID:
+      type: object
+    edgegroups.edgeGroupCreatePayload:
+      properties:
+        Dynamic:
+          type: boolean
+        Endpoints:
+          items:
+            type: integer
+          type: array
+        Name:
+          type: string
+        PartialMatch:
+          type: boolean
+        TagIDs:
+          items:
+            type: integer
+          type: array
+      type: object
     edgegroups.edgeGroupUpdatePayload:
       properties:
         Dynamic:
@@ -206,25 +225,6 @@ components:
           items:
             type: integer
           type: array
-      type: object
-    edgegroups.edgeGroupCreatePayload:
-      properties:
-        Dynamic:
-          type: boolean
-        Endpoints:
-          items:
-            type: integer
-          type: array
-        Name:
-          type: string
-        PartialMatch:
-          type: boolean
-        TagIDs:
-          items:
-            type: integer
-          type: array
-      type: object
-    roar.Roar-portainer_EndpointID:
       type: object
     portainer.EdgeGroup:
       properties:

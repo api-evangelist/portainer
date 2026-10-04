@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-motd-motd-response-schema.json",
+  "title": "motd.motdResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-motd-api-openapi.yml#/components/schemas/motd.motdResponse",
+  "properties": {
+    "ContentLayout": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "Hash": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Message": {
+      "type": "string"
+    },
+    "Style": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

@@ -1,8 +1,9 @@
 aid: portainer
 name: Portainer
-description: >-
-  Portainer is an open source container management platform that simplifies deploying, managing, and monitoring Docker,
-  Swarm, Podman, and Kubernetes environments through a unified web UI and REST API.
+description: Portainer provides a centralized multi‑cluster management platform for Kubernetes, Docker, Swarm and Podman workloads. It offers
+  enterprise identity and access features such as SSO, LDAP and OIDC, as well as GitOps deployment workflows and self‑service guardrails. The
+  product is aimed at engineering teams and enterprises that need to govern containerized applications across on‑premises, cloud and edge environments
+  from a single console.
 type: Index
 deliveryModel:
   model: open-core
@@ -34,14 +35,106 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/portainer.png
 tags:
-  - Container Management
-  - Containers
-  - Docker
-  - Kubernetes
+- Container Management
+- Containers
+- Docker
+- Kubernetes
+- Kubernetes Management
+- Enterprise Identity
+- GitOps
+- Multi‑Cluster Governance - Container Management - Containers - Docker - Kubernetes
 url: https://raw.githubusercontent.com/api-evangelist/portainer/refs/heads/main/apis.yml
 created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.23'
+x-coverage:
+  state: unreadable
+  reason: no-machine-readable-spec
+  detail: No OpenAPI/AsyncAPI/GraphQL spec found at known endpoints (e.g., https://api.portainer.io/openapi.json returned empty).
+  evidence:
+  - url: https://api.portainer.io/openapi.json
+    status: 200
+  checked: '2026-10-03'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+common:
+- type: FinOps
+  url: finops/portainer-finops.yml
+- type: RateLimits
+  url: rate-limits/portainer-rate-limits.yml
+- type: Plans
+  url: plans/portainer-plans-pricing.yml
+- type: Spectral
+  url: rules/portainer-rules.yml
+- type: JSONLD
+  url: json-ld/portainer-context.jsonld
+- type: Vocabulary
+  url: vocabulary/portainer-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/portainer-data-model.yml
+- type: ErrorCatalog
+  url: errors/portainer-problem-types.yml
+- type: Conformance
+  url: conformance/portainer-conformance.yml
+- type: LLMsTxt
+  url: llms/portainer-llms.txt
+- type: WellKnown
+  url: well-known/portainer-well-known.yml
+- type: Hosts
+  url: hosts/portainer-hosts.yml
+- type: Vendors
+  url: vendors/portainer-vendors.yml
+- type: TermsOfService
+  url: https://www.portainer.io/terms-and-license-agreements
+- type: PrivacyPolicy
+  url: https://docs.portainer.io/privacy
+- type: GettingStarted
+  url: https://docs.portainer.io/start/install/server/setup
+  name: Portainer Business Capability Map
+- type: IssueTracker
+  url: https://github.com/portainer/portainer/issues
+- type: Releases
+  url: https://github.com/portainer/portainer/releases
+- type: SecurityPolicy
+  url: https://github.com/portainer/portainer/blob/develop/SECURITY.md
+- type: CodeOfConduct
+  url: https://github.com/portainer/portainer/blob/develop/CODE_OF_CONDUCT.md
+- type: ContributionGuide
+  url: https://github.com/portainer/portainer/blob/develop/CONTRIBUTING.md
+- type: License
+  name: Zlib
+  url: https://github.com/portainer/portainer/blob/develop/LICENSE
+- type: AgenticAccess
+  url: agentic-access/portainer-agentic-access.yml
+- type: DomainSecurity
+  url: security/portainer-domain-security.yml
+- type: Authentication
+  url: authentication/portainer-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/portainer
+- type: Website
+  url: https://www.portainer.io/
+- type: Documentation
+  url: https://docs.portainer.io/
+- type: APIReference
+  url: https://api-docs.portainer.io/
+- type: Blog
+  url: https://www.portainer.io/blog
+- type: Pricing
+  url: https://www.portainer.io/pricing
+- type: GitHubOrg
+  url: https://github.com/portainer
+- type: GitHubRepository
+  url: https://github.com/portainer/portainer
+- type: Community
+  url: https://www.portainer.io/community
+- type: Slack
+  url: https://www.portainer.io/slack
+- type: LlmsText
+  url: https://docs.portainer.io/llms.txt
 apis:
 - aid: portainer:portainer-auth-api
   name: Portainer Auth API
@@ -61,6 +154,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-auth-authenticate-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-auth-authenticate-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-auth-oauth-payload-schema.json
 - aid: portainer:portainer-backup-api
   name: Portainer Backup API
   description: Manage backups
@@ -79,6 +178,10 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-backup-restore-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-backup-backup-payload-schema.json
 - aid: portainer:portainer-custom-templates-api
   name: Portainer Custom Templates API
   description: Manage Custom Templates
@@ -97,6 +200,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-customtemplates-custom-template-update-payload-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/portainer-customtemplates-custom-template-from-git-repository-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-custom-template-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/portainer-customtemplates-custom-template-from-file-content-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-customtemplates-file-response-schema.json
 - aid: portainer:portainer-docker-api
   name: Portainer Docker API
   description: Manage Docker resources
@@ -115,6 +230,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-images-image-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-docker-dashboard-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-containers-container-gpus-response-schema.json
 - aid: portainer:portainer-edge-api
   name: Portainer Edge API
   description: Manage Edge related environment(endpoint) settings
@@ -133,6 +254,8 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-edge-stack-payload-schema.json
 - aid: portainer:portainer-edge-groups-api
   name: Portainer Edge Groups API
   description: Manage Edge Groups
@@ -150,6 +273,14 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-edgegroups-decorated-edge-group-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-edge-group-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgegroups-edge-group-create-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgegroups-edge-group-update-payload-schema.json
 - aid: portainer:portainer-edge-jobs-api
   name: Portainer Edge Jobs API
   description: Manage Edge Jobs
@@ -167,6 +298,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-edge-job-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-edge-group-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgejobs-edge-job-create-from-file-content-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgejobs-edge-job-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgejobs-task-container-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgejobs-edge-job-file-response-schema.json
 - aid: portainer:portainer-edge-stacks-api
   name: Portainer Edge Stacks API
   description: Manage Edge Stacks
@@ -184,6 +327,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-edge-stack-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgestacks-edge-stack-from-git-repository-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgestacks-edge-stack-from-string-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-edge-stack-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgestacks-update-edge-stack-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edgestacks-update-status-payload-schema.json
 - aid: portainer:portainer-endpoint-groups-api
   name: Portainer Endpoint Groups API
   description: Manage environment(endpoint) groups
@@ -201,6 +356,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-endpoint-group-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-endpointgroups-endpoint-group-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-endpointgroups-endpoint-group-create-payload-schema.json
 - aid: portainer:portainer-endpoints-api
   name: Portainer Endpoints API
   description: Manage Docker environments(endpoints)
@@ -218,6 +379,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-endpoint-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-edge-stack-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-registry-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-endpoints-endpoint-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-endpoints-endpoint-settings-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-endpointedge-endpoint-edge-status-inspect-response-schema.json
 - aid: portainer:portainer-helm-api
   name: Portainer Helm API
   description: Manage Helm charts
@@ -236,6 +409,19 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: >-
+      json-schema/portainer-github-com-portainer-portainer-pkg-libhelm-release-release-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-helm-user-repository-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-release-release-element-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-helm-install-chart-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-users-helm-user-repository-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-users-add-helm-repo-url-payload-schema.json
 - aid: portainer:portainer-intel-api
   name: Portainer Intel API
   description: Manage Intel AMT settings
@@ -254,6 +440,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-openamt-open-amtconfigure-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-openamt-device-features-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-openamt-device-action-payload-schema.json
 - aid: portainer:portainer-kubernetes-api
   name: Portainer Kubernetes API
   description: Manage Kubernetes cluster
@@ -272,6 +464,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-kubernetes-k8s-application-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-v1beta1-pod-metrics-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-v1beta1-node-metrics-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-v1beta1-node-metrics-list-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-v1beta1-pod-metrics-list-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-kubernetes-k8s-service-info-schema.json
 - aid: portainer:portainer-ldap-api
   name: Portainer Ldap API
   description: Manage LDAP settings
@@ -290,6 +494,8 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-ldap-check-payload-schema.json
 - aid: portainer:portainer-motd-api
   name: Portainer Motd API
   description: Fetch the message of the day
@@ -306,6 +512,8 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-motd-motd-response-schema.json
 - aid: portainer:portainer-registries-api
   name: Portainer Registries API
   description: Manage Docker registries
@@ -324,6 +532,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-registry-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-registries-registry-create-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-registries-registry-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-registries-registry-configure-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-registries-registry-ping-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-registries-registry-ping-response-schema.json
 - aid: portainer:portainer-resource-controls-api
   name: Portainer Resource Controls API
   description: Manage access control on Docker resources
@@ -341,6 +561,10 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-resource-control-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-resourcecontrols-resource-control-create-payload-schema.json
 - aid: portainer:portainer-roles-api
   name: Portainer Roles API
   description: Manage roles
@@ -359,6 +583,8 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-role-schema.json
 - aid: portainer:portainer-settings-api
   name: Portainer Settings API
   description: Manage Portainer settings
@@ -377,6 +603,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-settings-settings-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-settings-public-settings-response-schema.json
 - aid: portainer:portainer-ssl-api
   name: Portainer Ssl API
   description: Manage ssl settings
@@ -395,6 +627,10 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-sslsettings-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-ssl-ssl-update-payload-schema.json
 - aid: portainer:portainer-stacks-api
   name: Portainer Stacks API
   description: Manage stacks
@@ -413,6 +649,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-stack-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-stacks-swarm-stack-from-git-repository-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-stacks-compose-stack-from-git-repository-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-stacks-update-swarm-stack-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-stacks-stack-git-redploy-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-stacks-swarm-stack-from-file-content-payload-schema.json
 - aid: portainer:portainer-status-api
   name: Portainer Status API
   description: Information about the Portainer instance
@@ -431,6 +679,8 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-system-status-schema.json
 - aid: portainer:portainer-system-api
   name: Portainer System API
   description: Manage Portainer system
@@ -449,6 +699,14 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-system-version-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-system-status-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-system-system-info-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-system-nodes-count-response-schema.json
 - aid: portainer:portainer-tags-api
   name: Portainer Tags API
   description: Manage tags
@@ -467,6 +725,10 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-tag-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-tags-tag-create-payload-schema.json
 - aid: portainer:portainer-team-memberships-api
   name: Portainer Team Memberships API
   description: Manage team memberships
@@ -485,6 +747,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-team-membership-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-teammemberships-team-membership-create-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-teammemberships-team-membership-update-payload-schema.json
 - aid: portainer:portainer-teams-api
   name: Portainer Teams API
   description: Manage teams
@@ -503,6 +771,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-teams-team-create-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-team-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-teams-team-update-payload-schema.json
 - aid: portainer:portainer-templates-api
   name: Portainer Templates API
   description: Manage App Templates
@@ -521,6 +795,10 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-templates-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-templates-file-response-schema.json
 - aid: portainer:portainer-upload-api
   name: Portainer Upload API
   description: Upload files
@@ -557,6 +835,18 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-user-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-apikey-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-users-user-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-team-membership-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-users-user-create-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-users-admin-init-payload-schema.json
 - aid: portainer:portainer-webhooks-api
   name: Portainer Webhooks API
   description: Manage webhooks
@@ -575,6 +865,12 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
+  - type: JSONSchema
+    url: json-schema/portainer-portainer-webhook-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-webhooks-webhook-create-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-webhooks-webhook-update-payload-schema.json
 - aid: portainer:portainer-websocket-api
   name: Portainer Websocket API
   description: Create exec sessions using websockets
@@ -609,51 +905,13 @@ apis:
     url: https://api-docs.portainer.io/
   - type: GettingStarted
     url: https://docs.portainer.io/start
-common:
-  - type: CapabilityMap
-    url: capabilities/portainer-capability-edges.yml
-    name: Portainer Business Capability Map
-  - type: IssueTracker
-    url: https://github.com/portainer/portainer/issues
-  - type: Releases
-    url: https://github.com/portainer/portainer/releases
-  - type: SecurityPolicy
-    url: https://github.com/portainer/portainer/blob/develop/SECURITY.md
-  - type: CodeOfConduct
-    url: https://github.com/portainer/portainer/blob/develop/CODE_OF_CONDUCT.md
-  - type: ContributionGuide
-    url: https://github.com/portainer/portainer/blob/develop/CONTRIBUTING.md
-  - type: License
-    name: Zlib
-    url: https://github.com/portainer/portainer/blob/develop/LICENSE
-  - type: AgenticAccess
-    url: agentic-access/portainer-agentic-access.yml
-  - type: DomainSecurity
-    url: security/portainer-domain-security.yml
-  - type: Authentication
-    url: authentication/portainer-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/portainer
-  - type: Website
-    url: https://www.portainer.io/
-  - type: Documentation
-    url: https://docs.portainer.io/
-  - type: APIReference
-    url: https://api-docs.portainer.io/
-  - type: Blog
-    url: https://www.portainer.io/blog
-  - type: Pricing
-    url: https://www.portainer.io/pricing
-  - type: GitHubOrg
-    url: https://github.com/portainer
-  - type: GitHubRepository
-    url: https://github.com/portainer/portainer
-  - type: Community
-    url: https://www.portainer.io/community
-  - type: Slack
-    url: https://www.portainer.io/slack
-  - type: LlmsText
-    url: https://docs.portainer.io/llms.txt
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - type: JSONSchema
+    url: json-schema/portainer-gitops-repository-file-preview-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/portainer-gitops-file-response-schema.json
+x-enrichment:
+  date: '2026-10-03'
+  status: enriched
+  artifacts_added: 115
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

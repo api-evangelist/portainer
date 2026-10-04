@@ -1,0 +1,1515 @@
+{
+  "@context": {
+    "@vocab": "https://portainer.io/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "portainer": "https://portainer.io/schema#",
+    "auth.oauthPayload": "portainer:auth.oauthPayload",
+    "Code": {
+      "@id": "portainer:Code",
+      "@type": "xsd:string"
+    },
+    "auth.authenticateResponse": "portainer:auth.authenticateResponse",
+    "jwt": {
+      "@id": "portainer:jwt",
+      "@type": "xsd:string"
+    },
+    "auth.authenticatePayload": "portainer:auth.authenticatePayload",
+    "Password": {
+      "@id": "portainer:Password",
+      "@type": "xsd:string"
+    },
+    "Username": {
+      "@id": "portainer:Username",
+      "@type": "xsd:string"
+    },
+    "backup.backupPayload": "portainer:backup.backupPayload",
+    "backup.restorePayload": "portainer:backup.restorePayload",
+    "FileContent": {
+      "@id": "portainer:FileContent",
+      "@container": "@list"
+    },
+    "FileName": {
+      "@id": "portainer:FileName",
+      "@type": "xsd:string"
+    },
+    "portainer.CustomTemplatePlatform": "portainer:portainer.CustomTemplatePlatform",
+    "portainer.CustomTemplate": "portainer:portainer.CustomTemplate",
+    "CreatedByUserId": {
+      "@id": "portainer:CreatedByUserId",
+      "@type": "xsd:integer"
+    },
+    "Description": {
+      "@id": "portainer:Description",
+      "@type": "xsd:string"
+    },
+    "EdgeTemplate": {
+      "@id": "portainer:EdgeTemplate",
+      "@type": "xsd:boolean"
+    },
+    "EntryPoint": {
+      "@id": "portainer:EntryPoint",
+      "@type": "xsd:string"
+    },
+    "GitConfig": {
+      "@id": "portainer:GitConfig",
+      "@type": "@id"
+    },
+    "Id": {
+      "@id": "portainer:Id",
+      "@type": "xsd:integer"
+    },
+    "IsComposeFormat": {
+      "@id": "portainer:IsComposeFormat",
+      "@type": "xsd:boolean"
+    },
+    "Logo": {
+      "@id": "portainer:Logo",
+      "@type": "xsd:string"
+    },
+    "Note": {
+      "@id": "portainer:Note",
+      "@type": "xsd:string"
+    },
+    "Platform": {
+      "@id": "portainer:Platform"
+    },
+    "ProjectPath": {
+      "@id": "portainer:ProjectPath",
+      "@type": "xsd:string"
+    },
+    "ResourceControl": {
+      "@id": "portainer:ResourceControl",
+      "@type": "@id"
+    },
+    "Title": {
+      "@id": "portainer:Title",
+      "@type": "xsd:string"
+    },
+    "Type": {
+      "@id": "portainer:Type"
+    },
+    "Variables": {
+      "@id": "portainer:Variables",
+      "@container": "@list"
+    },
+    "portainer.StackType": "portainer:portainer.StackType",
+    "customtemplates.customTemplateUpdatePayload": "portainer:customtemplates.customTemplateUpdatePayload",
+    "ComposeFilePathInRepository": {
+      "@id": "portainer:ComposeFilePathInRepository",
+      "@type": "xsd:string"
+    },
+    "RepositoryAuthentication": {
+      "@id": "portainer:RepositoryAuthentication",
+      "@type": "xsd:boolean"
+    },
+    "RepositoryAuthorizationType": {
+      "@id": "portainer:RepositoryAuthorizationType"
+    },
+    "RepositoryGitCredentialID": {
+      "@id": "portainer:RepositoryGitCredentialID",
+      "@type": "xsd:integer"
+    },
+    "RepositoryPassword": {
+      "@id": "portainer:RepositoryPassword",
+      "@type": "xsd:string"
+    },
+    "RepositoryReferenceName": {
+      "@id": "portainer:RepositoryReferenceName",
+      "@type": "xsd:string"
+    },
+    "RepositoryURL": {
+      "@id": "portainer:RepositoryURL",
+      "@type": "xsd:string"
+    },
+    "RepositoryUsername": {
+      "@id": "portainer:RepositoryUsername",
+      "@type": "xsd:string"
+    },
+    "TLSSkipVerify": {
+      "@id": "portainer:TLSSkipVerify",
+      "@type": "xsd:boolean"
+    },
+    "portainer.CustomTemplateVariableDefinition": "portainer:portainer.CustomTemplateVariableDefinition",
+    "defaultValue": {
+      "@id": "portainer:defaultValue",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "portainer:description",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "portainer:label",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "portainer:name",
+      "@type": "xsd:string"
+    },
+    "gittypes.GitAuthentication": "portainer:gittypes.GitAuthentication",
+    "AuthorizationType": {
+      "@id": "portainer:AuthorizationType",
+      "@type": "@id"
+    },
+    "GitCredentialID": {
+      "@id": "portainer:GitCredentialID",
+      "@type": "xsd:integer"
+    },
+    "portainer.UserResourceAccess": "portainer:portainer.UserResourceAccess",
+    "AccessLevel": {
+      "@id": "portainer:AccessLevel",
+      "@type": "@id"
+    },
+    "UserId": {
+      "@id": "portainer:UserId",
+      "@type": "xsd:integer"
+    },
+    "customtemplates.customTemplateFromGitRepositoryPayload": "portainer:customtemplates.customTemplateFromGitRepositoryPayload",
+    "customtemplates.customTemplateFromFileContentPayload": "portainer:customtemplates.customTemplateFromFileContentPayload",
+    "customtemplates.fileResponse": "portainer:customtemplates.fileResponse",
+    "portainer.ResourceControl": "portainer:portainer.ResourceControl",
+    "AdministratorsOnly": {
+      "@id": "portainer:AdministratorsOnly",
+      "@type": "xsd:boolean"
+    },
+    "OwnerId": {
+      "@id": "portainer:OwnerId",
+      "@type": "xsd:integer"
+    },
+    "Public": {
+      "@id": "portainer:Public",
+      "@type": "xsd:boolean"
+    },
+    "ResourceId": {
+      "@id": "portainer:ResourceId",
+      "@type": "xsd:string"
+    },
+    "SubResourceIds": {
+      "@id": "portainer:SubResourceIds",
+      "@container": "@list"
+    },
+    "System": {
+      "@id": "portainer:System",
+      "@type": "xsd:boolean"
+    },
+    "TeamAccesses": {
+      "@id": "portainer:TeamAccesses",
+      "@container": "@list"
+    },
+    "UserAccesses": {
+      "@id": "portainer:UserAccesses",
+      "@container": "@list"
+    },
+    "gittypes.RepoConfig": "portainer:gittypes.RepoConfig",
+    "Authentication": {
+      "@id": "portainer:Authentication"
+    },
+    "ConfigFilePath": {
+      "@id": "portainer:ConfigFilePath",
+      "@type": "xsd:string"
+    },
+    "ConfigHash": {
+      "@id": "portainer:ConfigHash",
+      "@type": "xsd:string"
+    },
+    "ReferenceName": {
+      "@id": "portainer:ReferenceName",
+      "@type": "xsd:string"
+    },
+    "URL": {
+      "@id": "portainer:URL",
+      "@type": "xsd:string"
+    },
+    "portainer.ResourceControlType": "portainer:portainer.ResourceControlType",
+    "gittypes.GitCredentialAuthType": "portainer:gittypes.GitCredentialAuthType",
+    "portainer.TeamResourceAccess": "portainer:portainer.TeamResourceAccess",
+    "TeamId": {
+      "@id": "portainer:TeamId",
+      "@type": "xsd:integer"
+    },
+    "portainer.ResourceAccessLevel": "portainer:portainer.ResourceAccessLevel",
+    "stats.ContainerStats": "portainer:stats.ContainerStats",
+    "healthy": {
+      "@id": "portainer:healthy",
+      "@type": "xsd:integer"
+    },
+    "running": {
+      "@id": "portainer:running",
+      "@type": "xsd:integer"
+    },
+    "stopped": {
+      "@id": "portainer:stopped",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "portainer:total",
+      "@type": "xsd:integer"
+    },
+    "unhealthy": {
+      "@id": "portainer:unhealthy",
+      "@type": "xsd:integer"
+    },
+    "containers.containerGpusResponse": "portainer:containers.containerGpusResponse",
+    "gpus": {
+      "@id": "portainer:gpus",
+      "@type": "xsd:string"
+    },
+    "images.ImageResponse": "portainer:images.ImageResponse",
+    "created": {
+      "@id": "portainer:created",
+      "@type": "xsd:integer"
+    },
+    "id": {
+      "@id": "portainer:id",
+      "@type": "xsd:string"
+    },
+    "nodeName": {
+      "@id": "portainer:nodeName",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "portainer:size",
+      "@type": "xsd:integer"
+    },
+    "tags": {
+      "@id": "portainer:tags",
+      "@container": "@list"
+    },
+    "used": {
+      "@id": "portainer:used",
+      "@type": "xsd:boolean"
+    },
+    "docker.dashboardResponse": "portainer:docker.dashboardResponse",
+    "containers": {
+      "@id": "portainer:containers",
+      "@type": "@id"
+    },
+    "images": {
+      "@id": "portainer:images",
+      "@type": "@id"
+    },
+    "networks": {
+      "@id": "portainer:networks",
+      "@type": "xsd:integer"
+    },
+    "services": {
+      "@id": "portainer:services",
+      "@type": "xsd:integer"
+    },
+    "stacks": {
+      "@id": "portainer:stacks",
+      "@type": "xsd:integer"
+    },
+    "volumes": {
+      "@id": "portainer:volumes",
+      "@type": "xsd:integer"
+    },
+    "docker.imagesCounters": "portainer:docker.imagesCounters",
+    "portainer.Pair": "portainer:portainer.Pair",
+    "value": {
+      "@id": "portainer:value",
+      "@type": "xsd:string"
+    },
+    "edge.DeployerOptionsPayload": "portainer:edge.DeployerOptionsPayload",
+    "ForceRecreate": {
+      "@id": "portainer:ForceRecreate",
+      "@type": "xsd:boolean"
+    },
+    "Prune": {
+      "@id": "portainer:Prune",
+      "@type": "xsd:boolean"
+    },
+    "RemoveVolumes": {
+      "@id": "portainer:RemoveVolumes",
+      "@type": "xsd:boolean"
+    },
+    "edge.StackPayload": "portainer:edge.StackPayload",
+    "AlwaysCloneGitRepoForRelativePath": {
+      "@id": "portainer:AlwaysCloneGitRepoForRelativePath",
+      "@type": "xsd:boolean"
+    },
+    "CreatedBy": {
+      "@id": "portainer:CreatedBy",
+      "@type": "xsd:string"
+    },
+    "DeployerOptionsPayload": {
+      "@id": "portainer:DeployerOptionsPayload",
+      "@type": "@id"
+    },
+    "DirEntries": {
+      "@id": "portainer:DirEntries",
+      "@container": "@list"
+    },
+    "EdgeUpdateID": {
+      "@id": "portainer:EdgeUpdateID",
+      "@type": "xsd:integer"
+    },
+    "EntryFileName": {
+      "@id": "portainer:EntryFileName",
+      "@type": "xsd:string"
+    },
+    "EnvVars": {
+      "@id": "portainer:EnvVars",
+      "@container": "@list"
+    },
+    "FilesystemPath": {
+      "@id": "portainer:FilesystemPath",
+      "@type": "xsd:string"
+    },
+    "ForceUpdate": {
+      "@id": "portainer:ForceUpdate",
+      "@type": "xsd:boolean"
+    },
+    "HelmConfig": {
+      "@id": "portainer:HelmConfig"
+    },
+    "ID": {
+      "@id": "portainer:ID",
+      "@type": "xsd:integer"
+    },
+    "Name": {
+      "@id": "portainer:Name",
+      "@type": "xsd:string"
+    },
+    "Namespace": {
+      "@id": "portainer:Namespace",
+      "@type": "xsd:string"
+    },
+    "PrePullImage": {
+      "@id": "portainer:PrePullImage",
+      "@type": "xsd:boolean"
+    },
+    "RePullImage": {
+      "@id": "portainer:RePullImage",
+      "@type": "xsd:boolean"
+    },
+    "ReadyRePullImage": {
+      "@id": "portainer:ReadyRePullImage",
+      "@type": "xsd:boolean"
+    },
+    "RegistryCredentials": {
+      "@id": "portainer:RegistryCredentials",
+      "@container": "@list"
+    },
+    "RetryDeploy": {
+      "@id": "portainer:RetryDeploy",
+      "@type": "xsd:boolean"
+    },
+    "RetryPeriod": {
+      "@id": "portainer:RetryPeriod",
+      "@type": "xsd:integer"
+    },
+    "RollbackTo": {
+      "@id": "portainer:RollbackTo",
+      "@type": "xsd:integer"
+    },
+    "StackFileContent": {
+      "@id": "portainer:StackFileContent",
+      "@type": "xsd:string"
+    },
+    "SupportRelativePath": {
+      "@id": "portainer:SupportRelativePath",
+      "@type": "xsd:boolean"
+    },
+    "Version": {
+      "@id": "portainer:Version",
+      "@type": "xsd:integer"
+    },
+    "filesystem.DirEntry": "portainer:filesystem.DirEntry",
+    "Content": {
+      "@id": "portainer:Content",
+      "@type": "xsd:string"
+    },
+    "IsFile": {
+      "@id": "portainer:IsFile",
+      "@type": "xsd:boolean"
+    },
+    "Permissions": {
+      "@id": "portainer:Permissions",
+      "@type": "@id"
+    },
+    "os.FileMode": "portainer:os.FileMode",
+    "edge.RegistryCredentials": "portainer:edge.RegistryCredentials",
+    "Secret": {
+      "@id": "portainer:Secret",
+      "@type": "xsd:string"
+    },
+    "ServerURL": {
+      "@id": "portainer:ServerURL",
+      "@type": "xsd:string"
+    },
+    "portainer.HelmConfig": "portainer:portainer.HelmConfig",
+    "Atomic": {
+      "@id": "portainer:Atomic",
+      "@type": "xsd:boolean"
+    },
+    "ChartPath": {
+      "@id": "portainer:ChartPath",
+      "@type": "xsd:string"
+    },
+    "Timeout": {
+      "@id": "portainer:Timeout",
+      "@type": "xsd:string"
+    },
+    "ValuesFiles": {
+      "@id": "portainer:ValuesFiles",
+      "@container": "@list"
+    },
+    "edgegroups.edgeGroupUpdatePayload": "portainer:edgegroups.edgeGroupUpdatePayload",
+    "Dynamic": {
+      "@id": "portainer:Dynamic",
+      "@type": "xsd:boolean"
+    },
+    "Endpoints": {
+      "@id": "portainer:Endpoints",
+      "@container": "@list"
+    },
+    "PartialMatch": {
+      "@id": "portainer:PartialMatch",
+      "@type": "xsd:boolean"
+    },
+    "TagIDs": {
+      "@id": "portainer:TagIDs",
+      "@container": "@list"
+    },
+    "edgegroups.decoratedEdgeGroup": "portainer:edgegroups.decoratedEdgeGroup",
+    "EndpointIds": {
+      "@id": "portainer:EndpointIds",
+      "@type": "xsd:integer"
+    },
+    "EndpointTypes": {
+      "@id": "portainer:EndpointTypes",
+      "@container": "@list"
+    },
+    "HasEdgeJob": {
+      "@id": "portainer:HasEdgeJob",
+      "@type": "xsd:boolean"
+    },
+    "HasEdgeStack": {
+      "@id": "portainer:HasEdgeStack",
+      "@type": "xsd:boolean"
+    },
+    "TagIds": {
+      "@id": "portainer:TagIds",
+      "@container": "@list"
+    },
+    "TrustedEndpoints": {
+      "@id": "portainer:TrustedEndpoints",
+      "@container": "@list"
+    },
+    "edgegroups.edgeGroupCreatePayload": "portainer:edgegroups.edgeGroupCreatePayload",
+    "portainer.EdgeGroup": "portainer:portainer.EdgeGroup",
+    "portainer.EndpointType": "portainer:portainer.EndpointType",
+    "edgejobs.taskContainer": "portainer:edgejobs.taskContainer",
+    "EndpointId": {
+      "@id": "portainer:EndpointId",
+      "@type": "xsd:integer"
+    },
+    "EndpointName": {
+      "@id": "portainer:EndpointName",
+      "@type": "xsd:string"
+    },
+    "LogsStatus": {
+      "@id": "portainer:LogsStatus",
+      "@type": "@id"
+    },
+    "portainer.EdgeJob": "portainer:portainer.EdgeJob",
+    "Created": {
+      "@id": "portainer:Created",
+      "@type": "xsd:integer"
+    },
+    "CronExpression": {
+      "@id": "portainer:CronExpression",
+      "@type": "xsd:string"
+    },
+    "EdgeGroups": {
+      "@id": "portainer:EdgeGroups",
+      "@container": "@list"
+    },
+    "GroupLogsCollection": {
+      "@id": "portainer:GroupLogsCollection"
+    },
+    "Recurring": {
+      "@id": "portainer:Recurring",
+      "@type": "xsd:boolean"
+    },
+    "ScriptPath": {
+      "@id": "portainer:ScriptPath",
+      "@type": "xsd:string"
+    },
+    "edgejobs.edgeJobCreateFromFileContentPayload": "portainer:edgejobs.edgeJobCreateFromFileContentPayload",
+    "edgejobs.fileResponse": "portainer:edgejobs.fileResponse",
+    "portainer.EdgeJobLogsStatus": "portainer:portainer.EdgeJobLogsStatus",
+    "edgejobs.edgeJobFileResponse": "portainer:edgejobs.edgeJobFileResponse",
+    "edgejobs.edgeJobUpdatePayload": "portainer:edgejobs.edgeJobUpdatePayload",
+    "portainer.EdgeJobEndpointMeta": "portainer:portainer.EdgeJobEndpointMeta",
+    "CollectLogs": {
+      "@id": "portainer:CollectLogs",
+      "@type": "xsd:boolean"
+    },
+    "portainer.EdgeStackDeploymentStatus": "portainer:portainer.EdgeStackDeploymentStatus",
+    "Error": {
+      "@id": "portainer:Error",
+      "@type": "xsd:string"
+    },
+    "Time": {
+      "@id": "portainer:Time",
+      "@type": "xsd:integer"
+    },
+    "portainer.EdgeStack": "portainer:portainer.EdgeStack",
+    "CreationDate": {
+      "@id": "portainer:CreationDate",
+      "@type": "xsd:integer"
+    },
+    "DeploymentType": {
+      "@id": "portainer:DeploymentType",
+      "@type": "@id"
+    },
+    "ManifestPath": {
+      "@id": "portainer:ManifestPath",
+      "@type": "xsd:string"
+    },
+    "NumDeployments": {
+      "@id": "portainer:NumDeployments",
+      "@type": "xsd:integer"
+    },
+    "Status": {
+      "@id": "portainer:Status"
+    },
+    "UseManifestNamespaces": {
+      "@id": "portainer:UseManifestNamespaces",
+      "@type": "xsd:boolean"
+    },
+    "portainer.EdgeStackStatusType": "portainer:portainer.EdgeStackStatusType",
+    "edgestacks.updateEdgeStackPayload": "portainer:edgestacks.updateEdgeStackPayload",
+    "UpdateVersion": {
+      "@id": "portainer:UpdateVersion",
+      "@type": "xsd:boolean"
+    },
+    "edgestacks.stackFileResponse": "portainer:edgestacks.stackFileResponse",
+    "edgestacks.edgeStackFromStringPayload": "portainer:edgestacks.edgeStackFromStringPayload",
+    "Registries": {
+      "@id": "portainer:Registries",
+      "@container": "@list"
+    },
+    "portainer.EdgeStackStatusDetails": "portainer:portainer.EdgeStackStatusDetails",
+    "Acknowledged": {
+      "@id": "portainer:Acknowledged",
+      "@type": "xsd:boolean"
+    },
+    "ImagesPulled": {
+      "@id": "portainer:ImagesPulled",
+      "@type": "xsd:boolean"
+    },
+    "Ok": {
+      "@id": "portainer:Ok",
+      "@type": "xsd:boolean"
+    },
+    "Pending": {
+      "@id": "portainer:Pending",
+      "@type": "xsd:boolean"
+    },
+    "RemoteUpdateSuccess": {
+      "@id": "portainer:RemoteUpdateSuccess",
+      "@type": "xsd:boolean"
+    },
+    "Remove": {
+      "@id": "portainer:Remove",
+      "@type": "xsd:boolean"
+    },
+    "portainer.StackDeploymentInfo": "portainer:portainer.StackDeploymentInfo",
+    "FileVersion": {
+      "@id": "portainer:FileVersion",
+      "@type": "xsd:integer"
+    },
+    "edgestacks.updateStatusPayload": "portainer:edgestacks.updateStatusPayload",
+    "EndpointID": {
+      "@id": "portainer:EndpointID",
+      "@type": "xsd:integer"
+    },
+    "portainer.EdgeStackStatus": "portainer:portainer.EdgeStackStatus",
+    "DeploymentInfo": {
+      "@id": "portainer:DeploymentInfo"
+    },
+    "Details": {
+      "@id": "portainer:Details"
+    },
+    "edgestacks.edgeStackFromGitRepositoryPayload": "portainer:edgestacks.edgeStackFromGitRepositoryPayload",
+    "FilePathInRepository": {
+      "@id": "portainer:FilePathInRepository",
+      "@type": "xsd:string"
+    },
+    "portainer.EdgeStackDeploymentType": "portainer:portainer.EdgeStackDeploymentType",
+    "portainer.AccessPolicy": "portainer:portainer.AccessPolicy",
+    "Namespaces": {
+      "@id": "portainer:Namespaces",
+      "@container": "@list"
+    },
+    "RoleId": {
+      "@id": "portainer:RoleId",
+      "@type": "xsd:integer"
+    },
+    "endpointgroups.endpointGroupCreatePayload": "portainer:endpointgroups.endpointGroupCreatePayload",
+    "AssociatedEndpoints": {
+      "@id": "portainer:AssociatedEndpoints",
+      "@container": "@list"
+    },
+    "portainer.EndpointGroup": "portainer:portainer.EndpointGroup",
+    "AuthorizedTeams": {
+      "@id": "portainer:AuthorizedTeams",
+      "@container": "@list"
+    },
+    "AuthorizedUsers": {
+      "@id": "portainer:AuthorizedUsers",
+      "@container": "@list"
+    },
+    "Labels": {
+      "@id": "portainer:Labels",
+      "@container": "@list"
+    },
+    "Tags": {
+      "@id": "portainer:Tags",
+      "@container": "@list"
+    },
+    "TeamAccessPolicies": {
+      "@id": "portainer:TeamAccessPolicies",
+      "@type": "@id"
+    },
+    "UserAccessPolicies": {
+      "@id": "portainer:UserAccessPolicies",
+      "@type": "@id"
+    },
+    "endpointgroups.endpointGroupUpdatePayload": "portainer:endpointgroups.endpointGroupUpdatePayload",
+    "portainer.KubernetesFlags": "portainer:portainer.KubernetesFlags",
+    "IsServerIngressClassDetected": {
+      "@id": "portainer:IsServerIngressClassDetected",
+      "@type": "xsd:boolean"
+    },
+    "IsServerMetricsDetected": {
+      "@id": "portainer:IsServerMetricsDetected",
+      "@type": "xsd:boolean"
+    },
+    "IsServerStorageDetected": {
+      "@id": "portainer:IsServerStorageDetected",
+      "@type": "xsd:boolean"
+    },
+    "portainer.TLSConfiguration": "portainer:portainer.TLSConfiguration",
+    "TLS": {
+      "@id": "portainer:TLS",
+      "@type": "xsd:boolean"
+    },
+    "TLSCACert": {
+      "@id": "portainer:TLSCACert",
+      "@type": "xsd:string"
+    },
+    "TLSCert": {
+      "@id": "portainer:TLSCert",
+      "@type": "xsd:string"
+    },
+    "TLSKey": {
+      "@id": "portainer:TLSKey",
+      "@type": "xsd:string"
+    },
+    "portainer.GithubRegistryData": "portainer:portainer.GithubRegistryData",
+    "OrganisationName": {
+      "@id": "portainer:OrganisationName",
+      "@type": "xsd:string"
+    },
+    "UseOrganisation": {
+      "@id": "portainer:UseOrganisation",
+      "@type": "xsd:boolean"
+    },
+    "portainer.EcrData": "portainer:portainer.EcrData",
+    "Region": {
+      "@id": "portainer:Region",
+      "@type": "xsd:string"
+    },
+    "endpoints.forceUpdateServicePayload": "portainer:endpoints.forceUpdateServicePayload",
+    "PullImage": {
+      "@id": "portainer:PullImage",
+      "@type": "xsd:boolean"
+    },
+    "ServiceID": {
+      "@id": "portainer:ServiceID",
+      "@type": "xsd:string"
+    },
+    "portainer.Registry": "portainer:portainer.Registry",
+    "AccessToken": {
+      "@id": "portainer:AccessToken",
+      "@type": "xsd:string"
+    },
+    "AccessTokenExpiry": {
+      "@id": "portainer:AccessTokenExpiry",
+      "@type": "xsd:integer"
+    },
+    "BaseURL": {
+      "@id": "portainer:BaseURL",
+      "@type": "xsd:string"
+    },
+    "Ecr": {
+      "@id": "portainer:Ecr",
+      "@type": "@id"
+    },
+    "Github": {
+      "@id": "portainer:Github",
+      "@type": "@id"
+    },
+    "Gitlab": {
+      "@id": "portainer:Gitlab",
+      "@type": "@id"
+    },
+    "ManagementConfiguration": {
+      "@id": "portainer:ManagementConfiguration",
+      "@type": "@id"
+    },
+    "Quay": {
+      "@id": "portainer:Quay",
+      "@type": "@id"
+    },
+    "RegistryAccesses": {
+      "@id": "portainer:RegistryAccesses",
+      "@type": "@id"
+    },
+    "portainer.EndpointStatus": "portainer:portainer.EndpointStatus",
+    "portainer.KubernetesStorageClassConfig": "portainer:portainer.KubernetesStorageClassConfig",
+    "AccessModes": {
+      "@id": "portainer:AccessModes",
+      "@container": "@list"
+    },
+    "AllowVolumeExpansion": {
+      "@id": "portainer:AllowVolumeExpansion",
+      "@type": "xsd:boolean"
+    },
+    "Provisioner": {
+      "@id": "portainer:Provisioner",
+      "@type": "xsd:string"
+    },
+    "portainer.RegistryManagementConfiguration": "portainer:portainer.RegistryManagementConfiguration",
+    "TLSConfig": {
+      "@id": "portainer:TLSConfig",
+      "@type": "@id"
+    },
+    "endpoints.endpointDeleteRequest": "portainer:endpoints.endpointDeleteRequest",
+    "deleteCluster": {
+      "@id": "portainer:deleteCluster",
+      "@type": "xsd:boolean"
+    },
+    "endpointedge.edgeJobResponse": "portainer:endpointedge.edgeJobResponse",
+    "Script": {
+      "@id": "portainer:Script",
+      "@type": "xsd:string"
+    },
+    "portainer.GitlabRegistryData": "portainer:portainer.GitlabRegistryData",
+    "InstanceURL": {
+      "@id": "portainer:InstanceURL",
+      "@type": "xsd:string"
+    },
+    "ProjectId": {
+      "@id": "portainer:ProjectId",
+      "@type": "xsd:integer"
+    },
+    "endpoints.endpointSettingsUpdatePayload": "portainer:endpoints.endpointSettingsUpdatePayload",
+    "allowBindMountsForRegularUsers": {
+      "@id": "portainer:allowBindMountsForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowContainerCapabilitiesForRegularUsers": {
+      "@id": "portainer:allowContainerCapabilitiesForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowDeviceMappingForRegularUsers": {
+      "@id": "portainer:allowDeviceMappingForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowHostNamespaceForRegularUsers": {
+      "@id": "portainer:allowHostNamespaceForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowPrivilegedModeForRegularUsers": {
+      "@id": "portainer:allowPrivilegedModeForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowStackManagementForRegularUsers": {
+      "@id": "portainer:allowStackManagementForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowSysctlSettingForRegularUsers": {
+      "@id": "portainer:allowSysctlSettingForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "allowVolumeBrowserForRegularUsers": {
+      "@id": "portainer:allowVolumeBrowserForRegularUsers",
+      "@type": "xsd:boolean"
+    },
+    "enableGPUManagement": {
+      "@id": "portainer:enableGPUManagement",
+      "@type": "xsd:boolean"
+    },
+    "enableHostManagementFeatures": {
+      "@id": "portainer:enableHostManagementFeatures",
+      "@type": "xsd:boolean"
+    },
+    "portainer.KubernetesSnapshot": "portainer:portainer.KubernetesSnapshot",
+    "DiagnosticsData": {
+      "@id": "portainer:DiagnosticsData",
+      "@type": "@id"
+    },
+    "KubernetesVersion": {
+      "@id": "portainer:KubernetesVersion",
+      "@type": "xsd:string"
+    },
+    "NodeCount": {
+      "@id": "portainer:NodeCount",
+      "@type": "xsd:integer"
+    },
+    "PerformanceMetrics": {
+      "@id": "portainer:PerformanceMetrics",
+      "@type": "@id"
+    },
+    "TotalCPU": {
+      "@id": "portainer:TotalCPU",
+      "@type": "xsd:integer"
+    },
+    "TotalMemory": {
+      "@id": "portainer:TotalMemory",
+      "@type": "xsd:integer"
+    },
+    "portainer.EnvironmentEdgeSettings": "portainer:portainer.EnvironmentEdgeSettings",
+    "AsyncMode": {
+      "@id": "portainer:AsyncMode",
+      "@type": "xsd:boolean"
+    },
+    "CommandInterval": {
+      "@id": "portainer:CommandInterval",
+      "@type": "xsd:integer"
+    },
+    "PingInterval": {
+      "@id": "portainer:PingInterval",
+      "@type": "xsd:integer"
+    },
+    "SnapshotInterval": {
+      "@id": "portainer:SnapshotInterval",
+      "@type": "xsd:integer"
+    },
+    "endpoints.endpointDeleteBatchPayload": "portainer:endpoints.endpointDeleteBatchPayload",
+    "endpoints": {
+      "@id": "portainer:endpoints",
+      "@container": "@list"
+    },
+    "endpoints.dockerhubStatusResponse": "portainer:endpoints.dockerhubStatusResponse",
+    "limit": {
+      "@id": "portainer:limit",
+      "@type": "xsd:integer"
+    },
+    "remaining": {
+      "@id": "portainer:remaining",
+      "@type": "xsd:integer"
+    },
+    "portainer.DiagnosticsData": "portainer:portainer.DiagnosticsData",
+    "DNS": {
+      "@id": "portainer:DNS"
+    },
+    "Log": {
+      "@id": "portainer:Log",
+      "@type": "xsd:string"
+    },
+    "Proxy": {
+      "@id": "portainer:Proxy"
+    },
+    "Telnet": {
+      "@id": "portainer:Telnet"
+    },
+    "portainer.QuayRegistryData": "portainer:portainer.QuayRegistryData",
+    "portainer.EndpointPostInitMigrations": "portainer:portainer.EndpointPostInitMigrations",
+    "MigrateGPUs": {
+      "@id": "portainer:MigrateGPUs",
+      "@type": "xsd:boolean"
+    },
+    "MigrateIngresses": {
+      "@id": "portainer:MigrateIngresses",
+      "@type": "xsd:boolean"
+    },
+    "endpoints.endpointUpdatePayload": "portainer:endpoints.endpointUpdatePayload",
+    "AzureApplicationID": {
+      "@id": "portainer:AzureApplicationID",
+      "@type": "xsd:string"
+    },
+    "AzureAuthenticationKey": {
+      "@id": "portainer:AzureAuthenticationKey",
+      "@type": "xsd:string"
+    },
+    "AzureTenantID": {
+      "@id": "portainer:AzureTenantID",
+      "@type": "xsd:string"
+    },
+    "EdgeCheckinInterval": {
+      "@id": "portainer:EdgeCheckinInterval",
+      "@type": "xsd:integer"
+    },
+    "Gpus": {
+      "@id": "portainer:Gpus",
+      "@container": "@list"
+    },
+    "GroupID": {
+      "@id": "portainer:GroupID",
+      "@type": "xsd:integer"
+    },
+    "Kubernetes": {
+      "@id": "portainer:Kubernetes"
+    },
+    "PublicURL": {
+      "@id": "portainer:PublicURL",
+      "@type": "xsd:string"
+    },
+    "TLSSkipClientVerify": {
+      "@id": "portainer:TLSSkipClientVerify",
+      "@type": "xsd:boolean"
+    },
+    "portainer.DockerSnapshot": "portainer:portainer.DockerSnapshot",
+    "ContainerCount": {
+      "@id": "portainer:ContainerCount",
+      "@type": "xsd:integer"
+    },
+    "DockerSnapshotRaw": {
+      "@id": "portainer:DockerSnapshotRaw",
+      "@type": "@id"
+    },
+    "DockerVersion": {
+      "@id": "portainer:DockerVersion",
+      "@type": "xsd:string"
+    },
+    "GpuUseAll": {
+      "@id": "portainer:GpuUseAll",
+      "@type": "xsd:boolean"
+    },
+    "GpuUseList": {
+      "@id": "portainer:GpuUseList",
+      "@container": "@list"
+    },
+    "HealthyContainerCount": {
+      "@id": "portainer:HealthyContainerCount",
+      "@type": "xsd:integer"
+    },
+    "ImageCount": {
+      "@id": "portainer:ImageCount",
+      "@type": "xsd:integer"
+    },
+    "IsPodman": {
+      "@id": "portainer:IsPodman",
+      "@type": "xsd:boolean"
+    },
+    "RunningContainerCount": {
+      "@id": "portainer:RunningContainerCount",
+      "@type": "xsd:integer"
+    },
+    "ServiceCount": {
+      "@id": "portainer:ServiceCount",
+      "@type": "xsd:integer"
+    },
+    "StackCount": {
+      "@id": "portainer:StackCount",
+      "@type": "xsd:integer"
+    },
+    "StoppedContainerCount": {
+      "@id": "portainer:StoppedContainerCount",
+      "@type": "xsd:integer"
+    },
+    "Swarm": {
+      "@id": "portainer:Swarm",
+      "@type": "xsd:boolean"
+    },
+    "UnhealthyContainerCount": {
+      "@id": "portainer:UnhealthyContainerCount",
+      "@type": "xsd:integer"
+    },
+    "VolumeCount": {
+      "@id": "portainer:VolumeCount",
+      "@type": "xsd:integer"
+    },
+    "portainer.Endpoint": "portainer:portainer.Endpoint",
+    "AMTDeviceGUID": {
+      "@id": "portainer:AMTDeviceGUID",
+      "@type": "xsd:string"
+    },
+    "Agent": {
+      "@id": "portainer:Agent"
+    },
+    "AzureCredentials": {
+      "@id": "portainer:AzureCredentials",
+      "@type": "@id"
+    },
+    "ComposeSyntaxMaxVersion": {
+      "@id": "portainer:ComposeSyntaxMaxVersion",
+      "@type": "xsd:string"
+    },
+    "ContainerEngine": {
+      "@id": "portainer:ContainerEngine",
+      "@type": "xsd:string"
+    },
+    "Edge": {
+      "@id": "portainer:Edge",
+      "@type": "@id"
+    },
+    "EdgeID": {
+      "@id": "portainer:EdgeID",
+      "@type": "xsd:string"
+    },
+    "EdgeKey": {
+      "@id": "portainer:EdgeKey",
+      "@type": "xsd:string"
+    },
+    "EnableGPUManagement": {
+      "@id": "portainer:EnableGPUManagement",
+      "@type": "xsd:boolean"
+    },
+    "GroupId": {
+      "@id": "portainer:GroupId",
+      "@type": "xsd:integer"
+    },
+    "Heartbeat": {
+      "@id": "portainer:Heartbeat",
+      "@type": "xsd:boolean"
+    },
+    "IsEdgeDevice": {
+      "@id": "portainer:IsEdgeDevice",
+      "@type": "xsd:boolean"
+    },
+    "LastCheckInDate": {
+      "@id": "portainer:LastCheckInDate",
+      "@type": "xsd:integer"
+    },
+    "PostInitMigrations": {
+      "@id": "portainer:PostInitMigrations"
+    },
+    "SecuritySettings": {
+      "@id": "portainer:SecuritySettings"
+    },
+    "Snapshots": {
+      "@id": "portainer:Snapshots",
+      "@container": "@list"
+    },
+    "UserTrusted": {
+      "@id": "portainer:UserTrusted",
+      "@type": "xsd:boolean"
+    },
+    "swarm.ServiceUpdateResponse": "portainer:swarm.ServiceUpdateResponse",
+    "Warnings": {
+      "@id": "portainer:Warnings",
+      "@container": "@list"
+    },
+    "portainer.RegistryType": "portainer:portainer.RegistryType",
+    "portainer.KubernetesData": "portainer:portainer.KubernetesData",
+    "Configuration": {
+      "@id": "portainer:Configuration",
+      "@type": "@id"
+    },
+    "Flags": {
+      "@id": "portainer:Flags",
+      "@type": "@id"
+    },
+    "portainer.PerformanceMetrics": "portainer:portainer.PerformanceMetrics",
+    "CPUUsage": {
+      "@id": "portainer:CPUUsage",
+      "@type": "xsd:decimal"
+    },
+    "MemoryUsage": {
+      "@id": "portainer:MemoryUsage",
+      "@type": "xsd:decimal"
+    },
+    "NetworkUsage": {
+      "@id": "portainer:NetworkUsage",
+      "@type": "xsd:decimal"
+    },
+    "portainer.AzureCredentials": "portainer:portainer.AzureCredentials",
+    "ApplicationID": {
+      "@id": "portainer:ApplicationID",
+      "@type": "xsd:string"
+    },
+    "AuthenticationKey": {
+      "@id": "portainer:AuthenticationKey",
+      "@type": "xsd:string"
+    },
+    "TenantID": {
+      "@id": "portainer:TenantID",
+      "@type": "xsd:string"
+    },
+    "endpoints.registryAccessPayload": "portainer:endpoints.registryAccessPayload",
+    "endpointedge.stackStatusResponse": "portainer:endpointedge.stackStatusResponse",
+    "portainer.KubernetesConfiguration": "portainer:portainer.KubernetesConfiguration",
+    "AllowNoneIngressClass": {
+      "@id": "portainer:AllowNoneIngressClass",
+      "@type": "xsd:boolean"
+    },
+    "EnableResourceOverCommit": {
+      "@id": "portainer:EnableResourceOverCommit",
+      "@type": "xsd:boolean"
+    },
+    "IngressAvailabilityPerNamespace": {
+      "@id": "portainer:IngressAvailabilityPerNamespace",
+      "@type": "xsd:boolean"
+    },
+    "IngressClasses": {
+      "@id": "portainer:IngressClasses",
+      "@container": "@list"
+    },
+    "ResourceOverCommitPercentage": {
+      "@id": "portainer:ResourceOverCommitPercentage",
+      "@type": "xsd:integer"
+    },
+    "RestrictDefaultNamespace": {
+      "@id": "portainer:RestrictDefaultNamespace",
+      "@type": "xsd:boolean"
+    },
+    "StorageClasses": {
+      "@id": "portainer:StorageClasses",
+      "@container": "@list"
+    },
+    "UseLoadBalancer": {
+      "@id": "portainer:UseLoadBalancer",
+      "@type": "xsd:boolean"
+    },
+    "UseServerMetrics": {
+      "@id": "portainer:UseServerMetrics",
+      "@type": "xsd:boolean"
+    },
+    "portainer.KubernetesIngressClassConfig": "portainer:portainer.KubernetesIngressClassConfig",
+    "Blocked": {
+      "@id": "portainer:Blocked",
+      "@type": "xsd:boolean"
+    },
+    "BlockedNamespaces": {
+      "@id": "portainer:BlockedNamespaces",
+      "@container": "@list"
+    },
+    "endpoints.endpointDeleteBatchPartialResponse": "portainer:endpoints.endpointDeleteBatchPartialResponse",
+    "deleted": {
+      "@id": "portainer:deleted",
+      "@container": "@list"
+    },
+    "errors": {
+      "@id": "portainer:errors",
+      "@container": "@list"
+    },
+    "endpoints.endpointUpdateRelationsPayload": "portainer:endpoints.endpointUpdateRelationsPayload",
+    "Relations": {
+      "@id": "portainer:Relations"
+    },
+    "endpointedge.endpointEdgeStatusInspectResponse": "portainer:endpointedge.endpointEdgeStatusInspectResponse",
+    "checkin": {
+      "@id": "portainer:checkin",
+      "@type": "xsd:integer"
+    },
+    "credentials": {
+      "@id": "portainer:credentials",
+      "@type": "xsd:string"
+    },
+    "port": {
+      "@id": "portainer:port",
+      "@type": "xsd:integer"
+    },
+    "schedules": {
+      "@id": "portainer:schedules",
+      "@container": "@list"
+    },
+    "status": {
+      "@id": "portainer:status",
+      "@type": "xsd:string"
+    },
+    "endpoints.endpointCreateGlobalKeyResponse": "portainer:endpoints.endpointCreateGlobalKeyResponse",
+    "endpointID": {
+      "@id": "portainer:endpointID",
+      "@type": "xsd:integer"
+    },
+    "portainer.RegistryAccessPolicies": "portainer:portainer.RegistryAccessPolicies",
+    "portainer.EndpointSecuritySettings": "portainer:portainer.EndpointSecuritySettings",
+    "gitops.fileResponse": "portainer:gitops.fileResponse",
+    "gitops.repositoryFilePreviewPayload": "portainer:gitops.repositoryFilePreviewPayload",
+    "authorizationType": {
+      "@id": "portainer:authorizationType",
+      "@type": "@id"
+    },
+    "password": {
+      "@id": "portainer:password",
+      "@type": "xsd:string"
+    },
+    "reference": {
+      "@id": "portainer:reference",
+      "@type": "xsd:string"
+    },
+    "repository": {
+      "@id": "portainer:repository",
+      "@type": "xsd:string"
+    },
+    "targetFile": {
+      "@id": "portainer:targetFile",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "portainer:username",
+      "@type": "xsd:string"
+    },
+    "portainer.HelmUserRepository": "portainer:portainer.HelmUserRepository",
+    "release.Values": "portainer:release.Values",
+    "computedValues": {
+      "@id": "portainer:computedValues",
+      "@type": "xsd:string"
+    },
+    "userSuppliedValues": {
+      "@id": "portainer:userSuppliedValues",
+      "@type": "xsd:string"
+    },
+    "release.Maintainer": "portainer:release.Maintainer",
+    "email": {
+      "@id": "portainer:email",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "portainer:url",
+      "@type": "xsd:string"
+    },
+    "helm.installChartPayload": "portainer:helm.installChartPayload",
+    "atomic": {
+      "@id": "portainer:atomic",
+      "@type": "xsd:boolean"
+    },
+    "chart": {
+      "@id": "portainer:chart",
+      "@type": "xsd:string"
+    },
+    "namespace": {
+      "@id": "portainer:namespace",
+      "@type": "xsd:string"
+    },
+    "repo": {
+      "@id": "portainer:repo",
+      "@type": "xsd:string"
+    },
+    "values": {
+      "@id": "portainer:values",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "portainer:version",
+      "@type": "xsd:string"
+    },
+    "release.Dependency": "portainer:release.Dependency",
+    "alias": {
+      "@id": "portainer:alias",
+      "@type": "xsd:string"
+    },
+    "condition": {
+      "@id": "portainer:condition",
+      "@type": "xsd:string"
+    },
+    "enabled": {
+      "@id": "portainer:enabled",
+      "@type": "xsd:boolean"
+    },
+    "import-values": {
+      "@id": "portainer:import-values",
+      "@container": "@list"
+    },
+    "release.ReleaseElement": "portainer:release.ReleaseElement",
+    "appVersion": {
+      "@id": "portainer:appVersion",
+      "@type": "xsd:string"
+    },
+    "revision": {
+      "@id": "portainer:revision",
+      "@type": "xsd:string"
+    },
+    "updated": {
+      "@id": "portainer:updated",
+      "@type": "xsd:string"
+    },
+    "release.Lock": "portainer:release.Lock",
+    "dependencies": {
+      "@id": "portainer:dependencies",
+      "@container": "@list"
+    },
+    "digest": {
+      "@id": "portainer:digest",
+      "@type": "xsd:string"
+    },
+    "generated": {
+      "@id": "portainer:generated",
+      "@type": "xsd:string"
+    },
+    "github_com_portainer_portainer_pkg_libhelm_release.Hook": "portainer:github_com_portainer_portainer_pkg_libhelm_release.Hook",
+    "delete_policies": {
+      "@id": "portainer:delete_policies",
+      "@container": "@list"
+    },
+    "events": {
+      "@id": "portainer:events",
+      "@container": "@list"
+    },
+    "kind": {
+      "@id": "portainer:kind",
+      "@type": "xsd:string"
+    },
+    "last_run": {
+      "@id": "portainer:last_run"
+    },
+    "manifest": {
+      "@id": "portainer:manifest",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "portainer:path",
+      "@type": "xsd:string"
+    },
+    "weight": {
+      "@id": "portainer:weight",
+      "@type": "xsd:integer"
+    },
+    "github_com_portainer_portainer_pkg_libhelm_release.Info": "portainer:github_com_portainer_portainer_pkg_libhelm_release.Info",
+    "first_deployed": {
+      "@id": "portainer:first_deployed",
+      "@type": "xsd:string"
+    },
+    "last_deployed": {
+      "@id": "portainer:last_deployed",
+      "@type": "xsd:string"
+    },
+    "notes": {
+      "@id": "portainer:notes",
+      "@type": "xsd:string"
+    },
+    "resources": {
+      "@id": "portainer:resources",
+      "@container": "@list"
+    },
+    "release.Chart": "portainer:release.Chart",
+    "files": {
+      "@id": "portainer:files",
+      "@container": "@list"
+    },
+    "lock": {
+      "@id": "portainer:lock"
+    },
+    "metadata": {
+      "@id": "portainer:metadata"
+    },
+    "templates": {
+      "@id": "portainer:templates",
+      "@container": "@list"
+    },
+    "release.Metadata": "portainer:release.Metadata",
+    "annotations": {
+      "@id": "portainer:annotations"
+    },
+    "apiVersion": {
+      "@id": "portainer:apiVersion",
+      "@type": "xsd:string"
+    },
+    "deprecated": {
+      "@id": "portainer:deprecated",
+      "@type": "xsd:boolean"
+    },
+    "home": {
+      "@id": "portainer:home",
+      "@type": "xsd:string"
+    },
+    "icon": {
+      "@id": "portainer:icon",
+      "@type": "xsd:string"
+    },
+    "keywords": {
+      "@id": "portainer:keywords",
+      "@container": "@list"
+    },
+    "kubeVersion": {
+      "@id": "portainer:kubeVersion",
+      "@type": "xsd:string"
+    },
+    "maintainers": {
+      "@id": "portainer:maintainers",
+      "@container": "@list"
+    },
+    "sources": {
+      "@id": "portainer:sources",
+      "@container": "@list"
+    },
+    "type": {
+      "@id": "portainer:type",
+      "@type": "xsd:string"
+    },
+    "release.ChartReference": "portainer:release.ChartReference",
+    "chartPath": {
+      "@id": "portainer:chartPath",
+      "@type": "xsd:string"
+    },
+    "registryID": {
+      "@id": "portainer:registryID",
+      "@type": "xsd:integer"
+    },
+    "repoURL": {
+      "@id": "portainer:repoURL",
+      "@type": "xsd:string"
+    },
+    "release.File": "portainer:release.File",
+    "data": {
+      "@id": "portainer:data",
+      "@container": "@list"
+    },
+    "github_com_portainer_portainer_pkg_libhelm_release.Release": "portainer:github_com_portainer_portainer_pkg_libhelm_release.Release",
+    "chartReference": {
+      "@id": "portainer:chartReference"
+    },
+    "config": {
+      "@id": "portainer:config"
+    },
+    "hooks": {
+      "@id": "portainer:hooks",
+      "@container": "@list"
+    },
+    "info": {
+      "@id": "portainer:info"
+    },
+    "stackID": {
+      "@id": "portainer:stackID",
+      "@type": "xsd:integer"
+    },
+    "users.addHelmRepoUrlPayload": "portainer:users.addHelmRepoUrlPayload",
+    "github_com_portainer_portainer_pkg_libhelm_release.HookExecution": "portainer:github_com_portainer_portainer_pkg_libhelm_release.HookExecution",
+    "completed_at": {
+      "@id": "portainer:completed_at",
+      "@type": "xsd:string"
+    },
+    "phase": {
+      "@id": "portainer:phase",
+      "@type": "xsd:string"
+    },
+    "started_at": {
+      "@id": "portainer:started_at",
+      "@type": "xsd:string"
+    },
+    "unstructured.Unstructured": "portainer:unstructured.Unstructured",
+    "Object": {
+      "@id": "portainer:Object"
+    },
+    "users.helmUserRepositoryResponse": "portainer:users.helmUserRepositoryResponse",
+    "GlobalRepository": {
+      "@id": "portainer:GlobalRepository",
+      "@type": "xsd:string"
+    },
+    "UserRepositories": {
+      "@id": "portainer:UserRepositories",
+      "@container": "@list"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Portainer API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Portainer's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-03) from openapi/portainer-auth-api-openapi.yml, openapi/portainer-backup-api-openapi.yml, openapi/portainer-custom-templates-api-openapi.yml.",
+  "dcterms:created": "2026-10-03",
+  "dcterms:source": [
+    "openapi/portainer-auth-api-openapi.yml",
+    "openapi/portainer-backup-api-openapi.yml",
+    "openapi/portainer-custom-templates-api-openapi.yml",
+    "openapi/portainer-docker-api-openapi.yml",
+    "openapi/portainer-edge-api-openapi.yml"
+  ]
+}

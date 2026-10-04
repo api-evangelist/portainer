@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-edgestacks-edge-stack-from-git-repository-payload-schema.json",
+  "title": "edgestacks.edgeStackFromGitRepositoryPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-edge-stacks-api-openapi.yml#/components/schemas/edgestacks.edgeStackFromGitRepositoryPayload",
+  "properties": {
+    "DeploymentType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EdgeStackDeploymentType"
+        }
+      ],
+      "description": "Deployment type to deploy this stack\nValid values are: 0 - 'compose', 1 - 'kubernetes'\ncompose is enabled only for docker environments\nkubernetes is enabled only for kubernetes environments",
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "EdgeGroups": {
+      "description": "List of identifiers of EdgeGroups",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "FilePathInRepository": {
+      "default": "docker-compose.yml",
+      "description": "Path to the Stack file inside the Git repository",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Name of the stack\nMax length: 255\nName must only contains lowercase characters, numbers, hyphens, or underscores\nName must start with a lowercase character or number\nExample: stack-name or stack_123 or stackName",
+      "type": "string"
+    },
+    "Registries": {
+      "description": "List of Registries to use for this stack",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "RepositoryAuthentication": {
+      "description": "Use basic authentication to clone the Git repository",
+      "type": "boolean"
+    },
+    "RepositoryAuthorizationType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/gittypes.GitCredentialAuthType"
+        }
+      ],
+      "description": "RepositoryAuthorizationType is the authorization type to use"
+    },
+    "RepositoryPassword": {
+      "description": "Password used in basic authentication. Required when RepositoryAuthentication is true.",
+      "type": "string"
+    },
+    "RepositoryReferenceName": {
+      "description": "Reference name of a Git repository hosting the Stack file",
+      "type": "string"
+    },
+    "RepositoryURL": {
+      "description": "URL of a Git repository hosting the Stack file",
+      "type": "string"
+    },
+    "RepositoryUsername": {
+      "description": "Username used in basic authentication. Required when RepositoryAuthentication is true.",
+      "type": "string"
+    },
+    "TLSSkipVerify": {
+      "description": "TLSSkipVerify skips SSL verification when cloning the Git repository",
+      "type": "boolean"
+    },
+    "UseManifestNamespaces": {
+      "description": "Uses the manifest's namespaces instead of the default one",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "EdgeGroups",
+    "Name",
+    "RepositoryURL"
+  ],
+  "type": "object",
+  "$defs": {
+    "gittypes.GitCredentialAuthType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "GitCredentialAuthType_Basic",
+        "GitCredentialAuthType_Token"
+      ]
+    },
+    "portainer.EdgeStackDeploymentType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "EdgeStackDeploymentCompose",
+        "EdgeStackDeploymentKubernetes"
+      ]
+    }
+  }
+}

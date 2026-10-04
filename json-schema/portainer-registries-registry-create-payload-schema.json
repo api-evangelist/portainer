@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-registries-registry-create-payload-schema.json",
+  "title": "registries.registryCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-registries-api-openapi.yml#/components/schemas/registries.registryCreatePayload",
+  "properties": {
+    "Authentication": {
+      "description": "Is authentication against this registry enabled",
+      "type": "boolean"
+    },
+    "BaseURL": {
+      "description": "BaseURL required for ProGet registry",
+      "type": "string"
+    },
+    "Ecr": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EcrData"
+        }
+      ],
+      "description": "ECR specific details, required when type = 7"
+    },
+    "Gitlab": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.GitlabRegistryData"
+        }
+      ],
+      "description": "Gitlab specific details, required when type = 4"
+    },
+    "Name": {
+      "description": "Name that will be used to identify this registry",
+      "type": "string"
+    },
+    "Password": {
+      "description": "Password used to authenticate against this registry. required when Authentication is true",
+      "type": "string"
+    },
+    "Quay": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.QuayRegistryData"
+        }
+      ],
+      "description": "Quay specific details, required when type = 1"
+    },
+    "TLS": {
+      "description": "Use TLS",
+      "type": "boolean"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.RegistryType"
+        }
+      ],
+      "description": "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5 (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "URL": {
+      "description": "URL or IP address of the Docker registry",
+      "type": "string"
+    },
+    "Username": {
+      "description": "Username used to authenticate against this registry. Required when Authentication is true",
+      "type": "string"
+    }
+  },
+  "required": [
+    "Authentication",
+    "Name",
+    "Type",
+    "URL"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.EcrData": {
+      "properties": {
+        "Region": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.GitlabRegistryData": {
+      "properties": {
+        "InstanceURL": {
+          "type": "string"
+        },
+        "ProjectId": {
+          "type": "integer"
+        },
+        "ProjectPath": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.QuayRegistryData": {
+      "properties": {
+        "OrganisationName": {
+          "type": "string"
+        },
+        "UseOrganisation": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.RegistryType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "QuayRegistry",
+        "AzureRegistry",
+        "CustomRegistry",
+        "GitlabRegistry",
+        "ProGetRegistry",
+        "DockerHubRegistry",
+        "EcrRegistry",
+        "GithubRegistry"
+      ]
+    }
+  }
+}

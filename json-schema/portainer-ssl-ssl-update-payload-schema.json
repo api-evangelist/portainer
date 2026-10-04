@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-ssl-ssl-update-payload-schema.json",
+  "title": "ssl.sslUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-ssl-api-openapi.yml#/components/schemas/ssl.sslUpdatePayload",
+  "properties": {
+    "Cert": {
+      "description": "SSL Certificates",
+      "type": "string"
+    },
+    "HTTPEnabled": {
+      "type": "boolean"
+    },
+    "Key": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

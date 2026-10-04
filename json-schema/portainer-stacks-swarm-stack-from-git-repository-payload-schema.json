@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-stacks-swarm-stack-from-git-repository-payload-schema.json",
+  "title": "stacks.swarmStackFromGitRepositoryPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-stacks-api-openapi.yml#/components/schemas/stacks.swarmStackFromGitRepositoryPayload",
+  "properties": {
+    "AdditionalFiles": {
+      "description": "Applicable when deploying with multiple stack files",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "AutoUpdate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.AutoUpdateSettings"
+        }
+      ],
+      "description": "Optional GitOps update configuration"
+    },
+    "ComposeFile": {
+      "default": "docker-compose.yml",
+      "description": "Path to the Stack file inside the Git repository",
+      "type": "string"
+    },
+    "Env": {
+      "description": "A list of environment variables used during stack deployment",
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "FromAppTemplate": {
+      "description": "Whether the stack is from a app template",
+      "type": "boolean"
+    },
+    "Name": {
+      "description": "Name of the stack",
+      "type": "string"
+    },
+    "RepositoryAuthentication": {
+      "description": "Use basic authentication to clone the Git repository",
+      "type": "boolean"
+    },
+    "RepositoryPassword": {
+      "description": "Password used in basic authentication. Required when RepositoryAuthentication is true.",
+      "type": "string"
+    },
+    "RepositoryReferenceName": {
+      "description": "Reference name of a Git repository hosting the Stack file",
+      "type": "string"
+    },
+    "RepositoryURL": {
+      "description": "URL of a Git repository hosting the Stack file",
+      "type": "string"
+    },
+    "RepositoryUsername": {
+      "description": "Username used in basic authentication. Required when RepositoryAuthentication is true.",
+      "type": "string"
+    },
+    "SwarmID": {
+      "description": "Swarm cluster identifier",
+      "type": "string"
+    },
+    "TLSSkipVerify": {
+      "description": "TLSSkipVerify skips SSL verification when cloning the Git repository",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "Name",
+    "RepositoryURL",
+    "SwarmID"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.AutoUpdateSettings": {
+      "properties": {
+        "ForcePullImage": {
+          "description": "Pull latest image",
+          "type": "boolean"
+        },
+        "ForceUpdate": {
+          "description": "Force update ignores repo changes",
+          "type": "boolean"
+        },
+        "Interval": {
+          "description": "Auto update interval",
+          "type": "string"
+        },
+        "JobID": {
+          "description": "Autoupdate job id",
+          "type": "string"
+        },
+        "Webhook": {
+          "description": "A UUID generated from client",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

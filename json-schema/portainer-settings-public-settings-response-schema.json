@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-settings-public-settings-response-schema.json",
+  "title": "settings.publicSettingsResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-settings-api-openapi.yml#/components/schemas/settings.publicSettingsResponse",
+  "properties": {
+    "AuthenticationMethod": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.AuthenticationMethod"
+        }
+      ],
+      "description": "Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth"
+    },
+    "Edge": {
+      "properties": {
+        "CheckinInterval": {
+          "description": "The check in interval for edge agent (in seconds) - used in non async mode [seconds]",
+          "type": "integer"
+        },
+        "CommandInterval": {
+          "description": "The command list interval for edge agent - used in edge async mode [seconds]",
+          "type": "integer"
+        },
+        "PingInterval": {
+          "description": "The ping interval for edge agent - used in edge async mode [seconds]",
+          "type": "integer"
+        },
+        "SnapshotInterval": {
+          "description": "The snapshot interval for edge agent - used in edge async mode [seconds]",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "EnableEdgeComputeFeatures": {
+      "description": "Whether edge compute features are enabled",
+      "type": "boolean"
+    },
+    "Features": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "description": "Supported feature flags",
+      "type": "object"
+    },
+    "GlobalDeploymentOptions": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.GlobalDeploymentOptions"
+        }
+      ],
+      "description": "Deployment options for encouraging deployment as code"
+    },
+    "IsAMTEnabled": {
+      "description": "Whether AMT is enabled",
+      "type": "boolean"
+    },
+    "IsDockerDesktopExtension": {
+      "type": "boolean"
+    },
+    "KubeconfigExpiry": {
+      "default": "0",
+      "description": "The expiry of a Kubeconfig",
+      "type": "string"
+    },
+    "LogoURL": {
+      "description": "URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string",
+      "type": "string"
+    },
+    "OAuthLoginURI": {
+      "description": "The URL used for oauth login",
+      "type": "string"
+    },
+    "OAuthLogoutURI": {
+      "description": "The URL used for oauth logout",
+      "type": "string"
+    },
+    "RequiredPasswordLength": {
+      "description": "The minimum required length for a password of any user when using internal auth mode",
+      "type": "integer"
+    },
+    "TeamSync": {
+      "description": "Whether team sync is enabled",
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.AuthenticationMethod": {
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "AuthenticationInternal",
+        "AuthenticationLDAP",
+        "AuthenticationOAuth"
+      ]
+    },
+    "portainer.GlobalDeploymentOptions": {
+      "properties": {
+        "hideStacksFunctionality": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

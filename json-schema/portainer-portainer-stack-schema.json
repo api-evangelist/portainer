@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-stack-schema.json",
+  "title": "portainer.Stack",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-stacks-api-openapi.yml#/components/schemas/portainer.Stack",
+  "properties": {
+    "AdditionalFiles": {
+      "description": "Only applies when deploying stack with multiple files",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "AutoUpdate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.AutoUpdateSettings"
+        }
+      ],
+      "description": "The GitOps update settings of a git stack"
+    },
+    "CreatedBy": {
+      "description": "The username which created this stack",
+      "type": "string"
+    },
+    "CreationDate": {
+      "description": "The date in unix time when stack was created",
+      "type": "integer"
+    },
+    "EndpointId": {
+      "description": "Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment",
+      "type": "integer"
+    },
+    "EntryPoint": {
+      "description": "Path to the Stack file",
+      "type": "string"
+    },
+    "Env": {
+      "description": "A list of environment(endpoint) variables used during stack deployment",
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "FromAppTemplate": {
+      "description": "Whether the stack is from a app template",
+      "type": "boolean"
+    },
+    "GitConfig": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/gittypes.RepoConfig"
+        }
+      ],
+      "description": "The git config of this stack"
+    },
+    "Id": {
+      "description": "Stack Identifier",
+      "type": "integer"
+    },
+    "Name": {
+      "description": "Stack name",
+      "type": "string"
+    },
+    "Namespace": {
+      "description": "Kubernetes namespace if stack is a kube application",
+      "type": "string"
+    },
+    "Option": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.StackOption"
+        }
+      ],
+      "description": "The stack deployment option"
+    },
+    "ProjectPath": {
+      "description": "Path on disk to the repository hosting the Stack file",
+      "type": "string"
+    },
+    "ResourceControl": {
+      "$ref": "#/$defs/portainer.ResourceControl"
+    },
+    "Status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.StackStatus"
+        }
+      ],
+      "description": "Stack status (1 - active, 2 - inactive)"
+    },
+    "SwarmId": {
+      "description": "Cluster identifier of the Swarm cluster where the stack is deployed",
+      "type": "string"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.StackType"
+        }
+      ],
+      "description": "Stack type. 1 for a Swarm stack, 2 for a Compose stack"
+    },
+    "UpdateDate": {
+      "description": "The date in unix time when stack was last updated",
+      "type": "integer"
+    },
+    "UpdatedBy": {
+      "description": "The username which last updated this stack",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "gittypes.GitAuthentication": {
+      "properties": {
+        "AuthorizationType": {
+          "$ref": "#/$defs/gittypes.GitCredentialAuthType"
+        },
+        "GitCredentialID": {
+          "description": "Git credentials identifier when the value is not 0\nWhen the value is 0, Username, Password, and Authtype are set without using saved credential\nThis is introduced since 2.15.0",
+          "type": "integer"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "gittypes.GitCredentialAuthType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "GitCredentialAuthType_Basic",
+        "GitCredentialAuthType_Token"
+      ]
+    },
+    "gittypes.RepoConfig": {
+      "properties": {
+        "Authentication": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/gittypes.GitAuthentication"
+            }
+          ],
+          "description": "Git credentials"
+        },
+        "ConfigFilePath": {
+          "description": "Path to where the config file is in this url/refName",
+          "type": "string"
+        },
+        "ConfigHash": {
+          "description": "Repository hash",
+          "type": "string"
+        },
+        "ReferenceName": {
+          "description": "The reference name",
+          "type": "string"
+        },
+        "TLSSkipVerify": {
+          "description": "TLSSkipVerify skips SSL verification when cloning the Git repository",
+          "type": "boolean"
+        },
+        "URL": {
+          "description": "The repo url",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.AutoUpdateSettings": {
+      "properties": {
+        "ForcePullImage": {
+          "description": "Pull latest image",
+          "type": "boolean"
+        },
+        "ForceUpdate": {
+          "description": "Force update ignores repo changes",
+          "type": "boolean"
+        },
+        "Interval": {
+          "description": "Auto update interval",
+          "type": "string"
+        },
+        "JobID": {
+          "description": "Autoupdate job id",
+          "type": "string"
+        },
+        "Webhook": {
+          "description": "A UUID generated from client",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.ResourceAccessLevel": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ReadWriteAccessLevel"
+      ]
+    },
+    "portainer.ResourceControl": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "AdministratorsOnly": {
+          "description": "Permit access to resource only to admins",
+          "type": "boolean"
+        },
+        "Id": {
+          "description": "ResourceControl Identifier",
+          "type": "integer"
+        },
+        "OwnerId": {
+          "description": "Deprecated fields\nDeprecated in DBVersion == 2",
+          "type": "integer"
+        },
+        "Public": {
+          "description": "Permit access to the associated resource to any user",
+          "type": "boolean"
+        },
+        "ResourceId": {
+          "description": "Docker resource identifier on which access control will be applied.\\\nIn the case of a resource control applied to a stack, use the stack name as identifier",
+          "type": "string"
+        },
+        "SubResourceIds": {
+          "description": "List of Docker resources that will inherit this access control",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "System": {
+          "type": "boolean"
+        },
+        "TeamAccesses": {
+          "items": {
+            "$ref": "#/$defs/portainer.TeamResourceAccess"
+          },
+          "type": "array"
+        },
+        "Type": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.ResourceControlType"
+            }
+          ],
+          "description": "Type of Docker resource. Valid values are: 1- container, 2 -service\n3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template"
+        },
+        "UserAccesses": {
+          "items": {
+            "$ref": "#/$defs/portainer.UserResourceAccess"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.ResourceControlType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ContainerResourceControl",
+        "ServiceResourceControl",
+        "VolumeResourceControl",
+        "NetworkResourceControl",
+        "SecretResourceControl",
+        "StackResourceControl",
+        "ConfigResourceControl",
+        "CustomTemplateResourceControl",
+        "ContainerGroupResourceControl"
+      ]
+    },
+    "portainer.StackOption": {
+      "properties": {
+        "HelmAtomic": {
+          "description": "Enable atomic rollback on failure (Helm --atomic flag for Kubernetes Helm stacks)",
+          "type": "boolean"
+        },
+        "Prune": {
+          "description": "Prune services that are no longer referenced",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.StackStatus": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "StackStatusActive",
+        "StackStatusInactive"
+      ]
+    },
+    "portainer.StackType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "DockerSwarmStack",
+        "DockerComposeStack",
+        "KubernetesStack"
+      ]
+    },
+    "portainer.TeamResourceAccess": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "TeamId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.UserResourceAccess": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "UserId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

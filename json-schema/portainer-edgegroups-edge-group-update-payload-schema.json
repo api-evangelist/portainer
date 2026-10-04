@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-edgegroups-edge-group-update-payload-schema.json",
+  "title": "edgegroups.edgeGroupUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-edge-groups-api-openapi.yml#/components/schemas/edgegroups.edgeGroupUpdatePayload",
+  "properties": {
+    "Dynamic": {
+      "type": "boolean"
+    },
+    "Endpoints": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "PartialMatch": {
+      "type": "boolean"
+    },
+    "TagIDs": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

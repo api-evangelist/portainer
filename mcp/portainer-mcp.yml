@@ -1,0 +1,7 @@
+generated: '2026-10-03'
+method: derived
+source: https://docs.portainer.io/advanced/portainer-mcp-server.md
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived

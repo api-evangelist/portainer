@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-helm-user-repository-schema.json",
+  "title": "portainer.HelmUserRepository",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-helm-api-openapi.yml#/components/schemas/portainer.HelmUserRepository",
+  "properties": {
+    "Id": {
+      "description": "Membership Identifier",
+      "type": "integer"
+    },
+    "URL": {
+      "description": "Helm repository URL",
+      "type": "string"
+    },
+    "UserId": {
+      "description": "User identifier",
+      "type": "integer"
+    }
+  },
+  "type": "object"
+}

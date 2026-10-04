@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-kubernetes-k8s-application-schema.json",
+  "title": "kubernetes.K8sApplication",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-kubernetes-api-openapi.yml#/components/schemas/kubernetes.K8sApplication",
+  "properties": {
+    "Annotations": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "ApplicationOwner": {
+      "type": "string"
+    },
+    "ApplicationType": {
+      "type": "string"
+    },
+    "Configurations": {
+      "items": {
+        "$ref": "#/$defs/kubernetes.Configuration"
+      },
+      "type": "array"
+    },
+    "Containers": {
+      "items": {},
+      "type": "array"
+    },
+    "CreationDate": {
+      "type": "string"
+    },
+    "CustomResourceMetadata": {
+      "$ref": "#/$defs/kubernetes.CustomResourceMetadata"
+    },
+    "DeploymentType": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "Image": {
+      "type": "string"
+    },
+    "Kind": {
+      "type": "string"
+    },
+    "Labels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "LoadBalancerIPAddress": {
+      "type": "string"
+    },
+    "MatchLabels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "Metadata": {
+      "$ref": "#/$defs/kubernetes.Metadata"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Namespace": {
+      "type": "string"
+    },
+    "Pods": {
+      "items": {
+        "$ref": "#/$defs/kubernetes.Pod"
+      },
+      "type": "array"
+    },
+    "PublishedPorts": {
+      "items": {
+        "$ref": "#/$defs/kubernetes.PublishedPort"
+      },
+      "type": "array"
+    },
+    "Resource": {
+      "$ref": "#/$defs/kubernetes.K8sApplicationResource"
+    },
+    "ResourcePool": {
+      "type": "string"
+    },
+    "RunningPodsCount": {
+      "type": "integer"
+    },
+    "ServiceId": {
+      "type": "string"
+    },
+    "ServiceName": {
+      "type": "string"
+    },
+    "ServiceType": {
+      "type": "string"
+    },
+    "StackId": {
+      "type": "string"
+    },
+    "StackKind": {
+      "type": "string"
+    },
+    "StackName": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "TotalPodsCount": {
+      "type": "integer"
+    },
+    "Uid": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "kubernetes.Configuration": {
+      "properties": {
+        "ConfigurationOwner": {
+          "type": "string"
+        },
+        "Data": {
+          "additionalProperties": {},
+          "type": "object"
+        },
+        "Kind": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.CustomResourceMetadata": {
+      "properties": {
+        "apiVersion": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plural": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.IngressRule": {
+      "properties": {
+        "Host": {
+          "type": "string"
+        },
+        "IP": {
+          "type": "string"
+        },
+        "Path": {
+          "type": "string"
+        },
+        "TLS": {
+          "items": {
+            "$ref": "#/$defs/kubernetes.TLSInfo"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.K8sApplicationResource": {
+      "properties": {
+        "CpuLimit": {
+          "type": "number"
+        },
+        "CpuRequest": {
+          "type": "number"
+        },
+        "MemoryLimit": {
+          "type": "integer"
+        },
+        "MemoryRequest": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.Metadata": {
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.Pod": {
+      "properties": {
+        "ContainerName": {
+          "type": "string"
+        },
+        "CreationDate": {
+          "type": "string"
+        },
+        "Image": {
+          "type": "string"
+        },
+        "ImagePullPolicy": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "PodIP": {
+          "type": "string"
+        },
+        "Resource": {
+          "$ref": "#/$defs/kubernetes.K8sApplicationResource"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "Uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.PublishedPort": {
+      "properties": {
+        "IngressRules": {
+          "items": {
+            "$ref": "#/$defs/kubernetes.IngressRule"
+          },
+          "type": "array"
+        },
+        "Port": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "kubernetes.TLSInfo": {
+      "properties": {
+        "hosts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

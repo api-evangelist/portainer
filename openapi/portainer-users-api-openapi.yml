@@ -457,122 +457,6 @@ paths:
       - Users
 components:
   schemas:
-    portainer.MembershipRole:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      x-enum-varnames:
-      - _
-      - TeamLeader
-      - TeamMember
-    portainer.UserRole:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      x-enum-varnames:
-      - _
-      - AdministratorRole
-      - StandardUserRole
-    users.adminInitPayload:
-      properties:
-        Password:
-          description: Password for the admin user
-          example: admin-password
-          type: string
-        Username:
-          description: Username for the admin user
-          example: admin
-          type: string
-      required:
-      - Password
-      - Username
-      type: object
-    users.accessTokenResponse:
-      properties:
-        apiKey:
-          $ref: '#/components/schemas/portainer.APIKey'
-        rawAPIKey:
-          type: string
-      type: object
-    portainer.TeamMembership:
-      properties:
-        Id:
-          description: Membership Identifier
-          example: 1
-          type: integer
-        Role:
-          allOf:
-          - $ref: '#/components/schemas/portainer.MembershipRole'
-          description: Team role (1 for team leader and 2 for team member)
-          example: 1
-        TeamID:
-          description: Team identifier
-          example: 1
-          type: integer
-        UserID:
-          description: User identifier
-          example: 1
-          type: integer
-      type: object
-    users.userCreatePayload:
-      properties:
-        Password:
-          example: cg9Wgky3
-          type: string
-        Role:
-          description: User role (1 for administrator account and 2 for regular account)
-          enum:
-          - 1
-          - 2
-          example: 2
-          type: integer
-        Username:
-          example: bob
-          type: string
-      required:
-      - Password
-      - Role
-      - Username
-      type: object
-    portainer.User:
-      properties:
-        EndpointAuthorizations:
-          allOf:
-          - $ref: '#/components/schemas/portainer.EndpointAuthorizations'
-          description: Deprecated in DBVersion == 25
-        Id:
-          description: User Identifier
-          example: 1
-          type: integer
-        PortainerAuthorizations:
-          allOf:
-          - $ref: '#/components/schemas/portainer.Authorizations'
-          description: Deprecated in DBVersion == 25
-        Role:
-          allOf:
-          - $ref: '#/components/schemas/portainer.UserRole'
-          description: User role (1 for administrator account and 2 for regular account)
-          example: 1
-        ThemeSettings:
-          $ref: '#/components/schemas/portainer.UserThemeSettings'
-        TokenIssueAt:
-          example: 1
-          type: integer
-        UseCache:
-          example: true
-          type: boolean
-        UserTheme:
-          description: Deprecated
-          example: dark
-          type: string
-        Username:
-          example: bob
-          type: string
-      type: object
     users.userUpdatePayload:
       properties:
         NewPassword:
@@ -617,6 +501,166 @@ components:
       - NewPassword
       - Password
       type: object
+    users.userAccessTokenCreatePayload:
+      properties:
+        description:
+          example: github-api-key
+          type: string
+        password:
+          example: password
+          type: string
+      required:
+      - description
+      - password
+      type: object
+    users.accessTokenResponse:
+      properties:
+        apiKey:
+          $ref: '#/components/schemas/portainer.APIKey'
+        rawAPIKey:
+          type: string
+      type: object
+    portainer.User:
+      properties:
+        EndpointAuthorizations:
+          allOf:
+          - $ref: '#/components/schemas/portainer.EndpointAuthorizations'
+          description: Deprecated in DBVersion == 25
+        Id:
+          description: User Identifier
+          example: 1
+          type: integer
+        PortainerAuthorizations:
+          allOf:
+          - $ref: '#/components/schemas/portainer.Authorizations'
+          description: Deprecated in DBVersion == 25
+        Role:
+          allOf:
+          - $ref: '#/components/schemas/portainer.UserRole'
+          description: User role (1 for administrator account and 2 for regular account)
+          example: 1
+        ThemeSettings:
+          $ref: '#/components/schemas/portainer.UserThemeSettings'
+        TokenIssueAt:
+          example: 1
+          type: integer
+        UseCache:
+          example: true
+          type: boolean
+        UserTheme:
+          description: Deprecated
+          example: dark
+          type: string
+        Username:
+          example: bob
+          type: string
+      type: object
+    users.userCreatePayload:
+      properties:
+        Password:
+          example: cg9Wgky3
+          type: string
+        Role:
+          description: User role (1 for administrator account and 2 for regular account)
+          enum:
+          - 1
+          - 2
+          example: 2
+          type: integer
+        Username:
+          example: bob
+          type: string
+      required:
+      - Password
+      - Role
+      - Username
+      type: object
+    portainer.TeamMembership:
+      properties:
+        Id:
+          description: Membership Identifier
+          example: 1
+          type: integer
+        Role:
+          allOf:
+          - $ref: '#/components/schemas/portainer.MembershipRole'
+          description: Team role (1 for team leader and 2 for team member)
+          example: 1
+        TeamID:
+          description: Team identifier
+          example: 1
+          type: integer
+        UserID:
+          description: User identifier
+          example: 1
+          type: integer
+      type: object
+    users.adminInitPayload:
+      properties:
+        Password:
+          description: Password for the admin user
+          example: admin-password
+          type: string
+        Username:
+          description: Username for the admin user
+          example: admin
+          type: string
+      required:
+      - Password
+      - Username
+      type: object
+    users.themePayload:
+      properties:
+        color:
+          description: Color represents the color theme of the UI
+          enum:
+          - dark
+          - light
+          - highcontrast
+          - auto
+          example: dark
+          type: string
+      type: object
+    portainer.Authorizations:
+      additionalProperties:
+        type: boolean
+      type: object
+    portainer.UserThemeSettings:
+      properties:
+        color:
+          description: Color represents the color theme of the UI
+          enum:
+          - dark
+          - light
+          - highcontrast
+          - auto
+          example: dark
+          type: string
+      type: object
+    portainer.UserRole:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      x-enum-varnames:
+      - _
+      - AdministratorRole
+      - StandardUserRole
+    portainer.MembershipRole:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      x-enum-varnames:
+      - _
+      - TeamLeader
+      - TeamMember
+    portainer.EndpointAuthorizations:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.Authorizations'
+      type: object
     portainer.APIKey:
       properties:
         dateCreated:
@@ -640,50 +684,6 @@ components:
         userId:
           example: 1
           type: integer
-      type: object
-    portainer.UserThemeSettings:
-      properties:
-        color:
-          description: Color represents the color theme of the UI
-          enum:
-          - dark
-          - light
-          - highcontrast
-          - auto
-          example: dark
-          type: string
-      type: object
-    users.userAccessTokenCreatePayload:
-      properties:
-        description:
-          example: github-api-key
-          type: string
-        password:
-          example: password
-          type: string
-      required:
-      - description
-      - password
-      type: object
-    portainer.Authorizations:
-      additionalProperties:
-        type: boolean
-      type: object
-    users.themePayload:
-      properties:
-        color:
-          description: Color represents the color theme of the UI
-          enum:
-          - dark
-          - light
-          - highcontrast
-          - auto
-          example: dark
-          type: string
-      type: object
-    portainer.EndpointAuthorizations:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.Authorizations'
       type: object
   securitySchemes:
     ApiKeyAuth:

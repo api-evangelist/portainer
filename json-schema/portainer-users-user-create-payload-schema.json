@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-users-user-create-payload-schema.json",
+  "title": "users.userCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-users-api-openapi.yml#/components/schemas/users.userCreatePayload",
+  "properties": {
+    "Password": {
+      "type": "string"
+    },
+    "Role": {
+      "description": "User role (1 for administrator account and 2 for regular account)",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "Username": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Password",
+    "Role",
+    "Username"
+  ],
+  "type": "object"
+}

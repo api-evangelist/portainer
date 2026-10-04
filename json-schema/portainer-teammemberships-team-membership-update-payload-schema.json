@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-teammemberships-team-membership-update-payload-schema.json",
+  "title": "teammemberships.teamMembershipUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-team-memberships-api-openapi.yml#/components/schemas/teammemberships.teamMembershipUpdatePayload",
+  "properties": {
+    "Role": {
+      "description": "Role for the user inside the team (1 for leader and 2 for regular member)",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "TeamID": {
+      "description": "Team identifier",
+      "type": "integer"
+    },
+    "UserID": {
+      "description": "User identifier",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "Role",
+    "TeamID",
+    "UserID"
+  ],
+  "type": "object"
+}

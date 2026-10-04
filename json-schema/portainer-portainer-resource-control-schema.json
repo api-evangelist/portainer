@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-resource-control-schema.json",
+  "title": "portainer.ResourceControl",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-resource-controls-api-openapi.yml#/components/schemas/portainer.ResourceControl",
+  "properties": {
+    "AccessLevel": {
+      "$ref": "#/$defs/portainer.ResourceAccessLevel"
+    },
+    "AdministratorsOnly": {
+      "description": "Permit access to resource only to admins",
+      "type": "boolean"
+    },
+    "Id": {
+      "description": "ResourceControl Identifier",
+      "type": "integer"
+    },
+    "OwnerId": {
+      "description": "Deprecated fields\nDeprecated in DBVersion == 2",
+      "type": "integer"
+    },
+    "Public": {
+      "description": "Permit access to the associated resource to any user",
+      "type": "boolean"
+    },
+    "ResourceId": {
+      "description": "Docker resource identifier on which access control will be applied.\\\nIn the case of a resource control applied to a stack, use the stack name as identifier",
+      "type": "string"
+    },
+    "SubResourceIds": {
+      "description": "List of Docker resources that will inherit this access control",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "System": {
+      "type": "boolean"
+    },
+    "TeamAccesses": {
+      "items": {
+        "$ref": "#/$defs/portainer.TeamResourceAccess"
+      },
+      "type": "array"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.ResourceControlType"
+        }
+      ],
+      "description": "Type of Docker resource. Valid values are: 1- container, 2 -service\n3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template"
+    },
+    "UserAccesses": {
+      "items": {
+        "$ref": "#/$defs/portainer.UserResourceAccess"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.ResourceAccessLevel": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ReadWriteAccessLevel"
+      ]
+    },
+    "portainer.ResourceControlType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ContainerResourceControl",
+        "ServiceResourceControl",
+        "VolumeResourceControl",
+        "NetworkResourceControl",
+        "SecretResourceControl",
+        "StackResourceControl",
+        "ConfigResourceControl",
+        "CustomTemplateResourceControl",
+        "ContainerGroupResourceControl"
+      ]
+    },
+    "portainer.TeamResourceAccess": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "TeamId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.UserResourceAccess": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "UserId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

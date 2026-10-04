@@ -39,10 +39,6 @@ paths:
       - Roles
 components:
   schemas:
-    portainer.Authorizations:
-      additionalProperties:
-        type: boolean
-      type: object
     portainer.Role:
       properties:
         Authorizations:
@@ -63,6 +59,10 @@ components:
           type: string
         Priority:
           type: integer
+      type: object
+    portainer.Authorizations:
+      additionalProperties:
+        type: boolean
       type: object
   securitySchemes:
     ApiKeyAuth:

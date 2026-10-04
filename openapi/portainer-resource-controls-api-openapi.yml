@@ -141,13 +141,6 @@ components:
             type: integer
           type: array
       type: object
-    portainer.UserResourceAccess:
-      properties:
-        AccessLevel:
-          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
-        UserId:
-          type: integer
-      type: object
     resourcecontrols.resourceControlCreatePayload:
       properties:
         AdministratorsOnly:
@@ -205,6 +198,52 @@ components:
       - ResourceID
       - Type
       type: object
+    portainer.UserResourceAccess:
+      properties:
+        AccessLevel:
+          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
+        UserId:
+          type: integer
+      type: object
+    portainer.TeamResourceAccess:
+      properties:
+        AccessLevel:
+          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
+        TeamId:
+          type: integer
+      type: object
+    portainer.ResourceControlType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      type: integer
+      x-enum-varnames:
+      - _
+      - ContainerResourceControl
+      - ServiceResourceControl
+      - VolumeResourceControl
+      - NetworkResourceControl
+      - SecretResourceControl
+      - StackResourceControl
+      - ConfigResourceControl
+      - CustomTemplateResourceControl
+      - ContainerGroupResourceControl
+    portainer.ResourceAccessLevel:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - _
+      - ReadWriteAccessLevel
     portainer.ResourceControl:
       properties:
         AccessLevel:
@@ -257,45 +296,6 @@ components:
             $ref: '#/components/schemas/portainer.UserResourceAccess'
           type: array
       type: object
-    portainer.ResourceControlType:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      type: integer
-      x-enum-varnames:
-      - _
-      - ContainerResourceControl
-      - ServiceResourceControl
-      - VolumeResourceControl
-      - NetworkResourceControl
-      - SecretResourceControl
-      - StackResourceControl
-      - ConfigResourceControl
-      - CustomTemplateResourceControl
-      - ContainerGroupResourceControl
-    portainer.TeamResourceAccess:
-      properties:
-        AccessLevel:
-          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
-        TeamId:
-          type: integer
-      type: object
-    portainer.ResourceAccessLevel:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - _
-      - ReadWriteAccessLevel
   securitySchemes:
     ApiKeyAuth:
       in: header

@@ -520,26 +520,39 @@ paths:
       - Helm
 components:
   schemas:
-    portainer.HelmUserRepository:
+    users.helmUserRepositoryResponse:
       properties:
-        Id:
-          description: Membership Identifier
-          example: 1
-          type: integer
-        URL:
-          description: Helm repository URL
-          example: https://charts.bitnami.com/bitnami
+        GlobalRepository:
           type: string
-        UserId:
-          description: User identifier
-          example: 1
-          type: integer
+        UserRepositories:
+          items:
+            $ref: '#/components/schemas/portainer.HelmUserRepository'
+          type: array
       type: object
-    release.Values:
+    release.ChartReference:
       properties:
-        computedValues:
+        chartPath:
           type: string
-        userSuppliedValues:
+        registryID:
+          type: integer
+        repoURL:
+          type: string
+      type: object
+    users.addHelmRepoUrlPayload:
+      properties:
+        url:
+          type: string
+      type: object
+    github_com_portainer_portainer_pkg_libhelm_release.HookExecution:
+      properties:
+        completed_at:
+          description: CompletedAt indicates the date/time this hook was completed.
+          type: string
+        phase:
+          description: Phase indicates whether the hook completed successfully
+          type: string
+        started_at:
+          description: StartedAt indicates the date/time this hook was started
           type: string
       type: object
     release.Maintainer:
@@ -554,22 +567,155 @@ components:
           description: URL is an optional URL to an address for the named maintainer
           type: string
       type: object
-    helm.installChartPayload:
+    github_com_portainer_portainer_pkg_libhelm_release.Release:
       properties:
-        atomic:
-          type: boolean
+        appVersion:
+          description: AppVersion is the app version of the release.
+          type: string
+        chart:
+          allOf:
+          - $ref: '#/components/schemas/release.Chart'
+          description: Chart is the chart that was released.
+        chartReference:
+          allOf:
+          - $ref: '#/components/schemas/release.ChartReference'
+          description: ChartReference are the labels that are used to identify the chart source.
+        config:
+          additionalProperties: {}
+          description: 'Config is the set of extra Values added to the chart.
+
+            These values override the default values inside of the chart.'
+          type: object
+        hooks:
+          description: Hooks are all of the hooks declared for this release.
+          items:
+            $ref: '#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.Hook'
+          type: array
+        info:
+          allOf:
+          - $ref: '#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.Info'
+          description: Info provides information about a release
+        manifest:
+          description: Manifest is the string representation of the rendered template.
+          type: string
+        name:
+          description: Name is the name of the release
+          type: string
+        namespace:
+          description: Namespace is the kubernetes namespace of the release.
+          type: string
+        stackID:
+          description: StackID is the ID of the Portainer stack associated with this release (if using GitOps)
+          type: integer
+        values:
+          allOf:
+          - $ref: '#/components/schemas/release.Values'
+          description: Values are the values used to deploy the chart.
+        version:
+          description: Version is an int which represents the revision of the release.
+          type: integer
+      type: object
+    release.File:
+      properties:
+        data:
+          description: Data is the template as byte data.
+          items:
+            type: integer
+          type: array
+        name:
+          description: Name is the path-like name of the template.
+          type: string
+      type: object
+    unstructured.Unstructured:
+      properties:
+        Object:
+          additionalProperties: true
+          description: 'Object is a JSON compatible map with string, float, int, bool, []interface{}, or
+
+            map[string]interface{}
+
+            children.'
+          type: object
+      type: object
+    github_com_portainer_portainer_pkg_libhelm_release.Hook:
+      properties:
+        delete_policies:
+          description: DeletePolicies are the policies that indicate when to delete the hook
+          items:
+            type: string
+          type: array
+        events:
+          description: Events are the events that this hook fires on.
+          items:
+            type: string
+          type: array
+        kind:
+          description: Kind is the Kubernetes kind.
+          type: string
+        last_run:
+          allOf:
+          - $ref: '#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.HookExecution'
+          description: LastRun indicates the date/time this was last run.
+        manifest:
+          description: Manifest is the manifest contents.
+          type: string
+        name:
+          type: string
+        path:
+          description: Path is the chart-relative path to the template.
+          type: string
+        weight:
+          description: Weight indicates the sort order for execution among similar Hook type
+          type: integer
+      type: object
+    release.ReleaseElement:
+      properties:
+        appVersion:
+          type: string
         chart:
           type: string
         name:
           type: string
         namespace:
           type: string
-        repo:
+        revision:
           type: string
+        status:
+          type: string
+        updated:
+          type: string
+      type: object
+    release.Chart:
+      properties:
+        files:
+          description: 'Files are miscellaneous files in a chart archive,
+
+            e.g. README, LICENSE, etc.'
+          items:
+            $ref: '#/components/schemas/release.File'
+          type: array
+        lock:
+          allOf:
+          - $ref: '#/components/schemas/release.Lock'
+          description: Lock is the contents of Chart.lock.
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/release.Metadata'
+          description: Metadata is the contents of the Chartfile.
+        schema:
+          description: Schema is an optional JSON schema for imposing structure on Values
+          items:
+            type: integer
+          type: array
+        templates:
+          description: Templates for this chart.
+          items:
+            $ref: '#/components/schemas/release.File'
+          type: array
         values:
-          type: string
-        version:
-          type: string
+          additionalProperties: {}
+          description: Values are default config for this chart.
+          type: object
       type: object
     release.Dependency:
       properties:
@@ -616,23 +762,6 @@ components:
             may contain a semantic version range.'
           type: string
       type: object
-    release.ReleaseElement:
-      properties:
-        appVersion:
-          type: string
-        chart:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-        revision:
-          type: string
-        status:
-          type: string
-        updated:
-          type: string
-      type: object
     release.Lock:
       properties:
         dependencies:
@@ -646,37 +775,6 @@ components:
         generated:
           description: Generated is the date the lock file was last generated.
           type: string
-      type: object
-    github_com_portainer_portainer_pkg_libhelm_release.Hook:
-      properties:
-        delete_policies:
-          description: DeletePolicies are the policies that indicate when to delete the hook
-          items:
-            type: string
-          type: array
-        events:
-          description: Events are the events that this hook fires on.
-          items:
-            type: string
-          type: array
-        kind:
-          description: Kind is the Kubernetes kind.
-          type: string
-        last_run:
-          allOf:
-          - $ref: '#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.HookExecution'
-          description: LastRun indicates the date/time this was last run.
-        manifest:
-          description: Manifest is the manifest contents.
-          type: string
-        name:
-          type: string
-        path:
-          description: Path is the chart-relative path to the template.
-          type: string
-        weight:
-          description: Weight indicates the sort order for execution among similar Hook type
-          type: integer
       type: object
     github_com_portainer_portainer_pkg_libhelm_release.Info:
       properties:
@@ -703,38 +801,6 @@ components:
         status:
           description: Status is the current state of the release
           type: string
-      type: object
-    release.Chart:
-      properties:
-        files:
-          description: 'Files are miscellaneous files in a chart archive,
-
-            e.g. README, LICENSE, etc.'
-          items:
-            $ref: '#/components/schemas/release.File'
-          type: array
-        lock:
-          allOf:
-          - $ref: '#/components/schemas/release.Lock'
-          description: Lock is the contents of Chart.lock.
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/release.Metadata'
-          description: Metadata is the contents of the Chartfile.
-        schema:
-          description: Schema is an optional JSON schema for imposing structure on Values
-          items:
-            type: integer
-          type: array
-        templates:
-          description: Templates for this chart.
-          items:
-            $ref: '#/components/schemas/release.File'
-          type: array
-        values:
-          additionalProperties: {}
-          description: Values are default config for this chart.
-          type: object
       type: object
     release.Metadata:
       properties:
@@ -802,110 +868,44 @@ components:
           description: A SemVer 2 conformant version string of the chart. Required.
           type: string
       type: object
-    release.ChartReference:
+    helm.installChartPayload:
       properties:
-        chartPath:
-          type: string
-        registryID:
-          type: integer
-        repoURL:
-          type: string
-      type: object
-    release.File:
-      properties:
-        data:
-          description: Data is the template as byte data.
-          items:
-            type: integer
-          type: array
-        name:
-          description: Name is the path-like name of the template.
-          type: string
-      type: object
-    github_com_portainer_portainer_pkg_libhelm_release.Release:
-      properties:
-        appVersion:
-          description: AppVersion is the app version of the release.
-          type: string
+        atomic:
+          type: boolean
         chart:
-          allOf:
-          - $ref: '#/components/schemas/release.Chart'
-          description: Chart is the chart that was released.
-        chartReference:
-          allOf:
-          - $ref: '#/components/schemas/release.ChartReference'
-          description: ChartReference are the labels that are used to identify the chart source.
-        config:
-          additionalProperties: {}
-          description: 'Config is the set of extra Values added to the chart.
-
-            These values override the default values inside of the chart.'
-          type: object
-        hooks:
-          description: Hooks are all of the hooks declared for this release.
-          items:
-            $ref: '#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.Hook'
-          type: array
-        info:
-          allOf:
-          - $ref: '#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.Info'
-          description: Info provides information about a release
-        manifest:
-          description: Manifest is the string representation of the rendered template.
           type: string
         name:
-          description: Name is the name of the release
           type: string
         namespace:
-          description: Namespace is the kubernetes namespace of the release.
           type: string
-        stackID:
-          description: StackID is the ID of the Portainer stack associated with this release (if using GitOps)
-          type: integer
+        repo:
+          type: string
         values:
-          allOf:
-          - $ref: '#/components/schemas/release.Values'
-          description: Values are the values used to deploy the chart.
+          type: string
         version:
-          description: Version is an int which represents the revision of the release.
+          type: string
+      type: object
+    portainer.HelmUserRepository:
+      properties:
+        Id:
+          description: Membership Identifier
+          example: 1
+          type: integer
+        URL:
+          description: Helm repository URL
+          example: https://charts.bitnami.com/bitnami
+          type: string
+        UserId:
+          description: User identifier
+          example: 1
           type: integer
       type: object
-    users.addHelmRepoUrlPayload:
+    release.Values:
       properties:
-        url:
+        computedValues:
           type: string
-      type: object
-    github_com_portainer_portainer_pkg_libhelm_release.HookExecution:
-      properties:
-        completed_at:
-          description: CompletedAt indicates the date/time this hook was completed.
+        userSuppliedValues:
           type: string
-        phase:
-          description: Phase indicates whether the hook completed successfully
-          type: string
-        started_at:
-          description: StartedAt indicates the date/time this hook was started
-          type: string
-      type: object
-    unstructured.Unstructured:
-      properties:
-        Object:
-          additionalProperties: true
-          description: 'Object is a JSON compatible map with string, float, int, bool, []interface{}, or
-
-            map[string]interface{}
-
-            children.'
-          type: object
-      type: object
-    users.helmUserRepositoryResponse:
-      properties:
-        GlobalRepository:
-          type: string
-        UserRepositories:
-          items:
-            $ref: '#/components/schemas/portainer.HelmUserRepository'
-          type: array
       type: object
   securitySchemes:
     ApiKeyAuth:

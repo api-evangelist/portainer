@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-user-schema.json",
+  "title": "portainer.User",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-users-api-openapi.yml#/components/schemas/portainer.User",
+  "properties": {
+    "EndpointAuthorizations": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EndpointAuthorizations"
+        }
+      ],
+      "description": "Deprecated in DBVersion == 25"
+    },
+    "Id": {
+      "description": "User Identifier",
+      "type": "integer"
+    },
+    "PortainerAuthorizations": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.Authorizations"
+        }
+      ],
+      "description": "Deprecated in DBVersion == 25"
+    },
+    "Role": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.UserRole"
+        }
+      ],
+      "description": "User role (1 for administrator account and 2 for regular account)"
+    },
+    "ThemeSettings": {
+      "$ref": "#/$defs/portainer.UserThemeSettings"
+    },
+    "TokenIssueAt": {
+      "type": "integer"
+    },
+    "UseCache": {
+      "type": "boolean"
+    },
+    "UserTheme": {
+      "description": "Deprecated",
+      "type": "string"
+    },
+    "Username": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.Authorizations": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "type": "object"
+    },
+    "portainer.EndpointAuthorizations": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.Authorizations"
+      },
+      "type": "object"
+    },
+    "portainer.UserRole": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "AdministratorRole",
+        "StandardUserRole"
+      ]
+    },
+    "portainer.UserThemeSettings": {
+      "properties": {
+        "color": {
+          "description": "Color represents the color theme of the UI",
+          "enum": [
+            "dark",
+            "light",
+            "highcontrast",
+            "auto"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

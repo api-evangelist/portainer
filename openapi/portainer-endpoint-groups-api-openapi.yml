@@ -236,27 +236,6 @@ paths:
       - endpoint_groups
 components:
   schemas:
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    portainer.AccessPolicy:
-      properties:
-        Namespaces:
-          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
-          items:
-            type: string
-          type: array
-        RoleId:
-          description: Role identifier. Reference the role that will be associated to this access policy
-          example: 1
-          type: integer
-      type: object
     endpointgroups.endpointGroupCreatePayload:
       properties:
         AssociatedEndpoints:
@@ -329,9 +308,30 @@ components:
         UserAccessPolicies:
           $ref: '#/components/schemas/portainer.UserAccessPolicies'
       type: object
-    portainer.UserAccessPolicies:
+    portainer.AccessPolicy:
+      properties:
+        Namespaces:
+          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+          items:
+            type: string
+          type: array
+        RoleId:
+          description: Role identifier. Reference the role that will be associated to this access policy
+          example: 1
+          type: integer
+      type: object
+    portainer.TeamAccessPolicies:
       additionalProperties:
         $ref: '#/components/schemas/portainer.AccessPolicy'
+      type: object
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
       type: object
     endpointgroups.endpointGroupUpdatePayload:
       properties:
@@ -364,7 +364,7 @@ components:
         UserAccessPolicies:
           $ref: '#/components/schemas/portainer.UserAccessPolicies'
       type: object
-    portainer.TeamAccessPolicies:
+    portainer.UserAccessPolicies:
       additionalProperties:
         $ref: '#/components/schemas/portainer.AccessPolicy'
       type: object

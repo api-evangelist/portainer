@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-teams-team-create-payload-schema.json",
+  "title": "teams.teamCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-teams-api-openapi.yml#/components/schemas/teams.teamCreatePayload",
+  "properties": {
+    "Name": {
+      "description": "Name",
+      "type": "string"
+    },
+    "TeamLeaders": {
+      "description": "TeamLeaders",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "type": "object"
+}

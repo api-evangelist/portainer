@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-endpointedge-endpoint-edge-status-inspect-response-schema.json",
+  "title": "endpointedge.endpointEdgeStatusInspectResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoints-api-openapi.yml#/components/schemas/endpointedge.endpointEdgeStatusInspectResponse",
+  "properties": {
+    "checkin": {
+      "description": "The current value of CheckinInterval",
+      "type": "integer"
+    },
+    "credentials": {
+      "type": "string"
+    },
+    "port": {
+      "description": "The tunnel port",
+      "type": "integer"
+    },
+    "schedules": {
+      "description": "List of requests for jobs to run on the environment(endpoint)",
+      "items": {
+        "$ref": "#/$defs/endpointedge.edgeJobResponse"
+      },
+      "type": "array"
+    },
+    "stacks": {
+      "description": "List of stacks to be deployed on the environments(endpoints)",
+      "items": {
+        "$ref": "#/$defs/endpointedge.stackStatusResponse"
+      },
+      "type": "array"
+    },
+    "status": {
+      "description": "Status represents the environment(endpoint) status",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "endpointedge.edgeJobResponse": {
+      "properties": {
+        "CollectLogs": {
+          "description": "Whether to collect logs",
+          "type": "boolean"
+        },
+        "CronExpression": {
+          "description": "A cron expression to schedule this job",
+          "type": "string"
+        },
+        "Id": {
+          "description": "EdgeJob Identifier",
+          "type": "integer"
+        },
+        "Script": {
+          "description": "Script to run",
+          "type": "string"
+        },
+        "Version": {
+          "description": "Version of this EdgeJob",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "endpointedge.stackStatusResponse": {
+      "properties": {
+        "ID": {
+          "description": "EdgeStack Identifier",
+          "type": "integer"
+        },
+        "Version": {
+          "description": "Version of this stack",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

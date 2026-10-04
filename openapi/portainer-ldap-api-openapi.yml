@@ -42,36 +42,6 @@ paths:
         required: true
 components:
   schemas:
-    portainer.LDAPSearchSettings:
-      properties:
-        BaseDN:
-          description: The distinguished name of the element from which the LDAP server will search for users
-          example: dc=ldap,dc=domain,dc=tld
-          type: string
-        Filter:
-          description: Optional LDAP search filter used to select user elements
-          example: (objectClass=account)
-          type: string
-        UserNameAttribute:
-          description: LDAP attribute which denotes the username
-          example: uid
-          type: string
-      type: object
-    portainer.LDAPGroupSearchSettings:
-      properties:
-        GroupAttribute:
-          description: LDAP attribute which denotes the group membership
-          example: member
-          type: string
-        GroupBaseDN:
-          description: The distinguished name of the element from which the LDAP server will search for groups
-          example: dc=ldap,dc=domain,dc=tld
-          type: string
-        GroupFilter:
-          description: The LDAP search filter used to select group elements, optional
-          example: (objectClass=account
-          type: string
-      type: object
     portainer.TLSConfiguration:
       properties:
         TLS:
@@ -94,6 +64,41 @@ components:
           description: Skip the verification of the server TLS certificate
           example: false
           type: boolean
+      type: object
+    portainer.LDAPSearchSettings:
+      properties:
+        BaseDN:
+          description: The distinguished name of the element from which the LDAP server will search for users
+          example: dc=ldap,dc=domain,dc=tld
+          type: string
+        Filter:
+          description: Optional LDAP search filter used to select user elements
+          example: (objectClass=account)
+          type: string
+        UserNameAttribute:
+          description: LDAP attribute which denotes the username
+          example: uid
+          type: string
+      type: object
+    ldap.checkPayload:
+      properties:
+        LDAPSettings:
+          $ref: '#/components/schemas/portainer.LDAPSettings'
+      type: object
+    portainer.LDAPGroupSearchSettings:
+      properties:
+        GroupAttribute:
+          description: LDAP attribute which denotes the group membership
+          example: member
+          type: string
+        GroupBaseDN:
+          description: The distinguished name of the element from which the LDAP server will search for groups
+          example: dc=ldap,dc=domain,dc=tld
+          type: string
+        GroupFilter:
+          description: The LDAP search filter used to select group elements, optional
+          example: (objectClass=account
+          type: string
       type: object
     portainer.LDAPSettings:
       properties:
@@ -131,11 +136,6 @@ components:
           description: URL or IP address of the LDAP server
           example: myldap.domain.tld:389
           type: string
-      type: object
-    ldap.checkPayload:
-      properties:
-        LDAPSettings:
-          $ref: '#/components/schemas/portainer.LDAPSettings'
       type: object
   securitySchemes:
     ApiKeyAuth:

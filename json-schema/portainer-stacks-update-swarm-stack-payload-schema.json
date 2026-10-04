@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-stacks-update-swarm-stack-payload-schema.json",
+  "title": "stacks.updateSwarmStackPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-stacks-api-openapi.yml#/components/schemas/stacks.updateSwarmStackPayload",
+  "properties": {
+    "Env": {
+      "description": "A list of environment(endpoint) variables used during stack deployment",
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "Prune": {
+      "description": "Prune services that are no longer referenced (only available for Swarm stacks)",
+      "type": "boolean"
+    },
+    "PullImage": {
+      "description": "Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility\nForce a pulling to current image with the original tag though the image is already the latest",
+      "type": "boolean"
+    },
+    "RepullImageAndRedeploy": {
+      "description": "RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack",
+      "type": "boolean"
+    },
+    "StackFileContent": {
+      "description": "New content of the Stack file",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

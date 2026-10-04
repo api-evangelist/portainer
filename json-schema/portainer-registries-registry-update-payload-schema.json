@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-registries-registry-update-payload-schema.json",
+  "title": "registries.registryUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-registries-api-openapi.yml#/components/schemas/registries.registryUpdatePayload",
+  "properties": {
+    "Authentication": {
+      "description": "Is authentication against this registry enabled",
+      "type": "boolean"
+    },
+    "BaseURL": {
+      "description": "BaseURL is used for quay registry",
+      "type": "string"
+    },
+    "Ecr": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EcrData"
+        }
+      ],
+      "description": "ECR data"
+    },
+    "Name": {
+      "description": "Name that will be used to identify this registry",
+      "type": "string"
+    },
+    "Password": {
+      "description": "Password used to authenticate against this registry. required when Authentication is true",
+      "type": "string"
+    },
+    "Quay": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.QuayRegistryData"
+        }
+      ],
+      "description": "Quay data"
+    },
+    "RegistryAccesses": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.RegistryAccesses"
+        }
+      ],
+      "description": "Registry access control"
+    },
+    "URL": {
+      "description": "URL or IP address of the Docker registry",
+      "type": "string"
+    },
+    "Username": {
+      "description": "Username used to authenticate against this registry. Required when Authentication is true",
+      "type": "string"
+    }
+  },
+  "required": [
+    "Authentication",
+    "Name",
+    "URL"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.AccessPolicy": {
+      "properties": {
+        "Namespaces": {
+          "description": "Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "description": "Role identifier. Reference the role that will be associated to this access policy",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EcrData": {
+      "properties": {
+        "Region": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.QuayRegistryData": {
+      "properties": {
+        "OrganisationName": {
+          "type": "string"
+        },
+        "UseOrganisation": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.RegistryAccessPolicies": {
+      "properties": {
+        "Namespaces": {
+          "description": "Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "TeamAccessPolicies": {
+          "$ref": "#/$defs/portainer.TeamAccessPolicies"
+        },
+        "UserAccessPolicies": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.UserAccessPolicies"
+            }
+          ],
+          "description": "Docker specific fields (with docker, users/teams have access to a registry)"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.RegistryAccesses": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.RegistryAccessPolicies"
+      },
+      "type": "object"
+    },
+    "portainer.TeamAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    },
+    "portainer.UserAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    }
+  }
+}

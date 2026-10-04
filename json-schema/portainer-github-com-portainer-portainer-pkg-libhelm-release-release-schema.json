@@ -1,0 +1,445 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-github-com-portainer-portainer-pkg-libhelm-release-release-schema.json",
+  "title": "github_com_portainer_portainer_pkg_libhelm_release.Release",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-helm-api-openapi.yml#/components/schemas/github_com_portainer_portainer_pkg_libhelm_release.Release",
+  "properties": {
+    "appVersion": {
+      "description": "AppVersion is the app version of the release.",
+      "type": "string"
+    },
+    "chart": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/release.Chart"
+        }
+      ],
+      "description": "Chart is the chart that was released."
+    },
+    "chartReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/release.ChartReference"
+        }
+      ],
+      "description": "ChartReference are the labels that are used to identify the chart source."
+    },
+    "config": {
+      "additionalProperties": {},
+      "description": "Config is the set of extra Values added to the chart.\nThese values override the default values inside of the chart.",
+      "type": "object"
+    },
+    "hooks": {
+      "description": "Hooks are all of the hooks declared for this release.",
+      "items": {
+        "$ref": "#/$defs/github_com_portainer_portainer_pkg_libhelm_release.Hook"
+      },
+      "type": "array"
+    },
+    "info": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/github_com_portainer_portainer_pkg_libhelm_release.Info"
+        }
+      ],
+      "description": "Info provides information about a release"
+    },
+    "manifest": {
+      "description": "Manifest is the string representation of the rendered template.",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name is the name of the release",
+      "type": "string"
+    },
+    "namespace": {
+      "description": "Namespace is the kubernetes namespace of the release.",
+      "type": "string"
+    },
+    "stackID": {
+      "description": "StackID is the ID of the Portainer stack associated with this release (if using GitOps)",
+      "type": "integer"
+    },
+    "values": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/release.Values"
+        }
+      ],
+      "description": "Values are the values used to deploy the chart."
+    },
+    "version": {
+      "description": "Version is an int which represents the revision of the release.",
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "github_com_portainer_portainer_pkg_libhelm_release.Hook": {
+      "properties": {
+        "delete_policies": {
+          "description": "DeletePolicies are the policies that indicate when to delete the hook",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "events": {
+          "description": "Events are the events that this hook fires on.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "description": "Kind is the Kubernetes kind.",
+          "type": "string"
+        },
+        "last_run": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/github_com_portainer_portainer_pkg_libhelm_release.HookExecution"
+            }
+          ],
+          "description": "LastRun indicates the date/time this was last run."
+        },
+        "manifest": {
+          "description": "Manifest is the manifest contents.",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "description": "Path is the chart-relative path to the template.",
+          "type": "string"
+        },
+        "weight": {
+          "description": "Weight indicates the sort order for execution among similar Hook type",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "github_com_portainer_portainer_pkg_libhelm_release.HookExecution": {
+      "properties": {
+        "completed_at": {
+          "description": "CompletedAt indicates the date/time this hook was completed.",
+          "type": "string"
+        },
+        "phase": {
+          "description": "Phase indicates whether the hook completed successfully",
+          "type": "string"
+        },
+        "started_at": {
+          "description": "StartedAt indicates the date/time this hook was started",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "github_com_portainer_portainer_pkg_libhelm_release.Info": {
+      "properties": {
+        "deleted": {
+          "description": "Deleted tracks when this object was deleted.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description is human-friendly \"log entry\" about this release.",
+          "type": "string"
+        },
+        "first_deployed": {
+          "description": "FirstDeployed is when the release was first deployed.",
+          "type": "string"
+        },
+        "last_deployed": {
+          "description": "LastDeployed is when the release was last deployed.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Contains the rendered templates/NOTES.txt if available",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Resources is the list of resources that are part of the release",
+          "items": {
+            "$ref": "#/$defs/unstructured.Unstructured"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "Status is the current state of the release",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.Chart": {
+      "properties": {
+        "files": {
+          "description": "Files are miscellaneous files in a chart archive,\ne.g. README, LICENSE, etc.",
+          "items": {
+            "$ref": "#/$defs/release.File"
+          },
+          "type": "array"
+        },
+        "lock": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/release.Lock"
+            }
+          ],
+          "description": "Lock is the contents of Chart.lock."
+        },
+        "metadata": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/release.Metadata"
+            }
+          ],
+          "description": "Metadata is the contents of the Chartfile."
+        },
+        "schema": {
+          "description": "Schema is an optional JSON schema for imposing structure on Values",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "templates": {
+          "description": "Templates for this chart.",
+          "items": {
+            "$ref": "#/$defs/release.File"
+          },
+          "type": "array"
+        },
+        "values": {
+          "additionalProperties": {},
+          "description": "Values are default config for this chart.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "release.ChartReference": {
+      "properties": {
+        "chartPath": {
+          "type": "string"
+        },
+        "registryID": {
+          "type": "integer"
+        },
+        "repoURL": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.Dependency": {
+      "properties": {
+        "alias": {
+          "description": "Alias usable alias to be used for the chart",
+          "type": "string"
+        },
+        "condition": {
+          "description": "A yaml path that resolves to a boolean, used for enabling/disabling charts (e.g. subchart1.enabled )",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Enabled bool determines if chart should be loaded",
+          "type": "boolean"
+        },
+        "import-values": {
+          "description": "ImportValues holds the mapping of source values to parent key to be imported. Each item can be a\nstring or pair of child/parent sublist items.",
+          "items": {},
+          "type": "array"
+        },
+        "name": {
+          "description": "Name is the name of the dependency.\n\nThis must mach the name in the dependency's Chart.yaml.",
+          "type": "string"
+        },
+        "repository": {
+          "description": "The URL to the repository.\n\nAppending `index.yaml` to this string should result in a URL that can be\nused to fetch the repository index.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags can be used to group charts for enabling/disabling together",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version is the version (range) of this chart.\n\nA lock file will always produce a single version, while a dependency\nmay contain a semantic version range.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.File": {
+      "properties": {
+        "data": {
+          "description": "Data is the template as byte data.",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Name is the path-like name of the template.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.Lock": {
+      "properties": {
+        "dependencies": {
+          "description": "Dependencies is the list of dependencies that this lock file has locked.",
+          "items": {
+            "$ref": "#/$defs/release.Dependency"
+          },
+          "type": "array"
+        },
+        "digest": {
+          "description": "Digest is a hash of the dependencies in Chart.yaml.",
+          "type": "string"
+        },
+        "generated": {
+          "description": "Generated is the date the lock file was last generated.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.Maintainer": {
+      "properties": {
+        "email": {
+          "description": "Email is an optional email address to contact the named maintainer",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name is a user name or organization name",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL is an optional URL to an address for the named maintainer",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.Metadata": {
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations are additional mappings uninterpreted by Helm,\nmade available for inspection by other applications.",
+          "type": "object"
+        },
+        "apiVersion": {
+          "description": "The API Version of this chart. Required.",
+          "type": "string"
+        },
+        "appVersion": {
+          "description": "The version of the application enclosed inside of this chart.",
+          "type": "string"
+        },
+        "condition": {
+          "description": "The condition to check to enable chart",
+          "type": "string"
+        },
+        "dependencies": {
+          "description": "Dependencies are a list of dependencies for a chart.",
+          "items": {
+            "$ref": "#/$defs/release.Dependency"
+          },
+          "type": "array"
+        },
+        "deprecated": {
+          "description": "Whether or not this chart is deprecated",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "A one-sentence description of the chart",
+          "type": "string"
+        },
+        "home": {
+          "description": "The URL to a relevant project page, git repo, or contact person",
+          "type": "string"
+        },
+        "icon": {
+          "description": "The URL to an icon file.",
+          "type": "string"
+        },
+        "keywords": {
+          "description": "A list of string keywords",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kubeVersion": {
+          "description": "KubeVersion is a SemVer constraint specifying the version of Kubernetes required.",
+          "type": "string"
+        },
+        "maintainers": {
+          "description": "A list of name and URL/email address combinations for the maintainer(s)",
+          "items": {
+            "$ref": "#/$defs/release.Maintainer"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of the chart. Required.",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Source is the URL to the source code of this chart",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tags": {
+          "description": "The tags to check to enable chart",
+          "type": "string"
+        },
+        "type": {
+          "description": "Specifies the chart type: application or library",
+          "type": "string"
+        },
+        "version": {
+          "description": "A SemVer 2 conformant version string of the chart. Required.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "release.Values": {
+      "properties": {
+        "computedValues": {
+          "type": "string"
+        },
+        "userSuppliedValues": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "unstructured.Unstructured": {
+      "properties": {
+        "Object": {
+          "additionalProperties": true,
+          "description": "Object is a JSON compatible map with string, float, int, bool, []interface{}, or\nmap[string]interface{}\nchildren.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

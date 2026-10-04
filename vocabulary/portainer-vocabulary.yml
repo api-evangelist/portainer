@@ -1,0 +1,424 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/portainer-auth-api-openapi.yml
+- openapi/portainer-backup-api-openapi.yml
+- openapi/portainer-custom-templates-api-openapi.yml
+- openapi/portainer-docker-api-openapi.yml
+- openapi/portainer-edge-api-openapi.yml
+vocabulary:
+  name: Portainer Domain Vocabulary
+  description: 'Terms declared by Portainer''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-03'
+  terms:
+  - term: Auth
+    definition: Authenticate against Portainer HTTP API
+    tags:
+    - Resource Group
+    source: openapi/portainer-auth-api-openapi.yml
+  - term: Backup
+    definition: Manage backups
+    tags:
+    - Resource Group
+    source: openapi/portainer-backup-api-openapi.yml
+  - term: Custom Templates
+    definition: Manage Custom Templates
+    tags:
+    - Resource Group
+    source: openapi/portainer-custom-templates-api-openapi.yml
+  - term: docker
+    definition: Manage Docker resources
+    tags:
+    - Resource Group
+    source: openapi/portainer-docker-api-openapi.yml
+  - term: Edge
+    definition: Manage Edge related environment(endpoint) settings
+    tags:
+    - Resource Group
+    source: openapi/portainer-edge-api-openapi.yml
+  - term: edge_groups
+    definition: Manage Edge Groups
+    tags:
+    - Resource Group
+    source: openapi/portainer-edge-groups-api-openapi.yml
+  - term: edge_jobs
+    definition: Manage Edge Jobs
+    tags:
+    - Resource Group
+    source: openapi/portainer-edge-jobs-api-openapi.yml
+  - term: edge_stacks
+    definition: Manage Edge Stacks
+    tags:
+    - Resource Group
+    source: openapi/portainer-edge-stacks-api-openapi.yml
+  - term: endpoint_groups
+    definition: Manage environment(endpoint) groups
+    tags:
+    - Resource Group
+    source: openapi/portainer-endpoint-groups-api-openapi.yml
+  - term: Endpoints
+    definition: Manage Docker environments(endpoints)
+    tags:
+    - Resource Group
+    source: openapi/portainer-endpoints-api-openapi.yml
+  - term: Git Ops
+    definition: Operate git repository
+    tags:
+    - Resource Group
+    source: openapi/portainer-git-ops-api-openapi.yml
+  - term: Helm
+    definition: Manage Helm charts
+    tags:
+    - Resource Group
+    source: openapi/portainer-helm-api-openapi.yml
+  - term: Intel
+    definition: Manage Intel AMT settings
+    tags:
+    - Resource Group
+    source: openapi/portainer-intel-api-openapi.yml
+  - term: Kubernetes
+    definition: Manage Kubernetes cluster
+    tags:
+    - Resource Group
+    source: openapi/portainer-kubernetes-api-openapi.yml
+  - term: LDAP
+    definition: Manage LDAP settings
+    tags:
+    - Resource Group
+    source: openapi/portainer-ldap-api-openapi.yml
+  - term: motd
+    definition: Fetch the message of the day
+    tags:
+    - Resource Group
+    source: openapi/portainer-motd-api-openapi.yml
+  - term: Registries
+    definition: Manage Docker registries
+    tags:
+    - Resource Group
+    source: openapi/portainer-registries-api-openapi.yml
+  - term: resource_controls
+    definition: Manage access control on Docker resources
+    tags:
+    - Resource Group
+    source: openapi/portainer-resource-controls-api-openapi.yml
+  - term: Roles
+    definition: Manage roles
+    tags:
+    - Resource Group
+    source: openapi/portainer-roles-api-openapi.yml
+  - term: Settings
+    definition: Manage Portainer settings
+    tags:
+    - Resource Group
+    source: openapi/portainer-settings-api-openapi.yml
+  - term: SSL
+    definition: Manage ssl settings
+    tags:
+    - Resource Group
+    source: openapi/portainer-ssl-api-openapi.yml
+  - term: Stacks
+    definition: Manage stacks
+    tags:
+    - Resource Group
+    source: openapi/portainer-stacks-api-openapi.yml
+  - term: Status
+    definition: Information about the Portainer instance
+    tags:
+    - Resource Group
+    source: openapi/portainer-status-api-openapi.yml
+  - term: System
+    definition: Manage Portainer system
+    tags:
+    - Resource Group
+    source: openapi/portainer-system-api-openapi.yml
+  - term: Tags
+    definition: Manage tags
+    tags:
+    - Resource Group
+    source: openapi/portainer-tags-api-openapi.yml
+  - term: Team Memberships
+    definition: Manage team memberships
+    tags:
+    - Resource Group
+    source: openapi/portainer-team-memberships-api-openapi.yml
+  - term: Teams
+    definition: Manage teams
+    tags:
+    - Resource Group
+    source: openapi/portainer-teams-api-openapi.yml
+  - term: Templates
+    definition: Manage App Templates
+    tags:
+    - Resource Group
+    source: openapi/portainer-templates-api-openapi.yml
+  - term: Upload
+    definition: Upload files
+    tags:
+    - Resource Group
+    source: openapi/portainer-upload-api-openapi.yml
+  - term: Users
+    definition: Manage users
+    tags:
+    - Resource Group
+    source: openapi/portainer-users-api-openapi.yml
+  - term: Webhooks
+    definition: Manage webhooks
+    tags:
+    - Resource Group
+    source: openapi/portainer-webhooks-api-openapi.yml
+  - term: Websocket
+    definition: Create exec sessions using websockets
+    tags:
+    - Resource Group
+    source: openapi/portainer-websocket-api-openapi.yml
+  - term: auth.oauthPayload
+    definition: 'Object declared by the contract with fields: Code.'
+    tags:
+    - Object
+    source: openapi/portainer-auth-api-openapi.yml#/components/schemas/auth.oauthPayload
+  - term: auth.authenticateResponse
+    definition: 'Object declared by the contract with fields: jwt.'
+    tags:
+    - Object
+    source: openapi/portainer-auth-api-openapi.yml#/components/schemas/auth.authenticateResponse
+  - term: auth.authenticatePayload
+    definition: 'Object declared by the contract with fields: Password, Username.'
+    tags:
+    - Object
+    source: openapi/portainer-auth-api-openapi.yml#/components/schemas/auth.authenticatePayload
+  - term: backup.backupPayload
+    definition: 'Object declared by the contract with fields: Password.'
+    tags:
+    - Object
+    source: openapi/portainer-backup-api-openapi.yml#/components/schemas/backup.backupPayload
+  - term: backup.restorePayload
+    definition: 'Object declared by the contract with fields: FileContent, FileName, Password.'
+    tags:
+    - Object
+    source: openapi/portainer-backup-api-openapi.yml#/components/schemas/backup.restorePayload
+  - term: portainer.CustomTemplatePlatform
+    definition: 'Enumeration declared by the contract with values: 0, 1, 2.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.CustomTemplatePlatform
+  - term: portainer.CustomTemplate
+    definition: 'Object declared by the contract with fields: CreatedByUserId, Description, EdgeTemplate, EntryPoint, GitConfig, Id, IsComposeFormat,
+      Logo, Note, Platform, ProjectPath, ResourceControl. (3 more)'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.CustomTemplate
+  - term: portainer.StackType
+    definition: 'Enumeration declared by the contract with values: 0, 1, 2, 3.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.StackType
+  - term: customtemplates.customTemplateUpdatePayload
+    definition: 'Object declared by the contract with fields: ComposeFilePathInRepository, Description, EdgeTemplate, FileContent, IsComposeFormat,
+      Logo, Note, Platform, RepositoryAuthentication, RepositoryAuthorizationType, RepositoryGitCredentialID, RepositoryPassword. (7 more)'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/customtemplates.customTemplateUpdatePayload
+  - term: portainer.CustomTemplateVariableDefinition
+    definition: 'Object declared by the contract with fields: defaultValue, description, label, name.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.CustomTemplateVariableDefinition
+  - term: gittypes.GitAuthentication
+    definition: 'Object declared by the contract with fields: AuthorizationType, GitCredentialID, Password, Username.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/gittypes.GitAuthentication
+  - term: portainer.UserResourceAccess
+    definition: 'Object declared by the contract with fields: AccessLevel, UserId.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.UserResourceAccess
+  - term: customtemplates.customTemplateFromGitRepositoryPayload
+    definition: 'Object declared by the contract with fields: ComposeFilePathInRepository, Description, EdgeTemplate, IsComposeFormat, Logo, Note,
+      Platform, RepositoryAuthentication, RepositoryPassword, RepositoryReferenceName, RepositoryURL, RepositoryUsername. (4 more)'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/customtemplates.customTemplateFromGitRepositoryPayload
+  - term: customtemplates.customTemplateFromFileContentPayload
+    definition: 'Object declared by the contract with fields: Description, EdgeTemplate, FileContent, Logo, Note, Platform, Title, Type, Variables.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/customtemplates.customTemplateFromFileContentPayload
+  - term: customtemplates.fileResponse
+    definition: 'Object declared by the contract with fields: FileContent.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/customtemplates.fileResponse
+  - term: portainer.ResourceControl
+    definition: 'Object declared by the contract with fields: AccessLevel, AdministratorsOnly, Id, OwnerId, Public, ResourceId, SubResourceIds,
+      System, TeamAccesses, Type, UserAccesses.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.ResourceControl
+  - term: gittypes.RepoConfig
+    definition: 'Object declared by the contract with fields: Authentication, ConfigFilePath, ConfigHash, ReferenceName, TLSSkipVerify, URL.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/gittypes.RepoConfig
+  - term: portainer.ResourceControlType
+    definition: 'Enumeration declared by the contract with values: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.ResourceControlType
+  - term: gittypes.GitCredentialAuthType
+    definition: 'Enumeration declared by the contract with values: 0, 1.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/gittypes.GitCredentialAuthType
+  - term: portainer.TeamResourceAccess
+    definition: 'Object declared by the contract with fields: AccessLevel, TeamId.'
+    tags:
+    - Object
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.TeamResourceAccess
+  - term: portainer.ResourceAccessLevel
+    definition: 'Enumeration declared by the contract with values: 0, 1.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.ResourceAccessLevel
+  - term: stats.ContainerStats
+    definition: 'Object declared by the contract with fields: healthy, running, stopped, total, unhealthy.'
+    tags:
+    - Object
+    source: openapi/portainer-docker-api-openapi.yml#/components/schemas/stats.ContainerStats
+  - term: containers.containerGpusResponse
+    definition: 'Object declared by the contract with fields: gpus.'
+    tags:
+    - Object
+    source: openapi/portainer-docker-api-openapi.yml#/components/schemas/containers.containerGpusResponse
+  - term: images.ImageResponse
+    definition: 'Object declared by the contract with fields: created, id, nodeName, size, tags, used.'
+    tags:
+    - Object
+    source: openapi/portainer-docker-api-openapi.yml#/components/schemas/images.ImageResponse
+  - term: docker.dashboardResponse
+    definition: 'Object declared by the contract with fields: containers, images, networks, services, stacks, volumes.'
+    tags:
+    - Object
+    source: openapi/portainer-docker-api-openapi.yml#/components/schemas/docker.dashboardResponse
+  - term: docker.imagesCounters
+    definition: 'Object declared by the contract with fields: size, total.'
+    tags:
+    - Object
+    source: openapi/portainer-docker-api-openapi.yml#/components/schemas/docker.imagesCounters
+  - term: portainer.Pair
+    definition: 'Object declared by the contract with fields: name, value.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/portainer.Pair
+  - term: edge.DeployerOptionsPayload
+    definition: 'Object declared by the contract with fields: ForceRecreate, Prune, RemoveVolumes.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/edge.DeployerOptionsPayload
+  - term: edge.StackPayload
+    definition: 'Object declared by the contract with fields: AlwaysCloneGitRepoForRelativePath, CreatedBy, CreatedByUserId, DeployerOptionsPayload,
+      DirEntries, EdgeUpdateID, EntryFileName, EnvVars, FilesystemPath, ForceUpdate, HelmConfig, ID. (12 more)'
+    tags:
+    - Object
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/edge.StackPayload
+  - term: filesystem.DirEntry
+    definition: 'Object declared by the contract with fields: Content, IsFile, Name, Permissions.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/filesystem.DirEntry
+  - term: os.FileMode
+    definition: 'Enumeration declared by the contract with values: 2147483648, 1073741824, 536870912, 268435456, 134217728, 67108864, 33554432,
+      16777216, 8388608, 4194304, 2097152, 1048576. (18 more)'
+    tags:
+    - Enumeration
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/os.FileMode
+  - term: edge.RegistryCredentials
+    definition: 'Object declared by the contract with fields: Secret, ServerURL, Username.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/edge.RegistryCredentials
+  - term: portainer.HelmConfig
+    definition: 'Object declared by the contract with fields: Atomic, ChartPath, Timeout, ValuesFiles, Version.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-api-openapi.yml#/components/schemas/portainer.HelmConfig
+  - term: edgegroups.edgeGroupUpdatePayload
+    definition: 'Object declared by the contract with fields: Dynamic, Endpoints, Name, PartialMatch, TagIDs.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-groups-api-openapi.yml#/components/schemas/edgegroups.edgeGroupUpdatePayload
+  - term: edgegroups.decoratedEdgeGroup
+    definition: 'Object declared by the contract with fields: Dynamic, EndpointIds, EndpointTypes, Endpoints, HasEdgeJob, HasEdgeStack, Id, Name,
+      PartialMatch, TagIds, TrustedEndpoints.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-groups-api-openapi.yml#/components/schemas/edgegroups.decoratedEdgeGroup
+  - term: edgegroups.edgeGroupCreatePayload
+    definition: 'Object declared by the contract with fields: Dynamic, Endpoints, Name, PartialMatch, TagIDs.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-groups-api-openapi.yml#/components/schemas/edgegroups.edgeGroupCreatePayload
+  - term: portainer.EdgeGroup
+    definition: 'Object declared by the contract with fields: Dynamic, EndpointIds, Endpoints, Id, Name, PartialMatch, TagIds.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-groups-api-openapi.yml#/components/schemas/portainer.EdgeGroup
+  - term: portainer.EndpointType
+    definition: 'Enumeration declared by the contract with values: 0, 1, 2, 3, 4, 5, 6, 7.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-edge-groups-api-openapi.yml#/components/schemas/portainer.EndpointType
+  - term: edgejobs.taskContainer
+    definition: 'Object declared by the contract with fields: EndpointId, EndpointName, Id, LogsStatus.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/edgejobs.taskContainer
+  - term: portainer.EdgeJob
+    definition: 'Object declared by the contract with fields: Created, CronExpression, EdgeGroups, Endpoints, GroupLogsCollection, Id, Name, Recurring,
+      ScriptPath, Version.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/portainer.EdgeJob
+  - term: edgejobs.edgeJobCreateFromFileContentPayload
+    definition: 'Object declared by the contract with fields: CronExpression, EdgeGroups, Endpoints, FileContent, Name, Recurring.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/edgejobs.edgeJobCreateFromFileContentPayload
+  - term: edgejobs.fileResponse
+    definition: 'Object declared by the contract with fields: FileContent.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/edgejobs.fileResponse
+  - term: portainer.EdgeJobLogsStatus
+    definition: 'Enumeration declared by the contract with values: 0, 1, 2, 3.'
+    tags:
+    - Enumeration
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/portainer.EdgeJobLogsStatus
+  - term: edgejobs.edgeJobFileResponse
+    definition: 'Object declared by the contract with fields: FileContent.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/edgejobs.edgeJobFileResponse
+  - term: edgejobs.edgeJobUpdatePayload
+    definition: 'Object declared by the contract with fields: CronExpression, EdgeGroups, Endpoints, FileContent, Name, Recurring.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/edgejobs.edgeJobUpdatePayload
+  - term: portainer.EdgeJobEndpointMeta
+    definition: 'Object declared by the contract with fields: CollectLogs, LogsStatus.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-jobs-api-openapi.yml#/components/schemas/portainer.EdgeJobEndpointMeta
+  - term: portainer.EdgeStackDeploymentStatus
+    definition: 'Object declared by the contract with fields: Error, RollbackTo, Time, Type, Version.'
+    tags:
+    - Object
+    source: openapi/portainer-edge-stacks-api-openapi.yml#/components/schemas/portainer.EdgeStackDeploymentStatus
+  - term: portainer.EdgeStack
+    definition: 'Object declared by the contract with fields: CreatedBy, CreatedByUserId, CreationDate, DeploymentType, EdgeGroups, EntryPoint,
+      Id, ManifestPath, Name, NumDeployments, ProjectPath, Status. (2 more)'
+    tags:
+    - Object
+    source: openapi/portainer-edge-stacks-api-openapi.yml#/components/schemas/portainer.EdgeStack

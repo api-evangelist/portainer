@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-custom-template-schema.json",
+  "title": "portainer.CustomTemplate",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/portainer.CustomTemplate",
+  "properties": {
+    "CreatedByUserId": {
+      "description": "User identifier who created this template",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "Description of the template",
+      "type": "string"
+    },
+    "EdgeTemplate": {
+      "description": "EdgeTemplate indicates if this template purpose for Edge Stack",
+      "type": "boolean"
+    },
+    "EntryPoint": {
+      "description": "Path to the Stack file",
+      "type": "string"
+    },
+    "GitConfig": {
+      "$ref": "#/$defs/gittypes.RepoConfig"
+    },
+    "Id": {
+      "description": "CustomTemplate Identifier",
+      "type": "integer"
+    },
+    "IsComposeFormat": {
+      "description": "IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file",
+      "type": "boolean"
+    },
+    "Logo": {
+      "description": "URL of the template's logo",
+      "type": "string"
+    },
+    "Note": {
+      "description": "A note that will be displayed in the UI. Supports HTML content",
+      "type": "string"
+    },
+    "Platform": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.CustomTemplatePlatform"
+        }
+      ],
+      "description": "Platform associated to the template.\nValid values are: 1 - 'linux', 2 - 'windows'",
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "ProjectPath": {
+      "description": "Path on disk to the repository hosting the Stack file",
+      "type": "string"
+    },
+    "ResourceControl": {
+      "$ref": "#/$defs/portainer.ResourceControl"
+    },
+    "Title": {
+      "description": "Title of the template",
+      "type": "string"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.StackType"
+        }
+      ],
+      "description": "Type of created stack:\n* 1 - swarm\n* 2 - compose\n* 3 - kubernetes",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "Variables": {
+      "items": {
+        "$ref": "#/$defs/portainer.CustomTemplateVariableDefinition"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "gittypes.GitAuthentication": {
+      "properties": {
+        "AuthorizationType": {
+          "$ref": "#/$defs/gittypes.GitCredentialAuthType"
+        },
+        "GitCredentialID": {
+          "description": "Git credentials identifier when the value is not 0\nWhen the value is 0, Username, Password, and Authtype are set without using saved credential\nThis is introduced since 2.15.0",
+          "type": "integer"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "gittypes.GitCredentialAuthType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "GitCredentialAuthType_Basic",
+        "GitCredentialAuthType_Token"
+      ]
+    },
+    "gittypes.RepoConfig": {
+      "properties": {
+        "Authentication": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/gittypes.GitAuthentication"
+            }
+          ],
+          "description": "Git credentials"
+        },
+        "ConfigFilePath": {
+          "description": "Path to where the config file is in this url/refName",
+          "type": "string"
+        },
+        "ConfigHash": {
+          "description": "Repository hash",
+          "type": "string"
+        },
+        "ReferenceName": {
+          "description": "The reference name",
+          "type": "string"
+        },
+        "TLSSkipVerify": {
+          "description": "TLSSkipVerify skips SSL verification when cloning the Git repository",
+          "type": "boolean"
+        },
+        "URL": {
+          "description": "The repo url",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.CustomTemplatePlatform": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "CustomTemplatePlatformLinux",
+        "CustomTemplatePlatformWindows"
+      ]
+    },
+    "portainer.CustomTemplateVariableDefinition": {
+      "properties": {
+        "defaultValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.ResourceAccessLevel": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ReadWriteAccessLevel"
+      ]
+    },
+    "portainer.ResourceControl": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "AdministratorsOnly": {
+          "description": "Permit access to resource only to admins",
+          "type": "boolean"
+        },
+        "Id": {
+          "description": "ResourceControl Identifier",
+          "type": "integer"
+        },
+        "OwnerId": {
+          "description": "Deprecated fields\nDeprecated in DBVersion == 2",
+          "type": "integer"
+        },
+        "Public": {
+          "description": "Permit access to the associated resource to any user",
+          "type": "boolean"
+        },
+        "ResourceId": {
+          "description": "Docker resource identifier on which access control will be applied.\\\nIn the case of a resource control applied to a stack, use the stack name as identifier",
+          "type": "string"
+        },
+        "SubResourceIds": {
+          "description": "List of Docker resources that will inherit this access control",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "System": {
+          "type": "boolean"
+        },
+        "TeamAccesses": {
+          "items": {
+            "$ref": "#/$defs/portainer.TeamResourceAccess"
+          },
+          "type": "array"
+        },
+        "Type": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.ResourceControlType"
+            }
+          ],
+          "description": "Type of Docker resource. Valid values are: 1- container, 2 -service\n3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template"
+        },
+        "UserAccesses": {
+          "items": {
+            "$ref": "#/$defs/portainer.UserResourceAccess"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.ResourceControlType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ContainerResourceControl",
+        "ServiceResourceControl",
+        "VolumeResourceControl",
+        "NetworkResourceControl",
+        "SecretResourceControl",
+        "StackResourceControl",
+        "ConfigResourceControl",
+        "CustomTemplateResourceControl",
+        "ContainerGroupResourceControl"
+      ]
+    },
+    "portainer.StackType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "DockerSwarmStack",
+        "DockerComposeStack",
+        "KubernetesStack"
+      ]
+    },
+    "portainer.TeamResourceAccess": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "TeamId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.UserResourceAccess": {
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/$defs/portainer.ResourceAccessLevel"
+        },
+        "UserId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

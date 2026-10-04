@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-endpoint-group-schema.json",
+  "title": "portainer.EndpointGroup",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoint-groups-api-openapi.yml#/components/schemas/portainer.EndpointGroup",
+  "properties": {
+    "AuthorizedTeams": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "AuthorizedUsers": {
+      "description": "Deprecated in DBVersion == 18",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Description": {
+      "description": "Description associated to the environment(endpoint) group",
+      "type": "string"
+    },
+    "Id": {
+      "description": "Environment(Endpoint) group Identifier",
+      "type": "integer"
+    },
+    "Labels": {
+      "description": "Deprecated fields",
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "Name": {
+      "description": "Environment(Endpoint) group name",
+      "type": "string"
+    },
+    "TagIds": {
+      "description": "List of tags associated to this environment(endpoint) group",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Tags": {
+      "description": "Deprecated in DBVersion == 22",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "TeamAccessPolicies": {
+      "$ref": "#/$defs/portainer.TeamAccessPolicies"
+    },
+    "UserAccessPolicies": {
+      "$ref": "#/$defs/portainer.UserAccessPolicies"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.AccessPolicy": {
+      "properties": {
+        "Namespaces": {
+          "description": "Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "description": "Role identifier. Reference the role that will be associated to this access policy",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.TeamAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    },
+    "portainer.UserAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    }
+  }
+}

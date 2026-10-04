@@ -1,0 +1,11 @@
+generated: '2026-10-03'
+method: probed
+source: https://www.portainer.io/legal/privacy-policy
+signals:
+  data_subject_request:
+    - source: https://www.portainer.io/legal/privacy-policy
+      http_status: 200
+      fetched: /tmp/privacy_site.html
+      section: Introduction
+      quote: "Portainer.io Ltd., (“Portainer” “We”, “Us”) is sensitive to your concerns about how we use the personal information we collect from you through either our website (the “Site”) or our application (“the Product”, “our Software”). This Privacy Policy covers Portainer’s treatment of the Personally Identifiable Information we collect when you use the Site or the Product. It also describes the choices available to you regarding our use of your personal information and how you can access and update this information."
+      note: Provides data subject rights to access and update personal data.

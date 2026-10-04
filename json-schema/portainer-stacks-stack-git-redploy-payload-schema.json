@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-stacks-stack-git-redploy-payload-schema.json",
+  "title": "stacks.stackGitRedployPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-stacks-api-openapi.yml#/components/schemas/stacks.stackGitRedployPayload",
+  "properties": {
+    "Env": {
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "Prune": {
+      "type": "boolean"
+    },
+    "PullImage": {
+      "description": "Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility\nForce a pulling to current image with the original tag though the image is already the latest",
+      "type": "boolean"
+    },
+    "RepositoryAuthentication": {
+      "type": "boolean"
+    },
+    "RepositoryAuthorizationType": {
+      "$ref": "#/$defs/gittypes.GitCredentialAuthType"
+    },
+    "RepositoryPassword": {
+      "type": "string"
+    },
+    "RepositoryReferenceName": {
+      "type": "string"
+    },
+    "RepositoryUsername": {
+      "type": "string"
+    },
+    "RepullImageAndRedeploy": {
+      "description": "RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack",
+      "type": "boolean"
+    },
+    "StackName": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "gittypes.GitCredentialAuthType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "GitCredentialAuthType_Basic",
+        "GitCredentialAuthType_Token"
+      ]
+    },
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

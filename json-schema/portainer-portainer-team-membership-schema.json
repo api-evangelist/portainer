@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-team-membership-schema.json",
+  "title": "portainer.TeamMembership",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-team-memberships-api-openapi.yml#/components/schemas/portainer.TeamMembership",
+  "properties": {
+    "Id": {
+      "description": "Membership Identifier",
+      "type": "integer"
+    },
+    "Role": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.MembershipRole"
+        }
+      ],
+      "description": "Team role (1 for team leader and 2 for team member)"
+    },
+    "TeamID": {
+      "description": "Team identifier",
+      "type": "integer"
+    },
+    "UserID": {
+      "description": "User identifier",
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.MembershipRole": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "TeamLeader",
+        "TeamMember"
+      ]
+    }
+  }
+}

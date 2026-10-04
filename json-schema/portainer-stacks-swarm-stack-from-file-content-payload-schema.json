@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-stacks-swarm-stack-from-file-content-payload-schema.json",
+  "title": "stacks.swarmStackFromFileContentPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-stacks-api-openapi.yml#/components/schemas/stacks.swarmStackFromFileContentPayload",
+  "properties": {
+    "Env": {
+      "description": "A list of environment variables used during stack deployment",
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "FromAppTemplate": {
+      "description": "Whether the stack is from a app template",
+      "type": "boolean"
+    },
+    "Name": {
+      "description": "Name of the stack",
+      "type": "string"
+    },
+    "StackFileContent": {
+      "description": "Content of the Stack file",
+      "type": "string"
+    },
+    "SwarmID": {
+      "description": "Swarm cluster identifier",
+      "type": "string"
+    }
+  },
+  "required": [
+    "Name",
+    "StackFileContent",
+    "SwarmID"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

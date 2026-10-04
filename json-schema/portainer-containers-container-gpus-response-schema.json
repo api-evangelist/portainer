@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-containers-container-gpus-response-schema.json",
+  "title": "containers.containerGpusResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-docker-api-openapi.yml#/components/schemas/containers.containerGpusResponse",
+  "properties": {
+    "gpus": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

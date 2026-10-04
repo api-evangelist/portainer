@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-endpoints-endpoint-settings-update-payload-schema.json",
+  "title": "endpoints.endpointSettingsUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoints-api-openapi.yml#/components/schemas/endpoints.endpointSettingsUpdatePayload",
+  "properties": {
+    "allowBindMountsForRegularUsers": {
+      "description": "Whether non-administrator should be able to use bind mounts when creating containers",
+      "type": "boolean"
+    },
+    "allowContainerCapabilitiesForRegularUsers": {
+      "description": "Whether non-administrator should be able to use container capabilities",
+      "type": "boolean"
+    },
+    "allowDeviceMappingForRegularUsers": {
+      "description": "Whether non-administrator should be able to use device mapping",
+      "type": "boolean"
+    },
+    "allowHostNamespaceForRegularUsers": {
+      "description": "Whether non-administrator should be able to use the host pid",
+      "type": "boolean"
+    },
+    "allowPrivilegedModeForRegularUsers": {
+      "description": "Whether non-administrator should be able to use privileged mode when creating containers",
+      "type": "boolean"
+    },
+    "allowStackManagementForRegularUsers": {
+      "description": "Whether non-administrator should be able to manage stacks",
+      "type": "boolean"
+    },
+    "allowSysctlSettingForRegularUsers": {
+      "description": "Whether non-administrator should be able to use sysctl settings",
+      "type": "boolean"
+    },
+    "allowVolumeBrowserForRegularUsers": {
+      "description": "Whether non-administrator should be able to browse volumes",
+      "type": "boolean"
+    },
+    "enableGPUManagement": {
+      "type": "boolean"
+    },
+    "enableHostManagementFeatures": {
+      "description": "Whether host management features are enabled",
+      "type": "boolean"
+    },
+    "gpus": {
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

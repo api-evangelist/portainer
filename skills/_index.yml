@@ -1,0 +1,25 @@
+generated: '2026-10-03'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/portainer-endpoints-api-openapi.yml
+skills:
+- file: skills/portainer-webhooks-manage.md
+  name: portainer-webhooks-manage
+  api: openapi/portainer-webhooks-api-openapi.yml
+  operations:
+  - postWebhooks
+  - postWebhooksById
+  - deleteWebhooksById
+- file: skills/portainer-create-user-with-api-key.md
+  name: portainer-create-user-with-api-key
+  api: openapi/portainer-users-api-openapi.yml
+  operations:
+  - UserCreate
+  - UserUpdatePassword
+  - UserGenerateAPIKey
+- file: skills/portainer-team-create-and-inspect.md
+  name: portainer-team-create-and-inspect
+  api: openapi/portainer-teams-api-openapi.yml
+  operations:
+  - TeamCreate
+  - TeamInspect

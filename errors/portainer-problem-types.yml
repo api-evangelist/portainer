@@ -1,0 +1,74 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/portainer-auth-api-openapi.yml
+- openapi/portainer-backup-api-openapi.yml
+- openapi/portainer-custom-templates-api-openapi.yml
+- openapi/portainer-docker-api-openapi.yml
+- openapi/portainer-edge-api-openapi.yml
+- openapi/portainer-edge-groups-api-openapi.yml
+- openapi/portainer-edge-jobs-api-openapi.yml
+- openapi/portainer-edge-stacks-api-openapi.yml
+- openapi/portainer-endpoint-groups-api-openapi.yml
+- openapi/portainer-endpoints-api-openapi.yml
+- openapi/portainer-git-ops-api-openapi.yml
+- openapi/portainer-helm-api-openapi.yml
+format: custom
+envelope:
+  media_type: null
+  schema: null
+coverage:
+  operations: 240
+  statuses_declared: 8
+problems:
+- status: 400
+  title: Bad Request
+  description: Invalid request
+  operations: 207
+  media_types: []
+  schema: null
+- status: 401
+  title: Unauthorized
+  description: Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure
+    that you have provided a valid API ke
+  operations: 69
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: Permission denied - the user is authenticated but does not have the necessary permissions to access
+    the requested resource or perform the sp
+  operations: 121
+  media_types: []
+  schema: null
+- status: 404
+  title: Not Found
+  description: Unable to find an environment with the specified identifier.
+  operations: 120
+  media_types: []
+  schema: null
+- status: 409
+  title: Conflict
+  description: Stack name or webhook ID already exists
+  operations: 23
+  media_types: []
+  schema: null
+- status: 422
+  title: Unprocessable Content
+  description: Invalid Credentials
+  operations: 2
+  media_types: []
+  schema: null
+- status: 500
+  title: Internal Server Error
+  description: Server error
+  operations: 234
+  media_types: []
+  schema: null
+- status: 503
+  title: Service Unavailable
+  description: Edge compute features are disabled
+  operations: 24
+  media_types: []
+  schema: null

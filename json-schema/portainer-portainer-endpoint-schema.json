@@ -1,0 +1,642 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-endpoint-schema.json",
+  "title": "portainer.Endpoint",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoints-api-openapi.yml#/components/schemas/portainer.Endpoint",
+  "properties": {
+    "AMTDeviceGUID": {
+      "description": "The identifier of the AMT Device associated with this environment(endpoint)",
+      "type": "string"
+    },
+    "Agent": {
+      "properties": {
+        "Version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AuthorizedTeams": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "AuthorizedUsers": {
+      "description": "Deprecated in DBVersion == 18",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "AzureCredentials": {
+      "$ref": "#/$defs/portainer.AzureCredentials"
+    },
+    "ComposeSyntaxMaxVersion": {
+      "description": "Maximum version of docker-compose",
+      "type": "string"
+    },
+    "ContainerEngine": {
+      "description": "ContainerEngine represents the container engine type. This can be 'docker' or 'podman' when interacting directly with these environmentes, otherwise '' for kubernetes environments.",
+      "type": "string"
+    },
+    "Edge": {
+      "$ref": "#/$defs/portainer.EnvironmentEdgeSettings"
+    },
+    "EdgeCheckinInterval": {
+      "description": "The check in interval for edge agent (in seconds)",
+      "type": "integer"
+    },
+    "EdgeID": {
+      "description": "The identifier of the edge agent associated with this environment(endpoint)",
+      "type": "string"
+    },
+    "EdgeKey": {
+      "description": "The key which is used to map the agent to Portainer",
+      "type": "string"
+    },
+    "EnableGPUManagement": {
+      "type": "boolean"
+    },
+    "Gpus": {
+      "items": {
+        "$ref": "#/$defs/portainer.Pair"
+      },
+      "type": "array"
+    },
+    "GroupId": {
+      "description": "Environment(Endpoint) group identifier",
+      "type": "integer"
+    },
+    "Heartbeat": {
+      "description": "Heartbeat indicates the heartbeat status of an edge environment",
+      "type": "boolean"
+    },
+    "Id": {
+      "description": "Environment(Endpoint) Identifier",
+      "type": "integer"
+    },
+    "IsEdgeDevice": {
+      "description": "Deprecated v2.18",
+      "type": "boolean"
+    },
+    "Kubernetes": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.KubernetesData"
+        }
+      ],
+      "description": "Associated Kubernetes data"
+    },
+    "LastCheckInDate": {
+      "description": "LastCheckInDate mark last check-in date on checkin",
+      "type": "integer"
+    },
+    "Name": {
+      "description": "Environment(Endpoint) name",
+      "type": "string"
+    },
+    "PostInitMigrations": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EndpointPostInitMigrations"
+        }
+      ],
+      "description": "Whether we need to run any \"post init migrations\"."
+    },
+    "PublicURL": {
+      "description": "URL or IP address where exposed containers will be reachable",
+      "type": "string"
+    },
+    "SecuritySettings": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EndpointSecuritySettings"
+        }
+      ],
+      "description": "Environment(Endpoint) specific security settings"
+    },
+    "Snapshots": {
+      "description": "List of snapshots",
+      "items": {
+        "$ref": "#/$defs/portainer.DockerSnapshot"
+      },
+      "type": "array"
+    },
+    "Status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EndpointStatus"
+        }
+      ],
+      "description": "The status of the environment(endpoint) (1 - up, 2 - down)"
+    },
+    "TLS": {
+      "description": "Deprecated fields\nDeprecated in DBVersion == 4",
+      "type": "boolean"
+    },
+    "TLSCACert": {
+      "type": "string"
+    },
+    "TLSCert": {
+      "type": "string"
+    },
+    "TLSConfig": {
+      "$ref": "#/$defs/portainer.TLSConfiguration"
+    },
+    "TLSKey": {
+      "type": "string"
+    },
+    "TagIds": {
+      "description": "List of tag identifiers to which this environment(endpoint) is associated",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Tags": {
+      "description": "Deprecated in DBVersion == 22",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "TeamAccessPolicies": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.TeamAccessPolicies"
+        }
+      ],
+      "description": "List of team identifiers authorized to connect to this environment(endpoint)"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EndpointType"
+        }
+      ],
+      "description": "Environment(Endpoint) environment(endpoint) type. 1 for a Docker environment(endpoint), 2 for an agent on Docker environment(endpoint) or 3 for an Azure environment(endpoint)."
+    },
+    "URL": {
+      "description": "URL or IP address of the Docker host associated to this environment(endpoint)",
+      "type": "string"
+    },
+    "UserAccessPolicies": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.UserAccessPolicies"
+        }
+      ],
+      "description": "List of user identifiers authorized to connect to this environment(endpoint)"
+    },
+    "UserTrusted": {
+      "description": "Whether the device has been trusted or not by the user",
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.AccessPolicy": {
+      "properties": {
+        "Namespaces": {
+          "description": "Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "description": "Role identifier. Reference the role that will be associated to this access policy",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.AzureCredentials": {
+      "properties": {
+        "ApplicationID": {
+          "description": "Azure application ID",
+          "type": "string"
+        },
+        "AuthenticationKey": {
+          "description": "Azure authentication key",
+          "type": "string"
+        },
+        "TenantID": {
+          "description": "Azure tenant ID",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.DiagnosticsData": {
+      "properties": {
+        "DNS": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "Log": {
+          "type": "string"
+        },
+        "Proxy": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "Telnet": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.DockerSnapshot": {
+      "properties": {
+        "ContainerCount": {
+          "type": "integer"
+        },
+        "DiagnosticsData": {
+          "$ref": "#/$defs/portainer.DiagnosticsData"
+        },
+        "DockerSnapshotRaw": {
+          "$ref": "#/$defs/portainer.DockerSnapshotRaw"
+        },
+        "DockerVersion": {
+          "type": "string"
+        },
+        "GpuUseAll": {
+          "type": "boolean"
+        },
+        "GpuUseList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "HealthyContainerCount": {
+          "type": "integer"
+        },
+        "ImageCount": {
+          "type": "integer"
+        },
+        "IsPodman": {
+          "type": "boolean"
+        },
+        "NodeCount": {
+          "type": "integer"
+        },
+        "PerformanceMetrics": {
+          "$ref": "#/$defs/portainer.PerformanceMetrics"
+        },
+        "RunningContainerCount": {
+          "type": "integer"
+        },
+        "ServiceCount": {
+          "type": "integer"
+        },
+        "StackCount": {
+          "type": "integer"
+        },
+        "StoppedContainerCount": {
+          "type": "integer"
+        },
+        "Swarm": {
+          "type": "boolean"
+        },
+        "Time": {
+          "type": "integer"
+        },
+        "TotalCPU": {
+          "type": "integer"
+        },
+        "TotalMemory": {
+          "type": "integer"
+        },
+        "UnhealthyContainerCount": {
+          "type": "integer"
+        },
+        "VolumeCount": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.DockerSnapshotRaw": {
+      "type": "object"
+    },
+    "portainer.EndpointPostInitMigrations": {
+      "properties": {
+        "MigrateGPUs": {
+          "type": "boolean"
+        },
+        "MigrateIngresses": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EndpointSecuritySettings": {
+      "properties": {
+        "allowBindMountsForRegularUsers": {
+          "description": "Whether non-administrator should be able to use bind mounts when creating containers",
+          "type": "boolean"
+        },
+        "allowContainerCapabilitiesForRegularUsers": {
+          "description": "Whether non-administrator should be able to use container capabilities",
+          "type": "boolean"
+        },
+        "allowDeviceMappingForRegularUsers": {
+          "description": "Whether non-administrator should be able to use device mapping",
+          "type": "boolean"
+        },
+        "allowHostNamespaceForRegularUsers": {
+          "description": "Whether non-administrator should be able to use the host pid",
+          "type": "boolean"
+        },
+        "allowPrivilegedModeForRegularUsers": {
+          "description": "Whether non-administrator should be able to use privileged mode when creating containers",
+          "type": "boolean"
+        },
+        "allowStackManagementForRegularUsers": {
+          "description": "Whether non-administrator should be able to manage stacks",
+          "type": "boolean"
+        },
+        "allowSysctlSettingForRegularUsers": {
+          "description": "Whether non-administrator should be able to use sysctl settings",
+          "type": "boolean"
+        },
+        "allowVolumeBrowserForRegularUsers": {
+          "description": "Whether non-administrator should be able to browse volumes",
+          "type": "boolean"
+        },
+        "enableHostManagementFeatures": {
+          "description": "Whether host management features are enabled",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EndpointStatus": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "EndpointStatusUp",
+        "EndpointStatusDown"
+      ]
+    },
+    "portainer.EndpointType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "DockerEnvironment",
+        "AgentOnDockerEnvironment",
+        "AzureEnvironment",
+        "EdgeAgentOnDockerEnvironment",
+        "KubernetesLocalEnvironment",
+        "AgentOnKubernetesEnvironment",
+        "EdgeAgentOnKubernetesEnvironment"
+      ]
+    },
+    "portainer.EnvironmentEdgeSettings": {
+      "properties": {
+        "AsyncMode": {
+          "description": "Whether the device has been started in edge async mode",
+          "type": "boolean"
+        },
+        "CommandInterval": {
+          "description": "The command list interval for edge agent - used in edge async mode [seconds]",
+          "type": "integer"
+        },
+        "PingInterval": {
+          "description": "The ping interval for edge agent - used in edge async mode [seconds]",
+          "type": "integer"
+        },
+        "SnapshotInterval": {
+          "description": "The snapshot interval for edge agent - used in edge async mode [seconds]",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.KubernetesConfiguration": {
+      "properties": {
+        "AllowNoneIngressClass": {
+          "type": "boolean"
+        },
+        "EnableResourceOverCommit": {
+          "type": "boolean"
+        },
+        "IngressAvailabilityPerNamespace": {
+          "type": "boolean"
+        },
+        "IngressClasses": {
+          "items": {
+            "$ref": "#/$defs/portainer.KubernetesIngressClassConfig"
+          },
+          "type": "array"
+        },
+        "ResourceOverCommitPercentage": {
+          "type": "integer"
+        },
+        "RestrictDefaultNamespace": {
+          "type": "boolean"
+        },
+        "StorageClasses": {
+          "items": {
+            "$ref": "#/$defs/portainer.KubernetesStorageClassConfig"
+          },
+          "type": "array"
+        },
+        "UseLoadBalancer": {
+          "type": "boolean"
+        },
+        "UseServerMetrics": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.KubernetesData": {
+      "properties": {
+        "Configuration": {
+          "$ref": "#/$defs/portainer.KubernetesConfiguration"
+        },
+        "Flags": {
+          "$ref": "#/$defs/portainer.KubernetesFlags"
+        },
+        "Snapshots": {
+          "items": {
+            "$ref": "#/$defs/portainer.KubernetesSnapshot"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.KubernetesFlags": {
+      "properties": {
+        "IsServerIngressClassDetected": {
+          "type": "boolean"
+        },
+        "IsServerMetricsDetected": {
+          "type": "boolean"
+        },
+        "IsServerStorageDetected": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.KubernetesIngressClassConfig": {
+      "properties": {
+        "Blocked": {
+          "type": "boolean"
+        },
+        "BlockedNamespaces": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.KubernetesSnapshot": {
+      "properties": {
+        "DiagnosticsData": {
+          "$ref": "#/$defs/portainer.DiagnosticsData"
+        },
+        "KubernetesVersion": {
+          "type": "string"
+        },
+        "NodeCount": {
+          "type": "integer"
+        },
+        "PerformanceMetrics": {
+          "$ref": "#/$defs/portainer.PerformanceMetrics"
+        },
+        "Time": {
+          "type": "integer"
+        },
+        "TotalCPU": {
+          "type": "integer"
+        },
+        "TotalMemory": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.KubernetesStorageClassConfig": {
+      "properties": {
+        "AccessModes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "AllowVolumeExpansion": {
+          "type": "boolean"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Provisioner": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.Pair": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.PerformanceMetrics": {
+      "properties": {
+        "CPUUsage": {
+          "type": "number"
+        },
+        "MemoryUsage": {
+          "type": "number"
+        },
+        "NetworkUsage": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.TLSConfiguration": {
+      "properties": {
+        "TLS": {
+          "description": "Use TLS",
+          "type": "boolean"
+        },
+        "TLSCACert": {
+          "description": "Path to the TLS CA certificate file",
+          "type": "string"
+        },
+        "TLSCert": {
+          "description": "Path to the TLS client certificate file",
+          "type": "string"
+        },
+        "TLSKey": {
+          "description": "Path to the TLS client key file",
+          "type": "string"
+        },
+        "TLSSkipVerify": {
+          "description": "Skip the verification of the server TLS certificate",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.TeamAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    },
+    "portainer.UserAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    }
+  }
+}

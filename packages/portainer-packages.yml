@@ -1,0 +1,9 @@
+generated: '2026-10-03'
+method: none
+source: https://registry.npmjs.org/portainer
+packages: []
+rejected:
+- name: portainer
+  registry: npm
+  reason: 'official: false as written'
+note: 'no first-party package: every candidate a model listed was unowned (harvest-packages.py --audit)'

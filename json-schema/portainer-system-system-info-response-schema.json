@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-system-system-info-response-schema.json",
+  "title": "system.systemInfoResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-system-api-openapi.yml#/components/schemas/system.systemInfoResponse",
+  "properties": {
+    "agents": {
+      "type": "integer"
+    },
+    "edgeAgents": {
+      "type": "integer"
+    },
+    "platform": {
+      "$ref": "#/$defs/platform.ContainerPlatform"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "platform.ContainerPlatform": {
+      "enum": [
+        "Docker",
+        "Docker Standalone",
+        "Docker Swarm",
+        "Kubernetes",
+        "Podman"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "PlatformDocker",
+        "PlatformDockerStandalone",
+        "PlatformDockerSwarm",
+        "PlatformKubernetes",
+        "PlatformPodman"
+      ]
+    }
+  }
+}

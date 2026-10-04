@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-webhooks-webhook-create-payload-schema.json",
+  "title": "webhooks.webhookCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-webhooks-api-openapi.yml#/components/schemas/webhooks.webhookCreatePayload",
+  "properties": {
+    "EndpointID": {
+      "type": "integer"
+    },
+    "RegistryID": {
+      "type": "integer"
+    },
+    "ResourceID": {
+      "type": "string"
+    },
+    "WebhookType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.WebhookType"
+        }
+      ],
+      "description": "Type of webhook (1 - service)"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.WebhookType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ServiceWebhook"
+      ]
+    }
+  }
+}

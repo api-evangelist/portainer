@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-edge-stack-schema.json",
+  "title": "portainer.EdgeStack",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-edge-stacks-api-openapi.yml#/components/schemas/portainer.EdgeStack",
+  "properties": {
+    "CreatedBy": {
+      "description": "The username which created this stack",
+      "type": "string"
+    },
+    "CreatedByUserId": {
+      "description": "The username id which created this stack",
+      "type": "string"
+    },
+    "CreationDate": {
+      "description": "StatusArray    map[EndpointID][]EdgeStackStatus `json:\"StatusArray\"`",
+      "type": "integer"
+    },
+    "DeploymentType": {
+      "$ref": "#/$defs/portainer.EdgeStackDeploymentType"
+    },
+    "EdgeGroups": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "EntryPoint": {
+      "type": "string"
+    },
+    "Id": {
+      "description": "EdgeStack Identifier",
+      "type": "integer"
+    },
+    "ManifestPath": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "NumDeployments": {
+      "type": "integer"
+    },
+    "ProjectPath": {
+      "type": "string"
+    },
+    "Status": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.EdgeStackStatus"
+      },
+      "type": "object"
+    },
+    "UseManifestNamespaces": {
+      "description": "Uses the manifest's namespaces instead of the default one",
+      "type": "boolean"
+    },
+    "Version": {
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.EdgeStackDeploymentStatus": {
+      "properties": {
+        "Error": {
+          "type": "string"
+        },
+        "RollbackTo": {
+          "description": "EE only feature",
+          "type": "integer"
+        },
+        "Time": {
+          "type": "integer"
+        },
+        "Type": {
+          "$ref": "#/$defs/portainer.EdgeStackStatusType"
+        },
+        "Version": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EdgeStackDeploymentType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "EdgeStackDeploymentCompose",
+        "EdgeStackDeploymentKubernetes"
+      ]
+    },
+    "portainer.EdgeStackStatus": {
+      "properties": {
+        "DeploymentInfo": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.StackDeploymentInfo"
+            }
+          ],
+          "description": "EE only feature"
+        },
+        "Details": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.EdgeStackStatusDetails"
+            }
+          ],
+          "description": "Deprecated"
+        },
+        "EndpointID": {
+          "type": "integer"
+        },
+        "Error": {
+          "description": "Deprecated",
+          "type": "string"
+        },
+        "ReadyRePullImage": {
+          "description": "ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image",
+          "type": "boolean"
+        },
+        "Status": {
+          "items": {
+            "$ref": "#/$defs/portainer.EdgeStackDeploymentStatus"
+          },
+          "type": "array"
+        },
+        "Type": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.EdgeStackStatusType"
+            }
+          ],
+          "description": "Deprecated"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EdgeStackStatusDetails": {
+      "properties": {
+        "Acknowledged": {
+          "type": "boolean"
+        },
+        "Error": {
+          "type": "boolean"
+        },
+        "ImagesPulled": {
+          "type": "boolean"
+        },
+        "Ok": {
+          "type": "boolean"
+        },
+        "Pending": {
+          "type": "boolean"
+        },
+        "RemoteUpdateSuccess": {
+          "type": "boolean"
+        },
+        "Remove": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EdgeStackStatusType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "EdgeStackStatusPending",
+        "EdgeStackStatusDeploymentReceived",
+        "EdgeStackStatusError",
+        "EdgeStackStatusAcknowledged",
+        "EdgeStackStatusRemoved",
+        "EdgeStackStatusRemoteUpdateSuccess",
+        "EdgeStackStatusImagesPulled",
+        "EdgeStackStatusRunning",
+        "EdgeStackStatusDeploying",
+        "EdgeStackStatusRemoving",
+        "EdgeStackStatusPausedDeploying",
+        "EdgeStackStatusRollingBack",
+        "EdgeStackStatusRolledBack",
+        "EdgeStackStatusCompleted"
+      ]
+    },
+    "portainer.StackDeploymentInfo": {
+      "properties": {
+        "ConfigHash": {
+          "description": "ConfigHash is the commit hash of the git repository used for deploying the stack",
+          "type": "string"
+        },
+        "FileVersion": {
+          "description": "FileVersion is the version of the stack file, used to detect changes",
+          "type": "integer"
+        },
+        "Version": {
+          "description": "Version is the version of the stack and also is the deployed version in edge agent",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

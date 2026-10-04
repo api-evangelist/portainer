@@ -184,6 +184,17 @@ paths:
         required: true
 components:
   schemas:
+    portainer.Team:
+      properties:
+        Id:
+          description: Team Identifier
+          example: 1
+          type: integer
+        Name:
+          description: Team name
+          example: developers
+          type: string
+      type: object
     teams.teamCreatePayload:
       properties:
         Name:
@@ -205,17 +216,6 @@ components:
       properties:
         Name:
           description: Name
-          example: developers
-          type: string
-      type: object
-    portainer.Team:
-      properties:
-        Id:
-          description: Team Identifier
-          example: 1
-          type: integer
-        Name:
-          description: Team name
           example: developers
           type: string
       type: object

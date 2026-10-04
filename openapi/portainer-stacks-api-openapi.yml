@@ -907,63 +907,14 @@ paths:
       - Stacks
 components:
   schemas:
-    portainer.StackType:
+    gittypes.GitCredentialAuthType:
       enum:
       - 0
       - 1
-      - 2
-      - 3
       type: integer
       x-enum-varnames:
-      - _
-      - DockerSwarmStack
-      - DockerComposeStack
-      - KubernetesStack
-    stacks.swarmStackFromFileContentPayload:
-      properties:
-        Env:
-          description: A list of environment variables used during stack deployment
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        FromAppTemplate:
-          description: Whether the stack is from a app template
-          example: false
-          type: boolean
-        Name:
-          description: Name of the stack
-          example: myStack
-          type: string
-        StackFileContent:
-          description: Content of the Stack file
-          example: "version: 3\n services:\n web:\n image:nginx"
-          type: string
-        SwarmID:
-          description: Swarm cluster identifier
-          example: jpofkc0i9uo9wtx1zesuk649w
-          type: string
-      required:
-      - Name
-      - StackFileContent
-      - SwarmID
-      type: object
-    gittypes.GitAuthentication:
-      properties:
-        AuthorizationType:
-          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
-        GitCredentialID:
-          description: 'Git credentials identifier when the value is not 0
-
-            When the value is 0, Username, Password, and Authtype are set without using saved credential
-
-            This is introduced since 2.15.0'
-          example: 0
-          type: integer
-        Password:
-          type: string
-        Username:
-          type: string
-      type: object
+      - GitCredentialAuthType_Basic
+      - GitCredentialAuthType_Token
     stacks.composeStackFromFileContentPayload:
       properties:
         Env:
@@ -987,201 +938,6 @@ components:
       - Name
       - StackFileContent
       type: object
-    stacks.stackGitUpdatePayload:
-      properties:
-        AutoUpdate:
-          $ref: '#/components/schemas/portainer.AutoUpdateSettings'
-        Env:
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        Prune:
-          type: boolean
-        RepositoryAuthentication:
-          type: boolean
-        RepositoryAuthorizationType:
-          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
-        RepositoryPassword:
-          type: string
-        RepositoryReferenceName:
-          type: string
-        RepositoryUsername:
-          type: string
-        TLSSkipVerify:
-          type: boolean
-      type: object
-    stacks.kubernetesGitDeploymentPayload:
-      properties:
-        AdditionalFiles:
-          items:
-            type: string
-          type: array
-        AutoUpdate:
-          $ref: '#/components/schemas/portainer.AutoUpdateSettings'
-        ComposeFormat:
-          type: boolean
-        ManifestFile:
-          type: string
-        Namespace:
-          type: string
-        RepositoryAuthentication:
-          type: boolean
-        RepositoryPassword:
-          type: string
-        RepositoryReferenceName:
-          type: string
-        RepositoryURL:
-          type: string
-        RepositoryUsername:
-          type: string
-        StackName:
-          type: string
-        TLSSkipVerify:
-          description: TLSSkipVerify skips SSL verification when cloning the Git repository
-          example: false
-          type: boolean
-      type: object
-    stacks.composeStackFromGitRepositoryPayload:
-      properties:
-        AdditionalFiles:
-          description: Applicable when deploying with multiple stack files
-          example:
-          - '[nz.compose.yml'
-          - ' uat.compose.yml]'
-          items:
-            type: string
-          type: array
-        AutoUpdate:
-          allOf:
-          - $ref: '#/components/schemas/portainer.AutoUpdateSettings'
-          description: Optional GitOps update configuration
-        ComposeFile:
-          default: docker-compose.yml
-          description: Path to the Stack file inside the Git repository
-          example: docker-compose.yml
-          type: string
-        Env:
-          description: A list of environment variables used during stack deployment
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        FromAppTemplate:
-          description: Whether the stack is from a app template
-          example: false
-          type: boolean
-        Name:
-          description: Name of the stack
-          example: myStack
-          type: string
-        RepositoryAuthentication:
-          description: Use basic authentication to clone the Git repository
-          example: true
-          type: boolean
-        RepositoryPassword:
-          description: Password used in basic authentication. Required when RepositoryAuthentication is true.
-          example: myGitPassword
-          type: string
-        RepositoryReferenceName:
-          description: Reference name of a Git repository hosting the Stack file
-          example: refs/heads/master
-          type: string
-        RepositoryURL:
-          description: URL of a Git repository hosting the Stack file
-          example: https://github.com/openfaas/faas
-          type: string
-        RepositoryUsername:
-          description: Username used in basic authentication. Required when RepositoryAuthentication is true.
-          example: myGitUsername
-          type: string
-        TLSSkipVerify:
-          description: TLSSkipVerify skips SSL verification when cloning the Git repository
-          example: false
-          type: boolean
-      required:
-      - Name
-      - RepositoryURL
-      type: object
-    gittypes.GitCredentialAuthType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - GitCredentialAuthType_Basic
-      - GitCredentialAuthType_Token
-    portainer.ResourceAccessLevel:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - _
-      - ReadWriteAccessLevel
-    stacks.swarmStackFromGitRepositoryPayload:
-      properties:
-        AdditionalFiles:
-          description: Applicable when deploying with multiple stack files
-          example:
-          - '[nz.compose.yml'
-          - ' uat.compose.yml]'
-          items:
-            type: string
-          type: array
-        AutoUpdate:
-          allOf:
-          - $ref: '#/components/schemas/portainer.AutoUpdateSettings'
-          description: Optional GitOps update configuration
-        ComposeFile:
-          default: docker-compose.yml
-          description: Path to the Stack file inside the Git repository
-          example: docker-compose.yml
-          type: string
-        Env:
-          description: A list of environment variables used during stack deployment
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        FromAppTemplate:
-          description: Whether the stack is from a app template
-          example: false
-          type: boolean
-        Name:
-          description: Name of the stack
-          example: myStack
-          type: string
-        RepositoryAuthentication:
-          description: Use basic authentication to clone the Git repository
-          example: true
-          type: boolean
-        RepositoryPassword:
-          description: Password used in basic authentication. Required when RepositoryAuthentication is true.
-          example: myGitPassword
-          type: string
-        RepositoryReferenceName:
-          description: Reference name of a Git repository hosting the Stack file
-          example: refs/heads/master
-          type: string
-        RepositoryURL:
-          description: URL of a Git repository hosting the Stack file
-          example: https://github.com/openfaas/faas
-          type: string
-        RepositoryUsername:
-          description: Username used in basic authentication. Required when RepositoryAuthentication is true.
-          example: myGitUsername
-          type: string
-        SwarmID:
-          description: Swarm cluster identifier
-          example: jpofkc0i9uo9wtx1zesuk649w
-          type: string
-        TLSSkipVerify:
-          description: TLSSkipVerify skips SSL verification when cloning the Git repository
-          example: false
-          type: boolean
-      required:
-      - Name
-      - RepositoryURL
-      - SwarmID
-      type: object
     stacks.stackMigratePayload:
       properties:
         EndpointID:
@@ -1198,35 +954,6 @@ components:
           type: string
       required:
       - EndpointID
-      type: object
-    portainer.StackOption:
-      properties:
-        HelmAtomic:
-          description: Enable atomic rollback on failure (Helm --atomic flag for Kubernetes Helm stacks)
-          example: false
-          type: boolean
-        Prune:
-          description: Prune services that are no longer referenced
-          example: false
-          type: boolean
-      type: object
-    stacks.kubernetesManifestURLDeploymentPayload:
-      properties:
-        ComposeFormat:
-          type: boolean
-        ManifestURL:
-          type: string
-        Namespace:
-          type: string
-        StackName:
-          type: string
-      type: object
-    portainer.UserResourceAccess:
-      properties:
-        AccessLevel:
-          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
-        UserId:
-          type: integer
       type: object
     gittypes.RepoConfig:
       properties:
@@ -1253,47 +980,6 @@ components:
         URL:
           description: The repo url
           example: https://github.com/portainer/portainer.git
-          type: string
-      type: object
-    portainer.StackStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      x-enum-varnames:
-      - _
-      - StackStatusActive
-      - StackStatusInactive
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
-    stacks.kubernetesStringDeploymentPayload:
-      properties:
-        ComposeFormat:
-          type: boolean
-        FromAppTemplate:
-          description: Whether the stack is from a app template
-          example: false
-          type: boolean
-        Namespace:
-          type: string
-        StackFileContent:
-          type: string
-        StackName:
-          type: string
-      type: object
-    stacks.stackFileResponse:
-      properties:
-        StackFileContent:
-          description: Content of the Stack file
-          example: "version: 3\n services:\n web:\n image:nginx"
           type: string
       type: object
     portainer.Stack:
@@ -1411,31 +1097,38 @@ components:
         StackName:
           type: string
       type: object
-    stacks.updateSwarmStackPayload:
-      properties:
-        Env:
-          description: A list of environment(endpoint) variables used during stack deployment
-          items:
-            $ref: '#/components/schemas/portainer.Pair'
-          type: array
-        Prune:
-          description: Prune services that are no longer referenced (only available for Swarm stacks)
-          example: true
-          type: boolean
-        PullImage:
-          description: 'Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
-
-            Force a pulling to current image with the original tag though the image is already the latest'
-          example: false
-          type: boolean
-        RepullImageAndRedeploy:
-          description: RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack
-          type: boolean
-        StackFileContent:
-          description: New content of the Stack file
-          example: "version: 3\n services:\n web:\n image:nginx"
-          type: string
-      type: object
+    portainer.ResourceControlType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      type: integer
+      x-enum-varnames:
+      - _
+      - ContainerResourceControl
+      - ServiceResourceControl
+      - VolumeResourceControl
+      - NetworkResourceControl
+      - SecretResourceControl
+      - StackResourceControl
+      - ConfigResourceControl
+      - CustomTemplateResourceControl
+      - ContainerGroupResourceControl
+    portainer.ResourceAccessLevel:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - _
+      - ReadWriteAccessLevel
     portainer.ResourceControl:
       properties:
         AccessLevel:
@@ -1488,6 +1181,122 @@ components:
             $ref: '#/components/schemas/portainer.UserResourceAccess'
           type: array
       type: object
+    stacks.updateSwarmStackPayload:
+      properties:
+        Env:
+          description: A list of environment(endpoint) variables used during stack deployment
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        Prune:
+          description: Prune services that are no longer referenced (only available for Swarm stacks)
+          example: true
+          type: boolean
+        PullImage:
+          description: 'Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
+
+            Force a pulling to current image with the original tag though the image is already the latest'
+          example: false
+          type: boolean
+        RepullImageAndRedeploy:
+          description: RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack
+          type: boolean
+        StackFileContent:
+          description: New content of the Stack file
+          example: "version: 3\n services:\n web:\n image:nginx"
+          type: string
+      type: object
+    portainer.StackStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      x-enum-varnames:
+      - _
+      - StackStatusActive
+      - StackStatusInactive
+    stacks.stackFileResponse:
+      properties:
+        StackFileContent:
+          description: Content of the Stack file
+          example: "version: 3\n services:\n web:\n image:nginx"
+          type: string
+      type: object
+    stacks.kubernetesGitDeploymentPayload:
+      properties:
+        AdditionalFiles:
+          items:
+            type: string
+          type: array
+        AutoUpdate:
+          $ref: '#/components/schemas/portainer.AutoUpdateSettings'
+        ComposeFormat:
+          type: boolean
+        ManifestFile:
+          type: string
+        Namespace:
+          type: string
+        RepositoryAuthentication:
+          type: boolean
+        RepositoryPassword:
+          type: string
+        RepositoryReferenceName:
+          type: string
+        RepositoryURL:
+          type: string
+        RepositoryUsername:
+          type: string
+        StackName:
+          type: string
+        TLSSkipVerify:
+          description: TLSSkipVerify skips SSL verification when cloning the Git repository
+          example: false
+          type: boolean
+      type: object
+    stacks.swarmStackFromFileContentPayload:
+      properties:
+        Env:
+          description: A list of environment variables used during stack deployment
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        FromAppTemplate:
+          description: Whether the stack is from a app template
+          example: false
+          type: boolean
+        Name:
+          description: Name of the stack
+          example: myStack
+          type: string
+        StackFileContent:
+          description: Content of the Stack file
+          example: "version: 3\n services:\n web:\n image:nginx"
+          type: string
+        SwarmID:
+          description: Swarm cluster identifier
+          example: jpofkc0i9uo9wtx1zesuk649w
+          type: string
+      required:
+      - Name
+      - StackFileContent
+      - SwarmID
+      type: object
+    stacks.kubernetesStringDeploymentPayload:
+      properties:
+        ComposeFormat:
+          type: boolean
+        FromAppTemplate:
+          description: Whether the stack is from a app template
+          example: false
+          type: boolean
+        Namespace:
+          type: string
+        StackFileContent:
+          type: string
+        StackName:
+          type: string
+      type: object
     portainer.AutoUpdateSettings:
       properties:
         ForcePullImage:
@@ -1511,36 +1320,227 @@ components:
           example: 05de31a2-79fa-4644-9c12-faa67e5c49f0
           type: string
       type: object
-    portainer.ResourceControlType:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      type: integer
-      x-enum-varnames:
-      - _
-      - ContainerResourceControl
-      - ServiceResourceControl
-      - VolumeResourceControl
-      - NetworkResourceControl
-      - SecretResourceControl
-      - StackResourceControl
-      - ConfigResourceControl
-      - CustomTemplateResourceControl
-      - ContainerGroupResourceControl
+    stacks.swarmStackFromGitRepositoryPayload:
+      properties:
+        AdditionalFiles:
+          description: Applicable when deploying with multiple stack files
+          example:
+          - '[nz.compose.yml'
+          - ' uat.compose.yml]'
+          items:
+            type: string
+          type: array
+        AutoUpdate:
+          allOf:
+          - $ref: '#/components/schemas/portainer.AutoUpdateSettings'
+          description: Optional GitOps update configuration
+        ComposeFile:
+          default: docker-compose.yml
+          description: Path to the Stack file inside the Git repository
+          example: docker-compose.yml
+          type: string
+        Env:
+          description: A list of environment variables used during stack deployment
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        FromAppTemplate:
+          description: Whether the stack is from a app template
+          example: false
+          type: boolean
+        Name:
+          description: Name of the stack
+          example: myStack
+          type: string
+        RepositoryAuthentication:
+          description: Use basic authentication to clone the Git repository
+          example: true
+          type: boolean
+        RepositoryPassword:
+          description: Password used in basic authentication. Required when RepositoryAuthentication is true.
+          example: myGitPassword
+          type: string
+        RepositoryReferenceName:
+          description: Reference name of a Git repository hosting the Stack file
+          example: refs/heads/master
+          type: string
+        RepositoryURL:
+          description: URL of a Git repository hosting the Stack file
+          example: https://github.com/openfaas/faas
+          type: string
+        RepositoryUsername:
+          description: Username used in basic authentication. Required when RepositoryAuthentication is true.
+          example: myGitUsername
+          type: string
+        SwarmID:
+          description: Swarm cluster identifier
+          example: jpofkc0i9uo9wtx1zesuk649w
+          type: string
+        TLSSkipVerify:
+          description: TLSSkipVerify skips SSL verification when cloning the Git repository
+          example: false
+          type: boolean
+      required:
+      - Name
+      - RepositoryURL
+      - SwarmID
+      type: object
+    gittypes.GitAuthentication:
+      properties:
+        AuthorizationType:
+          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
+        GitCredentialID:
+          description: 'Git credentials identifier when the value is not 0
+
+            When the value is 0, Username, Password, and Authtype are set without using saved credential
+
+            This is introduced since 2.15.0'
+          example: 0
+          type: integer
+        Password:
+          type: string
+        Username:
+          type: string
+      type: object
+    portainer.UserResourceAccess:
+      properties:
+        AccessLevel:
+          $ref: '#/components/schemas/portainer.ResourceAccessLevel'
+        UserId:
+          type: integer
+      type: object
     portainer.TeamResourceAccess:
       properties:
         AccessLevel:
           $ref: '#/components/schemas/portainer.ResourceAccessLevel'
         TeamId:
           type: integer
+      type: object
+    portainer.StackType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      x-enum-varnames:
+      - _
+      - DockerSwarmStack
+      - DockerComposeStack
+      - KubernetesStack
+    stacks.stackGitUpdatePayload:
+      properties:
+        AutoUpdate:
+          $ref: '#/components/schemas/portainer.AutoUpdateSettings'
+        Env:
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        Prune:
+          type: boolean
+        RepositoryAuthentication:
+          type: boolean
+        RepositoryAuthorizationType:
+          $ref: '#/components/schemas/gittypes.GitCredentialAuthType'
+        RepositoryPassword:
+          type: string
+        RepositoryReferenceName:
+          type: string
+        RepositoryUsername:
+          type: string
+        TLSSkipVerify:
+          type: boolean
+      type: object
+    stacks.kubernetesManifestURLDeploymentPayload:
+      properties:
+        ComposeFormat:
+          type: boolean
+        ManifestURL:
+          type: string
+        Namespace:
+          type: string
+        StackName:
+          type: string
+      type: object
+    portainer.StackOption:
+      properties:
+        HelmAtomic:
+          description: Enable atomic rollback on failure (Helm --atomic flag for Kubernetes Helm stacks)
+          example: false
+          type: boolean
+        Prune:
+          description: Prune services that are no longer referenced
+          example: false
+          type: boolean
+      type: object
+    stacks.composeStackFromGitRepositoryPayload:
+      properties:
+        AdditionalFiles:
+          description: Applicable when deploying with multiple stack files
+          example:
+          - '[nz.compose.yml'
+          - ' uat.compose.yml]'
+          items:
+            type: string
+          type: array
+        AutoUpdate:
+          allOf:
+          - $ref: '#/components/schemas/portainer.AutoUpdateSettings'
+          description: Optional GitOps update configuration
+        ComposeFile:
+          default: docker-compose.yml
+          description: Path to the Stack file inside the Git repository
+          example: docker-compose.yml
+          type: string
+        Env:
+          description: A list of environment variables used during stack deployment
+          items:
+            $ref: '#/components/schemas/portainer.Pair'
+          type: array
+        FromAppTemplate:
+          description: Whether the stack is from a app template
+          example: false
+          type: boolean
+        Name:
+          description: Name of the stack
+          example: myStack
+          type: string
+        RepositoryAuthentication:
+          description: Use basic authentication to clone the Git repository
+          example: true
+          type: boolean
+        RepositoryPassword:
+          description: Password used in basic authentication. Required when RepositoryAuthentication is true.
+          example: myGitPassword
+          type: string
+        RepositoryReferenceName:
+          description: Reference name of a Git repository hosting the Stack file
+          example: refs/heads/master
+          type: string
+        RepositoryURL:
+          description: URL of a Git repository hosting the Stack file
+          example: https://github.com/openfaas/faas
+          type: string
+        RepositoryUsername:
+          description: Username used in basic authentication. Required when RepositoryAuthentication is true.
+          example: myGitUsername
+          type: string
+        TLSSkipVerify:
+          description: TLSSkipVerify skips SSL verification when cloning the Git repository
+          example: false
+          type: boolean
+      required:
+      - Name
+      - RepositoryURL
+      type: object
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

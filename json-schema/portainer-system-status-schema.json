@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-system-status-schema.json",
+  "title": "system.status",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-status-api-openapi.yml#/components/schemas/system.status",
+  "properties": {
+    "InstanceID": {
+      "description": "Server Instance ID",
+      "type": "string"
+    },
+    "Version": {
+      "description": "Portainer API version",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

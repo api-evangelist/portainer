@@ -242,26 +242,45 @@ paths:
         required: true
 components:
   schemas:
-    portainer.AccessPolicy:
+    portainer.GithubRegistryData:
       properties:
-        Namespaces:
-          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
-          items:
-            type: string
-          type: array
-        RoleId:
-          description: Role identifier. Reference the role that will be associated to this access policy
-          example: 1
-          type: integer
+        OrganisationName:
+          type: string
+        UseOrganisation:
+          type: boolean
       type: object
-    portainer.GitlabRegistryData:
+    portainer.RegistryType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      x-enum-varnames:
+      - _
+      - QuayRegistry
+      - AzureRegistry
+      - CustomRegistry
+      - GitlabRegistry
+      - ProGetRegistry
+      - DockerHubRegistry
+      - EcrRegistry
+      - GithubRegistry
+    registries.registryPingResponse:
       properties:
-        InstanceURL:
+        message:
+          description: Message provides details about the connection test result
+          example: Registry connection successful
           type: string
-        ProjectId:
-          type: integer
-        ProjectPath:
-          type: string
+        success:
+          description: Success indicates if the registry connection was successful
+          example: true
+          type: boolean
       type: object
     portainer.TLSConfiguration:
       properties:
@@ -286,196 +305,21 @@ components:
           example: false
           type: boolean
       type: object
-    portainer.GithubRegistryData:
-      properties:
-        OrganisationName:
-          type: string
-        UseOrganisation:
-          type: boolean
-      type: object
-    portainer.RegistryAccessPolicies:
+    portainer.AccessPolicy:
       properties:
         Namespaces:
-          description: Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
+          description: Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
           items:
             type: string
           type: array
-        TeamAccessPolicies:
-          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-        UserAccessPolicies:
-          allOf:
-          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
-          description: Docker specific fields (with docker, users/teams have access to a registry)
+        RoleId:
+          description: Role identifier. Reference the role that will be associated to this access policy
+          example: 1
+          type: integer
       type: object
     portainer.TeamAccessPolicies:
       additionalProperties:
         $ref: '#/components/schemas/portainer.AccessPolicy'
-      type: object
-    portainer.EcrData:
-      properties:
-        Region:
-          example: ap-southeast-2
-          type: string
-      type: object
-    registries.registryCreatePayload:
-      properties:
-        Authentication:
-          description: Is authentication against this registry enabled
-          example: false
-          type: boolean
-        BaseURL:
-          description: BaseURL required for ProGet registry
-          example: registry.mydomain.tld:2375
-          type: string
-        Ecr:
-          allOf:
-          - $ref: '#/components/schemas/portainer.EcrData'
-          description: ECR specific details, required when type = 7
-        Gitlab:
-          allOf:
-          - $ref: '#/components/schemas/portainer.GitlabRegistryData'
-          description: Gitlab specific details, required when type = 4
-        Name:
-          description: Name that will be used to identify this registry
-          example: my-registry
-          type: string
-        Password:
-          description: Password used to authenticate against this registry. required when Authentication is true
-          example: registry_password
-          type: string
-        Quay:
-          allOf:
-          - $ref: '#/components/schemas/portainer.QuayRegistryData'
-          description: Quay specific details, required when type = 1
-        TLS:
-          description: Use TLS
-          example: true
-          type: boolean
-        Type:
-          allOf:
-          - $ref: '#/components/schemas/portainer.RegistryType'
-          description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5 (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)"
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          example: 1
-        URL:
-          description: URL or IP address of the Docker registry
-          example: registry.mydomain.tld:2375/feed
-          type: string
-        Username:
-          description: Username used to authenticate against this registry. Required when Authentication is true
-          example: registry_user
-          type: string
-      required:
-      - Authentication
-      - Name
-      - Type
-      - URL
-      type: object
-    portainer.Registry:
-      properties:
-        AccessToken:
-          description: Stores temporary access token
-          type: string
-        AccessTokenExpiry:
-          type: integer
-        Authentication:
-          description: Is authentication against this registry enabled
-          example: true
-          type: boolean
-        AuthorizedTeams:
-          description: Deprecated in DBVersion == 18
-          items:
-            type: integer
-          type: array
-        AuthorizedUsers:
-          description: Deprecated in DBVersion == 18
-          items:
-            type: integer
-          type: array
-        BaseURL:
-          description: Base URL, introduced for ProGet registry
-          example: registry.mydomain.tld:2375
-          type: string
-        Ecr:
-          $ref: '#/components/schemas/portainer.EcrData'
-        Github:
-          $ref: '#/components/schemas/portainer.GithubRegistryData'
-        Gitlab:
-          $ref: '#/components/schemas/portainer.GitlabRegistryData'
-        Id:
-          description: Registry Identifier
-          example: 1
-          type: integer
-        ManagementConfiguration:
-          $ref: '#/components/schemas/portainer.RegistryManagementConfiguration'
-        Name:
-          description: Registry Name
-          example: my-registry
-          type: string
-        Password:
-          description: Password or SecretAccessKey used to authenticate against this registry
-          example: registry_password
-          type: string
-        Quay:
-          $ref: '#/components/schemas/portainer.QuayRegistryData'
-        RegistryAccesses:
-          $ref: '#/components/schemas/portainer.RegistryAccesses'
-        TeamAccessPolicies:
-          allOf:
-          - $ref: '#/components/schemas/portainer.TeamAccessPolicies'
-          description: Deprecated in DBVersion == 31
-        Type:
-          allOf:
-          - $ref: '#/components/schemas/portainer.RegistryType'
-          description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-        URL:
-          description: URL or IP address of the Docker registry
-          example: registry.mydomain.tld:2375
-          type: string
-        UserAccessPolicies:
-          allOf:
-          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
-          description: 'Deprecated fields
-
-            Deprecated in DBVersion == 31'
-        Username:
-          description: Username or AccessKeyID used to authenticate against this registry
-          example: registry user
-          type: string
-      type: object
-    registries.registryPingResponse:
-      properties:
-        message:
-          description: Message provides details about the connection test result
-          example: Registry connection successful
-          type: string
-        success:
-          description: Success indicates if the registry connection was successful
-          example: true
-          type: boolean
-      type: object
-    portainer.UserAccessPolicies:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.AccessPolicy'
-      type: object
-    portainer.RegistryAccesses:
-      additionalProperties:
-        $ref: '#/components/schemas/portainer.RegistryAccessPolicies'
       type: object
     registries.registryConfigurePayload:
       properties:
@@ -563,6 +407,119 @@ components:
       - Name
       - URL
       type: object
+    portainer.RegistryAccessPolicies:
+      properties:
+        Namespaces:
+          description: Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
+          items:
+            type: string
+          type: array
+        TeamAccessPolicies:
+          $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+        UserAccessPolicies:
+          allOf:
+          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
+          description: Docker specific fields (with docker, users/teams have access to a registry)
+      type: object
+    portainer.RegistryAccesses:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.RegistryAccessPolicies'
+      type: object
+    portainer.EcrData:
+      properties:
+        Region:
+          example: ap-southeast-2
+          type: string
+      type: object
+    portainer.GitlabRegistryData:
+      properties:
+        InstanceURL:
+          type: string
+        ProjectId:
+          type: integer
+        ProjectPath:
+          type: string
+      type: object
+    portainer.Registry:
+      properties:
+        AccessToken:
+          description: Stores temporary access token
+          type: string
+        AccessTokenExpiry:
+          type: integer
+        Authentication:
+          description: Is authentication against this registry enabled
+          example: true
+          type: boolean
+        AuthorizedTeams:
+          description: Deprecated in DBVersion == 18
+          items:
+            type: integer
+          type: array
+        AuthorizedUsers:
+          description: Deprecated in DBVersion == 18
+          items:
+            type: integer
+          type: array
+        BaseURL:
+          description: Base URL, introduced for ProGet registry
+          example: registry.mydomain.tld:2375
+          type: string
+        Ecr:
+          $ref: '#/components/schemas/portainer.EcrData'
+        Github:
+          $ref: '#/components/schemas/portainer.GithubRegistryData'
+        Gitlab:
+          $ref: '#/components/schemas/portainer.GitlabRegistryData'
+        Id:
+          description: Registry Identifier
+          example: 1
+          type: integer
+        ManagementConfiguration:
+          $ref: '#/components/schemas/portainer.RegistryManagementConfiguration'
+        Name:
+          description: Registry Name
+          example: my-registry
+          type: string
+        Password:
+          description: Password or SecretAccessKey used to authenticate against this registry
+          example: registry_password
+          type: string
+        Quay:
+          $ref: '#/components/schemas/portainer.QuayRegistryData'
+        RegistryAccesses:
+          $ref: '#/components/schemas/portainer.RegistryAccesses'
+        TeamAccessPolicies:
+          allOf:
+          - $ref: '#/components/schemas/portainer.TeamAccessPolicies'
+          description: Deprecated in DBVersion == 31
+        Type:
+          allOf:
+          - $ref: '#/components/schemas/portainer.RegistryType'
+          description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+        URL:
+          description: URL or IP address of the Docker registry
+          example: registry.mydomain.tld:2375
+          type: string
+        UserAccessPolicies:
+          allOf:
+          - $ref: '#/components/schemas/portainer.UserAccessPolicies'
+          description: 'Deprecated fields
+
+            Deprecated in DBVersion == 31'
+        Username:
+          description: Username or AccessKeyID used to authenticate against this registry
+          example: registry user
+          type: string
+      type: object
     portainer.RegistryManagementConfiguration:
       properties:
         AccessToken:
@@ -582,28 +539,78 @@ components:
         Username:
           type: string
       type: object
-    portainer.RegistryType:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      type: integer
-      x-enum-varnames:
-      - _
-      - QuayRegistry
-      - AzureRegistry
-      - CustomRegistry
-      - GitlabRegistry
-      - ProGetRegistry
-      - DockerHubRegistry
-      - EcrRegistry
-      - GithubRegistry
+    portainer.QuayRegistryData:
+      properties:
+        OrganisationName:
+          type: string
+        UseOrganisation:
+          type: boolean
+      type: object
+    registries.registryCreatePayload:
+      properties:
+        Authentication:
+          description: Is authentication against this registry enabled
+          example: false
+          type: boolean
+        BaseURL:
+          description: BaseURL required for ProGet registry
+          example: registry.mydomain.tld:2375
+          type: string
+        Ecr:
+          allOf:
+          - $ref: '#/components/schemas/portainer.EcrData'
+          description: ECR specific details, required when type = 7
+        Gitlab:
+          allOf:
+          - $ref: '#/components/schemas/portainer.GitlabRegistryData'
+          description: Gitlab specific details, required when type = 4
+        Name:
+          description: Name that will be used to identify this registry
+          example: my-registry
+          type: string
+        Password:
+          description: Password used to authenticate against this registry. required when Authentication is true
+          example: registry_password
+          type: string
+        Quay:
+          allOf:
+          - $ref: '#/components/schemas/portainer.QuayRegistryData'
+          description: Quay specific details, required when type = 1
+        TLS:
+          description: Use TLS
+          example: true
+          type: boolean
+        Type:
+          allOf:
+          - $ref: '#/components/schemas/portainer.RegistryType'
+          description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5 (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)"
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          example: 1
+        URL:
+          description: URL or IP address of the Docker registry
+          example: registry.mydomain.tld:2375/feed
+          type: string
+        Username:
+          description: Username used to authenticate against this registry. Required when Authentication is true
+          example: registry_user
+          type: string
+      required:
+      - Authentication
+      - Name
+      - Type
+      - URL
+      type: object
+    portainer.UserAccessPolicies:
+      additionalProperties:
+        $ref: '#/components/schemas/portainer.AccessPolicy'
+      type: object
     registries.registryPingPayload:
       properties:
         Password:
@@ -639,13 +646,6 @@ components:
       required:
       - Type
       - URL
-      type: object
-    portainer.QuayRegistryData:
-      properties:
-        OrganisationName:
-          type: string
-        UseOrganisation:
-          type: boolean
       type: object
   securitySchemes:
     ApiKeyAuth:

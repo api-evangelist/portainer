@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-users-user-update-payload-schema.json",
+  "title": "users.userUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-users-api-openapi.yml#/components/schemas/users.userUpdatePayload",
+  "properties": {
+    "NewPassword": {
+      "type": "string"
+    },
+    "Password": {
+      "type": "string"
+    },
+    "Role": {
+      "description": "User role (1 for administrator account and 2 for regular account)",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "Theme": {
+      "$ref": "#/$defs/users.themePayload"
+    },
+    "UseCache": {
+      "type": "boolean"
+    },
+    "Username": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "NewPassword",
+    "Password",
+    "Role",
+    "UseCache",
+    "Username"
+  ],
+  "type": "object",
+  "$defs": {
+    "users.themePayload": {
+      "properties": {
+        "color": {
+          "description": "Color represents the color theme of the UI",
+          "enum": [
+            "dark",
+            "light",
+            "highcontrast",
+            "auto"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

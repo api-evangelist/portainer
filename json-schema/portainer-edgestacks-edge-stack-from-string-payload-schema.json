@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-edgestacks-edge-stack-from-string-payload-schema.json",
+  "title": "edgestacks.edgeStackFromStringPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-edge-stacks-api-openapi.yml#/components/schemas/edgestacks.edgeStackFromStringPayload",
+  "properties": {
+    "DeploymentType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.EdgeStackDeploymentType"
+        }
+      ],
+      "description": "Deployment type to deploy this stack\nValid values are: 0 - 'compose', 1 - 'kubernetes'\ncompose is enabled only for docker environments\nkubernetes is enabled only for kubernetes environments",
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "EdgeGroups": {
+      "description": "List of identifiers of EdgeGroups",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Name": {
+      "description": "Name of the stack\nMax length: 255\nName must only contains lowercase characters, numbers, hyphens, or underscores\nName must start with a lowercase character or number\nExample: stack-name or stack_123 or stackName",
+      "type": "string"
+    },
+    "Registries": {
+      "description": "List of Registries to use for this stack",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "StackFileContent": {
+      "description": "Content of the Stack file",
+      "type": "string"
+    },
+    "UseManifestNamespaces": {
+      "description": "Uses the manifest's namespaces instead of the default one",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "Name",
+    "StackFileContent"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.EdgeStackDeploymentType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "EdgeStackDeploymentCompose",
+        "EdgeStackDeploymentKubernetes"
+      ]
+    }
+  }
+}

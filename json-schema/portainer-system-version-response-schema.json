@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-system-version-response-schema.json",
+  "title": "system.versionResponse",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-system-api-openapi.yml#/components/schemas/system.versionResponse",
+  "properties": {
+    "Build": {
+      "$ref": "#/$defs/build.BuildInfo"
+    },
+    "DatabaseVersion": {
+      "type": "string"
+    },
+    "Dependencies": {
+      "$ref": "#/$defs/build.DependenciesInfo"
+    },
+    "LatestVersion": {
+      "description": "The latest version available",
+      "type": "string"
+    },
+    "Runtime": {
+      "$ref": "#/$defs/build.RuntimeInfo"
+    },
+    "ServerEdition": {
+      "type": "string"
+    },
+    "ServerVersion": {
+      "type": "string"
+    },
+    "UpdateAvailable": {
+      "description": "Whether portainer has an update available",
+      "type": "boolean"
+    },
+    "VersionSupport": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "build.BuildInfo": {
+      "properties": {
+        "BuildNumber": {
+          "type": "string"
+        },
+        "GitCommit": {
+          "type": "string"
+        },
+        "GoVersion": {
+          "type": "string"
+        },
+        "ImageTag": {
+          "type": "string"
+        },
+        "NodejsVersion": {
+          "type": "string"
+        },
+        "PnpmVersion": {
+          "type": "string"
+        },
+        "WebpackVersion": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "build.DependenciesInfo": {
+      "properties": {
+        "ComposeVersion": {
+          "type": "string"
+        },
+        "DockerVersion": {
+          "type": "string"
+        },
+        "HelmVersion": {
+          "type": "string"
+        },
+        "KubectlVersion": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "build.RuntimeInfo": {
+      "properties": {
+        "Env": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

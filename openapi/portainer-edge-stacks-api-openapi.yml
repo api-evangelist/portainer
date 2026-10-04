@@ -375,71 +375,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    portainer.EdgeStackDeploymentStatus:
+    gittypes.GitCredentialAuthType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      x-enum-varnames:
+      - GitCredentialAuthType_Basic
+      - GitCredentialAuthType_Token
+    portainer.StackDeploymentInfo:
       properties:
-        Error:
+        ConfigHash:
+          description: ConfigHash is the commit hash of the git repository used for deploying the stack
           type: string
-        RollbackTo:
-          description: EE only feature
+        FileVersion:
+          description: FileVersion is the version of the stack file, used to detect changes
           type: integer
-        Time:
-          type: integer
-        Type:
-          $ref: '#/components/schemas/portainer.EdgeStackStatusType'
         Version:
+          description: Version is the version of the stack and also is the deployed version in edge agent
           type: integer
       type: object
-    edge.RegistryCredentials:
+    edgestacks.stackFileResponse:
       properties:
-        Secret:
+        StackFileContent:
           type: string
-        ServerURL:
-          type: string
-        Username:
-          type: string
-      type: object
-    portainer.EdgeStack:
-      properties:
-        CreatedBy:
-          description: The username which created this stack
-          example: admin
-          type: string
-        CreatedByUserId:
-          description: The username id which created this stack
-          example: '1'
-          type: string
-        CreationDate:
-          description: StatusArray    map[EndpointID][]EdgeStackStatus `json:"StatusArray"`
-          type: integer
-        DeploymentType:
-          $ref: '#/components/schemas/portainer.EdgeStackDeploymentType'
-        EdgeGroups:
-          items:
-            type: integer
-          type: array
-        EntryPoint:
-          type: string
-        Id:
-          description: EdgeStack Identifier
-          example: 1
-          type: integer
-        ManifestPath:
-          type: string
-        Name:
-          type: string
-        NumDeployments:
-          type: integer
-        ProjectPath:
-          type: string
-        Status:
-          additionalProperties:
-            $ref: '#/components/schemas/portainer.EdgeStackStatus'
-          type: object
-        UseManifestNamespaces:
-          description: Uses the manifest's namespaces instead of the default one
-          type: boolean
-        Version:
-          type: integer
       type: object
     portainer.EdgeStackStatusType:
       enum:
@@ -473,195 +432,6 @@ components:
       - EdgeStackStatusRollingBack
       - EdgeStackStatusRolledBack
       - EdgeStackStatusCompleted
-    filesystem.DirEntry:
-      properties:
-        Content:
-          type: string
-        IsFile:
-          type: boolean
-        Name:
-          type: string
-        Permissions:
-          $ref: '#/components/schemas/os.FileMode'
-      type: object
-    portainer.HelmConfig:
-      properties:
-        Atomic:
-          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
-          example: true
-          type: boolean
-        ChartPath:
-          description: Path to a Helm chart folder for Helm git deployments
-          example: charts/my-app
-          type: string
-        Timeout:
-          description: Timeout for Helm operations (equivalent to helm --timeout flag)
-          example: 5m0s
-          type: string
-        ValuesFiles:
-          description: Array of paths to Helm values YAML files for Helm git deployments
-          example:
-          - '[''values/prod.yaml'''
-          - ' ''values/secrets.yaml'']'
-          items:
-            type: string
-          type: array
-        Version:
-          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
-          example: 1.2.3
-          type: string
-      type: object
-    edgestacks.updateEdgeStackPayload:
-      properties:
-        DeploymentType:
-          $ref: '#/components/schemas/portainer.EdgeStackDeploymentType'
-        EdgeGroups:
-          items:
-            type: integer
-          type: array
-        StackFileContent:
-          type: string
-        UpdateVersion:
-          type: boolean
-        UseManifestNamespaces:
-          description: Uses the manifest's namespaces instead of the default one
-          type: boolean
-      type: object
-    gittypes.GitCredentialAuthType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      x-enum-varnames:
-      - GitCredentialAuthType_Basic
-      - GitCredentialAuthType_Token
-    edge.DeployerOptionsPayload:
-      properties:
-        ForceRecreate:
-          description: 'ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
-
-            This field is only used when the Force Redeployment is triggered.
-
-            Once the stack is redeployed, this field will be reset to false.
-
-            For standard edge agent, this field is used in agent side
-
-            For async edge agent, this field is used in both agent side and server side.
-
-            This flag drives `docker compose up --force-recreate` option'
-          type: boolean
-        Prune:
-          description: 'Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
-
-            This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
-
-            Used only for EE'
-          type: boolean
-        RemoveVolumes:
-          description: 'RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
-
-            in the compose file and anonymouse volumes attached to containers
-
-            This flag drives `docker compose down --volumes` option
-
-            Used only for EE'
-          type: boolean
-      type: object
-    edgestacks.stackFileResponse:
-      properties:
-        StackFileContent:
-          type: string
-      type: object
-    edgestacks.edgeStackFromStringPayload:
-      properties:
-        DeploymentType:
-          allOf:
-          - $ref: '#/components/schemas/portainer.EdgeStackDeploymentType'
-          description: 'Deployment type to deploy this stack
-
-            Valid values are: 0 - ''compose'', 1 - ''kubernetes''
-
-            compose is enabled only for docker environments
-
-            kubernetes is enabled only for kubernetes environments'
-          enum:
-          - 0
-          - 1
-          - 2
-          example: 0
-        EdgeGroups:
-          description: List of identifiers of EdgeGroups
-          example:
-          - 1
-          items:
-            type: integer
-          type: array
-        Name:
-          description: 'Name of the stack
-
-            Max length: 255
-
-            Name must only contains lowercase characters, numbers, hyphens, or underscores
-
-            Name must start with a lowercase character or number
-
-            Example: stack-name or stack_123 or stackName'
-          example: stack-name
-          type: string
-        Registries:
-          description: List of Registries to use for this stack
-          items:
-            type: integer
-          type: array
-        StackFileContent:
-          description: Content of the Stack file
-          example: "version: 3\n services:\n web:\n image:nginx"
-          type: string
-        UseManifestNamespaces:
-          description: Uses the manifest's namespaces instead of the default one
-          type: boolean
-      required:
-      - Name
-      - StackFileContent
-      type: object
-    portainer.EdgeStackStatusDetails:
-      properties:
-        Acknowledged:
-          type: boolean
-        Error:
-          type: boolean
-        ImagesPulled:
-          type: boolean
-        Ok:
-          type: boolean
-        Pending:
-          type: boolean
-        RemoteUpdateSuccess:
-          type: boolean
-        Remove:
-          type: boolean
-      type: object
-    portainer.StackDeploymentInfo:
-      properties:
-        ConfigHash:
-          description: ConfigHash is the commit hash of the git repository used for deploying the stack
-          type: string
-        FileVersion:
-          description: FileVersion is the version of the stack file, used to detect changes
-          type: integer
-        Version:
-          description: Version is the version of the stack and also is the deployed version in edge agent
-          type: integer
-      type: object
-    portainer.Pair:
-      properties:
-        name:
-          example: name
-          type: string
-        value:
-          example: value
-          type: string
-      type: object
     edge.StackPayload:
       properties:
         AlwaysCloneGitRepoForRelativePath:
@@ -811,70 +581,6 @@ components:
           - $ref: '#/components/schemas/portainer.EdgeStackStatusType'
           description: Deprecated
       type: object
-    os.FileMode:
-      enum:
-      - 2147483648
-      - 1073741824
-      - 536870912
-      - 268435456
-      - 134217728
-      - 67108864
-      - 33554432
-      - 16777216
-      - 8388608
-      - 4194304
-      - 2097152
-      - 1048576
-      - 524288
-      - 2401763328
-      - 511
-      - 2147483648
-      - 1073741824
-      - 536870912
-      - 268435456
-      - 134217728
-      - 67108864
-      - 33554432
-      - 16777216
-      - 8388608
-      - 4194304
-      - 2097152
-      - 1048576
-      - 524288
-      - 2401763328
-      - 511
-      type: integer
-      x-enum-comments:
-        ModeAppend: 'a: append-only'
-        ModeCharDevice: 'c: Unix character device, when ModeDevice is set'
-        ModeDevice: 'D: device file'
-        ModeDir: 'd: is a directory'
-        ModeExclusive: 'l: exclusive use'
-        ModeIrregular: '?: non-regular file; nothing else is known about this file'
-        ModeNamedPipe: 'p: named pipe (FIFO)'
-        ModePerm: Unix permission bits, 0o777
-        ModeSetgid: 'g: setgid'
-        ModeSetuid: 'u: setuid'
-        ModeSocket: 'S: Unix domain socket'
-        ModeSticky: 't: sticky'
-        ModeSymlink: 'L: symbolic link'
-        ModeTemporary: 'T: temporary file; Plan 9 only'
-      x-enum-varnames:
-      - ModeDir
-      - ModeAppend
-      - ModeExclusive
-      - ModeTemporary
-      - ModeSymlink
-      - ModeDevice
-      - ModeNamedPipe
-      - ModeSocket
-      - ModeSetuid
-      - ModeSetgid
-      - ModeCharDevice
-      - ModeSticky
-      - ModeIrregular
-      - ModeType
-      - ModePerm
     edgestacks.edgeStackFromGitRepositoryPayload:
       properties:
         DeploymentType:
@@ -958,6 +664,87 @@ components:
       - Name
       - RepositoryURL
       type: object
+    os.FileMode:
+      enum:
+      - 2147483648
+      - 1073741824
+      - 536870912
+      - 268435456
+      - 134217728
+      - 67108864
+      - 33554432
+      - 16777216
+      - 8388608
+      - 4194304
+      - 2097152
+      - 1048576
+      - 524288
+      - 2401763328
+      - 511
+      - 2147483648
+      - 1073741824
+      - 536870912
+      - 268435456
+      - 134217728
+      - 67108864
+      - 33554432
+      - 16777216
+      - 8388608
+      - 4194304
+      - 2097152
+      - 1048576
+      - 524288
+      - 2401763328
+      - 511
+      type: integer
+      x-enum-comments:
+        ModeAppend: 'a: append-only'
+        ModeCharDevice: 'c: Unix character device, when ModeDevice is set'
+        ModeDevice: 'D: device file'
+        ModeDir: 'd: is a directory'
+        ModeExclusive: 'l: exclusive use'
+        ModeIrregular: '?: non-regular file; nothing else is known about this file'
+        ModeNamedPipe: 'p: named pipe (FIFO)'
+        ModePerm: Unix permission bits, 0o777
+        ModeSetgid: 'g: setgid'
+        ModeSetuid: 'u: setuid'
+        ModeSocket: 'S: Unix domain socket'
+        ModeSticky: 't: sticky'
+        ModeSymlink: 'L: symbolic link'
+        ModeTemporary: 'T: temporary file; Plan 9 only'
+      x-enum-varnames:
+      - ModeDir
+      - ModeAppend
+      - ModeExclusive
+      - ModeTemporary
+      - ModeSymlink
+      - ModeDevice
+      - ModeNamedPipe
+      - ModeSocket
+      - ModeSetuid
+      - ModeSetgid
+      - ModeCharDevice
+      - ModeSticky
+      - ModeIrregular
+      - ModeType
+      - ModePerm
+    portainer.EdgeStackStatusDetails:
+      properties:
+        Acknowledged:
+          type: boolean
+        Error:
+          type: boolean
+        ImagesPulled:
+          type: boolean
+        Ok:
+          type: boolean
+        Pending:
+          type: boolean
+        RemoteUpdateSuccess:
+          type: boolean
+        Remove:
+          type: boolean
+      type: object
     portainer.EdgeStackDeploymentType:
       enum:
       - 0
@@ -966,6 +753,219 @@ components:
       x-enum-varnames:
       - EdgeStackDeploymentCompose
       - EdgeStackDeploymentKubernetes
+    edge.RegistryCredentials:
+      properties:
+        Secret:
+          type: string
+        ServerURL:
+          type: string
+        Username:
+          type: string
+      type: object
+    portainer.EdgeStackDeploymentStatus:
+      properties:
+        Error:
+          type: string
+        RollbackTo:
+          description: EE only feature
+          type: integer
+        Time:
+          type: integer
+        Type:
+          $ref: '#/components/schemas/portainer.EdgeStackStatusType'
+        Version:
+          type: integer
+      type: object
+    portainer.HelmConfig:
+      properties:
+        Atomic:
+          description: Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
+          example: true
+          type: boolean
+        ChartPath:
+          description: Path to a Helm chart folder for Helm git deployments
+          example: charts/my-app
+          type: string
+        Timeout:
+          description: Timeout for Helm operations (equivalent to helm --timeout flag)
+          example: 5m0s
+          type: string
+        ValuesFiles:
+          description: Array of paths to Helm values YAML files for Helm git deployments
+          example:
+          - '[''values/prod.yaml'''
+          - ' ''values/secrets.yaml'']'
+          items:
+            type: string
+          type: array
+        Version:
+          description: Helm chart version from Chart.yaml (read-only, extracted during Git sync)
+          example: 1.2.3
+          type: string
+      type: object
+    edgestacks.edgeStackFromStringPayload:
+      properties:
+        DeploymentType:
+          allOf:
+          - $ref: '#/components/schemas/portainer.EdgeStackDeploymentType'
+          description: 'Deployment type to deploy this stack
+
+            Valid values are: 0 - ''compose'', 1 - ''kubernetes''
+
+            compose is enabled only for docker environments
+
+            kubernetes is enabled only for kubernetes environments'
+          enum:
+          - 0
+          - 1
+          - 2
+          example: 0
+        EdgeGroups:
+          description: List of identifiers of EdgeGroups
+          example:
+          - 1
+          items:
+            type: integer
+          type: array
+        Name:
+          description: 'Name of the stack
+
+            Max length: 255
+
+            Name must only contains lowercase characters, numbers, hyphens, or underscores
+
+            Name must start with a lowercase character or number
+
+            Example: stack-name or stack_123 or stackName'
+          example: stack-name
+          type: string
+        Registries:
+          description: List of Registries to use for this stack
+          items:
+            type: integer
+          type: array
+        StackFileContent:
+          description: Content of the Stack file
+          example: "version: 3\n services:\n web:\n image:nginx"
+          type: string
+        UseManifestNamespaces:
+          description: Uses the manifest's namespaces instead of the default one
+          type: boolean
+      required:
+      - Name
+      - StackFileContent
+      type: object
+    edge.DeployerOptionsPayload:
+      properties:
+        ForceRecreate:
+          description: 'ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
+
+            This field is only used when the Force Redeployment is triggered.
+
+            Once the stack is redeployed, this field will be reset to false.
+
+            For standard edge agent, this field is used in agent side
+
+            For async edge agent, this field is used in both agent side and server side.
+
+            This flag drives `docker compose up --force-recreate` option'
+          type: boolean
+        Prune:
+          description: 'Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
+
+            This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
+
+            Used only for EE'
+          type: boolean
+        RemoveVolumes:
+          description: 'RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
+
+            in the compose file and anonymouse volumes attached to containers
+
+            This flag drives `docker compose down --volumes` option
+
+            Used only for EE'
+          type: boolean
+      type: object
+    edgestacks.updateEdgeStackPayload:
+      properties:
+        DeploymentType:
+          $ref: '#/components/schemas/portainer.EdgeStackDeploymentType'
+        EdgeGroups:
+          items:
+            type: integer
+          type: array
+        StackFileContent:
+          type: string
+        UpdateVersion:
+          type: boolean
+        UseManifestNamespaces:
+          description: Uses the manifest's namespaces instead of the default one
+          type: boolean
+      type: object
+    portainer.EdgeStack:
+      properties:
+        CreatedBy:
+          description: The username which created this stack
+          example: admin
+          type: string
+        CreatedByUserId:
+          description: The username id which created this stack
+          example: '1'
+          type: string
+        CreationDate:
+          description: StatusArray    map[EndpointID][]EdgeStackStatus `json:"StatusArray"`
+          type: integer
+        DeploymentType:
+          $ref: '#/components/schemas/portainer.EdgeStackDeploymentType'
+        EdgeGroups:
+          items:
+            type: integer
+          type: array
+        EntryPoint:
+          type: string
+        Id:
+          description: EdgeStack Identifier
+          example: 1
+          type: integer
+        ManifestPath:
+          type: string
+        Name:
+          type: string
+        NumDeployments:
+          type: integer
+        ProjectPath:
+          type: string
+        Status:
+          additionalProperties:
+            $ref: '#/components/schemas/portainer.EdgeStackStatus'
+          type: object
+        UseManifestNamespaces:
+          description: Uses the manifest's namespaces instead of the default one
+          type: boolean
+        Version:
+          type: integer
+      type: object
+    filesystem.DirEntry:
+      properties:
+        Content:
+          type: string
+        IsFile:
+          type: boolean
+        Name:
+          type: string
+        Permissions:
+          $ref: '#/components/schemas/os.FileMode'
+      type: object
+    portainer.Pair:
+      properties:
+        name:
+          example: name
+          type: string
+        value:
+          example: value
+          type: string
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

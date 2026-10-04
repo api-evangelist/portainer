@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-customtemplates-custom-template-update-payload-schema.json",
+  "title": "customtemplates.customTemplateUpdatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/customtemplates.customTemplateUpdatePayload",
+  "properties": {
+    "ComposeFilePathInRepository": {
+      "default": "docker-compose.yml",
+      "description": "Path to the Stack file inside the Git repository",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the template",
+      "type": "string"
+    },
+    "EdgeTemplate": {
+      "description": "EdgeTemplate indicates if this template purpose for Edge Stack",
+      "type": "boolean"
+    },
+    "FileContent": {
+      "description": "Content of stack file",
+      "type": "string"
+    },
+    "IsComposeFormat": {
+      "description": "IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file",
+      "type": "boolean"
+    },
+    "Logo": {
+      "description": "URL of the template's logo",
+      "type": "string"
+    },
+    "Note": {
+      "description": "A note that will be displayed in the UI. Supports HTML content",
+      "type": "string"
+    },
+    "Platform": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.CustomTemplatePlatform"
+        }
+      ],
+      "description": "Platform associated to the template.\nValid values are: 1 - 'linux', 2 - 'windows'\nRequired for Docker stacks",
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "RepositoryAuthentication": {
+      "description": "Use authentication to clone the Git repository",
+      "type": "boolean"
+    },
+    "RepositoryAuthorizationType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/gittypes.GitCredentialAuthType"
+        }
+      ],
+      "description": "RepositoryAuthorizationType is the authorization type to use"
+    },
+    "RepositoryGitCredentialID": {
+      "description": "GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication\nis true and RepositoryUsername/RepositoryPassword are not provided",
+      "type": "integer"
+    },
+    "RepositoryPassword": {
+      "description": "Password used in basic authentication or token used in token authentication.\nRequired when RepositoryAuthentication is true and RepositoryGitCredentialID is 0",
+      "type": "string"
+    },
+    "RepositoryReferenceName": {
+      "description": "Reference name of a Git repository hosting the Stack file",
+      "type": "string"
+    },
+    "RepositoryURL": {
+      "description": "URL of a Git repository hosting the Stack file",
+      "type": "string"
+    },
+    "RepositoryUsername": {
+      "description": "Username used in basic authentication. Required when RepositoryAuthentication is true\nand RepositoryGitCredentialID is 0. Ignored if RepositoryAuthType is token",
+      "type": "string"
+    },
+    "TLSSkipVerify": {
+      "description": "TLSSkipVerify skips SSL verification when cloning the Git repository",
+      "type": "boolean"
+    },
+    "Title": {
+      "description": "Title of the template",
+      "type": "string"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.StackType"
+        }
+      ],
+      "description": "Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "Variables": {
+      "description": "Definitions of variables in the stack file",
+      "items": {
+        "$ref": "#/$defs/portainer.CustomTemplateVariableDefinition"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "Description",
+    "FileContent",
+    "RepositoryURL",
+    "Title",
+    "Type"
+  ],
+  "type": "object",
+  "$defs": {
+    "gittypes.GitCredentialAuthType": {
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "GitCredentialAuthType_Basic",
+        "GitCredentialAuthType_Token"
+      ]
+    },
+    "portainer.CustomTemplatePlatform": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "CustomTemplatePlatformLinux",
+        "CustomTemplatePlatformWindows"
+      ]
+    },
+    "portainer.CustomTemplateVariableDefinition": {
+      "properties": {
+        "defaultValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.StackType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "DockerSwarmStack",
+        "DockerComposeStack",
+        "KubernetesStack"
+      ]
+    }
+  }
+}

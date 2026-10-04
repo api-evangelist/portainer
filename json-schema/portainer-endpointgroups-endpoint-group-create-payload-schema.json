@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-endpointgroups-endpoint-group-create-payload-schema.json",
+  "title": "endpointgroups.endpointGroupCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoint-groups-api-openapi.yml#/components/schemas/endpointgroups.endpointGroupCreatePayload",
+  "properties": {
+    "AssociatedEndpoints": {
+      "description": "List of environment(endpoint) identifiers that will be part of this group",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Description": {
+      "description": "Environment(Endpoint) group description",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Environment(Endpoint) group name",
+      "type": "string"
+    },
+    "TagIDs": {
+      "description": "List of tag identifiers to which this environment(endpoint) group is associated",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "type": "object"
+}

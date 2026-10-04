@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-customtemplates-custom-template-from-file-content-payload-schema.json",
+  "title": "customtemplates.customTemplateFromFileContentPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-custom-templates-api-openapi.yml#/components/schemas/customtemplates.customTemplateFromFileContentPayload",
+  "properties": {
+    "Description": {
+      "description": "Description of the template",
+      "type": "string"
+    },
+    "EdgeTemplate": {
+      "description": "EdgeTemplate indicates if this template purpose for Edge Stack",
+      "type": "boolean"
+    },
+    "FileContent": {
+      "description": "Content of stack file",
+      "type": "string"
+    },
+    "Logo": {
+      "description": "URL of the template's logo",
+      "type": "string"
+    },
+    "Note": {
+      "description": "A note that will be displayed in the UI. Supports HTML content",
+      "type": "string"
+    },
+    "Platform": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.CustomTemplatePlatform"
+        }
+      ],
+      "description": "Platform associated to the template.\nValid values are: 1 - 'linux', 2 - 'windows'\nRequired for Docker stacks",
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "Title": {
+      "description": "Title of the template",
+      "type": "string"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.StackType"
+        }
+      ],
+      "description": "Type of created stack:\n* 1 - swarm\n* 2 - compose\n* 3 - kubernetes",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "Variables": {
+      "description": "Definitions of variables in the stack file",
+      "items": {
+        "$ref": "#/$defs/portainer.CustomTemplateVariableDefinition"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "Description",
+    "FileContent",
+    "Title",
+    "Type"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.CustomTemplatePlatform": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "CustomTemplatePlatformLinux",
+        "CustomTemplatePlatformWindows"
+      ]
+    },
+    "portainer.CustomTemplateVariableDefinition": {
+      "properties": {
+        "defaultValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.StackType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "DockerSwarmStack",
+        "DockerComposeStack",
+        "KubernetesStack"
+      ]
+    }
+  }
+}

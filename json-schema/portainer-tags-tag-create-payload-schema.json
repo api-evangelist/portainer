@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-tags-tag-create-payload-schema.json",
+  "title": "tags.tagCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-tags-api-openapi.yml#/components/schemas/tags.tagCreatePayload",
+  "properties": {
+    "Name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "type": "object"
+}

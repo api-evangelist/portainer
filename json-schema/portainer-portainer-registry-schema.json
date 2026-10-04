@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-portainer-registry-schema.json",
+  "title": "portainer.Registry",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-endpoints-api-openapi.yml#/components/schemas/portainer.Registry",
+  "properties": {
+    "AccessToken": {
+      "description": "Stores temporary access token",
+      "type": "string"
+    },
+    "AccessTokenExpiry": {
+      "type": "integer"
+    },
+    "Authentication": {
+      "description": "Is authentication against this registry enabled",
+      "type": "boolean"
+    },
+    "AuthorizedTeams": {
+      "description": "Deprecated in DBVersion == 18",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "AuthorizedUsers": {
+      "description": "Deprecated in DBVersion == 18",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "BaseURL": {
+      "description": "Base URL, introduced for ProGet registry",
+      "type": "string"
+    },
+    "Ecr": {
+      "$ref": "#/$defs/portainer.EcrData"
+    },
+    "Github": {
+      "$ref": "#/$defs/portainer.GithubRegistryData"
+    },
+    "Gitlab": {
+      "$ref": "#/$defs/portainer.GitlabRegistryData"
+    },
+    "Id": {
+      "description": "Registry Identifier",
+      "type": "integer"
+    },
+    "ManagementConfiguration": {
+      "$ref": "#/$defs/portainer.RegistryManagementConfiguration"
+    },
+    "Name": {
+      "description": "Registry Name",
+      "type": "string"
+    },
+    "Password": {
+      "description": "Password or SecretAccessKey used to authenticate against this registry",
+      "type": "string"
+    },
+    "Quay": {
+      "$ref": "#/$defs/portainer.QuayRegistryData"
+    },
+    "RegistryAccesses": {
+      "$ref": "#/$defs/portainer.RegistryAccesses"
+    },
+    "TeamAccessPolicies": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.TeamAccessPolicies"
+        }
+      ],
+      "description": "Deprecated in DBVersion == 31"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.RegistryType"
+        }
+      ],
+      "description": "Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "URL": {
+      "description": "URL or IP address of the Docker registry",
+      "type": "string"
+    },
+    "UserAccessPolicies": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.UserAccessPolicies"
+        }
+      ],
+      "description": "Deprecated fields\nDeprecated in DBVersion == 31"
+    },
+    "Username": {
+      "description": "Username or AccessKeyID used to authenticate against this registry",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.AccessPolicy": {
+      "properties": {
+        "Namespaces": {
+          "description": "Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "description": "Role identifier. Reference the role that will be associated to this access policy",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.EcrData": {
+      "properties": {
+        "Region": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.GithubRegistryData": {
+      "properties": {
+        "OrganisationName": {
+          "type": "string"
+        },
+        "UseOrganisation": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.GitlabRegistryData": {
+      "properties": {
+        "InstanceURL": {
+          "type": "string"
+        },
+        "ProjectId": {
+          "type": "integer"
+        },
+        "ProjectPath": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.QuayRegistryData": {
+      "properties": {
+        "OrganisationName": {
+          "type": "string"
+        },
+        "UseOrganisation": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.RegistryAccessPolicies": {
+      "properties": {
+        "Namespaces": {
+          "description": "Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "TeamAccessPolicies": {
+          "$ref": "#/$defs/portainer.TeamAccessPolicies"
+        },
+        "UserAccessPolicies": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/portainer.UserAccessPolicies"
+            }
+          ],
+          "description": "Docker specific fields (with docker, users/teams have access to a registry)"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.RegistryAccesses": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.RegistryAccessPolicies"
+      },
+      "type": "object"
+    },
+    "portainer.RegistryManagementConfiguration": {
+      "properties": {
+        "AccessToken": {
+          "type": "string"
+        },
+        "AccessTokenExpiry": {
+          "type": "integer"
+        },
+        "Authentication": {
+          "type": "boolean"
+        },
+        "Ecr": {
+          "$ref": "#/$defs/portainer.EcrData"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "TLSConfig": {
+          "$ref": "#/$defs/portainer.TLSConfiguration"
+        },
+        "Type": {
+          "$ref": "#/$defs/portainer.RegistryType"
+        },
+        "Username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.RegistryType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "QuayRegistry",
+        "AzureRegistry",
+        "CustomRegistry",
+        "GitlabRegistry",
+        "ProGetRegistry",
+        "DockerHubRegistry",
+        "EcrRegistry",
+        "GithubRegistry"
+      ]
+    },
+    "portainer.TLSConfiguration": {
+      "properties": {
+        "TLS": {
+          "description": "Use TLS",
+          "type": "boolean"
+        },
+        "TLSCACert": {
+          "description": "Path to the TLS CA certificate file",
+          "type": "string"
+        },
+        "TLSCert": {
+          "description": "Path to the TLS client certificate file",
+          "type": "string"
+        },
+        "TLSKey": {
+          "description": "Path to the TLS client key file",
+          "type": "string"
+        },
+        "TLSSkipVerify": {
+          "description": "Skip the verification of the server TLS certificate",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.TeamAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    },
+    "portainer.UserAccessPolicies": {
+      "additionalProperties": {
+        "$ref": "#/$defs/portainer.AccessPolicy"
+      },
+      "type": "object"
+    }
+  }
+}

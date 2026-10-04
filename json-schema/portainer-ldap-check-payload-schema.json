@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-ldap-check-payload-schema.json",
+  "title": "ldap.checkPayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-ldap-api-openapi.yml#/components/schemas/ldap.checkPayload",
+  "properties": {
+    "LDAPSettings": {
+      "$ref": "#/$defs/portainer.LDAPSettings"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "portainer.LDAPGroupSearchSettings": {
+      "properties": {
+        "GroupAttribute": {
+          "description": "LDAP attribute which denotes the group membership",
+          "type": "string"
+        },
+        "GroupBaseDN": {
+          "description": "The distinguished name of the element from which the LDAP server will search for groups",
+          "type": "string"
+        },
+        "GroupFilter": {
+          "description": "The LDAP search filter used to select group elements, optional",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.LDAPSearchSettings": {
+      "properties": {
+        "BaseDN": {
+          "description": "The distinguished name of the element from which the LDAP server will search for users",
+          "type": "string"
+        },
+        "Filter": {
+          "description": "Optional LDAP search filter used to select user elements",
+          "type": "string"
+        },
+        "UserNameAttribute": {
+          "description": "LDAP attribute which denotes the username",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.LDAPSettings": {
+      "properties": {
+        "AnonymousMode": {
+          "description": "Enable this option if the server is configured for Anonymous access. When enabled, ReaderDN and Password will not be used",
+          "type": "boolean"
+        },
+        "AutoCreateUsers": {
+          "description": "Automatically provision users and assign them to matching LDAP group names",
+          "type": "boolean"
+        },
+        "GroupSearchSettings": {
+          "items": {
+            "$ref": "#/$defs/portainer.LDAPGroupSearchSettings"
+          },
+          "type": "array"
+        },
+        "Password": {
+          "description": "Password of the account that will be used to search users",
+          "type": "string"
+        },
+        "ReaderDN": {
+          "description": "Account that will be used to search for users",
+          "type": "string"
+        },
+        "SearchSettings": {
+          "items": {
+            "$ref": "#/$defs/portainer.LDAPSearchSettings"
+          },
+          "type": "array"
+        },
+        "StartTLS": {
+          "description": "Whether LDAP connection should use StartTLS",
+          "type": "boolean"
+        },
+        "TLSConfig": {
+          "$ref": "#/$defs/portainer.TLSConfiguration"
+        },
+        "URL": {
+          "description": "URL or IP address of the LDAP server",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "portainer.TLSConfiguration": {
+      "properties": {
+        "TLS": {
+          "description": "Use TLS",
+          "type": "boolean"
+        },
+        "TLSCACert": {
+          "description": "Path to the TLS CA certificate file",
+          "type": "string"
+        },
+        "TLSCert": {
+          "description": "Path to the TLS client certificate file",
+          "type": "string"
+        },
+        "TLSKey": {
+          "description": "Path to the TLS client key file",
+          "type": "string"
+        },
+        "TLSSkipVerify": {
+          "description": "Skip the verification of the server TLS certificate",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

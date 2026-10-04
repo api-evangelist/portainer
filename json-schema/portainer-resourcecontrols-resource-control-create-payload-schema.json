@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/portainer/main/json-schema/portainer-resourcecontrols-resource-control-create-payload-schema.json",
+  "title": "resourcecontrols.resourceControlCreatePayload",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/portainer-resource-controls-api-openapi.yml#/components/schemas/resourcecontrols.resourceControlCreatePayload",
+  "properties": {
+    "AdministratorsOnly": {
+      "description": "Permit access to resource only to admins",
+      "type": "boolean"
+    },
+    "Public": {
+      "description": "Permit access to the associated resource to any user",
+      "type": "boolean"
+    },
+    "ResourceID": {
+      "type": "string"
+    },
+    "SubResourceIDs": {
+      "description": "List of Docker resources that will inherit this access control",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "Teams": {
+      "description": "List of team identifiers with access to the associated resource",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "Type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/portainer.ResourceControlType"
+        }
+      ],
+      "description": "Type of Resource. Valid values are: 1 - container, 2 - service\n3 - volume, 4 - network, 5 - secret, 6 - stack, 7 - config, 8 - custom template, 9 - azure-container-group",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "Users": {
+      "description": "List of user identifiers with access to the associated resource",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "ResourceID",
+    "Type"
+  ],
+  "type": "object",
+  "$defs": {
+    "portainer.ResourceControlType": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "type": "integer",
+      "x-enum-varnames": [
+        "_",
+        "ContainerResourceControl",
+        "ServiceResourceControl",
+        "VolumeResourceControl",
+        "NetworkResourceControl",
+        "SecretResourceControl",
+        "StackResourceControl",
+        "ConfigResourceControl",
+        "CustomTemplateResourceControl",
+        "ContainerGroupResourceControl"
+      ]
+    }
+  }
+}
