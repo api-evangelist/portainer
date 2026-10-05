@@ -1,0 +1,66 @@
+slug: portainer
+provider: Portainer
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Users
+  spec_file: portainer-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: '''Create a new user'', ''Update password for a user'', ''Generate an API key for a user'',
+    ''Initialize administrator account'', schemas portainer.UserRole, portainer.APIKey'
+  reason: Full user account lifecycle, credentials, API keys and admin bootstrap for the platform — classic
+    Identity & Access Management, not HR employee records.
+- tag: Endpoints
+  spec_file: portainer-endpoints-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: '''Create a new environment(endpoint)'', ''Inspect an environment(endpoint)'', schemas portainer.KubernetesSnapshot,
+    portainer.KubernetesStorageClassConfig'
+  reason: Endpoints here are Docker/Kubernetes compute environments registered for management — registration,
+    inspection, status and edge settings of infrastructure estates. That is IT Infrastructure Management,
+    not an API endpoint catalogue.
+- tag: Kubernetes
+  spec_file: portainer-kubernetes-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: '''Get a list of applications across all namespaces in the cluster'', ''Get a list of ConfigMaps'',
+    ''Get the dashboard summary data'', schema portainer.K8sNodesLimits'
+  reason: Broad read/delete surface over Kubernetes cluster resources (namespaces, config maps, roles,
+    cron jobs, node metrics). This is operating container infrastructure — IT Infrastructure Management.
+- tag: resource_controls
+  spec_file: portainer-resource-controls-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: portainer.UserResourceAccess, portainer.TeamResourceAccess, portainer.ResourceAccessLevel
+  reason: Resource controls here define which users and teams get which access level to a managed resource
+    — authorisation/access administration, i.e. Identity & Access Management. Schema names ground this;
+    not a business-domain capability.
+- tag: Team Memberships
+  spec_file: portainer-team-memberships-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: '''Create a new team membership'', ''Remove a team membership'', schemas portainer.TeamMembership,
+    portainer.MembershipRole'
+  reason: Assigning and revoking users' membership and role within teams controls access to managed environments.
+    This is access administration, not HR team management.
