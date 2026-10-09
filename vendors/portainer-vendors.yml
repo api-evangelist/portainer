@@ -1,6 +1,7 @@
 generated: '2026-10-03'
 method: probed
-source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml
+  names
 registry: all/0-working/vendors.yml
 areas_vocabulary:
 - documentation
@@ -52,6 +53,14 @@ vendors:
   signal: header
   confidence: high
   kin_score: []
+- vendor: gitbook
+  area: mcp-hosting
+  host: docs.portainer.io
+  evidence: mcp:https://docs.portainer.io/~gitbook/mcp
+  signal: mcp-handshake
+  confidence: high
+  kin_score:
+  - mcp_server
 reliance:
   areas_vendor_served:
   - cdn
@@ -60,8 +69,8 @@ reliance:
   vendor_count: 4
   areas_observed: 12
   share_of_observable_areas: 0.25
-  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
-    cannot tell those apart
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or
+    not observed, and this script cannot tell those apart
 checked:
 - 'docs-platform: gitbook'
 - docs.portainer.io (GettingStarted)

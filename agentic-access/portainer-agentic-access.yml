@@ -1,17 +1,28 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/portainer-openapi.yml
+source: openapi/portainer-auth-api-openapi.yml, openapi/portainer-backup-api-openapi.yml, openapi/portainer-custom-templates-api-openapi.yml,
+  openapi/portainer-docker-api-openapi.yml, openapi/portainer-edge-api-openapi.yml, openapi/portainer-edge-groups-api-openapi.yml,
+  openapi/portainer-edge-jobs-api-openapi.yml, openapi/portainer-edge-stacks-api-openapi.yml,
+  openapi/portainer-endpoint-groups-api-openapi.yml, openapi/portainer-endpoints-api-openapi.yml,
+  openapi/portainer-git-ops-api-openapi.yml, openapi/portainer-helm-api-openapi.yml, openapi/portainer-intel-api-openapi.yml,
+  openapi/portainer-kubernetes-api-openapi.yml, openapi/portainer-ldap-api-openapi.yml, openapi/portainer-motd-api-openapi.yml,
+  openapi/portainer-registries-api-openapi.yml, openapi/portainer-resource-controls-api-openapi.yml,
+  openapi/portainer-roles-api-openapi.yml, openapi/portainer-settings-api-openapi.yml, openapi/portainer-ssl-api-openapi.yml,
+  openapi/portainer-stacks-api-openapi.yml, openapi/portainer-status-api-openapi.yml, openapi/portainer-system-api-openapi.yml,
+  openapi/portainer-tags-api-openapi.yml, openapi/portainer-team-memberships-api-openapi.yml,
+  openapi/portainer-teams-api-openapi.yml, openapi/portainer-templates-api-openapi.yml, openapi/portainer-upload-api-openapi.yml,
+  openapi/portainer-users-api-openapi.yml, openapi/portainer-webhooks-api-openapi.yml, openapi/portainer-websocket-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 237
+  operations: 240
   by_action_class:
     acting: 129
-    connected: 108
+    connected: 111
   by_consequence:
     write: 109
-    read: 108
+    read: 111
     safety-critical: 7
     physical: 13
   human_in_the_loop_required: 7
@@ -67,6 +78,22 @@ operations:
 - path: /backup
   method: post
   operationId: Backup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /restore
+  method: post
+  operationId: Restore
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -229,6 +256,32 @@ operations:
 - path: /docker/{environmentId}/images
   method: get
   operationId: dockerImagesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /endpoints/{id}/edge/jobs/{jobID}/logs
+  method: post
+  operationId: postEndpointsByIdEdgeJobsByJobIDLogs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /endpoints/{id}/edge/stacks/{stackId}
+  method: get
+  operationId: getEndpointsByIdEdgeStacksByStackId
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -576,6 +629,16 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /endpoints/{id}/edge/stacks/{stackId}
+  method: get
+  operationId: getEndpointsByIdEdgeStacksByStackId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /endpoint_groups
   method: get
   operationId: EndpointGroupList
@@ -588,6 +651,7 @@ operations:
     audit: none
 - path: /endpoint_groups
   method: post
+  operationId: postEndpointGroups
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -619,6 +683,7 @@ operations:
     audit: required
 - path: /endpoint_groups/{id}
   method: get
+  operationId: getEndpointGroupsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -776,6 +841,7 @@ operations:
     audit: required
 - path: /endpoints/{id}/docker/v2/browse/put
   method: post
+  operationId: postEndpointsByIdDockerV2BrowsePut
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -801,6 +867,7 @@ operations:
     audit: none
 - path: /endpoints/{id}/edge/jobs/{jobID}/logs
   method: post
+  operationId: postEndpointsByIdEdgeJobsByJobIDLogs
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -816,6 +883,7 @@ operations:
     audit: required
 - path: /endpoints/{id}/edge/stacks/{stackId}
   method: get
+  operationId: getEndpointsByIdEdgeStacksByStackId
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -836,84 +904,6 @@ operations:
 - path: /endpoints/{id}/forceupdateservice
   method: put
   operationId: endpointForceUpdateService
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /endpoints/{id}/kubernetes/helm
-  method: get
-  operationId: HelmList
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /endpoints/{id}/kubernetes/helm
-  method: post
-  operationId: HelmInstall
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /endpoints/{id}/kubernetes/helm/{name}
-  method: get
-  operationId: HelmGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /endpoints/{id}/kubernetes/helm/{release}
-  method: delete
-  operationId: HelmDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /endpoints/{id}/kubernetes/helm/{release}/history
-  method: get
-  operationId: HelmGetHistory
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /endpoints/{id}/kubernetes/helm/{release}/rollback
-  method: post
-  operationId: HelmRollback
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1065,6 +1055,230 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /endpoints/{id}/kubernetes/helm
+  method: get
+  operationId: HelmList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /endpoints/{id}/kubernetes/helm
+  method: post
+  operationId: HelmInstall
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /endpoints/{id}/kubernetes/helm/{name}
+  method: get
+  operationId: HelmGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /endpoints/{id}/kubernetes/helm/{release}
+  method: delete
+  operationId: HelmDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /endpoints/{id}/kubernetes/helm/{release}/history
+  method: get
+  operationId: HelmGetHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /endpoints/{id}/kubernetes/helm/{release}/rollback
+  method: post
+  operationId: HelmRollback
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /templates/helm
+  method: get
+  operationId: HelmRepoSearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /templates/helm/{command}
+  method: get
+  operationId: HelmShow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /users/{id}/helm/repositories
+  method: get
+  operationId: HelmUserRepositoriesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /users/{id}/helm/repositories
+  method: post
+  operationId: HelmUserRepositoryCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /users/{id}/helm/repositories/{repositoryID}
+  method: delete
+  operationId: HelmUserRepositoryDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /open_amt
+  method: post
+  operationId: OpenAMTConfigure
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /open_amt/{id}/activate
+  method: post
+  operationId: openAMTActivate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /open_amt/{id}/devices
+  method: get
+  operationId: OpenAMTDevices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /open_amt/{id}/devices/{deviceId}/action
+  method: post
+  operationId: DeviceAction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /open_amt/{id}/devices_features/{deviceId}
+  method: post
+  operationId: DeviceFeatures
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /open_amt/{id}/info
+  method: get
+  operationId: OpenAMTHostInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /kubernetes/{id}/applications
   method: get
   operationId: GetAllKubernetesApplications
@@ -1867,90 +2081,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /open_amt
-  method: post
-  operationId: OpenAMTConfigure
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /open_amt/{id}/activate
-  method: post
-  operationId: openAMTActivate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /open_amt/{id}/devices
-  method: get
-  operationId: OpenAMTDevices
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /open_amt/{id}/devices/{deviceId}/action
-  method: post
-  operationId: DeviceAction
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /open_amt/{id}/devices_features/{deviceId}
-  method: post
-  operationId: DeviceFeatures
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /open_amt/{id}/info
-  method: get
-  operationId: OpenAMTHostInfo
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /registries
   method: get
   operationId: RegistryList
@@ -2098,22 +2228,6 @@ operations:
       proof-of-possession: true
     escalation:
       human-in-the-loop: required
-    audit: required
-- path: /restore
-  method: post
-  operationId: Restore
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
     audit: required
 - path: /roles
   method: get
@@ -2713,6 +2827,16 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /teams/{id}/memberships
+  method: get
+  operationId: TeamMemberships
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /teams
   method: get
   operationId: TeamList
@@ -2781,16 +2905,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /teams/{id}/memberships
-  method: get
-  operationId: TeamMemberships
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /templates
   method: get
   operationId: TemplateList
@@ -2804,32 +2918,6 @@ operations:
 - path: /templates/{id}/file
   method: post
   operationId: TemplateFile
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /templates/helm
-  method: get
-  operationId: HelmRepoSearch
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /templates/helm/{command}
-  method: get
-  operationId: HelmShow
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2908,48 +2996,6 @@ operations:
 - path: /users/{id}
   method: put
   operationId: UserUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /users/{id}/helm/repositories
-  method: get
-  operationId: HelmUserRepositoriesList
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /users/{id}/helm/repositories
-  method: post
-  operationId: HelmUserRepositoryCreate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /users/{id}/helm/repositories/{repositoryID}
-  method: delete
-  operationId: HelmUserRepositoryDelete
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3069,6 +3115,7 @@ operations:
     audit: none
 - path: /webhooks
   method: get
+  operationId: getWebhooks
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3078,6 +3125,7 @@ operations:
     audit: none
 - path: /webhooks
   method: post
+  operationId: postWebhooks
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3093,6 +3141,7 @@ operations:
     audit: required
 - path: /webhooks/{id}
   method: delete
+  operationId: deleteWebhooksById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3108,6 +3157,7 @@ operations:
     audit: required
 - path: /webhooks/{id}
   method: post
+  operationId: postWebhooksById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3123,6 +3173,7 @@ operations:
     audit: required
 - path: /webhooks/{id}
   method: put
+  operationId: putWebhooksById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3138,6 +3189,7 @@ operations:
     audit: required
 - path: /websocket/attach
   method: get
+  operationId: getWebsocketAttach
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3147,6 +3199,7 @@ operations:
     audit: none
 - path: /websocket/exec
   method: get
+  operationId: getWebsocketExec
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3156,6 +3209,7 @@ operations:
     audit: none
 - path: /websocket/kubernetes-shell
   method: get
+  operationId: getWebsocketKubernetesShell
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3165,6 +3219,7 @@ operations:
     audit: none
 - path: /websocket/pod
   method: get
+  operationId: getWebsocketPod
   x-agentic-access:
     action-class: connected
     consequence: read
