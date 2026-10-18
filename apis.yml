@@ -42,6 +42,14 @@ tags:
 - Kubernetes Management
 - Enterprise Identity
 - GitOps
+tags_raw:
+- Container Management
+- Containers
+- Docker
+- Kubernetes
+- Kubernetes Management
+- Enterprise Identity
+- GitOps
 - Multi‑Cluster Governance - Container Management - Containers - Docker - Kubernetes
 url: https://raw.githubusercontent.com/api-evangelist/portainer/refs/heads/main/apis.yml
 created: '2026-03-26'
