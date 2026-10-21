@@ -49,3 +49,16 @@
     detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
+- slug: portainer-docker-hub-docker-verified-publisher
+  label: Docker Hub (docker-verified-publisher)
+  partner: docker-hub
+  partner_name: Docker Hub (docker-verified-publisher)
+  category: Docker Verified Publisher
+  type: marketplace
+  marketplace: docker-verified-publisher
+  channel: partner-built
+  evidence: https://hub.docker.com/u/portainer
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
